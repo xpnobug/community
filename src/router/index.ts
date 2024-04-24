@@ -9,6 +9,7 @@ export default createRouter({
       path: '/',
       name: 'home',
       component: home,
+      redirect: '/new_index', //重定向到 /site/mysite
       children: [{
         path: '/new_index',
         name: 'new_index',
