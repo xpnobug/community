@@ -1,7 +1,7 @@
 <template>
   <div class="left-menu-style">
     <el-menu
-        default-active="2"
+        default-active="1"
         class="el-menu-vertical-demo"
         :collapse="djValueSet"
         @open="handleOpen"
@@ -40,10 +40,10 @@ const router = useRouter();
 //导航菜单动态加载
 const menuItems = ref([
   { id: "1", label: '首页', url: 'new_index', expanded: false },
-  { id: "2", label: 'Shop', url: '/collections', expanded: false},
-  { id: "3", label: 'Media & Event', url: '/pages/aboutus', expanded: false },
-  { id: "4", label: 'Museum', url: '/pages/aboutus', expanded: false },
-  { id: "5", label: 'Be Our Member', url: '/pages/aboutus', expanded: false },
+  { id: "2", label: '动态', url: '/collections', expanded: false},
+  { id: "3", label: '学堂', url: '/pages/aboutus', expanded: false },
+  { id: "4", label: '官方版块', url: '/pages/aboutus', expanded: false },
+  { id: "5", label: '用户', url: '/pages/aboutus', expanded: false },
 
   // Add more menu items as needed
 ]);
@@ -84,7 +84,7 @@ const handleMenuItemClick = (item:any) => {
 .right-content-style{
   width: 100%;
   /*height: 100%;*/
-  background-color:#f8f8f8 ;
+  background-color:var(--global-bg) ;
   display: flex;
   justify-content: center;
 }
@@ -92,7 +92,8 @@ const handleMenuItemClick = (item:any) => {
   position: fixed;
   height: 100%;
   border: none;
-  background-color: #ffffff;
+  /*background-color: #ffffff;*/
+  background-color: var(--reaicc-leftnav-bg);
   box-shadow: 0 0 10px 0 rgba(94, 92, 154, 0.06);
   /*transition-delay: .25s;*/
   padding-top: 50px;
@@ -100,7 +101,7 @@ const handleMenuItemClick = (item:any) => {
 }
 
 .el-menu-vertical-demo .el-menu-item {
-  color: #1a1a1a;
+  color: var(--reaicc-menu-active-color);
 }
 
 .el-menu-vertical-demo:not(.el-menu--collapse) {

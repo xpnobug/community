@@ -6,31 +6,31 @@
         <div class="contents contents-three" style="min-height: 608px;">
           <div class="right-content">
             <div>
-              <div class="content-box"><a href="/post/6233" class="links">
+              <div class="content-box"><a href="#" class="links">
                 <div class="pictures"><!---->
                   <div class="class-ification">资讯</div>
                   <img
-                      src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/ad9fe08485223095a44b17ea86d51712.png?upload_type/Tencent_COS"
+                      src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
                       alt="" style="width: 100%; height: 100%; border-radius: 8px;"></div>
               </a>
                 <div class="picture-box"
                      style="display: flex; flex-direction: column; justify-content: space-between;"><a
-                    href="/post/6233" class="links" style="display: block;">
+                    href="#" class="links" style="display: block;">
                   <div class="pictures-title" style="margin-bottom: 5px;">
                     奖金变“积分”？董明珠2亿年终奖陷罗生门--引发的有关“内购商城”的思考
                   </div>
                   <div class="picture-content">
                     “董明珠多拿出2亿发年终奖”一事正在朝“罗生门”的方向发展。格力年终奖罗生门：究竟是2亿奖金还是价值2亿？事实证明，董明
                   </div>
-                </a> <a href="/user?uid=216" class="links" style="display: block;">
+                </a> <a href="#" class="links" style="display: block;">
                   <div class="author-information">
                     <div class="information">
                       <div class="head-portrait"><img
-                          src="https://h5a.opensns.cn/public/uploads/avatar/216/693e921e8408e05fe347c719b8864677.png_80x80m1"
+                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
                           alt=""
                           style="width: 100%; height: 100%; border-radius: 50%;">
                       </div>
-                      <div class="release-time"><span>短说小芋头</span> <span
+                      <div class="release-time"><span>DS-REAI小芋头</span> <span
                       >02-05 11:33<span> · 未知</span></span></div>
                     </div>
                     <div class="views"><span>359 浏览</span> <span
@@ -38,27 +38,27 @@
                   </div>
                 </a></div>
               </div>
-              <div class="content-box"><a href="/post/6185" class="links">
+              <div class="content-box"><a href="#" class="links">
                 <div class="pictures"><!---->
                   <div class="class-ification">帖子</div>
                   <img
-                      src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/7c66ecbc555ed9400297ee923c7f8c3f.png?upload_type/Tencent_COS"
+                      src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg"
                       alt="" style="width: 100%; height: 100%; border-radius: 8px;"></div>
               </a>
                 <div class="picture-box"
                      style="display: flex; flex-direction: column; justify-content: space-between;"><a
-                    href="/post/6185" class="links" style="display: block;">
+                    href="#" class="links" style="display: block;">
                   <div class="pictures-title" style="margin-bottom: 5px;">关于网站相关调整的通知汇总</div>
                   <div class="picture-content">关于网站备案：&nbsp; &nbsp; &nbsp; &nbsp;根据工信部《关于开展移动互联网应用程序备案工作的通知</div>
-                </a> <a href="/user?uid=216" class="links" style="display: block;">
+                </a> <a href="#" class="links" style="display: block;">
                   <div class="author-information">
                     <div class="information">
                       <div class="head-portrait"><img
-                          src="https://h5a.opensns.cn/public/uploads/avatar/216/693e921e8408e05fe347c719b8864677.png_80x80m1"
+                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
                           alt=""
                           style="width: 100%; height: 100%; border-radius: 50%;">
                       </div>
-                      <div class="release-time"><span>短说小芋头</span> <span
+                      <div class="release-time"><span>DS-REAI小芋头</span> <span
                       >2023-12-14<span> · 未知</span></span></div>
                     </div>
                     <div class="views"><span>75 浏览</span> <span
@@ -66,7 +66,7 @@
                   </div>
                 </a></div>
               </div>
-              <div class="content-box"><a href="/post/5533" class="links">
+              <div class="content-box"><a href="#" class="links">
                 <div class="pictures"><!---->
                   <div class="class-ification">帖子</div>
                   <img
@@ -75,12 +75,12 @@
               </a>
                 <div class="picture-box"
                      style="display: flex; flex-direction: column; justify-content: space-between;"><a
-                    href="/post/5533" class="links" style="display: block;">
+                    href="#" class="links" style="display: block;">
                   <div class="pictures-title" style="margin-bottom: 5px;">如何搭建一个活跃的UGC社区？</div>
                   <div class="picture-content">
                     在开始运营前，也就是社区冷启动时，我们需要一些常规的社区运营工具：马甲功能是必不可少的社区运营的运营工具。简单和大家说下
                   </div>
-                </a> <a href="/user?uid=35" class="links" style="display: block;">
+                </a> <a href="#" class="links" style="display: block;">
                   <div class="author-information">
                     <div class="information">
                       <div class="head-portrait"><img
@@ -96,7 +96,7 @@
                   </div>
                 </a></div>
               </div>
-              <div class="content-box"><a href="/post/5084" class="links">
+              <div class="content-box"><a href="#" class="links">
                 <div class="pictures">
                   <div class="video-box-icon">
                     <svg class="play-button-icon icon-play">
@@ -110,12 +110,12 @@
               </a>
                 <div class="picture-box"
                      style="display: flex; flex-direction: column; justify-content: space-between;"><a
-                    href="/post/5084" class="links" style="display: block;">
+                    href="#" class="links" style="display: block;">
                   <div class="pictures-title" style="margin-bottom: 5px;">莫兰迪一丨丿丶一丿
                     莫兰迪
                   </div>
                   <div class="picture-content"></div>
-                </a> <a href="/user?uid=7387" class="links" style="display: block;">
+                </a> <a href="#" class="links" style="display: block;">
                   <div class="author-information">
                     <div class="information">
                       <div class="head-portrait"><img
@@ -137,86 +137,86 @@
             <div class="">
               <div class="recommended-title">产品共创</div>
               <ul class="recommended">
-                <li class="recommended-li"><a href="/post/6296" class="link"
+                <li class="recommended-li"><a href="#" class="link"
                                               target="_blank">
-                  <div class="recommended-contents">短说V4.1.4正式版发布|企微推送/消息开关/随机推荐等内容新增优化</div>
-                </a> <a href="/user?uid=216" class="">
+                  <div class="recommended-contents">DS-REAIV4.1.4正式版发布|企微推送/消息开关/随机推荐等内容新增优化</div>
+                </a> <a href="#" class="">
                   <div class="recommended-author">
                     <div class="author">
                       <div class="head-portrait"><img
-                          src="https://h5a.opensns.cn/public/uploads/avatar/216/693e921e8408e05fe347c719b8864677.png_80x80m1"
+                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
                           alt=""
                           style="width: 100%; height: 100%; border-radius: 50%;">
                       </div>
-                      <div class="author-name">短说小芋头</div>
+                      <div class="author-name">DS-REAI小芋头</div>
                     </div>
                     <div class="release-times">04-19 14:57<span> · 未知</span></div>
                   </div>
                 </a></li>
-                <li class="recommended-li"><a href="/post/6295" class="link"
+                <li class="recommended-li"><a href="#" class="link"
                                               target="_blank">
-                  <div class="recommended-contents">短说开发日报：通用版4.1.1
+                  <div class="recommended-contents">DS-REAI开发日报：通用版4.1.1
                     后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）
                   </div>
-                </a> <a href="/user?uid=216" class="">
+                </a> <a href="#" class="">
                   <div class="recommended-author">
                     <div class="author">
                       <div class="head-portrait"><img
-                          src="https://h5a.opensns.cn/public/uploads/avatar/216/693e921e8408e05fe347c719b8864677.png_80x80m1"
+                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
                           alt=""
                           style="width: 100%; height: 100%; border-radius: 50%;">
                       </div>
-                      <div class="author-name">短说小芋头</div>
+                      <div class="author-name">DS-REAI小芋头</div>
                     </div>
                     <div class="release-times">04-19 09:30<span> · 未知</span></div>
                   </div>
                 </a></li>
-                <li class="recommended-li"><a href="/post/6291" class="link"
+                <li class="recommended-li"><a href="#" class="link"
                                               target="_blank">
-                  <div class="recommended-contents">短说开发日报：PC3.1.1 pc端下载附件，无法下载成功修复完成（4.17/周三）</div>
-                </a> <a href="/user?uid=216" class="">
+                  <div class="recommended-contents">DS-REAI开发日报：PC3.1.1 pc端下载附件，无法下载成功修复完成（4.17/周三）</div>
+                </a> <a href="#" class="">
                   <div class="recommended-author">
                     <div class="author">
                       <div class="head-portrait"><img
-                          src="https://h5a.opensns.cn/public/uploads/avatar/216/693e921e8408e05fe347c719b8864677.png_80x80m1"
+                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
                           alt=""
                           style="width: 100%; height: 100%; border-radius: 50%;">
                       </div>
-                      <div class="author-name">短说小芋头</div>
+                      <div class="author-name">DS-REAI小芋头</div>
                     </div>
                     <div class="release-times">04-17 08:58<span> · 未知</span></div>
                   </div>
                 </a></li>
-                <li class="recommended-li"><a href="/post/6290" class="link"
+                <li class="recommended-li"><a href="#" class="link"
                                               target="_blank">
-                  <div class="recommended-contents">短说开发日报：通用版4.2.0 预览文件接口请求错误问题修复完成（4.16/周二）</div>
-                </a> <a href="/user?uid=216" class="">
+                  <div class="recommended-contents">DS-REAI开发日报：通用版4.2.0 预览文件接口请求错误问题修复完成（4.16/周二）</div>
+                </a> <a href="#" class="">
                   <div class="recommended-author">
                     <div class="author">
                       <div class="head-portrait"><img
-                          src="https://h5a.opensns.cn/public/uploads/avatar/216/693e921e8408e05fe347c719b8864677.png_80x80m1"
+                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
                           alt=""
                           style="width: 100%; height: 100%; border-radius: 50%;">
                       </div>
-                      <div class="author-name">短说小芋头</div>
+                      <div class="author-name">DS-REAI小芋头</div>
                     </div>
                     <div class="release-times">04-16 14:36<span> · 未知</span></div>
                   </div>
                 </a></li>
-                <li class="recommended-li"><a href="/post/6289" class="link"
+                <li class="recommended-li"><a href="#" class="link"
                                               target="_blank">
-                  <div class="recommended-contents">短说开发周报：通用版4.2.0 已认证用户，用户头像处的认证标识需要显示开发完成（4.8/
+                  <div class="recommended-contents">DS-REAI开发周报：通用版4.2.0 已认证用户，用户头像处的认证标识需要显示开发完成（4.8/
                     周一~4.12/周五）
                   </div>
-                </a> <a href="/user?uid=216" class="">
+                </a> <a href="#" class="">
                   <div class="recommended-author">
                     <div class="author">
                       <div class="head-portrait"><img
-                          src="https://h5a.opensns.cn/public/uploads/avatar/216/693e921e8408e05fe347c719b8864677.png_80x80m1"
+                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
                           alt=""
                           style="width: 100%; height: 100%; border-radius: 50%;">
                       </div>
-                      <div class="author-name">短说小芋头</div>
+                      <div class="author-name">DS-REAI小芋头</div>
                     </div>
                     <div class="release-times">04-13 09:00<span> · 未知</span></div>
                   </div>
@@ -245,7 +245,7 @@ export default {
   /*margin-bottom: 26px;*/
   font-size: 22px;
   font-weight: 600;
-  color: rgba(0, 0, 0, .85);
+  color: var(--reaicc-fontcolor);
 }
 
 .box .public .contents {
@@ -255,9 +255,10 @@ export default {
 }
 
 .box .public .contents .right-content {
+  margin-right: 15px;
   /*width: 848px;*/
   border-radius: 12px;
-  background: #fff;
+  background-color:var(--reaicc-meta-theme-post-color) ;
   box-shadow: rgba(94, 92, 154, .06);
   padding: 28px;
 }
@@ -326,7 +327,7 @@ img {
   width: 568px;
   font-size: 16px;
   font-weight: 600;
-  color: rgba(0, 0, 0, .85);
+  color: var(--reaicc-fontcolor);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -409,7 +410,7 @@ svg:not(:root) {
 .box .public .contents .left-content {
   /*width: 320px;*/
   border-radius: 12px;
-  background: #fff;
+  background-color:var(--reaicc-meta-theme-post-color) ;
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
   padding: 24px 28px;
 }
@@ -417,7 +418,7 @@ svg:not(:root) {
 .box .public .contents-three .recommended-list .recommended-title {
   font-size: 16px;
   font-weight: 600;
-  color: rgba(0, 0, 0, .85);
+  color: var(--reaicc-fontcolor);
 }
 
 dl, ol, ul {
@@ -432,11 +433,12 @@ dl, ol, ul {
 .box .public .contents-three .recommended-list .recommended .recommended-li {
   margin-top: 20px;
   border-bottom: 1px solid #eaeaf5;
+  list-style-type: none;
 }
 
 .box .public .contents-three .recommended-list .recommended .recommended-li .link {
   display: block;
-  color: rgba(0, 0, 0, .85);
+  color: var(--reaicc-fontcolor);
   line-height: 20px;
 }
 
@@ -448,7 +450,7 @@ dl, ol, ul {
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
-  color: rgba(0, 0, 0, .85);
+  color: var(--reaicc-fontcolor);
   margin-bottom: 7px;
 }
 
@@ -493,15 +495,15 @@ dl, ol, ul {
   .box .public .contents{
     flex-direction: column;
   }
-  .box .public .contents .right-content[data-v-693778e0] {
+  .box .public .contents .right-content{
     /*width: 375px;*/
   }
-  .box .public .contents .left-content[data-v-693778e0] {
+  .box .public .contents .left-content{
     /*width: 375px;*/
     padding: 0px 27px;
   }
 
-  .box .public .contents-three .right-content .content-box .pictures[data-v-693778e0] {
+  .box .public .contents-three .right-content .content-box .pictures{
     width: 120px;
     height: 120px;
   }

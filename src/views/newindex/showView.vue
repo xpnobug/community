@@ -4,15 +4,19 @@
     <div class="box-s">
       <PictureComponent/>
       <ZskComponent/>
+      <ZtComponent/>
+      <LiveComponent/>
     </div>
   </div>
 </template>
 <script>
 import PictureComponent from "./components/PictureComponent.vue";
 import ZskComponent from "./components/ZskComponent.vue";
+import ZtComponent from "@/views/newindex/components/ZtComponent.vue";
+import LiveComponent from "@/views/newindex/components/LiveComponent.vue";
 export default {
   name: "new_index",
-  components: {ZskComponent, PictureComponent}
+  components: {LiveComponent, ZtComponent, ZskComponent, PictureComponent}
 }
 </script>
 

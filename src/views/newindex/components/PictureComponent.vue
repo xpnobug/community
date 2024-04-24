@@ -3,12 +3,12 @@
     <div class="top">
       <div class="banner"
            style="background-image: url(https://alist.reaicc.com/nas/image/jpeg/2024-04/1/50ef8c69-f823-4414-be5d-25e581867902.jpg); background-size: cover; background-position: center center;">
-        <div class="content"><span>2023年短说团队年终总结</span></div>
+        <div class="content"><span>2023年DS-REAI团队年终总结</span></div>
       </div>
       <div class="identification">
         <div class="bg-picture"
              style="background-image: url(https://alist.reaicc.com/nas/image/jpeg/2024-04/1/f5cb6c26-f3bf-47f4-a6d0-c35c771f2c7a.jpg); background-size: cover; background-position: center center;">
-          <div class="content"><span>短说PC端功能『门户DIY』重磅更新，暨2.5.0测试版更新通告</span>
+          <div class="content"><span>DS-REAIPC端功能『门户DIY』重磅更新，暨2.5.0测试版更新通告</span>
           </div>
         </div>
         <div class="bg-picture"

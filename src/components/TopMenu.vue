@@ -5,7 +5,7 @@
         <ul class="menu-ul">
           <!--      logo-->
           <div class="logo">
-            <img src="https://q1.qlogo.cn/g?b=qq&nk=2877406366&s=640" alt="" style="width: 50px">
+            <img src="https://q1.qlogo.cn/g?b=qq&nk=2877406366&s=640" alt="">
           </div>
           <li @click="updateMenuDJ">
             <el-icon>
@@ -14,8 +14,8 @@
           </li>
           <li v-show="pmView"><a href="#">首页</a></li>
           <li v-show="pmView"><a href="#">产品</a></li>
-          <li v-show="pmView"><a href="#">关于我们</a></li>
-          <li v-show="pmView"><a href="#">联系我们</a></li>
+          <li v-show="pmView"><a href="#">社区</a></li>
+          <li v-show="pmView"><a href="#">版块</a></li>
         </ul>
       </nav>
     </div>
@@ -27,6 +27,7 @@
                  placeholder="搜索用户或内容" style="padding-right: 60px;">
         </div>
         <el-button type="primary">登录</el-button>
+        <div style="margin: 5px"><BgColorChange/></div>
       </div>
     </div>
   </div>
@@ -35,6 +36,7 @@
 <script lang="ts" setup>
 import {getCurrentInstance, onMounted, reactive, ref, watchEffect} from 'vue'
 import {Menu as IconMenu,} from '@element-plus/icons-vue'
+import BgColorChange from "@/components/BgColorChange.vue";
 
 // 定义一个响应式的数据
 const djValue = ref(false);
@@ -104,10 +106,11 @@ const updateMenuDJ = () => {
 .menu-main {
   display: flex;
   height: 54px;
-  background-color: #337fff;
+  /*background-color: #337fff;*/
+  background-color: var(--reaicc-nav-bg);
   justify-content: space-around;
   align-items: center;
-  padding: 0 40px;
+  /*padding: 0 40px;*/
 }
 
 .menu-ul {
@@ -162,16 +165,20 @@ input[type="text"], input[type="password"] {
 ::-webkit-input-placeholder { /* WebKit browsers */
   color: #99b9ee;
 }
-
+.logo>img{
+  width: 30px;
+}
 /*设置手机端样式*/
 @media screen and (max-width: 768px) {
+  .logo{
+    width: 30px;
+  }
   .menu-main {
     display: flex;
     height: 54px;
-    background-color: #337fff;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+    /*padding: 0 20px;*/
   }
 
   .menu-ul {

@@ -35,7 +35,7 @@ export default {
   margin-bottom: 26px;
   font-size: 22px;
   font-weight: 600;
-  color: rgba(0, 0, 0, .85);
+  color: var(--reaicc-fontcolor);
 }
 .box .public .list {
   position: relative;
@@ -136,7 +136,7 @@ a {
   max-width: 118px;
   margin-left: 0;
   line-height: 1;
-  color: rgba(0, 0, 0, .85);
+    color: var(--reaicc-fontcolor);
   font-size: 14px;
   text-align: center;
   overflow: hidden;
