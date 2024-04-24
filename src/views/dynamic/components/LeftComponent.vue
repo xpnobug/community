@@ -45,29 +45,29 @@
           </p></div>
         <div class="user-status-list">
           <div class="user-status request-small">
-            <div data-v-2fadc57c="" class="xm-header user-avatar"
+            <div class="xm-header user-avatar"
                  style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
-              <div data-v-2fadc57c="" class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
-                  data-v-2fadc57c=""
+              <div class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
+
                   src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/084059cc-5f23-45eb-b1b8-789c74d6a908.jpg"
                   alt="头像" class="" style="border-radius: 50%;"></div>
-              <svg data-v-2fadc57c="" viewBox="0 0 100 100" style="width: 44px; height: 44px;">
-                <defs data-v-2fadc57c="">
-                  <linearGradient data-v-2fadc57c="" id="svg22848f93-cdcc-41ca-83ab-2573b39e23f1" x1="0%" y1="0%"
+              <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
+                <defs>
+                  <linearGradient id="svg22848f93-cdcc-41ca-83ab-2573b39e23f1" x1="0%" y1="0%"
                                   x2="100%" y2="0%">
-                    <stop data-v-2fadc57c="" offset="0%"></stop>
-                    <stop data-v-2fadc57c="" offset="100%"></stop>
+                    <stop offset="0%"></stop>
+                    <stop offset="100%"></stop>
                   </linearGradient>
                 </defs>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
                       stroke-width="8" fill-opacity="0"></path>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
                       stroke="url(#svg22848f93-cdcc-41ca-83ab-2573b39e23f1)" stroke-width="8" fill-opacity="0"
                       style="stroke-dasharray: 183.68, 287;"></path>
               </svg>
-              <div data-v-2fadc57c="" class="xm-level"
+              <div class="xm-level"
                    style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
-                <span data-v-2fadc57c="" style="display: block;">9</span></div> <!----></div>
+                <span style="display: block;">9</span></div> <!----></div>
             <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a
                 href="#" class="bold" style="color: rgb(251, 91, 90);">
               想Vicky
@@ -84,29 +84,29 @@
             </div>
           </div>
           <div class="user-status request-small">
-            <div data-v-2fadc57c="" class="xm-header user-avatar"
+            <div class="xm-header user-avatar"
                  style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
-              <div data-v-2fadc57c="" class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
-                  data-v-2fadc57c=""
+              <div class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
+
                   src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg"
                   alt="头像" class="" style="border-radius: 50%;"></div>
-              <svg data-v-2fadc57c="" viewBox="0 0 100 100" style="width: 44px; height: 44px;">
-                <defs data-v-2fadc57c="">
-                  <linearGradient data-v-2fadc57c="" id="svg52d1944a-268d-47ca-b258-71c28b9e9152" x1="0%" y1="0%"
+              <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
+                <defs>
+                  <linearGradient id="svg52d1944a-268d-47ca-b258-71c28b9e9152" x1="0%" y1="0%"
                                   x2="100%" y2="0%">
-                    <stop data-v-2fadc57c="" offset="0%"></stop>
-                    <stop data-v-2fadc57c="" offset="100%"></stop>
+                    <stop offset="0%"></stop>
+                    <stop offset="100%"></stop>
                   </linearGradient>
                 </defs>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
                       stroke-width="8" fill-opacity="0"></path>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
                       stroke="url(#svg52d1944a-268d-47ca-b258-71c28b9e9152)" stroke-width="8" fill-opacity="0"
                       style="stroke-dasharray: 28.7, 287;"></path>
               </svg>
-              <div data-v-2fadc57c="" class="xm-level"
+              <div class="xm-level"
                    style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
-                <span data-v-2fadc57c="" style="display: block;">6</span></div> <!----></div>
+                <span style="display: block;">6</span></div> <!----></div>
             <p class="user-status-title text-long-ellipsis"><a data-v-2f920749=""
                                                                href="#"
                                                                class="bold">
@@ -124,29 +124,29 @@
             </div>
           </div>
           <div class="user-status request-small">
-            <div data-v-2fadc57c="" class="xm-header user-avatar"
+            <div class="xm-header user-avatar"
                  style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
-              <div data-v-2fadc57c="" class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
-                  data-v-2fadc57c=""
+              <div class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
+
                   src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg"
                   alt="头像" class="" style="border-radius: 50%;"></div>
-              <svg data-v-2fadc57c="" viewBox="0 0 100 100" style="width: 44px; height: 44px;">
-                <defs data-v-2fadc57c="">
-                  <linearGradient data-v-2fadc57c="" id="svg0319ca78-2d6c-4c5f-8669-2a9c304fa461" x1="0%" y1="0%"
+              <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
+                <defs>
+                  <linearGradient id="svg0319ca78-2d6c-4c5f-8669-2a9c304fa461" x1="0%" y1="0%"
                                   x2="100%" y2="0%">
-                    <stop data-v-2fadc57c="" offset="0%"></stop>
-                    <stop data-v-2fadc57c="" offset="100%"></stop>
+                    <stop offset="0%"></stop>
+                    <stop offset="100%"></stop>
                   </linearGradient>
                 </defs>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
                       stroke-width="8" fill-opacity="0"></path>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
                       stroke="url(#svg0319ca78-2d6c-4c5f-8669-2a9c304fa461)" stroke-width="8" fill-opacity="0"
                       style="stroke-dasharray: 14.35, 287;"></path>
               </svg> <!---->
-              <div data-v-2fadc57c="" class="xm-level" style="background: transparent;"><img data-v-2fadc57c=""
-                                                                                             src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%BB%84v1605690523?upload_type/Tencent_COS"
-                                                                                             style="width: 18px; height: 18px;">
+              <div class="xm-level" style="background: transparent;"><img
+                  src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%BB%84v1605690523?upload_type/Tencent_COS"
+                  style="width: 18px; height: 18px;">
               </div>
             </div>
             <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a
@@ -165,29 +165,29 @@
             </div>
           </div>
           <div class="user-status request-small">
-            <div data-v-2fadc57c="" class="xm-header user-avatar"
+            <div class="xm-header user-avatar"
                  style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
-              <div data-v-2fadc57c="" class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
-                  data-v-2fadc57c=""
+              <div class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
+
                   src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg"
                   alt="头像" class="" style="border-radius: 50%;"></div>
-              <svg data-v-2fadc57c="" viewBox="0 0 100 100" style="width: 44px; height: 44px;">
-                <defs data-v-2fadc57c="">
-                  <linearGradient data-v-2fadc57c="" id="svgf2fcd649-4ec8-4c8f-b35c-a66684c3a6b2" x1="0%" y1="0%"
+              <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
+                <defs>
+                  <linearGradient id="svgf2fcd649-4ec8-4c8f-b35c-a66684c3a6b2" x1="0%" y1="0%"
                                   x2="100%" y2="0%">
-                    <stop data-v-2fadc57c="" offset="0%"></stop>
-                    <stop data-v-2fadc57c="" offset="100%"></stop>
+                    <stop offset="0%"></stop>
+                    <stop offset="100%"></stop>
                   </linearGradient>
                 </defs>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
                       stroke-width="8" fill-opacity="0"></path>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
                       stroke="url(#svgf2fcd649-4ec8-4c8f-b35c-a66684c3a6b2)" stroke-width="8" fill-opacity="0"
                       style="stroke-dasharray: 175.07, 287;"></path>
               </svg> <!---->
-              <div data-v-2fadc57c="" class="xm-level" style="background: transparent;"><img data-v-2fadc57c=""
-                                                                                             src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS"
-                                                                                             style="width: 18px; height: 18px;">
+              <div class="xm-level" style="background: transparent;"><img
+                  src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS"
+                  style="width: 18px; height: 18px;">
               </div>
             </div>
             <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a
@@ -206,29 +206,29 @@
             </div>
           </div>
           <div class="user-status request-small">
-            <div data-v-2fadc57c="" class="xm-header user-avatar"
+            <div class="xm-header user-avatar"
                  style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
-              <div data-v-2fadc57c="" class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
-                  data-v-2fadc57c=""
+              <div class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
+
                   src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg"
                   alt="头像" class="" style="border-radius: 50%;"></div>
-              <svg data-v-2fadc57c="" viewBox="0 0 100 100" style="width: 44px; height: 44px;">
-                <defs data-v-2fadc57c="">
-                  <linearGradient data-v-2fadc57c="" id="svg30fd156d-d784-4592-83c9-c4af6c099f50" x1="0%" y1="0%"
+              <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
+                <defs>
+                  <linearGradient id="svg30fd156d-d784-4592-83c9-c4af6c099f50" x1="0%" y1="0%"
                                   x2="100%" y2="0%">
-                    <stop data-v-2fadc57c="" offset="0%"></stop>
-                    <stop data-v-2fadc57c="" offset="100%"></stop>
+                    <stop offset="0%"></stop>
+                    <stop offset="100%"></stop>
                   </linearGradient>
                 </defs>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
                       stroke-width="8" fill-opacity="0"></path>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
                       stroke="url(#svg30fd156d-d784-4592-83c9-c4af6c099f50)" stroke-width="8" fill-opacity="0"
                       style="stroke-dasharray: 100.45, 287;"></path>
               </svg>
-              <div data-v-2fadc57c="" class="xm-level"
+              <div class="xm-level"
                    style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
-                <span data-v-2fadc57c="" style="display: block;">7</span></div> <!----></div>
+                <span style="display: block;">7</span></div> <!----></div>
             <p class="user-status-title text-long-ellipsis"><a data-v-2f920749=""
                                                                href="#" class="bold">
               养了个乐多
@@ -828,10 +828,11 @@ stop:nth-child(2) {
   font-size: 1rem;
   font-weight: 500;
 }
+
 @media screen and (max-width: 768px) {
 
-  .grid .grid-column{
-    display: none!important;
+  .grid .grid-column {
+    display: none !important;
   }
 }
 </style>

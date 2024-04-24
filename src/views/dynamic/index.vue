@@ -32,21 +32,25 @@ export default {
     transform: none !important;
   }
 }
+
 @media screen and (max-width: 768px) {
   .content-grid {
     margin: 10px;
-    padding-top: 128px!important;
+    padding-top: 128px !important;
   }
+
   .grid {
-    display: block!important;
+    display: block !important;
   }
 }
+
 .content-grid {
   max-width: 1184px;
   padding: 54px 0 32px;
   padding-top: 84px;
   transition: transform 0.4s ease-in-out 0s;
 }
+
 .grid {
   display: grid;
   grid-template-columns: 100%;
@@ -54,6 +58,7 @@ export default {
   -ms-flex-align: start;
   align-items: start;
 }
+
 .grid.grid-3-6-3 {
   grid-template-areas: 'sidebar1 content sidebar2';
   grid-template-columns: 24.986486% 47.324324% 24.986486%;

@@ -1,33 +1,33 @@
 <template>
-  <div class="grid-column" data-v-2f920749=""><!---->
-    <div id="slider_home" class="home-slider" style="height:65px;" data-v-31d62611="" data-v-2f920749="">
-      <div class="left" style="" data-v-31d62611="">
-        <svg class="slider-control-icon icon-small-arrow" data-v-31d62611="">
-          <use xlink:href="#svg-small-arrow" data-v-31d62611=""></use>
+  <div class="grid-column"><!---->
+    <div id="slider_home" class="home-slider" style="height:65px;">
+      <div class="left" style="">
+        <svg class="slider-control-icon icon-small-arrow">
+          <use xlink:href="#svg-small-arrow"></use>
         </svg>
       </div>
-      <div class="right" style="" data-v-31d62611="">
-        <svg class="slider-control-icon icon-small-arrow" data-v-31d62611="">
-          <use xlink:href="#svg-small-arrow" data-v-31d62611=""></use>
+      <div class="right" style="">
+        <svg class="slider-control-icon icon-small-arrow">
+          <use xlink:href="#svg-small-arrow"></use>
         </svg>
       </div>
-      <div class="slider-list" style="transform:translateX(0px);" data-v-31d62611="">
-        <div data-v-31d62611="" class="slider active" style="min-width: 95px;"><span data-v-31d62611="">推荐</span></div>
-        <div data-v-31d62611="" class="slider" style="min-width: 95px;"><span data-v-31d62611="">圈子</span></div>
-        <div data-v-31d62611="" class="slider" style="min-width: 95px;"><span data-v-31d62611="">芋头专栏</span></div>
-        <div data-v-31d62611="" class="slider" style="min-width: 95px;"><span data-v-31d62611="">最新</span></div>
-        <div data-v-31d62611="" class="slider" style="min-width: 95px;"><span data-v-31d62611="">新手必学</span></div>
-        <div data-v-31d62611="" class="slider" style="min-width: 95px;"><span data-v-31d62611="">功能前瞻</span></div>
-        <div data-v-31d62611="" class="slider" style="min-width: 95px;"><span data-v-31d62611="">瀑布频道</span></div>
-        <div data-v-31d62611="" class="slider" style="min-width: 95px;"><span data-v-31d62611="">功能讲解</span></div>
-        <div data-v-31d62611="" class="slider" style="min-width: 95px;"><span data-v-31d62611="">文章</span></div>
-        <div data-v-31d62611="" class="slider" style="min-width: 95px;"><span data-v-31d62611="">问答</span></div>
+      <div class="slider-list" style="transform:translateX(0px);">
+        <div class="slider active" style="min-width: 95px;"><span>推荐</span></div>
+        <div class="slider" style="min-width: 95px;"><span>圈子</span></div>
+        <div class="slider" style="min-width: 95px;"><span>芋头专栏</span></div>
+        <div class="slider" style="min-width: 95px;"><span>最新</span></div>
+        <div class="slider" style="min-width: 95px;"><span>新手必学</span></div>
+        <div class="slider" style="min-width: 95px;"><span>功能前瞻</span></div>
+        <div class="slider" style="min-width: 95px;"><span>瀑布频道</span></div>
+        <div class="slider" style="min-width: 95px;"><span>功能讲解</span></div>
+        <div class="slider" style="min-width: 95px;"><span>文章</span></div>
+        <div class="slider" style="min-width: 95px;"><span>问答</span></div>
       </div>
       <object tabindex="-1" type="text/html" aria-hidden="true" data="about:blank"
               style="display: block; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border: none; padding: 0px; margin: 0px; opacity: 0; z-index: -1000; pointer-events: none;"></object>
     </div>
-    <div data-v-2f920749="">
-      <div data-v-9549e44a="" data-v-2f920749="" class="widget-box no-padding post-card" video-height="0">
+    <div>
+      <div data-v-9549e44a="" class="widget-box no-padding post-card" video-height="0">
         <div data-v-9549e44a="" class="widget-box-settings" style="z-index: 100;">
           <div data-v-9549e44a="" class="post-settings-wrap" style="display: none;">
             <div data-v-9549e44a="" style="position: relative;">
@@ -151,7 +151,7 @@
             </svg>
             <p data-v-9549e44a="" class="post-option-text">分享</p></div>
         </div> <!----></div>
-      <div data-v-9549e44a="" data-v-2f920749="" class="widget-box no-padding post-card" video-height="0">
+      <div data-v-9549e44a="" class="widget-box no-padding post-card" video-height="0">
         <div data-v-9549e44a="" class="widget-box-settings" style="z-index: 100;">
           <div data-v-9549e44a="" class="post-settings-wrap" style="display: none;">
             <div data-v-9549e44a="" style="position: relative;">
@@ -274,7 +274,7 @@
             </svg>
             <p data-v-9549e44a="" class="post-option-text">分享</p></div>
         </div> <!----></div>
-      <div data-v-9549e44a="" data-v-2f920749="" class="widget-box no-padding post-card" video-height="0">
+      <div data-v-9549e44a="" class="widget-box no-padding post-card" video-height="0">
         <div data-v-9549e44a="" class="widget-box-settings" style="z-index: 100;">
           <div data-v-9549e44a="" class="post-settings-wrap" style="display: none;">
             <div data-v-9549e44a="" style="position: relative;">
@@ -397,7 +397,7 @@
             </svg>
             <p data-v-9549e44a="" class="post-option-text">分享</p></div>
         </div> <!----></div>
-      <div data-v-9549e44a="" data-v-2f920749="" class="widget-box no-padding post-card" video-height="0">
+      <div data-v-9549e44a="" class="widget-box no-padding post-card" video-height="0">
         <div data-v-9549e44a="" class="widget-box-settings" style="z-index: 100;">
           <div data-v-9549e44a="" class="post-settings-wrap" style="display: none;">
             <div data-v-9549e44a="" style="position: relative;">
@@ -520,7 +520,7 @@
             </svg>
             <p data-v-9549e44a="" class="post-option-text">分享</p></div>
         </div> <!----></div>
-      <div data-v-9549e44a="" data-v-2f920749="" class="widget-box no-padding post-card" video-height="0">
+      <div data-v-9549e44a="" class="widget-box no-padding post-card" video-height="0">
         <div data-v-9549e44a="" class="widget-box-settings" style="z-index: 100;">
           <div data-v-9549e44a="" class="post-settings-wrap" style="display: none;">
             <div data-v-9549e44a="" style="position: relative;">
@@ -644,8 +644,8 @@
             <p data-v-9549e44a="" class="post-option-text">分享</p></div>
         </div> <!----></div>
 
-      <div data-v-2f920749="" style="display: none;">
-        <div data-v-2f920749="" class="ant-empty">
+      <div style="display: none;">
+        <div class="ant-empty">
           <div class="ant-empty-image">
             <svg width="184" height="152" viewBox="0 0 184 152" xmlns="http://www.w3.org/2000/svg">
               <g fill="none" fillRule="evenodd">
@@ -675,8 +675,8 @@
           </div>
           <p class="ant-empty-description">暂无内容</p></div>
       </div>
-      <div data-v-2f920749="" class="some-style-you-like">
-        <div data-v-2f920749="" class="loader-bars">
+      <div class="some-style-you-like">
+        <div class="loader-bars">
           <div class="loader-bar"></div>
           <div class="loader-bar"></div>
           <div class="loader-bar"></div>
