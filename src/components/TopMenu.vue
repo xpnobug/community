@@ -51,7 +51,7 @@ window.onresize = () => {
 const updatePMView = () => {
   pmView.value = screenWidth.value > 768;
   const emit = () => {
-    instance.proxy.$Bus.emit("pmView", pmView.value)
+    instance?.proxy?.$Bus.emit("pmView", pmView.value)
   }
   emit();
 }
@@ -64,7 +64,7 @@ const updateMenuDJ = () => {
   // 更新数据
   djValue.value = !djValue.value;
   const emit = () => {
-    instance.proxy.$Bus.emit("djValue", djValue.value)
+    instance?.proxy?.$Bus.emit("djValue", djValue.value)
   }
   emit();
   console.log(djValue.value);

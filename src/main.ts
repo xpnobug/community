@@ -6,8 +6,7 @@ import 'element-plus/dist/index.css'
 // import './styles/dark/css-vars.css'
 import mitt from "mitt"
 import App from './App.vue'
-import router from './router';
-
+import route from "./router"
 const app = createApp(App)
 const Mitt = mitt()
 declare module 'vue'{
@@ -15,8 +14,9 @@ declare module 'vue'{
         $Bus: typeof Mitt
     }
 }
+
 app.config.globalProperties.$Bus = Mitt
 // 使用路由
-app.use(router);
+app.use(route);
 app.use(ElementPlus)
 app.mount('#app')

@@ -3,18 +3,16 @@
        style="transform: translate(0px, 0px); transition: transform 0.4s ease-in-out 0s;">
     <div class="box-s">
       <PictureComponent/>
-<!--      <HotComponent/>-->
       <ZskComponent/>
     </div>
   </div>
 </template>
 <script>
 import PictureComponent from "./components/PictureComponent.vue";
-import HotComponent from "./components/HotComponent.vue";
 import ZskComponent from "./components/ZskComponent.vue";
 export default {
   name: "new_index",
-  components: {ZskComponent, HotComponent, PictureComponent}
+  components: {ZskComponent, PictureComponent}
 }
 </script>
 

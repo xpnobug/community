@@ -14,7 +14,7 @@
       </el-card>
       <el-card shadow="never" style="max-height: 480px; border: none; background: none" v-else></el-card>
 
-      <el-menu-item v-for="item in menuItems" :index="item.id" :key="item.path"  @click="handleMenuItemClick(item)">
+      <el-menu-item v-for="item in menuItems" :index="item.id" :key="item.id"  @click="handleMenuItemClick(item)">
         <el-icon>
           <icon-menu/>
         </el-icon>
@@ -29,12 +29,11 @@
 
 <script lang="ts" setup>
 import {getCurrentInstance, ref} from 'vue'
-import {Location, Menu as IconMenu, Setting,} from '@element-plus/icons-vue'
+import { Menu as IconMenu} from '@element-plus/icons-vue'
 import {RouterView, useRouter} from 'vue-router';
-import Index from "../views/newindex/index.vue";
 //定义变量
 const isLogin = ref(false);
-const menuPmView = ref(true);
+const menuPmView = ref();
 const djValueSet = ref();
 const instance = getCurrentInstance()
 const router = useRouter();
@@ -49,11 +48,11 @@ const menuItems = ref([
   // Add more menu items as needed
 ]);
 //点击按钮监听事件
-instance.proxy.$Bus.on("djValue", (param) => {
+instance?.proxy?.$Bus.on("djValue", (param) => {
   djValueSet.value = param;
 })
 //屏幕大小钮监听事件
-instance.proxy.$Bus.on("pmView", (param) => {
+instance?.proxy?.$Bus.on("pmView", (param) => {
   menuPmView.value = param;
 })
 const handleOpen = (key: string, keyPath: string[]) => {
@@ -63,7 +62,7 @@ const handleClose = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
 
-const handleMenuItemClick = (item) => {
+const handleMenuItemClick = (item:any) => {
   const routeName = item.label; // 使用菜单项的name属性作为路由名称
   router.push({ path: item.url })
   console.log(routeName, item.url)
