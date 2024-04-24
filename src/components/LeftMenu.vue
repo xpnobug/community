@@ -33,7 +33,7 @@ import { Menu as IconMenu} from '@element-plus/icons-vue'
 import {RouterView, useRouter} from 'vue-router';
 //定义变量
 const isLogin = ref(false);
-const menuPmView = ref('');
+const menuPmView = ref();
 const djValueSet = ref();
 const instance = getCurrentInstance()
 const router = useRouter();
@@ -53,7 +53,6 @@ instance?.proxy?.$Bus.on("djValue", (param) => {
 })
 //屏幕大小钮监听事件 true :pc false:mobile
 instance?.proxy?.$Bus.on("pmView", (param) => {
-  console.log("pmView", param)
   menuPmView.value = param;
 })
 
