@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import {getCurrentInstance, ref} from 'vue'
+import {getCurrentInstance, onMounted, reactive, ref, watchEffect} from 'vue'
 import {Menu as IconMenu,} from '@element-plus/icons-vue'
 
 // 定义一个响应式的数据
@@ -43,21 +43,41 @@ const instance = getCurrentInstance()
 
 //监听如果屏幕小于max-width: 768px，设置pmView
 //获取屏幕大小
-const screenWidth = ref(window.innerWidth)
-window.onresize = () => {
-  screenWidth.value = window.innerWidth
-}
+// 使用响应式
+const screenWidth = reactive({
+  screenWidth: window?.innerWidth,
+})
 //监听屏幕大小
 const updatePMView = () => {
-  pmView.value = screenWidth.value > 768;
+  pmView.value = window?.innerWidth > 768;
+  console.log(window?.innerWidth)
   const emit = () => {
     instance?.proxy?.$Bus.emit("pmView", pmView.value)
   }
   emit();
 }
-// 监听屏幕大小变化
-window.addEventListener('resize', updatePMView)
-updatePMView() // 初始化
+//页面渲染前
+onMounted(() => {
+      updatePMView() // 初始化
+      // 增加window监听
+      window.addEventListener('resize', () => {
+        screenWidth.screenWidth = window?.innerWidth
+      })
+    }
+)
+watchEffect(() => {
+  if (screenWidth.screenWidth >= 768) {
+    if (pmView.value)
+      return
+    pmView.value = true
+    // updatePMView()
+  }else {
+    if (!pmView.value)
+      return
+    pmView.value = false
+    updatePMView()
+  }
+})
 
 //第一次点击为true，第二次点击为false
 const updateMenuDJ = () => {

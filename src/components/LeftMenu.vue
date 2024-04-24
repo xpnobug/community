@@ -28,12 +28,12 @@
 </template>
 
 <script lang="ts" setup>
-import {getCurrentInstance, ref} from 'vue'
+import {getCurrentInstance, onBeforeMount, onMounted, ref} from 'vue'
 import { Menu as IconMenu} from '@element-plus/icons-vue'
 import {RouterView, useRouter} from 'vue-router';
 //定义变量
 const isLogin = ref(false);
-const menuPmView = ref();
+const menuPmView = ref('');
 const djValueSet = ref();
 const instance = getCurrentInstance()
 const router = useRouter();
@@ -51,10 +51,12 @@ const menuItems = ref([
 instance?.proxy?.$Bus.on("djValue", (param) => {
   djValueSet.value = param;
 })
-//屏幕大小钮监听事件
+//屏幕大小钮监听事件 true :pc false:mobile
 instance?.proxy?.$Bus.on("pmView", (param) => {
+  console.log("pmView", param)
   menuPmView.value = param;
 })
+
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
