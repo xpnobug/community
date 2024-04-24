@@ -40,7 +40,7 @@ const router = useRouter();
 //导航菜单动态加载
 const menuItems = ref([
   { id: "1", label: '首页', url: 'new_index', expanded: false },
-  { id: "2", label: '动态', url: '/collections', expanded: false},
+  { id: "2", label: '动态', url: 'dynamic', expanded: false},
   { id: "3", label: '学堂', url: '/pages/aboutus', expanded: false },
   { id: "4", label: '官方版块', url: '/pages/aboutus', expanded: false },
   { id: "5", label: '用户', url: '/pages/aboutus', expanded: false },
