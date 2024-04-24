@@ -258,7 +258,7 @@ export default {
   margin-right: 15px;
   /*width: 848px;*/
   border-radius: 12px;
-  background-color:var(--reaicc-meta-theme-post-color) ;
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: rgba(94, 92, 154, .06);
   padding: 28px;
 }
@@ -346,6 +346,7 @@ img {
   line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
 .box .public .contents-three .right-content .content-box .picture-box .author-information {
   display: flex;
   align-items: center;
@@ -410,7 +411,7 @@ svg:not(:root) {
 .box .public .contents .left-content {
   /*width: 320px;*/
   border-radius: 12px;
-  background-color:var(--reaicc-meta-theme-post-color) ;
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
   padding: 24px 28px;
 }
@@ -492,25 +493,29 @@ dl, ol, ul {
 
 /*设置手机端样式*/
 @media screen and (max-width: 768px) {
-  .box .public .contents{
+  .box .public .contents {
     flex-direction: column;
   }
-  .box .public .contents .right-content{
+
+  .box .public .contents .right-content {
     /*width: 375px;*/
   }
-  .box .public .contents .left-content{
+
+  .box .public .contents .left-content {
     /*width: 375px;*/
     padding: 0px 27px;
   }
 
-  .box .public .contents-three .right-content .content-box .pictures{
+  .box .public .contents-three .right-content .content-box .pictures {
     width: 120px;
     height: 120px;
   }
-  .box .public .contents-three .right-content .content-box .picture-box .pictures-title{
+
+  .box .public .contents-three .right-content .content-box .picture-box .pictures-title {
     width: 249px;
   }
-  .box .public .contents-three .right-content .content-box .picture-box .author-information .views{
+
+  .box .public .contents-three .right-content .content-box .picture-box .author-information .views {
     display: none;
   }
 }
