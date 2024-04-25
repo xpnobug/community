@@ -14,7 +14,7 @@
                      style="width: 100%; height: 100%; border-radius: 8px;">
               </div>
               <div class="title">
-                DS-REAIV4.1.4正式版发布|企微推送/消息开关/随机推荐等内容新增优化
+                DS-REAI|企微推送/消息开关/随机推荐等内容新增优化
               </div>
               <div class="title-content"><a href="#" class="link">
                 <!--                体验及咨询可V+小番茄-->

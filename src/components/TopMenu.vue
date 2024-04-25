@@ -12,10 +12,7 @@
               <icon-menu/>
             </el-icon>
           </li>
-          <li v-show="pmView"><a href="#">首页</a></li>
-          <li v-show="pmView"><a href="#">产品</a></li>
-          <li v-show="pmView"><a href="#">社区</a></li>
-          <li v-show="pmView"><a href="#">版块</a></li>
+          <li v-for="item in menuItems" :index="item.id" :key="item.id"  @click="handleMenuItemClick(item)" v-show="pmView" ><a href="#">{{ item.label }}</a></li>
         </ul>
       </nav>
     </div>
@@ -37,7 +34,21 @@
 import {getCurrentInstance, onMounted, reactive, ref, watchEffect} from 'vue'
 import {Menu as IconMenu,} from '@element-plus/icons-vue'
 import BgColorChange from "@/components/BgColorChange.vue";
+import {useRouter} from "vue-router";
 
+//导航菜单动态加载
+const menuItems = ref([
+  { id: "1", label: '首页', url: 'new_index', expanded: false },
+  { id: "2", label: '社区', url: 'dynamic', expanded: false},
+  { id: "3", label: '版块', url: '/pages/aboutus', expanded: false },
+  // { id: "5", label: '频道', url: '/pages/aboutus', expanded: false },
+]);
+const router = useRouter();
+const handleMenuItemClick = (item:any) => {
+  const routeName = item.label; // 使用菜单项的name属性作为路由名称
+  router.push({ path: item.url })
+  console.log(routeName, item.url)
+};
 // 定义一个响应式的数据
 const djValue = ref(false);
 const pmView = ref(false);

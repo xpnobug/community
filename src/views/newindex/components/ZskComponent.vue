@@ -139,7 +139,7 @@
               <ul class="recommended">
                 <li class="recommended-li"><a href="#" class="link"
                                               target="_blank">
-                  <div class="recommended-contents">DS-REAIV4.1.4正式版发布|企微推送/消息开关/随机推荐等内容新增优化</div>
+                  <div class="recommended-contents">DS-REAI|企微推送/消息开关/随机推荐等内容新增优化</div>
                 </a> <a href="#" class="">
                   <div class="recommended-author">
                     <div class="author">

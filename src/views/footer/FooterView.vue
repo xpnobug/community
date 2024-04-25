@@ -236,7 +236,7 @@ img {
   /*padding: 0 2rem;*/
 }
 #footer-wrap #reaicc-footer .footer-group {
-  min-width: 120px;
+  /*min-width: 120px;*/
 }
 #footer-wrap #reaicc-footer .footer-title {
   color: var(--reaicc-secondtext);

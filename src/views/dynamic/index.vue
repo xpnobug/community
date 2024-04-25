@@ -9,7 +9,7 @@
       <div class="grid grid-3-6-3 mobile-prefer-content">
         <LeftComponent/>
         <MainCompontent/>
-        <LeftComponent/>
+        <RightCompontent/>
       </div>
     </div>
   </div>
@@ -18,10 +18,11 @@
 <script>
 import LeftComponent from "@/views/dynamic/components/LeftComponent.vue";
 import MainCompontent from "@/views/dynamic/components/MainCompontent.vue";
+import RightCompontent from "@/views/dynamic/components/RightCompontent.vue";
 
 export default {
   name: "index",
-  components: {MainCompontent, LeftComponent}
+  components: {RightCompontent, MainCompontent, LeftComponent}
 }
 </script>
 

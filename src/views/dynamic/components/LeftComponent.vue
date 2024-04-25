@@ -1,3 +1,48 @@
+<script lang="ts" setup>
+import {ref} from "vue";
+
+const tagList = ref([
+  {id: "1", filter: '最近加入'},
+  {id: "2", filter: '最受欢迎'},
+  {id: "3", filter: '最近活跃'},
+]);
+const gGaoList = ref([
+  {id: "1", title: '官方社区已更新到4.1.2，欢迎大家一起找bug~', content: '各位社区的朋友，您们好：目前官方社区已经成功更新至4.1.2版，欢迎大家反馈使用'},
+  {id: "2", title: '圈子', content: '圈子'},
+  {id: "3", title: '最新', content: '最新'},
+]);
+const tjUserList = ref([
+  {
+    id: "1",
+    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/084059cc-5f23-45eb-b1b8-789c74d6a908.jpg',
+    level: '9',
+    userName: 'qww',
+    small: '3707',
+    tagId: '3'
+  },
+  {
+    id: "2",
+    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/084059cc-5f23-45eb-b1b8-789c74d6a908.jpg',
+    level: '8',
+    userName: '想Vicky',
+    small: '3707',
+    tagId: '3'
+  },
+  {
+    id: "3",
+    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/084059cc-5f23-45eb-b1b8-789c74d6a908.jpg',
+    level: '7',
+    userName: 'dsa',
+    small: '3707',
+    tagId: '1'
+  },
+]);
+const tagId = ref("1");
+const handleTag = value => {
+  tagId.value = value.id
+}
+</script>
+
 <template>
   <div class="grid-column fixed" style="top: -639px;">
     <div class="bulletin-board-box">
@@ -13,19 +58,11 @@
                style="transition: all 1s ease 0s; transform: translateX(-16px);">
             <div class="box">
               <el-carousel indicator-position="outside">
-                <el-carousel-item v-for="item in 4" :key="item">
-                  <div class="title">官方社区已更新到4.1.2，欢迎大家一起找bug~</div>
-                  <div class="content">各位社区的朋友，您们好：目前官方社区已经成功更新至4.1.2版，欢迎大家反馈使用</div>
+                <el-carousel-item v-for="item in gGaoList" :key="item">
+                  <div class="title">{{ item.title }}</div>
+                  <div class="content">{{ item.content }}</div>
                 </el-carousel-item>
               </el-carousel>
-            </div>
-            <div class="box">
-              <div class="title">欢迎来到想天社区-DS-REAI产品官方社区</div>
-              <div class="content">欢迎来到想天社区！这里播报最新DS-REAI社区更新消息，以及每日DS-REAI产品的开发日报，ge</div>
-            </div>
-            <div class="box">
-              <div class="title">官方社区已更新到4.1.2，欢迎大家一起找bug~</div>
-              <div class="content">各位社区的朋友，您们好：目前官方社区已经成功更新至4.1.2版，欢迎大家反馈使用</div>
             </div>
           </div>
         </div>
@@ -34,23 +71,22 @@
     </div>
     <div class="widget-box"><p class="widget-box-title">推荐用户</p>
       <div class="widget-box-content">
-        <div class="filters"><p class="filter">
-          最近加入
-        </p>
-          <p class="filter active">
-            最受欢迎
-          </p>
-          <p class="filter">
-            最近活跃
-          </p></div>
+        <div class="filters">
+          <p class="filter"
+             v-for="tag in tagList"
+             :class="[{ 'active': tagId === tag.id}]"
+             @click="handleTag(tag)">{{ tag.filter }}</p>
+        </div>
         <div class="user-status-list">
-          <div class="user-status request-small">
+          <div class="user-status request-small"
+               v-for="user in tjUserList"
+               v-show="tagId === user.tagId"
+          >
             <div class="xm-header user-avatar"
                  style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
-              <div class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
-
-                  src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/084059cc-5f23-45eb-b1b8-789c74d6a908.jpg"
-                  alt="头像" class="" style="border-radius: 50%;"></div>
+              <div class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;">
+                <img :src="user.avatar" alt="头像" class="" style="border-radius: 50%;">
+              </div>
               <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
                 <defs>
                   <linearGradient id="svg22848f93-cdcc-41ca-83ab-2573b39e23f1" x1="0%" y1="0%"
@@ -67,54 +103,18 @@
               </svg>
               <div class="xm-level"
                    style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
-                <span style="display: block;">9</span></div> <!----></div>
+                <span style="display: block;">{{ user.level }}</span></div> <!----></div>
             <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a
                 href="#" class="bold" style="color: rgb(251, 91, 90);">
-              想Vicky
+              {{ user.userName }}
             </a></p>
-            <p class="user-status-text small">
-              3707 粉丝
+            <p class="user-status-text small" v-if="tagId === '2'">
+              {{ user.small }} 粉丝
             </p>
-            <div class="action-request-list">
-              <div class="action-request accept">
-                <svg class="action-request-icon icon-add-friend">
-                  <use xlink:href="#svg-add-friend"></use>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div class="user-status request-small">
-            <div class="xm-header user-avatar"
-                 style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
-              <div class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
+            <p data-v-2f920749="" class="user-status-text small" v-else>
+              13小时前
+            </p>
 
-                  src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg"
-                  alt="头像" class="" style="border-radius: 50%;"></div>
-              <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
-                <defs>
-                  <linearGradient id="svg52d1944a-268d-47ca-b258-71c28b9e9152" x1="0%" y1="0%"
-                                  x2="100%" y2="0%">
-                    <stop offset="0%"></stop>
-                    <stop offset="100%"></stop>
-                  </linearGradient>
-                </defs>
-                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
-                      stroke-width="8" fill-opacity="0"></path>
-                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                      stroke="url(#svg52d1944a-268d-47ca-b258-71c28b9e9152)" stroke-width="8" fill-opacity="0"
-                      style="stroke-dasharray: 28.7, 287;"></path>
-              </svg>
-              <div class="xm-level"
-                   style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
-                <span style="display: block;">6</span></div> <!----></div>
-            <p class="user-status-title text-long-ellipsis"><a data-v-2f920749=""
-                                                               href="#"
-                                                               class="bold">
-              DS-REAI运营团队
-            </a></p>
-            <p class="user-status-text small">
-              1477 粉丝
-            </p>
             <div class="action-request-list">
               <div class="action-request accept">
                 <svg class="action-request-icon icon-add-friend">
@@ -205,45 +205,7 @@
               </div>
             </div>
           </div>
-          <div class="user-status request-small">
-            <div class="xm-header user-avatar"
-                 style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
-              <div class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
 
-                  src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg"
-                  alt="头像" class="" style="border-radius: 50%;"></div>
-              <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
-                <defs>
-                  <linearGradient id="svg30fd156d-d784-4592-83c9-c4af6c099f50" x1="0%" y1="0%"
-                                  x2="100%" y2="0%">
-                    <stop offset="0%"></stop>
-                    <stop offset="100%"></stop>
-                  </linearGradient>
-                </defs>
-                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
-                      stroke-width="8" fill-opacity="0"></path>
-                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                      stroke="url(#svg30fd156d-d784-4592-83c9-c4af6c099f50)" stroke-width="8" fill-opacity="0"
-                      style="stroke-dasharray: 100.45, 287;"></path>
-              </svg>
-              <div class="xm-level"
-                   style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
-                <span style="display: block;">7</span></div> <!----></div>
-            <p class="user-status-title text-long-ellipsis"><a data-v-2f920749=""
-                                                               href="#" class="bold">
-              养了个乐多
-            </a></p>
-            <p class="user-status-text small">
-              658 粉丝
-            </p>
-            <div class="action-request-list">
-              <div class="action-request accept">
-                <svg class="action-request-icon icon-add-friend">
-                  <use xlink:href="#svg-add-friend"></use>
-                </svg>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -283,11 +245,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "LeftComponent"
-}
-</script>
 
 <style scoped>
 h1, h2, h3, h4, h5, h6, a, p {
@@ -365,7 +322,7 @@ svg:not(:root) {
   transform: translateY(-50%);
 }
 
-.content-box .empty-left[data-v-2f920749], .content-box .empty-right {
+.content-box .empty-left, .content-box .empty-right {
   position: absolute;
   width: 30px;
   height: 30px;
@@ -481,11 +438,11 @@ p {
   transition: color .2s ease-in-out, opacity .2s ease-in-out;
 }
 
-.filters .filter.active[data-v-2f920749], input[type=password][data-v-2f920749]:focus, input[type=text][data-v-2f920749]:focus, select[data-v-2f920749]:focus, textarea[data-v-2f920749]:focus {
+.filters .filter.active, input[type=password]:focus, input[type=text]:focus, select:focus, textarea:focus {
   border-color: #337fff;
 }
 
-.filters .filter.active[data-v-2f920749], input[type=password][data-v-2f920749]:focus, input[type=text][data-v-2f920749]:focus, select[data-v-2f920749]:focus, textarea[data-v-2f920749]:focus {
+.filters .filter.active, input[type=password]:focus, input[type=text]:focus, select:focus, textarea:focus {
   border-color: #337fff;
 }
 
