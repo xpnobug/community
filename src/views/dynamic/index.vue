@@ -2,7 +2,7 @@
   <div class="content-grid">
     <div>
       <div class="section-banner"
-           style="background: url(https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/c6b949128885afaa4afe6140df0ae59b.png?imageMogr2/crop/2368x320/gravity/center) center center / cover no-repeat; cursor: pointer;">
+           style="background: url(https://alist.reaicc.com/nas/image/jpeg/2024-04/1/084059cc-5f23-45eb-b1b8-789c74d6a908.jpg) center center / cover no-repeat; cursor: pointer;">
         <p class="section-banner-title"></p>
         <p class="section-banner-text"></p>
       </div>
