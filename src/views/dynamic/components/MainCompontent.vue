@@ -40,7 +40,7 @@ const postInfo = ref([
   },
 ]);
 const tagId = ref("1");
-const handleTag = value => {
+const handleTag = (value:any) => {
   tagId.value = value.id
 }
 </script>
