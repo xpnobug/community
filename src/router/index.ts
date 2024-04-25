@@ -23,11 +23,11 @@ export default createRouter({
                     name: 'dynamic',
                     component: Dynamic,
                 },
-                {
-                    path: '/members',
-                    name: 'members',
-                    component: UserMember,
-                },
+                // {
+                //     path: '/members',
+                //     name: 'members',
+                //     component: UserMember,
+                // },
             ]
         },
     ]
