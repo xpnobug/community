@@ -4,11 +4,11 @@ import {getCurrentInstance, onBeforeMount, ref} from "vue";
 const viewIdValueSet = ref('1');
 const tagIdValueSet = ref('1');
 const instance = getCurrentInstance()
-instance?.proxy?.$Bus.on("viewId", (param) => {
+instance?.proxy?.$Bus.on("viewId", (param:any) => {
   viewIdValueSet.value = param;
   setAvatarSize(viewIdValueSet.value)
 })
-instance?.proxy?.$Bus.on("tagId", (param) => {
+instance?.proxy?.$Bus.on("tagId", (param:any) => {
   tagIdValueSet.value = param;
 })
 const avatarWidth = ref('');
@@ -20,7 +20,7 @@ onBeforeMount(() => {
 })
 const addWidth = ref();
 const addHeight = ref();
-const setAvatarSize = (size) => {
+const setAvatarSize = (size:any) => {
   avatarWidth.value = '85';
   avatarHeight.value = '85';
   addWh(avatarWidth.value, avatarHeight.value)
