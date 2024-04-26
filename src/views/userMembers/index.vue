@@ -1,7 +1,7 @@
 <template>
   <div class="content-grid"
-       style="width: 100%; padding-top: 84px; transform: translate(253.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
-    <div data-v-a0c93e92="">
+       style="width: 100%; padding-top: 84px;  transition: transform 0.4s ease-in-out 0s;">
+    <div data-v-a0c93e92="" style="margin: 10px;">
       <div class="section-banner" data-v-a0c93e92=""
            style="background: url(https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/aedadfd944b6b44687f68d45eca091af.png?imageMogr2/crop/2368x320/gravity/center) center center / cover no-repeat; cursor: default;">
         <p class="section-banner-title"></p>
@@ -75,7 +75,7 @@ export default {
 
 @media screen and (max-width: 768px) {
   .content-grid {
-    margin: 10px;
+    /*margin: 10px;*/
     padding-top: 128px !important;
   }
 
