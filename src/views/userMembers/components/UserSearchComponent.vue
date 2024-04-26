@@ -6,7 +6,15 @@ const viewList = ref([
   {id: "2", viewAction: '小网格', icon: ''},
   {id: "3", viewAction: '列表', icon: ''},
 ]);
-
+const instance = getCurrentInstance()
+const viewId = ref('1');
+const handleViewAction = (value:any) => {
+  viewId.value = value.id;
+  const emit = () => {
+    instance?.proxy?.$Bus.emit("viewId", viewId.value)
+  }
+  emit();
+}
 
 const tagList = ref([
   {id: "1", filter: '最近活跃'},
@@ -21,15 +29,7 @@ const handleTag = (value:any) => {
   }
   emit();
 }
-const instance = getCurrentInstance()
-const viewId = ref('1');
-const handleViewAction = (value:any) => {
-  viewId.value = value.id;
-  const emit = () => {
-    instance?.proxy?.$Bus.emit("viewId", viewId.value)
-  }
-  emit();
-}
+
 </script>
 
 <template>
@@ -49,7 +49,7 @@ const handleViewAction = (value:any) => {
         </div>
       </form>
       <div class="filter-tabs">
-        <div class="filter-tab active"
+        <div class="filter-tab"
              v-for="tag in tagList"
              :class="[{ 'active': tagId === tag.id}]"
              @click="handleTag(tag)">
@@ -59,12 +59,14 @@ const handleViewAction = (value:any) => {
     </div>
     <div class="section-filters-bar-actions">
       <div class="view-actions">
-        <div class="view-action active" v-for="item in viewList">
+        <div class="view-action" v-for="item in viewList"
+             :class="[{ 'active': viewId === item.id}]">
           <div :data-title="item.viewAction"
                style="position: relative;" @click="handleViewAction(item)">
-            <svg class="view-action-icon icon-big-grid-view">
-              <use xlink:href="#svg-big-grid-view"></use>
-            </svg>
+<!--            <svg class="view-action-icon icon-big-grid-view">-->
+<!--              <use xlink:href="#svg-big-grid-view"></use>-->
+<!--            </svg>-->
+            <p style="color: #00c7d9">{{item.viewAction}}</p>
             <div class="xm-tooltip"
                  style="white-space: nowrap; position: absolute; z-index: 99999; top: -32px; left: 50%; margin-left: -36px; opacity: 0; visibility: hidden; transform: translate(0px, -10px); transition: all 0.3s ease-in-out 0s;">
               <p class="xm-tooltip-text">{{ item.viewAction }}</p>
@@ -210,11 +212,11 @@ input {
   padding: 0 18px;
 }
 
-.button.primary[data-v-a0c93e92] {
+.button.primary {
   box-shadow: 4px 7px 12px 0 rgba(51, 127, 255, .2);
 }
 
-.button.primary[data-v-a0c93e92], .button.secondary[data-v-a0c93e92] {
+.button.primary, .button.secondary {
   background-color: #337fff;
 }
 
@@ -417,7 +419,7 @@ select {
   display: flex;
 }
 
-.filter-tab.active[data-v-a0c93e92] {
+.filter-tab.active {
   border-bottom-color: #337fff;
 }
 
