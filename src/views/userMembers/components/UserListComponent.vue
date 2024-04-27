@@ -176,7 +176,7 @@ const userList = ref([
             <p class="user-short-description-text">
 
             </p></div>
-          <div>
+          <div class="is-show">
             <div class="">
               <div id="tns196-ow" class="tns-outer">
                 <div aria-atomic="true" aria-live="polite" class="tns-liveregion tns-visually-hidden">slide <span
@@ -855,8 +855,11 @@ svg:not(:root) {
   height: 20px;
 }
 @media screen and (max-width: 768px) {
-  .user-preview[data-v-a2cc93aa] {
+  .user-preview {
     margin-bottom: 16px;
+  }
+  .is-show{
+    display: none;
   }
 }
 </style>
