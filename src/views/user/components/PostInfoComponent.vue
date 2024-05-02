@@ -14,7 +14,7 @@ const imgInfoList = ref()
 onBeforeMount(() => {
   instance?.proxy?.$Bus.on("imgInfoList", (param: any) => {
     imgInfoList.value = param;
-    console.log(imgInfoList)
+    // console.log(imgInfoList)
   })
 })
 

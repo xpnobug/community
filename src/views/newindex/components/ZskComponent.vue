@@ -88,7 +88,7 @@
                           alt=""
                           style="width: 100%; height: 100%; border-radius: 50%;">
                       </div>
-                      <div class="release-time"><span>想天软件小蘑菇</span> <span
+                      <div class="release-time"><span>DS-REAI软件小蘑菇</span> <span
                       >2023-02-24<span> · 未知</span></span></div>
                     </div>
                     <div class="views"><span>1505 浏览</span> <span

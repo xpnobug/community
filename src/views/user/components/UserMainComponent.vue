@@ -51,7 +51,7 @@
             </svg>
               <div class="xm-level" style="background: transparent;"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%BB%84v1605690523?upload_type/Tencent_COS" style="width: 18px; height: 18px;"></div>
             </div>
-            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">想天软件小蘑菇</span> </p>
+            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">DS-REAI软件小蘑菇</span> </p>
             <p class="user-status-text small">2023-04-13<span> · 未知</span></p>
             <div class="cad" style="right: 0px;">
               <div class="is-top"><svg class="icon">
@@ -151,7 +151,7 @@
             </svg>
               <div class="xm-level" style="background: transparent;"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%BB%84v1605690523?upload_type/Tencent_COS" style="width: 18px; height: 18px;"></div>
             </div>
-            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">想天软件小蘑菇</span> </p>
+            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">DS-REAI软件小蘑菇</span> </p>
             <p class="user-status-text small">03-25 21:27<span> · 浙江</span></p>
             <div class="cad" style="right: 0px;"> </div>
             <p></p>
@@ -238,7 +238,7 @@
             </svg>
               <div class="xm-level" style="background: transparent;"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%BB%84v1605690523?upload_type/Tencent_COS" style="width: 18px; height: 18px;"></div>
             </div>
-            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">想天软件小蘑菇</span> </p>
+            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">DS-REAI软件小蘑菇</span> </p>
             <p class="user-status-text small">03-20 13:34<span> · 浙江</span></p>
             <div class="cad" style="right: 0px;"> </div>
             <p></p>
@@ -326,7 +326,7 @@
             </svg>
               <div class="xm-level" style="background: transparent;"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%BB%84v1605690523?upload_type/Tencent_COS" style="width: 18px; height: 18px;"></div>
             </div>
-            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">想天软件小蘑菇</span> </p>
+            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">DS-REAI软件小蘑菇</span> </p>
             <p class="user-status-text small">03-19 20:40<span> · 浙江</span></p>
             <div class="cad" style="right: 0px;"> </div>
             <p></p>
@@ -414,7 +414,7 @@
             </svg>
               <div class="xm-level" style="background: transparent;"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%BB%84v1605690523?upload_type/Tencent_COS" style="width: 18px; height: 18px;"></div>
             </div>
-            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">想天软件小蘑菇</span> </p>
+            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">DS-REAI软件小蘑菇</span> </p>
             <p class="user-status-text small">02-18 09:21<span> · 浙江</span></p>
             <div class="cad" style="right: 0px;"> </div>
             <p></p>
@@ -502,7 +502,7 @@
             </svg>
               <div class="xm-level" style="background: transparent;"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%BB%84v1605690523?upload_type/Tencent_COS" style="width: 18px; height: 18px;"></div>
             </div>
-            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">想天软件小蘑菇</span> </p>
+            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">DS-REAI软件小蘑菇</span> </p>
             <p class="user-status-text small">02-07 13:50<span> · 浙江</span></p>
             <div class="cad" style="right: 0px;"> </div>
             <p></p>
@@ -1084,98 +1084,6 @@ export default {
 </script>
 
 <style scoped>
-@font-face {
-  font-family:'Regular';
-  src:url('https://pc.opensns.cn/font/SourceHanSansCN-Regular.ttf');
-}
-@font-face {
-  font-family:"\5FAE\8F6F\96C5\9ED1";
-  src:local("Microsoft YaHei");
-}
-body {
-  font-family:Regular;
-  font-size:16px;
-  font-weight:400;
-  color:rgba(0,0,0,.65);
-  text-align:left;
-  font-variant:tabular-nums;
-  line-height:1.15;
-}
-* {
-  margin: 0;
-  padding: 0;
-  border: none;
-  outline: none;
-  box-sizing: border-box;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-:not(font) {
-  font-family: Regular;
-}
-
-.tab-content > .active {
-  display: block;
-}
-
-body {
-  font-size: 16px;
-  background-color: #f8f8fb;
-  overflow-x: hidden;
-}
-
-body {
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,Liberation Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
-  font-size: 1rem;
-  font-weight: 400;
-  color: #212529;
-  text-align: left;
-}
-
-body {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  color: rgba(0,0,0,.65);
-  font-size: 14px;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
-  font-variant: tabular-nums;
-  line-height: 1.5;
-  background-color: #fff;
-  font-feature-settings: "tnum","tnum";
-}
-
-body {
-  background-color: #f8f8f8;
-}
-
-body {
-  overflow-x: auto;
-}
-
-body {
-  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","\5FAE\8F6F\96C5\9ED1",Arial,sans-serif;
-}
-
-html {
-  width: 100%;
-  height: 100%;
-}
-
-html {
-  font-family: sans-serif;
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -ms-overflow-style: scrollbar;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
 
 .grid-column  {
   display: grid;
