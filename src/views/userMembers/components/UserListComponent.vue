@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {getCurrentInstance, onBeforeMount, ref} from "vue";
+import {useRouter} from "vue-router";
 
 const viewIdValueSet = ref('1');
 const tagIdValueSet = ref('1');
@@ -118,7 +119,10 @@ const userList = ref([
     tagId: '3'
   },
 ]);
-
+const router = useRouter();
+const toUserInfo = (item:any) => {
+  router.push({ path: '/user/'+item.id })
+}
 
 </script>
 
@@ -126,7 +130,7 @@ const userList = ref([
   <div class="grid centered" :class="[{'grid-4-4-4' : viewIdValueSet === '1' , 'grid-3-3-3-3': viewIdValueSet === '2'}]"
        style="margin-top: 16px; justify-content: flex-start;">
     <div class="user-preview" :class="[{'small' : viewIdValueSet === '2'}]" v-for="item in userList"
-         v-show="tagIdValueSet === item.tagId">
+         v-show="tagIdValueSet === item.tagId" @click="toUserInfo(item)">
       <div class="user-preview" :class="[{'small' : viewIdValueSet === '2' , 'landscape': viewIdValueSet === '3'}]">
         <figure class="user-preview-cover"
                 :style="{background: 'url(' + item.previewCover + ') center center / cover no-repeat rgb(255, 255, 255)',}">

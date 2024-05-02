@@ -39,9 +39,9 @@ const instance = getCurrentInstance()
 const router = useRouter();
 //导航菜单动态加载
 const menuItems = ref([
-  { id: "1", label: '首页', url: 'new_index', expanded: false },
-  { id: "2", label: '社区', url: 'dynamic', expanded: false},
-  { id: "3", label: '用户版块', url: 'members', expanded: false },
+  { id: "1", label: '首页', url: '/new_index', expanded: false },
+  { id: "2", label: '社区', url: '/dynamic', expanded: false},
+  { id: "3", label: '用户版块', url: '/members', expanded: false },
   { id: "5", label: '频道', url: '/pages/aboutus', expanded: false },
 ]);
 //点击按钮监听事件

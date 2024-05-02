@@ -3,6 +3,8 @@ import home from "../views/index.vue";
 import ShowView from "../views/newindex/showView.vue";
 import Dynamic from "../views/dynamic/index.vue";
 import UserMember from "../views/userMembers/index.vue";
+import User from "../views/user/index.vue";
+import PostInfoComponent from "@/views/user/components/PostInfoComponent.vue";
 
 export default createRouter({
     history: createWebHistory(),
@@ -27,6 +29,15 @@ export default createRouter({
                     path: '/members',
                     name: 'members',
                     component: UserMember,
+                },
+                {
+                    path: '/user/:id',
+                    name: 'user',
+                    component: User,
+                },
+                {
+                    path: '/post/:id',
+                    component: PostInfoComponent,
                 },
             ]
         },

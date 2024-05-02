@@ -422,7 +422,7 @@ h1, h2, h3, h4, h5, h6, a, p {
   position: relative;
 }
 
-.xm-header[data-v-2fadc57c] {
+.xm-header {
   background: #fff;
   border-radius: 50%;
   box-sizing: content-box;
