@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {getCurrentInstance, onBeforeMount, onMounted, ref} from 'vue';
+import {getCurrentInstance, onBeforeMount, ref} from 'vue';
+
 const visible = ref(false);
 const open = ref<boolean>(false);
 const instance = getCurrentInstance()
@@ -10,7 +11,7 @@ const handleMenu = () => {
   }
   emit();
 }
-const imgInfoList = ref()
+const imgInfoList = ref([])
 onBeforeMount(() => {
   instance?.proxy?.$Bus.on("imgInfoList", (param: any) => {
     imgInfoList.value = param;
@@ -33,9 +34,9 @@ onBeforeMount(() => {
                           style="position: fixed; width: 80px; z-index: -99999;"></textarea>
                 <div class="popup-close-button" style="top: 6px; right: 6px; z-index: 999999;"
                      @click="handleMenu">
-<!--                  <svg class="popup-close-button-icon icon-cross">-->
-<!--                    <use xlink:href="#svg-cross"></use>-->
-<!--                  </svg>-->
+                  <!--                  <svg class="popup-close-button-icon icon-cross">-->
+                  <!--                    <use xlink:href="#svg-cross"></use>-->
+                  <!--                  </svg>-->
                   关闭
                 </div>
                 <div class="widget-box no-padding" style="overflow: hidden; border-radius: 0px;">
@@ -54,30 +55,30 @@ onBeforeMount(() => {
                                 <div class="widget-box-status-content">
                                   <div class="user-status">
                                     <div
-                                         class="xm-header user-avatar user-status-avatar"
-                                         style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%;">
+                                        class="xm-header user-avatar user-status-avatar"
+                                        style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%;">
                                       <div class="xm-avatar"
                                            style="width: 44px; height: 44px; padding: 6.4px;"><img
-                                                                                                   src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_544381688968711?imageMogr2/crop/128x128/gravity/center"
-                                                                                                   alt="头像" class=""
-                                                                                                   style="border-radius: 50%;">
+                                          src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_544381688968711?imageMogr2/crop/128x128/gravity/center"
+                                          alt="头像" class=""
+                                          style="border-radius: 50%;">
                                       </div>
                                       <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
                                         <defs>
                                           <linearGradient
-                                                          id="svg04aacff7-ae3e-4d5a-8602-279db3fc4699" x1="0%" y1="0%"
-                                                          x2="100%" y2="0%">
+                                              id="svg04aacff7-ae3e-4d5a-8602-279db3fc4699" x1="0%" y1="0%"
+                                              x2="100%" y2="0%">
                                             <stop offset="0%"></stop>
                                             <stop offset="100%"></stop>
                                           </linearGradient>
                                         </defs>
                                         <path
-                                              d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                                              stroke="#e9e9f0" stroke-width="8" fill-opacity="0"></path>
+                                            d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
+                                            stroke="#e9e9f0" stroke-width="8" fill-opacity="0"></path>
                                         <path
-                                              d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                                              stroke="url(#svg04aacff7-ae3e-4d5a-8602-279db3fc4699)" stroke-width="8"
-                                              fill-opacity="0" style="stroke-dasharray: 34.44, 287;"></path>
+                                            d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
+                                            stroke="url(#svg04aacff7-ae3e-4d5a-8602-279db3fc4699)" stroke-width="8"
+                                            fill-opacity="0" style="stroke-dasharray: 34.44, 287;"></path>
                                       </svg>
                                       <div class="xm-level" style="background: transparent;"><img
 
@@ -85,24 +86,24 @@ onBeforeMount(() => {
                                           style="width: 18px; height: 18px;"></div>
                                     </div>
                                     <p class="user-status-title medium"><span
-                                                                                                 class="bold"
-                                                                                                 style="color: rgb(251, 91, 90);">纯烬 </span>
+                                        class="bold"
+                                        style="color: rgb(251, 91, 90);">纯烬 </span>
                                     </p>
                                     <p class="user-status-text text-long-ellipsis"> 2023-09-12<span
-                                       > · 浙江</span></p>
+                                    > · 浙江</span></p>
                                   </div>
                                   <div class="widget-box-status-text">可爱⚈₃⚈</div>
                                   <div class="tag-list"><a
-                                                                              class="tag-item secondary">闲聊灌水</a></div>
+                                      class="tag-item secondary">闲聊灌水</a></div>
                                   <div class="content-actions"
                                        style="margin-top: -2px; border-top: none;">
                                     <div class="content-action">
                                       <div class="meta-line">
                                         <div class="meta-line-list reaction-item-list">
                                           <div class="reaction-item"><img
-                                                                                             src="https://pc.opensns.cn/img/reaction/like.png"
-                                                                                             alt="reaction-like"
-                                                                                             class="reaction-image">
+                                              src="https://pc.opensns.cn/img/reaction/like.png"
+                                              alt="reaction-like"
+                                              class="reaction-image">
                                           </div>
                                         </div>
                                         <p class="meta-line-text">0</p>
@@ -166,7 +167,7 @@ onBeforeMount(() => {
                   <div id="hevue-imgpreview-wrap" class="hevue-imgpreview-wrap">
                     <div class="he-img-wrap">
                       <a-image-preview-group>
-                        <a-image  :src="imgInfoList.image"/>
+                        <a-image :src="imgInfoList.image"/>
                       </a-image-preview-group>
                     </div>
                   </div>
@@ -192,8 +193,9 @@ onBeforeMount(() => {
     z-index: 99999 !important;
   }
 }
+
 @media screen and (max-width: 768px) {
-  .widget-box.no-padding{
+  .widget-box.no-padding {
     display: none;
   }
 }
