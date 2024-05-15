@@ -79,9 +79,9 @@
       </div>
 
       <el-menu-item v-for="item in menuItems" :key="item.id" :index="item.id" @click="handleMenuItemClick(item)">
-        <el-icon>
-          <icon-menu/>
-        </el-icon>
+<!--        <el-icon>-->
+<!--          <icon-menu/>-->
+<!--        </el-icon>-->
         <template #title>{{ item.label }}</template>
       </el-menu-item>
     </el-menu>
@@ -93,7 +93,7 @@
 
 <script lang="ts" setup>
 import {getCurrentInstance, ref} from 'vue'
-import {Menu as IconMenu} from '@element-plus/icons-vue'
+// import {Menu as IconMenu} from '@element-plus/icons-vue'
 import {RouterView, useRouter} from 'vue-router';
 import {useUserInfo} from "@/hooks/useCached";
 //定义变量
