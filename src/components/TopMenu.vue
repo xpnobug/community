@@ -8,9 +8,9 @@
             <img src="https://alist.reaicc.com/nas/image/png/2024-05/1/b0e02980-01dd-4700-b2aa-b16b4d8491a3.png" alt="">
           </div>
           <li @click="updateMenuDJ">
-            <el-icon>
-              <icon-menu/>
-            </el-icon>
+<!--            <el-icon>-->
+<!--              <icon-menu/>-->
+<!--            </el-icon>-->
           </li>
           <li v-for="item in menuItems" :index="item.id" :key="item.id"  @click="handleMenuItemClick(item)" v-show="pmView" ><a href="#">{{ item.label }}</a></li>
         </ul>
@@ -39,7 +39,6 @@
 
 <script lang="ts" setup>
 import {getCurrentInstance, onMounted, reactive, ref, watchEffect} from 'vue'
-import {Menu as IconMenu,} from '@element-plus/icons-vue'
 import BgColorChange from "@/components/BgColorChange.vue";
 import {useRouter} from "vue-router";
 import {isLogin, tokenInfo,userInfo} from "@/api/userLogin";
