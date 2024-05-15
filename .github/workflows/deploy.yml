@@ -1,0 +1,67 @@
+name: main
+# 触发workflow的条件
+on:
+  push:
+    # 只有master分支发生push事件时，才会触发workflow
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+# jobs表示执行的一项或多项任务
+jobs:
+  build: # 任务的job_id，具体名称自定义，这里build代表打包
+    runs-on: ubuntu-latest # runs-on字段指定运行所需要的虚拟机环境。注意：这个是必填字段
+    steps:
+      - uses: actions/checkout@v3
+
+      # 安装node
+      - name: 安装node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12
+          cache: 'npm'
+      #缓存依赖
+      - name: 缓存依赖
+        uses: actions/checkout@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          # 需要缓存的文件的路径
+          path: ./node_modules
+          # 对缓存的文件指定的唯一标识
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./package.json') }}
+          # 用于没有再找目标key的缓存的backup选项
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      # 装依赖
+      - name: 安装pnpm
+        run: npm install -g pnpm
+
+      # 装依赖
+      - name: 安装依赖
+        run: pnpm install
+
+      # 打包
+      - name: 打包
+        run: pnpm run build
+
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+      # 上传打包资源
+      - name: 上传打包资源
+        run: |
+          sshpass -p ${{ secrets.DEPLOY_PASSWORD }} scp -o StrictHostKeyChecking=no -r ./dist/* root@182.92.201.19:/www/wwwroot/community/
+        env:
+          REMOTE_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+
+        # uses: appleboy/ssh-action@v0.1.10
+        # with:
+        #     host: ${{ secrets.DEPLOY_SERVER_HOST }} # 服务器ip地址 ; 需要去仓库的 settings/secrets/actions 去创建
+        #     username: "root" # 服务器用户名称；需要去仓库的 settings/secrets/actions 去创建
+        #     password: ${{ secrets.DEPLOY_PASSWORD }} # 服务器密码；需要去仓库的 settings/secrets/actions 去创建
+        #     port: ${{ secrets.DEPLOY_SERVER_PORT }} # 服务器端口，默认22；需要去仓库的 settings/secrets/actions 去创建
+        #     script: |
+        #        sshpass -p ${{ secrets.DEPLOY_PASSWORD }} scp /dist/* root@8.140.45.252:/www/wwwroot/pan.reaicc.com
