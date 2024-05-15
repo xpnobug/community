@@ -4,6 +4,17 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  server: {
+    proxy: {
+      '/api': {
+        // target: 'http://182.92.201.19:8080',
+        target: 'http://127.0.0.1:8070',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+    port: 5174
+  },
   resolve: {
     alias: {
       // 如果报错__dirname找不到，需要安装node,执行npm install @types/node --save-dev

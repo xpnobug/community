@@ -1,31 +1,52 @@
+<script setup lang="ts">
+import {ref} from 'vue'
+
+const bannerList = ref([
+  {
+    id: "1",
+    image1: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/50ef8c69-f823-4414-be5d-25e581867902.jpg',
+    image2: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/f5cb6c26-f3bf-47f4-a6d0-c35c771f2c7a.jpg',
+    image3: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/e1d93718-3f0c-4994-984c-4359fa342cb5.jpg',
+    content1: '2023年LT-REAI团队年终总结',
+    content2: 'LT-REAIPC端功能『门户DIY』重磅更新，暨2.5.0测试版更新通告',
+    content3: '重要通知，需在2024年3月底前完成！附上微信小程序和APP的完整备案流程！',
+    state: true
+  }, {
+    id: "1",
+    image1: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/50ef8c69-f823-4414-be5d-25e581867902.jpg',
+    image2: '',
+    image3: '',
+    content1: '',
+    content2: '',
+    content3: '',
+    state: 'true'
+  }
+]);
+</script>
 <template>
   <div class="box" style="margin-bottom: 17px;">
-    <div class="top">
+    <div class="top" v-for="item in bannerList" :key="item.id" v-show="item.state === true">
       <div class="banner"
-           style="background-image: url(https://alist.reaicc.com/nas/image/jpeg/2024-04/1/50ef8c69-f823-4414-be5d-25e581867902.jpg); background-size: cover; background-position: center center;">
-        <div class="content"><span>2023年DS-REAI团队年终总结</span></div>
+           :style="{background: 'url('+item.image1+') center center / cover no-repeat rgb(255, 255, 255)'}">
+        <div class="content">
+          <span>{{ item.content1 }}</span>
+        </div>
       </div>
       <div class="identification">
         <div class="bg-picture"
-             style="background-image: url(https://alist.reaicc.com/nas/image/jpeg/2024-04/1/f5cb6c26-f3bf-47f4-a6d0-c35c771f2c7a.jpg); background-size: cover; background-position: center center;">
-          <div class="content"><span>DS-REAIPC端功能『门户DIY』重磅更新，暨2.5.0测试版更新通告</span>
+             :style="{background: 'url('+item.image2+') center center / cover no-repeat rgb(255, 255, 255)'}">
+          <div class="content"><span>{{ item.content1 }}</span>
           </div>
         </div>
         <div class="bg-picture"
-             style="background-image: url(https://alist.reaicc.com/nas/image/jpeg/2024-04/1/e1d93718-3f0c-4994-984c-4359fa342cb5.jpg); background-size: cover; background-position: center center;">
-          <div class="content"><span
-          >重要通知，需在2024年3月底前完成！附上微信小程序和APP的完整备案流程！</span></div>
+             :style="{background: 'url('+item.image3+') center center / cover no-repeat rgb(255, 255, 255)'}">
+          <div class="content"><span>{{ item.content3 }}</span></div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "PictureComponent"
-}
-</script>
 <style scoped>
 .box .top {
   display: flex;
@@ -112,29 +133,34 @@ export default {
 
 /*设置手机端样式*/
 @media screen and (max-width: 768px) {
-  .box .top{
+  .box .top {
     margin: 12px;
     flex-direction: column;
     height: 300px;
   }
+
   .box .top .banner {
     /*margin: 5px;*/
     width: 100%;
     height: 50%;
   }
+
   .box .top .identification {
     width: 100%;
     flex-direction: row;
   }
-  .box .top .identification .bg-picture{
+
+  .box .top .identification .bg-picture {
     width: 49%;
     height: 140px;
   }
-  .box .top .banner .content{
+
+  .box .top .banner .content {
     font-size: 12px;
     line-height: 20px;
   }
-  .box .top .identification .bg-picture .content{
+
+  .box .top .identification .bg-picture .content {
     font-size: 12px;
     line-height: 20px;
   }

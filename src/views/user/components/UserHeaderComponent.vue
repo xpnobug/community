@@ -29,7 +29,7 @@
           <div class="xm-level reaicss0-4-14-22" style="background:transparent;"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%BB%84v1605690523?upload_type/Tencent_COS" style="width:35px;height:35px;" class="reaicss0-5-22-23"></div>
         </div>
         <div class="reaicss0-3-13-24">
-          <p class="user-short-description-title reaicss0-4-24-25">DS-REAI软件小蘑菇</p>
+          <p class="user-short-description-title reaicss0-4-24-25">LT-REAI软件小蘑菇</p>
           <p class="user-short-description-text reaicss0-4-24-26">
           </p>
         </div>

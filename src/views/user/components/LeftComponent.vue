@@ -6,7 +6,7 @@
         <p class="paragraph">8年互联网行业经验</p>
         <div class="flex">
           <div class="auth">工作单位</div>
-          <div class="auth-content" style="flex:3;"> 嘉兴DS-REAI信息科技有限公司 </div>
+          <div class="auth-content" style="flex:3;"> 嘉兴LT-REAI信息科技有限公司 </div>
         </div>
         <div class="flex">
           <div class="auth">学校</div>
@@ -30,7 +30,7 @@
         </div>
         <div class="flex">
           <div class="auth">公司</div>
-          <div class="auth-content"> DS-REAI </div>
+          <div class="auth-content"> LT-REAI </div>
         </div>
         <div class="flex">
           <div class="auth">UID</div>
@@ -126,7 +126,7 @@
             </svg>
               <div class="xm-level" style="background: transparent;"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS" style="width: 18px; height: 18px;"></div>
             </div>
-            <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a class="bold" style="color: rgb(251, 91, 90);"> DS-REAI奕潇 </a></p>
+            <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a class="bold" style="color: rgb(251, 91, 90);"> LT-REAI奕潇 </a></p>
             <p class="user-status-text small text-long-ellipsis">724粉丝</p>
             <div class="action-request-list">
               <div class="action-request accept"><svg class="action-request-icon icon-add-friend">
@@ -148,7 +148,7 @@
             </svg>
               <div class="xm-level" style="background: transparent;"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS" style="width: 18px; height: 18px;"></div>
             </div>
-            <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a class="bold" style="color: rgb(251, 91, 90);"> DS-REAI小番茄 </a></p>
+            <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a class="bold" style="color: rgb(251, 91, 90);"> LT-REAI小番茄 </a></p>
             <p class="user-status-text small text-long-ellipsis">154粉丝</p>
             <div class="action-request-list">
               <div class="action-request accept"><svg class="action-request-icon icon-add-friend">

@@ -21,8 +21,10 @@
     "@vitejs/plugin-vue": "^5.0.4",
     "less": "^4.2.0",
     "nuxi": "^3.11.1",
+    "sass": "^1.77.1",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
-    "vue-tsc": "^2.0.6"
+    "vue-tsc": "^2.0.6",
+    "axios": "^1.6.5"
   }
 }

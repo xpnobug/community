@@ -1,3 +1,77 @@
+<script lang="ts" setup>
+import {ref} from "vue";
+
+const postList = ref([
+  {
+    tag: '资讯',
+    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+    title: '奖金变“积分”？董明珠2亿年终奖陷罗生门--引发的有关“内购商城”的思考',
+    content: '“董明珠多拿出2亿发年终奖”一事正在朝“罗生门”的方向发展。格力年终奖罗生门：究竟是2亿奖金还是价值2亿？事实证明，董明',
+    time: '2023-04-01 12:00:00',
+    author: 'LT-REAI小芋头',
+    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+    read: '100',
+    like: '100',
+    comment: '100',
+    share: '100',
+    collect: '100',
+  }, {
+    tag: '帖子',
+    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+    title: '奖金变“积分”？董明珠2亿年终奖陷罗生门--引发的有关“内购商城”的思考',
+    content: '“董明珠多拿出2亿发年终奖”一事正在朝“罗生门”的方向发展。格力年终奖罗生门：究竟是2亿奖金还是价值2亿？事实证明，董明',
+    time: '2023-04-01 12:00:00',
+    author: 'LT-REAI小芋头',
+    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+    read: '100',
+    like: '100',
+    comment: '100',
+    share: '100',
+    collect: '100',
+  }, {
+    tag: '帖子',
+    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+    title: '奖金变“积分”？董明珠2亿年终奖陷罗生门--引发的有关“内购商城”的思考',
+    content: '“董明珠多拿出2亿发年终奖”一事正在朝“罗生门”的方向发展。格力年终奖罗生门：究竟是2亿奖金还是价值2亿？事实证明，董明',
+    time: '2023-04-01 12:00:00',
+    author: 'LT-REAI小芋头',
+    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+    read: '100',
+    like: '100',
+    comment: '100',
+    share: '100',
+    collect: '100',
+  }
+]);
+const recommendList = ref([
+  {
+    contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+    author: 'LT-REAI小芋头',
+    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+    time: '12:00:00',
+    place: '深圳',
+  }, {
+    contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+    author: 'LT-REAI小芋头',
+    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+    time: '12:00:00',
+    place: '深圳',
+  }, {
+    contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+    author: 'LT-REAI小芋头',
+    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+    time: '12:00:00',
+    place: '深圳',
+  }, {
+    contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+    author: 'LT-REAI小芋头',
+    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+    time: '12:00:00',
+    place: '深圳',
+  }
+]);
+</script>
+
 <template>
   <div><!----> <!---->
     <div class="box" style="margin-bottom: 16px;"><!----> <!---->
@@ -6,97 +80,39 @@
         <div class="contents contents-three" style="min-height: 608px;">
           <div class="right-content">
             <div>
-              <div class="content-box"><a href="#" class="links">
-                <div class="pictures"><!---->
-                  <div class="class-ification">资讯</div>
-                  <img
-                      src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
-                      alt="" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-              </a>
+              <div v-for="item in postList" class="content-box">
+                <a class="links" href="#">
+                  <div class="pictures">
+                    <div class="class-ification">{{ item.tag }}</div>
+                    <img :src="item.cover" alt="" style="width: 100%; height: 100%; border-radius: 8px;">
+                  </div>
+                </a>
                 <div class="picture-box"
-                     style="display: flex; flex-direction: column; justify-content: space-between;"><a
-                    href="#" class="links" style="display: block;">
-                  <div class="pictures-title" style="margin-bottom: 5px;">
-                    奖金变“积分”？董明珠2亿年终奖陷罗生门--引发的有关“内购商城”的思考
-                  </div>
-                  <div class="picture-content">
-                    “董明珠多拿出2亿发年终奖”一事正在朝“罗生门”的方向发展。格力年终奖罗生门：究竟是2亿奖金还是价值2亿？事实证明，董明
-                  </div>
-                </a> <a href="#" class="links" style="display: block;">
-                  <div class="author-information">
-                    <div class="information">
-                      <div class="head-portrait"><img
-                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
-                          alt=""
-                          style="width: 100%; height: 100%; border-radius: 50%;">
+                     style="display: flex; flex-direction: column; justify-content: space-between;">
+                  <a class="links" href="#" style="display: block;">
+                    <div class="pictures-title" style="margin-bottom: 5px;">{{ item.title }}</div>
+                    <div class="picture-content">{{ item.content }}</div>
+                  </a>
+                  <a class="links" href="#" style="display: block;">
+                    <div class="author-information">
+                      <div class="information">
+                        <div class="head-portrait">
+                          <img :src="item.avatar" alt="" style="width: 100%; height: 100%; border-radius: 50%;">
+                        </div>
+                        <div class="release-time">
+                          <span>{{ item.author }}</span>&nbsp;
+                          <span> {{ item.time }} · 未知</span>
+                        </div>
                       </div>
-                      <div class="release-time"><span>DS-REAI小芋头</span> <span
-                      >02-05 11:33<span> · 未知</span></span></div>
-                    </div>
-                    <div class="views"><span>359 浏览</span> <span
-                    >1 点赞</span></div>
-                  </div>
-                </a></div>
-              </div>
-              <div class="content-box"><a href="#" class="links">
-                <div class="pictures"><!---->
-                  <div class="class-ification">帖子</div>
-                  <img
-                      src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg"
-                      alt="" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-              </a>
-                <div class="picture-box"
-                     style="display: flex; flex-direction: column; justify-content: space-between;"><a
-                    href="#" class="links" style="display: block;">
-                  <div class="pictures-title" style="margin-bottom: 5px;">关于网站相关调整的通知汇总</div>
-                  <div class="picture-content">关于网站备案：&nbsp; &nbsp; &nbsp; &nbsp;根据工信部《关于开展移动互联网应用程序备案工作的通知</div>
-                </a> <a href="#" class="links" style="display: block;">
-                  <div class="author-information">
-                    <div class="information">
-                      <div class="head-portrait"><img
-                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
-                          alt=""
-                          style="width: 100%; height: 100%; border-radius: 50%;">
+                      <div class="views">
+                        <span>{{ item.read }} 浏览</span>
+                        <span>{{ item.like }} 点赞</span>
                       </div>
-                      <div class="release-time"><span>DS-REAI小芋头</span> <span
-                      >2023-12-14<span> · 未知</span></span></div>
                     </div>
-                    <div class="views"><span>75 浏览</span> <span
-                    >1 点赞</span></div>
-                  </div>
-                </a></div>
+                  </a>
+                </div>
               </div>
-              <div class="content-box"><a href="#" class="links">
-                <div class="pictures"><!---->
-                  <div class="class-ification">帖子</div>
-                  <img
-                      src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/b238507d0e460954c452aeff54cc674d.png?upload_type/Tencent_COS"
-                      alt="" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-              </a>
-                <div class="picture-box"
-                     style="display: flex; flex-direction: column; justify-content: space-between;"><a
-                    href="#" class="links" style="display: block;">
-                  <div class="pictures-title" style="margin-bottom: 5px;">如何搭建一个活跃的UGC社区？</div>
-                  <div class="picture-content">
-                    在开始运营前，也就是社区冷启动时，我们需要一些常规的社区运营工具：马甲功能是必不可少的社区运营的运营工具。简单和大家说下
-                  </div>
-                </a> <a href="#" class="links" style="display: block;">
-                  <div class="author-information">
-                    <div class="information">
-                      <div class="head-portrait"><img
-                          src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_668781628835603?imageMogr2/crop/80x80/gravity/center"
-                          alt=""
-                          style="width: 100%; height: 100%; border-radius: 50%;">
-                      </div>
-                      <div class="release-time"><span>DS-REAI软件小蘑菇</span> <span
-                      >2023-02-24<span> · 未知</span></span></div>
-                    </div>
-                    <div class="views"><span>1505 浏览</span> <span
-                    >3 点赞</span></div>
-                  </div>
-                </a></div>
-              </div>
-              <div class="content-box"><a href="#" class="links">
+              <div class="content-box"><a class="links" href="#">
                 <div class="pictures">
                   <div class="video-box-icon">
                     <svg class="play-button-icon icon-play">
@@ -105,22 +121,23 @@
                   </div>
                   <div class="class-ification">视频</div>
                   <img
+                      alt=""
                       src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/2fba19c7ce76d6adaaad48f4a140a59f.gif?imageMogr2/crop/360x640/gravity/center"
-                      alt="" style="width: 100%; height: 100%; border-radius: 8px;"></div>
+                      style="width: 100%; height: 100%; border-radius: 8px;"></div>
               </a>
                 <div class="picture-box"
                      style="display: flex; flex-direction: column; justify-content: space-between;"><a
-                    href="#" class="links" style="display: block;">
+                    class="links" href="#" style="display: block;">
                   <div class="pictures-title" style="margin-bottom: 5px;">莫兰迪一丨丿丶一丿
                     莫兰迪
                   </div>
                   <div class="picture-content"></div>
-                </a> <a href="#" class="links" style="display: block;">
+                </a> <a class="links" href="#" style="display: block;">
                   <div class="author-information">
                     <div class="information">
                       <div class="head-portrait"><img
-                          src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/26dc97940dbd4f72c44655896ef5331b.png?imageMogr2/crop/80x80/gravity/center"
                           alt=""
+                          src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/26dc97940dbd4f72c44655896ef5331b.png?imageMogr2/crop/80x80/gravity/center"
                           style="width: 100%; height: 100%; border-radius: 50%;">
                       </div>
                       <div class="release-time"><span>私享时代</span> <span
@@ -137,102 +154,30 @@
             <div class="">
               <div class="recommended-title">产品共创</div>
               <ul class="recommended">
-                <li class="recommended-li"><a href="#" class="link"
-                                              target="_blank">
-                  <div class="recommended-contents">DS-REAI|企微推送/消息开关/随机推荐等内容新增优化</div>
-                </a> <a href="#" class="">
-                  <div class="recommended-author">
-                    <div class="author">
-                      <div class="head-portrait"><img
-                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
-                          alt=""
-                          style="width: 100%; height: 100%; border-radius: 50%;">
+                <li v-for="item in recommendList" :key="item.id" class="recommended-li">
+                  <a class="link" href="#" target="_blank">
+                    <div class="recommended-contents">{{ item.contents }}</div>
+                  </a>
+                  <a class="" href="#">
+                    <div class="recommended-author">
+                      <div class="author">
+                        <div class="head-portrait"><img
+                            :src="item.avatar"
+                            alt=""
+                            style="width: 100%; height: 100%; border-radius: 50%;">
+                        </div>
+                        <div class="author-name">{{ item.author }}</div>
                       </div>
-                      <div class="author-name">DS-REAI小芋头</div>
+                      <div class="release-times">{{ item.time }}<span> · {{ item.place }}</span></div>
                     </div>
-                    <div class="release-times">04-19 14:57<span> · 未知</span></div>
-                  </div>
-                </a></li>
-                <li class="recommended-li"><a href="#" class="link"
-                                              target="_blank">
-                  <div class="recommended-contents">DS-REAI开发日报：通用版4.1.1
-                    后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）
-                  </div>
-                </a> <a href="#" class="">
-                  <div class="recommended-author">
-                    <div class="author">
-                      <div class="head-portrait"><img
-                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
-                          alt=""
-                          style="width: 100%; height: 100%; border-radius: 50%;">
-                      </div>
-                      <div class="author-name">DS-REAI小芋头</div>
-                    </div>
-                    <div class="release-times">04-19 09:30<span> · 未知</span></div>
-                  </div>
-                </a></li>
-                <li class="recommended-li"><a href="#" class="link"
-                                              target="_blank">
-                  <div class="recommended-contents">DS-REAI开发日报：PC3.1.1 pc端下载附件，无法下载成功修复完成（4.17/周三）</div>
-                </a> <a href="#" class="">
-                  <div class="recommended-author">
-                    <div class="author">
-                      <div class="head-portrait"><img
-                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
-                          alt=""
-                          style="width: 100%; height: 100%; border-radius: 50%;">
-                      </div>
-                      <div class="author-name">DS-REAI小芋头</div>
-                    </div>
-                    <div class="release-times">04-17 08:58<span> · 未知</span></div>
-                  </div>
-                </a></li>
-                <li class="recommended-li"><a href="#" class="link"
-                                              target="_blank">
-                  <div class="recommended-contents">DS-REAI开发日报：通用版4.2.0 预览文件接口请求错误问题修复完成（4.16/周二）</div>
-                </a> <a href="#" class="">
-                  <div class="recommended-author">
-                    <div class="author">
-                      <div class="head-portrait"><img
-                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
-                          alt=""
-                          style="width: 100%; height: 100%; border-radius: 50%;">
-                      </div>
-                      <div class="author-name">DS-REAI小芋头</div>
-                    </div>
-                    <div class="release-times">04-16 14:36<span> · 未知</span></div>
-                  </div>
-                </a></li>
-                <li class="recommended-li"><a href="#" class="link"
-                                              target="_blank">
-                  <div class="recommended-contents">DS-REAI开发周报：通用版4.2.0 已认证用户，用户头像处的认证标识需要显示开发完成（4.8/
-                    周一~4.12/周五）
-                  </div>
-                </a> <a href="#" class="">
-                  <div class="recommended-author">
-                    <div class="author">
-                      <div class="head-portrait"><img
-                          src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg"
-                          alt=""
-                          style="width: 100%; height: 100%; border-radius: 50%;">
-                      </div>
-                      <div class="author-name">DS-REAI小芋头</div>
-                    </div>
-                    <div class="release-times">04-13 09:00<span> · 未知</span></div>
-                  </div>
-                </a></li>
+                  </a></li>
+
               </ul>
             </div>
           </div>
         </div> <!----></div>
     </div> <!----></div>
 </template>
-
-<script>
-export default {
-  name: "ZskComponent"
-}
-</script>
 
 <style scoped>
 .box .public {

@@ -1,3 +1,47 @@
+<script lang="ts" setup>
+import {ref} from 'vue'
+
+const liveList = ref([
+  {
+    id: '1',
+    title: '秋天，金黄，真美',
+    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg',
+  },
+  {
+    id: '2',
+    title: '匿名发帖显示ip属地吗？',
+    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg',
+  }, {
+    id: '3',
+    title: '风景分享给大家',
+    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg',
+  }
+]);
+const serialList = ref([
+  {
+    id: '1',
+    no: 1,
+    content: '升职加薪好办法',
+  },
+  {
+    id: '2',
+    no: 2,
+    content: '玩好抖音，你不能忽视的短视频内容套路化创作技巧！',
+  }, {
+    id: '3',
+    no: 3,
+    content: '这套版块图标有喜欢的可以自取',
+  }, {
+    id: '4',
+    no: 4,
+    content: '文案新人首先要做的事',
+  }, {
+    id: '5',
+    no: 5,
+    content: 'CC社区：“知识付费”解读（下）',
+  }
+]);
+</script>
 <template>
   <div><!----> <!---->
     <div class="box" style="margin-bottom: 16px;"><!---->
@@ -7,70 +51,35 @@
           <div class="right-content">
             <div class="subject-matter-text">
               <ul>
-                <li>
-                  <div class="picture"><!----> <a href="#" class=""
-                                                  style="width: 100%; height: 100%; display: block;"><img
-                      alt=""
-                      src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg"
-                      style="width: 100%; height: 100%; border-radius: 8px;"></a></div>
-                  <div class="picture-title"><a href="#" class="">
-                    秋天，金黄，真美
-                  </a></div>
-                </li>
-                <li>
-                  <div class="picture"><!----> <a href="#" class=""
-                                                  style="width: 100%; height: 100%; display: block;"><img
-                      alt=""
-                      src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/f5cb6c26-f3bf-47f4-a6d0-c35c771f2c7a.jpg"
-                      style="width: 100%; height: 100%; border-radius: 8px;"></a></div>
-                  <div class="picture-title"><a href="#" class=""
-                                                style="width: 100%; height: 100%; display: block;">
-                    匿名发帖显示ip属地吗？
-                  </a></div>
-                </li>
-                <li>
-                  <div class="picture"><!----> <a href="#" class=""><img
-                      alt=""
-                      src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/e440b13d-a100-4eff-8fc2-44b9700773e3.jpg"
-                      style="width: 100%; height: 100%; border-radius: 8px;"></a></div>
-                  <div class="picture-title"><a href="#" class="">
-                    风景分享给大家
+                <li v-for="item in liveList" :key="item.id">
+                  <div class="picture"><!---->
+                    <a class="" href="#" style="width: 100%; height: 100%; display: block;"><img
+                        :src="item.cover"
+                        alt=""
+                        style="width: 100%; height: 100%; border-radius: 8px;">
+                    </a>
+                  </div>
+                  <div class="picture-title"><a class="" href="#">
+                    {{ item.title }}
                   </a></div>
                 </li>
               </ul>
             </div>
             <div class="subject-matter-text">
               <ul>
-                <li>
-                  <div class="picture"><!----> <a href="#" class=""
-                                                  style="width: 100%; height: 100%; display: block;"><img
-                      alt=""
-                      src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8b0be487-e1ac-4589-b30d-b1905d89af0f.jpg"
-                      style="width: 100%; height: 100%; border-radius: 8px;"></a></div>
-                  <div class="picture-title"><a href="#" class="">
-                    秋天，金黄，真美
+                <li v-for="item in liveList" :key="item.id">
+                  <div class="picture"><!---->
+                    <a class="" href="#" style="width: 100%; height: 100%; display: block;"><img
+                        :src="item.cover"
+                        alt=""
+                        style="width: 100%; height: 100%; border-radius: 8px;">
+                    </a>
+                  </div>
+                  <div class="picture-title"><a class="" href="#">
+                    {{ item.title }}
                   </a></div>
                 </li>
-                <li>
-                  <div class="picture"><!----> <a href="#" class=""
-                                                  style="width: 100%; height: 100%; display: block;"><img
-                      alt=""
-                      src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/1f1b088f-44a9-4601-b43f-46e86e917596.jpg"
-                      style="width: 100%; height: 100%; border-radius: 8px;"></a></div>
-                  <div class="picture-title"><a href="#" class=""
-                                                style="width: 100%; height: 100%; display: block;">
-                    匿名发帖显示ip属地吗？
-                  </a></div>
-                </li>
-                <li>
-                  <div class="picture"><!----> <a href="#" class=""><img
-                      alt=""
-                      src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/26dd8633-a2e9-4712-b455-25ef1c8e5991.jpg"
-                      style="width: 100%; height: 100%; border-radius: 8px;"></a></div>
-                  <div class="picture-title"><a href="#" class="">
-                    风景分享给大家
-                  </a></div>
-                </li>
+
               </ul>
             </div>
 
@@ -80,68 +89,18 @@
               <div class="identification">新鲜事</div>
               <div class="content-list">
                 <ul>
-                  <li>
-                    <div class="serial-no">1</div>
-                    <div class="serial-no-content"><a href="#" class="">科大讯飞：发布“大模型+具身智能”的人形机器人技术原型，讯飞机器人超脑平台AIBOT接入星火大模型</a>
+                  <li v-for="item in serialList" :key="item.id">
+                    <div class="serial-no">{{ item.no }}</div>
+                    <div class="serial-no-content"><a class="" href="#">{{ item.content }}</a>
                     </div>
                   </li>
-                  <li>
-                    <div class="serial-no">2</div>
-                    <div class="serial-no-content"><a href="#" class="">《周处除三害》走红为中国电影市场带来了哪些积极信号</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="serial-no">3</div>
-                    <div class="serial-no-content"><a href="#" class="">我在中关村送快递：一天打电话30次
-                      被拒接10次，问“喂，您好，快递给您放哪”20次……</a></div>
-                  </li>
-                  <li>
-                    <div class="serial-no">4</div>
-                    <div class="serial-no-content"><a href="#" class="">因为有你们的负重前行，才有我们的岁月静好！</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="serial-no">5</div>
-                    <div class="serial-no-content"><a href="#" class="">成都大运会MV</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="serial-no">6</div>
-                    <div class="serial-no-content"><a href="#" class="">量大“馆”饱！中国美术馆重磅大展</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="serial-no">7</div>
-                    <div class="serial-no-content"><a href="#" class="">高校专业大幅调整，读大学该如何选专业？</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="serial-no">8</div>
-                    <div class="serial-no-content"><a href="#" class="">热门的浪姐，救不了冷门的综艺</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="serial-no">9</div>
-                    <div class="serial-no-content"><a href="#" class="">行业讯息一手掌握
-                      -------------
-                      1.2023年2月广告主花费减少23.3%
 
-                      2.外媒：推特不再作为独立公司存在，马斯克或有大动作
-
-                      3.淘宝直播拟调整</a></div>
-                  </li>
                 </ul>
               </div>
             </div>
           </div>
         </div> <!----></div> <!----></div> <!----></div>
 </template>
-
-<script>
-export default {
-  name: "LiveComponent"
-}
-</script>
 
 <style scoped>
 .box .public {
@@ -175,7 +134,7 @@ export default {
   margin-right: 15px;
   width: 848px;
   border-radius: 12px;
-  background-color:var(--reaicc-meta-theme-post-color) ;
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: rgba(94, 92, 154, .06);
   padding: 28px;
 }
@@ -235,7 +194,7 @@ img {
 .box .public .contents-tow .right-content .subject-matter-text ul li .picture-title {
   font-size: 16px;
   font-weight: 600;
-    color: var(--reaicc-fontcolor);
+  color: var(--reaicc-fontcolor);
   text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -246,7 +205,7 @@ img {
 }
 
 .box .public .contents-tow .right-content .subject-matter-text ul li .picture-title a {
-    color: var(--reaicc-fontcolor);
+  color: var(--reaicc-fontcolor);
   display: block;
   line-height: 20px;
 }
@@ -305,7 +264,7 @@ img {
   text-overflow: ellipsis;
   white-space: nowrap;
   display: block;
-    color: var(--reaicc-fontcolor);
+  color: var(--reaicc-fontcolor);
 }
 
 .box .public .contents-tow .right-content .content-list ul li .author {
@@ -320,7 +279,7 @@ img {
 .box .public .contents .left-content {
   width: 320px;
   border-radius: 12px;
-  background-color:var(--reaicc-meta-theme-post-color) ;
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
   padding: 24px 28px;
 }
@@ -394,19 +353,23 @@ img {
   opacity: .3;
   background: #337fff;
 }
+
 /*设置手机端样式*/
 @media screen and (max-width: 768px) {
   .box .public .contents {
     flex-direction: column;
   }
+
   .box .public .contents .right-content {
     width: auto;
   }
+
   .box .public .contents-tow .right-content .subject-matter-text ul li .picture {
     width: 90%;
     height: 80px;
   }
-  .box .public .contents-tow .right-content .subject-matter-text ul li .picture-title a{
+
+  .box .public .contents-tow .right-content .subject-matter-text ul li .picture-title a {
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -414,13 +377,16 @@ img {
     -webkit-box-orient: vertical;
     font-size: 12px;
   }
+
   .box .public .contents .left-content {
     width: auto;
   }
-  ul{
+
+  ul {
     margin-top: 1em;
     margin-bottom: 1em;
   }
+
   .box .public .contents .left-content-public .content-list ul li .serial-no-content a {
     width: 100%;
   }

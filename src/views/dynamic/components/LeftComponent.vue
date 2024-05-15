@@ -192,7 +192,7 @@ const handleTag = (value:any) => {
             </div>
             <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a
                 href="#" class="bold" style="color: rgb(251, 91, 90);">
-              DS-REAI奕潇
+              LT-REAI奕潇
             </a></p>
             <p class="user-status-text small">
               722 粉丝

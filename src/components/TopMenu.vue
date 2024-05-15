@@ -5,7 +5,7 @@
         <ul class="menu-ul">
           <!--      logo-->
           <div class="logo">
-            <img src="https://q1.qlogo.cn/g?b=qq&nk=2877406366&s=640" alt="">
+            <img src="https://alist.reaicc.com/nas/image/png/2024-05/1/b0e02980-01dd-4700-b2aa-b16b4d8491a3.png" alt="">
           </div>
           <li @click="updateMenuDJ">
             <el-icon>
@@ -23,7 +23,14 @@
           <input data-v-4d901bbe="" id="search-main" type="text" autocomplete="off" name="search_main"
                  placeholder="搜索用户或内容" style="padding-right: 60px;">
         </div>
-        <el-button type="primary">登录</el-button>
+        <el-button type="primary" @click="login" v-if="userInfo == null">登录</el-button>
+        <a-popover v-else v-model:open="visible" trigger="click">
+          <a-button type="primary">设置</a-button>
+          <template #content>
+            <UserCaozuo :user="userInfo"/>
+          </template>
+        </a-popover>
+
         <div style="margin: 5px"><BgColorChange/></div>
       </div>
     </div>
@@ -35,6 +42,17 @@ import {getCurrentInstance, onMounted, reactive, ref, watchEffect} from 'vue'
 import {Menu as IconMenu,} from '@element-plus/icons-vue'
 import BgColorChange from "@/components/BgColorChange.vue";
 import {useRouter} from "vue-router";
+import {isLogin, tokenInfo,userInfo} from "@/api/userLogin";
+import UserCaozuo from "@/components/Setting/UserCaozuo.vue";
+import {useUserInfo} from "@/hooks/useCached";
+
+const visible = ref<boolean>(false);
+//获取token
+isLogin().then(res => {
+  console.log(res)
+});
+//获取登录人信息
+const userInfo = useUserInfo();
 
 //导航菜单动态加载
 const menuItems = ref([
@@ -103,6 +121,10 @@ const updateMenuDJ = () => {
   console.log(djValue.value);
 }
 
+const login = () => {
+  //跳转页面
+  router.push({ path: '/login'})
+}
 </script>
 
 <style scoped>
@@ -177,11 +199,11 @@ input[type="text"], input[type="password"] {
   color: #99b9ee;
 }
 .logo>img{
-  width: 30px;
+  width: 100px;
 }
 /*设置手机端样式*/
 @media screen and (max-width: 768px) {
-  .logo{
+  .logo>img{
     width: 30px;
   }
   .menu-main {

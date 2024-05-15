@@ -5,10 +5,15 @@ import Dynamic from "../views/dynamic/index.vue";
 import UserMember from "../views/userMembers/index.vue";
 import User from "../views/user/index.vue";
 import PostInfoComponent from "@/views/user/components/PostInfoComponent.vue";
+import Login from "@/views/login/index.vue";
 
 export default createRouter({
     history: createWebHistory(),
     routes: [
+        {
+            path: '/login',
+            component: Login,
+        },
         {
             path: '/',
             name: 'home',
@@ -38,6 +43,16 @@ export default createRouter({
                 {
                     path: '/post/:id',
                     component: PostInfoComponent,
+                },
+                {
+                    path: '/task',
+                    name: 'task',
+                    component: () => import('@/views/userInfo/index.vue')
+                },
+                {
+                    path: '/user/info',
+                    name: 'info',
+                    component: () => import('@/views/userSetting/index.vue')
                 },
             ]
         },
