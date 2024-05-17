@@ -7,6 +7,11 @@ import User from "../views/user/index.vue";
 import PostInfoComponent from "@/views/user/components/PostInfoComponent.vue";
 import Login from "@/views/login/index.vue";
 
+/**
+ * vue-router历史模式的问题： vue3中历史模式默认改为了HTML5模式：createWebHistory()
+ *
+ * 解决办法： createWebHistory 换成 createWebHashHistory， 将历史模式由当前的HTML5模式改为Hash模式
+ */
 export default createRouter({
     history: createWebHashHistory(),
     routes: [
