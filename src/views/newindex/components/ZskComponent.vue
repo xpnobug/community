@@ -1,75 +1,35 @@
 <script lang="ts" setup>
-import {ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
+//获取用户信息
+const props = defineProps(['posts'])
 
-const postList = ref([
-  {
-    tag: '资讯',
-    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-    title: '奖金变“积分”？董明珠2亿年终奖陷罗生门--引发的有关“内购商城”的思考',
-    content: '“董明珠多拿出2亿发年终奖”一事正在朝“罗生门”的方向发展。格力年终奖罗生门：究竟是2亿奖金还是价值2亿？事实证明，董明',
-    time: '2023-04-01 12:00:00',
-    author: 'LT-REAI小芋头',
-    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-    read: '100',
-    like: '100',
-    comment: '100',
-    share: '100',
-    collect: '100',
-  }, {
-    tag: '帖子',
-    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-    title: '奖金变“积分”？董明珠2亿年终奖陷罗生门--引发的有关“内购商城”的思考',
-    content: '“董明珠多拿出2亿发年终奖”一事正在朝“罗生门”的方向发展。格力年终奖罗生门：究竟是2亿奖金还是价值2亿？事实证明，董明',
-    time: '2023-04-01 12:00:00',
-    author: 'LT-REAI小芋头',
-    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-    read: '100',
-    like: '100',
-    comment: '100',
-    share: '100',
-    collect: '100',
-  }, {
-    tag: '帖子',
-    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-    title: '奖金变“积分”？董明珠2亿年终奖陷罗生门--引发的有关“内购商城”的思考',
-    content: '“董明珠多拿出2亿发年终奖”一事正在朝“罗生门”的方向发展。格力年终奖罗生门：究竟是2亿奖金还是价值2亿？事实证明，董明',
-    time: '2023-04-01 12:00:00',
-    author: 'LT-REAI小芋头',
-    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-    read: '100',
-    like: '100',
-    comment: '100',
-    share: '100',
-    collect: '100',
-  }
-]);
-const recommendList = ref([
-  {
-    contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-    author: 'LT-REAI小芋头',
-    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-    time: '12:00:00',
-    place: '深圳',
-  }, {
-    contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-    author: 'LT-REAI小芋头',
-    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-    time: '12:00:00',
-    place: '深圳',
-  }, {
-    contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-    author: 'LT-REAI小芋头',
-    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-    time: '12:00:00',
-    place: '深圳',
-  }, {
-    contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-    author: 'LT-REAI小芋头',
-    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-    time: '12:00:00',
-    place: '深圳',
-  }
-]);
+// const recommendList = ref([
+//   {
+//     contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+//     author: 'LT-REAI小芋头',
+//     avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+//     time: '12:00:00',
+//     place: '深圳',
+//   }, {
+//     contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+//     author: 'LT-REAI小芋头',
+//     avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+//     time: '12:00:00',
+//     place: '深圳',
+//   }, {
+//     contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+//     author: 'LT-REAI小芋头',
+//     avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+//     time: '12:00:00',
+//     place: '深圳',
+//   }, {
+//     contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+//     author: 'LT-REAI小芋头',
+//     avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
+//     time: '12:00:00',
+//     place: '深圳',
+//   }
+// ]);
 </script>
 
 <template>
@@ -79,84 +39,52 @@ const recommendList = ref([
         <div class="title">运营知识库</div>
         <div class="contents contents-three" style="min-height: 608px;">
           <div class="right-content">
-            <div>
-              <div v-for="item in postList" class="content-box">
-                <a class="links" href="#">
-                  <div class="pictures">
-                    <div class="class-ification">{{ item.tag }}</div>
-                    <img :src="item.cover" alt="" style="width: 100%; height: 100%; border-radius: 8px;">
-                  </div>
-                </a>
-                <div class="picture-box"
-                     style="display: flex; flex-direction: column; justify-content: space-between;">
-                  <a class="links" href="#" style="display: block;">
-                    <div class="pictures-title" style="margin-bottom: 5px;">{{ item.title }}</div>
-                    <div class="picture-content">{{ item.content }}</div>
-                  </a>
-                  <a class="links" href="#" style="display: block;">
-                    <div class="author-information">
-                      <div class="information">
-                        <div class="head-portrait">
-                          <img :src="item.avatar" alt="" style="width: 100%; height: 100%; border-radius: 50%;">
-                        </div>
-                        <div class="release-time">
-                          <span>{{ item.author }}</span>&nbsp;
-                          <span> {{ item.time }} · 未知</span>
-                        </div>
-                      </div>
-                      <div class="views">
-                        <span>{{ item.read }} 浏览</span>
-                        <span>{{ item.like }} 点赞</span>
-                      </div>
+            <div v-for="item in props.posts">
+              <div v-if="item.typeName === '运营知识库'">
+                <div class="content-box" v-for="info in item.articleList" >
+                  <a class="links" href="#" >
+                    <div class="pictures">
+                      <div class="class-ification">{{ info.tag }}</div>
+                      <img :src="info.coverImage" alt="" style="width: 100%; height: 100%; border-radius: 8px;">
                     </div>
                   </a>
+                  <div class="picture-box"
+                       style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <a class="links" href="#" style="display: block;">
+                      <div class="pictures-title" style="margin-bottom: 5px;">{{ info.title }}</div>
+                      <div class="picture-content">{{ info.content }}</div>
+                    </a>
+                    <a class="links" href="#" style="display: block;">
+                      <div class="author-information">
+                        <div class="information">
+                          <div class="head-portrait">
+                            <img :src="info.avatar" alt=""
+                                 style="width: 100%; height: 100%; border-radius: 50%;">
+                          </div>
+                          <div class="release-time">
+                            <span>{{ info.author }}</span>&nbsp;
+                            <span> {{ info.publishDate }} · 未知</span>
+                          </div>
+                        </div>
+                        <div class="views">
+                          <span>{{ info.readCount }} 浏览</span>
+                          <span>{{ info.likeCount }} 点赞</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
                 </div>
               </div>
-              <div class="content-box"><a class="links" href="#">
-                <div class="pictures">
-                  <div class="video-box-icon">
-                    <svg class="play-button-icon icon-play">
-                      <use xlink:href="#svg-play"></use>
-                    </svg>
-                  </div>
-                  <div class="class-ification">视频</div>
-                  <img
-                      alt=""
-                      src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/2fba19c7ce76d6adaaad48f4a140a59f.gif?imageMogr2/crop/360x640/gravity/center"
-                      style="width: 100%; height: 100%; border-radius: 8px;"></div>
-              </a>
-                <div class="picture-box"
-                     style="display: flex; flex-direction: column; justify-content: space-between;"><a
-                    class="links" href="#" style="display: block;">
-                  <div class="pictures-title" style="margin-bottom: 5px;">莫兰迪一丨丿丶一丿
-                    莫兰迪
-                  </div>
-                  <div class="picture-content"></div>
-                </a> <a class="links" href="#" style="display: block;">
-                  <div class="author-information">
-                    <div class="information">
-                      <div class="head-portrait"><img
-                          alt=""
-                          src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/26dc97940dbd4f72c44655896ef5331b.png?imageMogr2/crop/80x80/gravity/center"
-                          style="width: 100%; height: 100%; border-radius: 50%;">
-                      </div>
-                      <div class="release-time"><span>私享时代</span> <span
-                      >2022-09-13<span> · 未知</span></span></div>
-                    </div>
-                    <div class="views"><span>791 浏览</span> <span
-                    >3 点赞</span></div>
-                  </div>
-                </a></div>
-              </div>
+
             </div>
           </div>
           <div class="left-content recommended-list">
             <div class="">
               <div class="recommended-title">产品共创</div>
-              <ul class="recommended">
-                <li v-for="item in recommendList" :key="item.id" class="recommended-li">
+              <ul class="recommended" v-for="list in props.posts">
+                <li v-if="list.typeName === '产品共创'" v-for="item in list.articleList" :key="item.id" class="recommended-li">
                   <a class="link" href="#" target="_blank">
-                    <div class="recommended-contents">{{ item.contents }}</div>
+                    <div class="recommended-contents">{{ item.content }}</div>
                   </a>
                   <a class="" href="#">
                     <div class="recommended-author">
@@ -168,7 +96,7 @@ const recommendList = ref([
                         </div>
                         <div class="author-name">{{ item.author }}</div>
                       </div>
-                      <div class="release-times">{{ item.time }}<span> · {{ item.place }}</span></div>
+                      <div class="release-times">{{ item.publishDate }}<span> · {{ item.place }}</span></div>
                     </div>
                   </a></li>
 

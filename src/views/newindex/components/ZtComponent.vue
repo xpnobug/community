@@ -1,73 +1,74 @@
 <script lang="ts" setup>
-import {ref} from 'vue'
-
-const ztList = ref([
-  {
-    id: 1,
-    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
-    title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-    tag: '帖子',
-    content: 'LT-REAI开发日报：通用版4.1.1 后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）',
-    author: 'LT-REAI小芋头'
-  },
-  {
-    id: 2,
-    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
-    title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-    tag: '帖子',
-    content: '1111111111111111111111111111111111111',
-    author: 'LT-REAI小芋头'
-  },
-  {
-    id: 3,
-    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
-    title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-    tag: '帖子',
-    content: 'LT-REAI开发日报：通用版4.1.1 后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）',
-    author: 'LT-REAI小芋头'
-  },
-  {
-    id: 4,
-    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
-    title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-    tag: '帖子',
-    content: 'LT-REAI开发日报：通用版4.1.1 后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）',
-    author: 'LT-REAI小芋头'
-  },
-  {
-    id: 5,
-    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
-    title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-    tag: '帖子',
-    content: 'LT-REAI开发日报：通用版4.1.1 后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）',
-    author: 'LT-REAI小芋头'
-  },
-]);
-
-const serialList = ref([
-  {
-    id: '1',
-    no: 1,
-    content: '升职加薪好办法',
-  },
-  {
-    id: '2',
-    no: 2,
-    content: '玩好抖音，你不能忽视的短视频内容套路化创作技巧！',
-  }, {
-    id: '3',
-    no: 3,
-    content: '这套版块图标有喜欢的可以自取',
-  }, {
-    id: '4',
-    no: 4,
-    content: '文案新人首先要做的事',
-  }, {
-    id: '5',
-    no: 5,
-    content: 'CC社区：“知识付费”解读（下）',
-  }
-]);
+import {onMounted, reactive, ref} from "vue";
+//获取用户信息
+const props = defineProps(['posts'])
+// const ztList = ref([
+//   {
+//     id: 1,
+//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
+//     title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+//     tag: '帖子',
+//     content: 'LT-REAI开发日报：通用版4.1.1 后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）',
+//     author: 'LT-REAI小芋头'
+//   },
+//   {
+//     id: 2,
+//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
+//     title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+//     tag: '帖子',
+//     content: '1111111111111111111111111111111111111',
+//     author: 'LT-REAI小芋头'
+//   },
+//   {
+//     id: 3,
+//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
+//     title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+//     tag: '帖子',
+//     content: 'LT-REAI开发日报：通用版4.1.1 后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）',
+//     author: 'LT-REAI小芋头'
+//   },
+//   {
+//     id: 4,
+//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
+//     title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+//     tag: '帖子',
+//     content: 'LT-REAI开发日报：通用版4.1.1 后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）',
+//     author: 'LT-REAI小芋头'
+//   },
+//   {
+//     id: 5,
+//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
+//     title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
+//     tag: '帖子',
+//     content: 'LT-REAI开发日报：通用版4.1.1 后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）',
+//     author: 'LT-REAI小芋头'
+//   },
+// ]);
+//
+// const serialList = ref([
+//   {
+//     id: '1',
+//     no: 1,
+//     content: '升职加薪好办法',
+//   },
+//   {
+//     id: '2',
+//     no: 2,
+//     content: '玩好抖音，你不能忽视的短视频内容套路化创作技巧！',
+//   }, {
+//     id: '3',
+//     no: 3,
+//     content: '这套版块图标有喜欢的可以自取',
+//   }, {
+//     id: '4',
+//     no: 4,
+//     content: '文案新人首先要做的事',
+//   }, {
+//     id: '5',
+//     no: 5,
+//     content: 'CC社区：“知识付费”解读（下）',
+//   }
+// ]);
 </script>
 
 <template>
@@ -77,42 +78,45 @@ const serialList = ref([
       <div class="public">
         <div class="title">LT-REAI专题</div>
         <div class="contents contents-one">
-          <div class="right-content">
-            <div v-for="(item,index) in ztList.slice(0,1)" :key="index" class="subject-matter-text">
-              <a class="link" href="#" style="line-height: 20px;">
-                <div class="picture"><!---->
-                  <img :src="item.cover"
-                       alt=""
-                       style="width: 100%; height: 100%; border-radius: 8px;">
+          <div v-for="post in props.posts">
+            <div class="right-content" v-if="post.typeName === 'LT-REAI专题'" v-for="item in post.articleList.slice(0,1)"  >
+              <div class="subject-matter-text">
+                <a class="link" href="#" style="line-height: 20px;">
+                  <div class="picture"><!---->
+                    <img :src="item.coverImage"
+                         alt=""
+                         style="width: 100%; height: 100%; border-radius: 8px;">
+                  </div>
+                  <div class="title">{{ item.title }}</div>
+                  <div class="title-content">
+                    <a class="link" href="#"><!--体验及咨询可V+小番茄--></a>
+                  </div>
+                </a>
+              </div>
+              <div class="content-list">
+                <div class="">
+                  <ul>
+                    <li v-for="(item,index) in post.articleList.slice(1,index)"  :key="index">
+                      <div class="explain" style="width: 34px;">{{ item.tag }}</div>
+                      <div class="explain-content"><a class="" href="#">
+                        {{ item.title }}
+                      </a></div>
+                      <div class="author"><a class="" href="#">{{ item.author }}</a>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
-                <div class="title">{{ item.title }}</div>
-                <div class="title-content">
-                  <a class="link" href="#"><!--体验及咨询可V+小番茄--></a>
-                </div>
-              </a>
-            </div>
-            <div class="content-list">
-              <div class="">
-                <ul>
-                  <li v-for="(item,index) in ztList.slice(1,index)" :key="index">
-                    <div class="explain" style="width: 34px;">{{ item.tag }}</div>
-                    <div class="explain-content"><a class="" href="#">
-                      {{ item.content }}
-                    </a></div>
-                    <div class="author"><a class="" href="#">{{ item.author }}</a>
-                    </div>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
+
           <div class="left-content left-content-public">
             <div class="">
               <div class="identification">功能前瞻</div>
               <div class="content-list">
-                <ul>
-                  <li v-for="(item,index) in serialList" :key="index">
-                    <div class="serial-no">{{ item.no }}</div>
+                <ul v-for="post in props.posts">
+                  <li v-if="post.typeName === '功能前瞻'" v-for="(item,index) in post.articleList" :key="index">
+                    <div class="serial-no">{{ index+1 }}</div>
                     <div class="serial-no-content">
                       <a class="" href="#">
                         {{ item.content }}
@@ -155,7 +159,7 @@ const serialList = ref([
 
 .box .public .contents .right-content {
   margin-right: 15px;
-  width: 848px;
+  /*width: 848px;*/
   border-radius: 12px;
   background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: rgba(94, 92, 154, .06);

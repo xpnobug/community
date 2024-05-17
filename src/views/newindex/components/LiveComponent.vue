@@ -1,22 +1,23 @@
 <script lang="ts" setup>
 import {ref} from 'vue'
 
-const liveList = ref([
-  {
-    id: '1',
-    title: '秋天，金黄，真美',
-    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg',
-  },
-  {
-    id: '2',
-    title: '匿名发帖显示ip属地吗？',
-    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg',
-  }, {
-    id: '3',
-    title: '风景分享给大家',
-    cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg',
-  }
-]);
+const props = defineProps(['posts'])
+// const liveList = ref([
+//   {
+//     id: '1',
+//     title: '秋天，金黄，真美',
+//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg',
+//   },
+//   {
+//     id: '2',
+//     title: '匿名发帖显示ip属地吗？',
+//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg',
+//   }, {
+//     id: '3',
+//     title: '风景分享给大家',
+//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg',
+//   }
+// ]);
 const serialList = ref([
   {
     id: '1',
@@ -50,11 +51,11 @@ const serialList = ref([
         <div class="contents contents-tow">
           <div class="right-content">
             <div class="subject-matter-text">
-              <ul>
-                <li v-for="item in liveList" :key="item.id">
+              <ul v-for="live in props.posts">
+                <li v-if="live.typeName === '七彩生活'" v-for="item in live.articleList.slice(0,3)" :key="item.id">
                   <div class="picture"><!---->
                     <a class="" href="#" style="width: 100%; height: 100%; display: block;"><img
-                        :src="item.cover"
+                        :src="item.coverImage"
                         alt=""
                         style="width: 100%; height: 100%; border-radius: 8px;">
                     </a>
@@ -66,11 +67,11 @@ const serialList = ref([
               </ul>
             </div>
             <div class="subject-matter-text">
-              <ul>
-                <li v-for="item in liveList" :key="item.id">
+              <ul v-for="live in props.posts">
+                <li v-if="live.typeName === '七彩生活'" v-for="item in live.articleList.slice(3,6)" :key="item.id">
                   <div class="picture"><!---->
                     <a class="" href="#" style="width: 100%; height: 100%; display: block;"><img
-                        :src="item.cover"
+                        :src="item.coverImage"
                         alt=""
                         style="width: 100%; height: 100%; border-radius: 8px;">
                     </a>
@@ -79,7 +80,6 @@ const serialList = ref([
                     {{ item.title }}
                   </a></div>
                 </li>
-
               </ul>
             </div>
 
@@ -88,9 +88,9 @@ const serialList = ref([
             <div class="">
               <div class="identification">新鲜事</div>
               <div class="content-list">
-                <ul>
-                  <li v-for="item in serialList" :key="item.id">
-                    <div class="serial-no">{{ item.no }}</div>
+                <ul v-for="live in props.posts">
+                  <li v-if="live.typeName === '新鲜事'" v-for="(item,index) in live.articleList" :key="item.id">
+                    <div class="serial-no">{{ index+1 }}</div>
                     <div class="serial-no-content"><a class="" href="#">{{ item.content }}</a>
                     </div>
                   </li>
@@ -192,6 +192,7 @@ img {
 }
 
 .box .public .contents-tow .right-content .subject-matter-text ul li .picture-title {
+  width: 220px;
   font-size: 16px;
   font-weight: 600;
   color: var(--reaicc-fontcolor);
@@ -199,8 +200,8 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
   -webkit-box-orient: vertical;
 }
 
@@ -389,6 +390,9 @@ img {
 
   .box .public .contents .left-content-public .content-list ul li .serial-no-content a {
     width: 100%;
+  }
+  .box .public .contents-tow .right-content .subject-matter-text ul li .picture-title{
+    width: 100px;
   }
 }
 </style>

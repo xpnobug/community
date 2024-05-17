@@ -13,7 +13,7 @@ export const useUserInfo = (uid?: number | ComputedRef<number | undefined> | Ref
         if (res.status === 200) {
             userInfo(res.data.data.loginId).then(user => {
                 userGetInfo.value = user.data.data;
-                console.log(user)
+                // console.log(user)
             })
         }
     })
