@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from "vue-router";
+import {createRouter, createWebHashHistory} from "vue-router";
 import home from "../views/index.vue";
 import ShowView from "../views/newindex/showView.vue";
 import Dynamic from "../views/dynamic/index.vue";
@@ -8,7 +8,7 @@ import PostInfoComponent from "@/views/user/components/PostInfoComponent.vue";
 import Login from "@/views/login/index.vue";
 
 export default createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes: [
         {
             path: '/login',
