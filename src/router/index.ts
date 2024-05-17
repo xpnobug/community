@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory} from "vue-router";
+import {createRouter,createWebHistory, createWebHashHistory} from "vue-router";
 import home from "../views/index.vue";
 import ShowView from "../views/newindex/showView.vue";
 import Dynamic from "../views/dynamic/index.vue";
@@ -13,7 +13,7 @@ import Login from "@/views/login/index.vue";
  * 解决办法： createWebHistory 换成 createWebHashHistory， 将历史模式由当前的HTML5模式改为Hash模式
  */
 export default createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory("/"),
     routes: [
         {
             path: '/login',
@@ -23,7 +23,7 @@ export default createRouter({
             path: '/',
             name: 'home',
             component: home,
-            redirect: '/new_index', //重定向到 /site/mysite
+            redirect: 'new_index', //重定向到 /site/mysite
             children: [
                 {
                     path: '/new_index',
