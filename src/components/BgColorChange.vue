@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary"  circle @click="handleChange"> 切换 </el-button>
+    <el-button type="primary" @click="handleChange"> 切换 </el-button>
   </div>
 </template>
 

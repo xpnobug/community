@@ -10,21 +10,24 @@
     "nuxtdev": "nuxt dev"
   },
   "dependencies": {
+    "@kangc/v-md-editor": "^2.3.18",
     "ant-design-vue": "^4.2.1",
     "element-plus": "^2.7.1",
     "mitt": "^3.0.1",
+    "prismjs": "^1.29.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
+    "@types/prismjs": "^1.26.4",
     "@vitejs/plugin-vue": "^5.0.4",
+    "axios": "^1.6.5",
     "less": "^4.2.0",
     "nuxi": "^3.11.1",
     "sass": "^1.77.1",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
-    "vue-tsc": "^2.0.6",
-    "axios": "^1.6.5"
+    "vue-tsc": "^2.0.6"
   }
 }

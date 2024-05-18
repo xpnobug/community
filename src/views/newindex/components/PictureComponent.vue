@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import {ref} from 'vue'
+const props = defineProps(['posts'])
+import type { SkeletonButtonProps, SkeletonAvatarProps } from 'ant-design-vue';
 
 const bannerList = ref([
   {
@@ -22,25 +24,32 @@ const bannerList = ref([
     state: 'true'
   }
 ]);
+const avatarShape = ref<SkeletonAvatarProps['shape']>('circle');
+
 </script>
 <template>
   <div class="box" style="margin-bottom: 17px;">
-    <div class="top" v-for="item in bannerList" :key="item.id" v-show="item.state === true">
+    <div class="top" v-for="item in props.posts.slice(0,1)" :key="item.id">
+<!--      <a-skeleton-image active :shape="avatarShape" />-->
       <div class="banner"
-           :style="{background: 'url('+item.image1+') center center / cover no-repeat rgb(255, 255, 255)'}">
+           :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}">
+<!--        //鼠标移入移出事件-->
+<!--        //鼠标移入给class 添加一个类名 hover-->
+<!--        //鼠标移出给class 移除一个类名 hover-->
         <div class="content">
-          <span>{{ item.content1 }}</span>
+          <span>{{ item.title }}</span>
         </div>
       </div>
-      <div class="identification">
+      <div class="identification"  v-for="item in props.posts.slice(1,2)" :key="item.id">
         <div class="bg-picture"
-             :style="{background: 'url('+item.image2+') center center / cover no-repeat rgb(255, 255, 255)'}">
-          <div class="content"><span>{{ item.content1 }}</span>
+             :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}">
+
+          <div class="content"><span>{{ item.title }}</span>
           </div>
         </div>
-        <div class="bg-picture"
-             :style="{background: 'url('+item.image3+') center center / cover no-repeat rgb(255, 255, 255)'}">
-          <div class="content"><span>{{ item.content3 }}</span></div>
+        <div class="bg-picture"  v-for="item in props.posts.slice(2,3)" :key="item.id"
+             :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}">
+          <div class="content"><span>{{ item.title }}</span></div>
         </div>
       </div>
     </div>
@@ -129,6 +138,13 @@ const bannerList = ref([
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.content-hover {
+  display: block !important;
+  height: 72px !important;
+  line-height: 28px !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
 }
 
 /*设置手机端样式*/

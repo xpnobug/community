@@ -23,10 +23,10 @@ export default createRouter({
             path: '/',
             name: 'home',
             component: home,
-            redirect: 'new_index', //重定向到 /site/mysite
+            redirect: 'index', //重定向到 /site/mysite
             children: [
                 {
-                    path: '/new_index',
+                    path: '/index',
                     name: 'new_index',
                     component: ShowView,
                 },
@@ -58,6 +58,16 @@ export default createRouter({
                     path: '/user/info',
                     name: 'info',
                     component: () => import('@/views/userSetting/index.vue')
+                },
+                {
+                    path: '/release',
+                    name: 'release',
+                    component: () => import('@/views/Edit/index.vue')
+                },
+                {
+                    path: '/post',
+                    name: 'post',
+                    component: () => import('@/views/postView/index.vue')
                 },
             ]
         },

@@ -1,8 +1,13 @@
 <script lang="ts" setup>
-import {onMounted, reactive, ref} from "vue";
 //获取用户信息
-const props = defineProps(['posts'])
+import {onMounted, watch} from "vue";
 
+const props = defineProps(['posts','loadings'])
+//监听loadings.value，修改loadings
+
+watch(()=>props.loadings,(newValue,oldValue)=>{
+  // console.log('workOrder变化了',newValue,oldValue)
+},{immediate:true,deep:true})
 // const recommendList = ref([
 //   {
 //     contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
@@ -39,10 +44,10 @@ const props = defineProps(['posts'])
         <div class="title">运营知识库</div>
         <div class="contents contents-three" style="min-height: 608px;">
           <div class="right-content">
-            <div v-for="item in props.posts">
+            <div v-if="props.loadings" v-for="item in props.posts">
               <div v-if="item.typeName === '运营知识库'">
-                <div class="content-box" v-for="info in item.articleList" >
-                  <a class="links" href="#" >
+                <div v-for="info in item.articleList.slice(0, 5)" class="content-box">
+                  <a class="links" href="#">
                     <div class="pictures">
                       <div class="class-ification">{{ info.tag }}</div>
                       <img :src="info.coverImage" alt="" style="width: 100%; height: 100%; border-radius: 8px;">
@@ -77,12 +82,16 @@ const props = defineProps(['posts'])
               </div>
 
             </div>
+            <div v-else v-for="item in 5">
+              <a-skeleton active avatar :paragraph="{ rows: 3 }" />
+            </div>
           </div>
           <div class="left-content recommended-list">
             <div class="">
               <div class="recommended-title">产品共创</div>
-              <ul class="recommended" v-for="list in props.posts">
-                <li v-if="list.typeName === '产品共创'" v-for="item in list.articleList" :key="item.id" class="recommended-li">
+              <ul v-if="props.loadings" v-for="list in props.posts" class="recommended">
+                <li v-for="item in list.articleList" v-if="list.typeName === '产品共创'" :key="item.id"
+                    class="recommended-li">
                   <a class="link" href="#" target="_blank">
                     <div class="recommended-contents">{{ item.content }}</div>
                   </a>
@@ -101,6 +110,9 @@ const props = defineProps(['posts'])
                   </a></li>
 
               </ul>
+              <div v-else v-for="item in 5">
+                <a-skeleton active />
+              </div>
             </div>
           </div>
         </div> <!----></div>
@@ -129,7 +141,7 @@ const props = defineProps(['posts'])
 
 .box .public .contents .right-content {
   margin-right: 15px;
-  /*width: 848px;*/
+  width: 848px;
   border-radius: 12px;
   background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: rgba(94, 92, 154, .06);
@@ -282,7 +294,7 @@ svg:not(:root) {
 
 /*左側列表*/
 .box .public .contents .left-content {
-  /*width: 320px;*/
+  width: 320px;
   border-radius: 12px;
   background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);

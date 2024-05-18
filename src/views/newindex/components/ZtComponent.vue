@@ -96,7 +96,7 @@ const props = defineProps(['posts'])
               <div class="content-list">
                 <div class="">
                   <ul>
-                    <li v-for="(item,index) in post.articleList.slice(1,index)"  :key="index">
+                    <li v-for="item in post.articleList.slice(1,11)">
                       <div class="explain" style="width: 34px;">{{ item.tag }}</div>
                       <div class="explain-content"><a class="" href="#">
                         {{ item.title }}

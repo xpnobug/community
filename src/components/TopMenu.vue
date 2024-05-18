@@ -23,15 +23,23 @@
           <input data-v-4d901bbe="" id="search-main" type="text" autocomplete="off" name="search_main"
                  placeholder="搜索用户或内容" style="padding-right: 60px;">
         </div>
-        <el-button type="primary" @click="login" v-if="userInfo == null">登录</el-button>
-        <a-popover v-else v-model:open="visible" trigger="click">
-          <a-button type="primary">设置</a-button>
-          <template #content>
-            <UserCaozuo :user="userInfo"/>
-          </template>
-        </a-popover>
+        <el-button type="primary" @click="login" v-if="userInfo == null" style="margin-right:10px;">登录</el-button>
+        <div v-else style="display: flex; ">
+          <a-popover v-model:open="postpush" trigger="click">
+            <a-button type="primary" style="margin-right:10px;">发布</a-button>
+            <template #content>
+              <EditArticle/>
+            </template>
+          </a-popover>
 
-        <div style="margin: 5px"><BgColorChange/></div>
+          <a-popover v-model:open="visible" trigger="click">
+            <a-button type="primary" style="margin-right:10px;">设置</a-button>
+            <template #content>
+              <UserCaozuo :user="userInfo"/>
+            </template>
+          </a-popover>
+        </div>
+        <BgColorChange/>
       </div>
     </div>
   </div>
@@ -44,7 +52,9 @@ import {useRouter} from "vue-router";
 import {isLogin, tokenInfo,userInfo} from "@/api/userLogin";
 import UserCaozuo from "@/components/Setting/UserCaozuo.vue";
 import {useUserInfo} from "@/hooks/useCached";
+import EditArticle from "@/components/Setting/EditArticle.vue";
 
+const postpush = ref<boolean>(false);
 const visible = ref<boolean>(false);
 //获取token
 isLogin().then(res => {
@@ -55,7 +65,7 @@ const userInfo = useUserInfo();
 
 //导航菜单动态加载
 const menuItems = ref([
-  { id: "1", label: '首页', url: 'new_index', expanded: false },
+  { id: "1", label: '首页', url: 'index', expanded: false },
   { id: "2", label: '社区', url: 'dynamic', expanded: false},
   { id: "3", label: '版块', url: '/pages/aboutus', expanded: false },
   // { id: "5", label: '频道', url: '/pages/aboutus', expanded: false },

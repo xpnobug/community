@@ -95,17 +95,14 @@
 import {getCurrentInstance, ref} from 'vue'
 // import {Menu as IconMenu} from '@element-plus/icons-vue'
 import {RouterView, useRouter} from 'vue-router';
-import {useUserInfo} from "@/hooks/useCached";
 //定义变量
-//获取登录人信息
-const userInfo = useUserInfo();
 const menuPmView = ref();
 const djValueSet = ref(false);
 const instance = getCurrentInstance()
 const router = useRouter();
 //导航菜单动态加载
 const menuItems = ref([
-  {id: "1", label: '首页', url: '/new_index', expanded: false},
+  {id: "1", label: '首页', url: '/index', expanded: false},
   {id: "2", label: '社区', url: '/dynamic', expanded: false},
   {id: "3", label: '用户版块', url: '/members', expanded: false},
   {id: "5", label: '频道', url: '/pages/aboutus', expanded: false},
@@ -118,18 +115,23 @@ instance?.proxy?.$Bus.on("djValue", (param) => {
 instance?.proxy?.$Bus.on("pmView", (param) => {
   menuPmView.value = param;
 })
+//获取登录人信息
+const userInfo = ref({});
+instance?.proxy?.$Bus.on("userInfo", (param: any) => {
+  userInfo.value = param;
+})
 
 const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+  // console.log(key, keyPath)
 }
 const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+  // console.log(key, keyPath)
 }
 
 const handleMenuItemClick = (item: any) => {
   const routeName = item.label; // 使用菜单项的name属性作为路由名称
   router.push({path: item.url})
-  console.log(routeName, item.url)
+  // console.log(routeName, item.url)
 };
 
 </script>

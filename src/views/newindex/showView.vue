@@ -2,15 +2,15 @@
   <div class="content-grid"
        style="transform: translate(0px, 0px); transition: transform 0.4s ease-in-out 0s;">
     <div class="box-s">
-      <PictureComponent/>
-      <ZskComponent :posts="postList"/>
+      <PictureComponent :posts="banner"/>
+      <ZskComponent :posts="postList" :loadings="loadings"/>
       <ZtComponent :posts="postList"/>
       <LiveComponent :posts="postList"/>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import {onMounted, reactive, ref} from "vue";
+import {watch, reactive, ref} from "vue";
 import PictureComponent from "./components/PictureComponent.vue";
 import ZskComponent from "./components/ZskComponent.vue";
 import ZtComponent from "@/views/newindex/components/ZtComponent.vue";
@@ -36,9 +36,23 @@ const page = reactive<Page>({
   minPage: 1,
 });
 const postList = ref([]);
+const banner = ref([]);
+const loadings = ref(false);
 pageList(page).then(res => {
+  //是否还在加载中
+  if (res.status === 200){
+    loadings.value = true;
+  }
   postList.value = res.data.data;
+  //循环输出
+  postList.value.forEach((item: any) => {
+    if (item.typeName === 'banner') {
+      console.log(item.articleList)
+      banner.value = item.articleList;
+    }
+  })
 });
+
 
 </script>
 
