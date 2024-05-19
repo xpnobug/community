@@ -89,30 +89,30 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
           <div class="left-content recommended-list">
             <div class="">
               <div class="recommended-title">产品共创</div>
-              <ul v-if="props.loadings" v-for="list in props.posts" class="recommended">
-                <li v-for="item in list.articleList" v-if="list.typeName === '产品共创'" :key="item.id"
-                    class="recommended-li">
-                  <a class="link" href="#" target="_blank">
-                    <div class="recommended-contents">{{ item.content }}</div>
-                  </a>
-                  <a class="" href="#">
-                    <div class="recommended-author">
-                      <div class="author">
-                        <div class="head-portrait"><img
-                            :src="item.avatar"
-                            alt=""
-                            style="width: 100%; height: 100%; border-radius: 50%;">
+                <ul v-if="props.loadings" v-for="list in props.posts" class="recommended">
+                  <li v-for="item in list.articleList" v-if="list.typeName === '产品共创'" :key="item.id"
+                      class="recommended-li">
+                    <a class="link" href="#" target="_blank">
+                      <div class="recommended-contents">{{ item.content }}</div>
+                    </a>
+                    <a class="" href="#">
+                      <div class="recommended-author">
+                        <div class="author">
+                          <div class="head-portrait"><img
+                              :src="item.avatar"
+                              alt=""
+                              style="width: 100%; height: 100%; border-radius: 50%;">
+                          </div>
+                          <div class="author-name">{{ item.author }}</div>
                         </div>
-                        <div class="author-name">{{ item.author }}</div>
+                        <div class="release-times">{{ item.publishDate }}<span> · {{ item.place }}</span></div>
                       </div>
-                      <div class="release-times">{{ item.publishDate }}<span> · {{ item.place }}</span></div>
-                    </div>
-                  </a></li>
+                    </a></li>
 
-              </ul>
-              <div v-else v-for="item in 5">
-                <a-skeleton active />
-              </div>
+                </ul>
+                <div v-else v-for="item in 5">
+                  <a-skeleton active />
+                </div>
             </div>
           </div>
         </div> <!----></div>

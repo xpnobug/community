@@ -19,7 +19,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { PlusOutlined } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 import type { UploadProps } from 'ant-design-vue';
 import {message} from "ant-design-vue";

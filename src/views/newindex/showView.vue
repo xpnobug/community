@@ -47,7 +47,7 @@ pageList(page).then(res => {
   //循环输出
   postList.value.forEach((item: any) => {
     if (item.typeName === 'banner') {
-      console.log(item.articleList)
+      // console.log(item.articleList)
       banner.value = item.articleList;
     }
   })
