@@ -1,4 +1,6 @@
 import axios from "@/request/axios";
+import {Page} from "@/api/base";
+
 
 const BASE_URL = '/users';
 
@@ -8,6 +10,14 @@ export interface userInfo {
     email?: string;
 }
 
+export function pageList(page: Page) {
+    return axios.get(`${BASE_URL}/pageList`,{
+        params: {
+            pageSize: page.pageSize,
+            currentPage: page.currentPage,
+        }
+    });
+}
 export function register(user: userInfo) {
     return axios.post(`${BASE_URL}/register`, user);
 }

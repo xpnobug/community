@@ -10,7 +10,6 @@ const id = 'preview-only';
 const text = ref('# Hello Editor');
 const scrollElement = document.documentElement;
 
-
 //获取地址栏中id
 const route = useRoute();
 const ids = route.params.id;

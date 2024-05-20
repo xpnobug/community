@@ -57,6 +57,9 @@ const addWh = (width: any, height: any) => {
   console.log(addWidth.value, addHeight.value)
 }
 
+//获取用户信息
+const props = defineProps(['userList'])
+
 const userList = ref([
   {
     id: "1",
@@ -121,7 +124,7 @@ const userList = ref([
 ]);
 const router = useRouter();
 const toUserInfo = (item:any) => {
-  router.push({ path: '/user/'+item.id })
+  router.push({ path: '/user/'+item.userId })
 }
 
 </script>
@@ -129,12 +132,12 @@ const toUserInfo = (item:any) => {
 <template>
   <div class="grid centered" :class="[{'grid-4-4-4' : viewIdValueSet === '1' , 'grid-3-3-3-3': viewIdValueSet === '2'}]"
        style="margin-top: 16px; justify-content: flex-start;">
-    <div class="user-preview" :class="[{'small' : viewIdValueSet === '2'}]" v-for="item in userList"
-         v-show="tagIdValueSet === item.tagId" @click="toUserInfo(item)">
+    <div class="user-preview" :class="[{'small' : viewIdValueSet === '2'}]" v-for="item in props.userList"
+         v-show="tagIdValueSet === '1'" @click="toUserInfo(item)">
       <div class="user-preview" :class="[{'small' : viewIdValueSet === '2' , 'landscape': viewIdValueSet === '3'}]">
         <figure class="user-preview-cover"
-                :style="{background: 'url(' + item.previewCover + ') center center / cover no-repeat rgb(255, 255, 255)',}">
-          <img alt="图片" :src=item.previewCover style="display: none;"> <!----></figure>
+                :style="{background: 'url(' + item.userCover + ') center center / cover no-repeat rgb(255, 255, 255)',}">
+          <img alt="图片" :src=item.userCover style="display: none;"> <!----></figure>
         <div class="user-preview-info">
           <div class="user-short-description ">
             <div class="xm-header user-avatar user-short-description-avatar"
@@ -158,9 +161,9 @@ const toUserInfo = (item:any) => {
                       stroke="#e9e9f0" stroke-width="8"></path>
                 <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
                       fill-opacity="0" stroke="url(#svg5ce7c7db-de6a-41b1-8c38-866e22cac3b4)" stroke-width="8"
-                      :style="[{strokeDasharray: item.experience + ',287'}]"></path>
+                      :style="[{strokeDasharray: item.exp + ',287'}]"></path>
               </svg>
-              <div class="xm-level" v-if="item.role === ''"
+              <div class="xm-level"
                    style="box-sizing: content-box; font-size: 16.5px; width: 27.5px; height: 27.5px; border: 3px solid rgb(255, 255, 255);">
                 <span style="display: block;">{{ item.level }}</span>
               </div>
@@ -175,7 +178,7 @@ const toUserInfo = (item:any) => {
 
             </div>
             <p class="user-short-description-title text-long-ellipsis" :style="{color: item.color}">
-              {{ item.userName }}
+              {{ item.username }}
             </p>
             <p class="user-short-description-text">
 

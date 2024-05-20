@@ -1,3 +1,26 @@
+
+<script setup lang="ts">
+import UserHeaderComponent from "@/views/user/components/UserHeaderComponent.vue";
+import SilderHomeComponent from "@/views/user/components/SilderHomeComponent.vue";
+import LeftComponent from "@/views/user/components/LeftComponent.vue";
+import UserMainComponent from "@/views/user/components/UserMainComponent.vue";
+import RightComponent from "@/views/user/components/RightComponent.vue";
+import {getCurrentInstance, reactive, ref} from "vue";
+import UserListComponent from "@/views/userMembers/components/UserListComponent.vue";
+import UserSearchComponent from "@/views/userMembers/components/UserSearchComponent.vue";
+import ImgViewComponent from "@/views/user/components/ImgViewComponent.vue";
+import VideViewComponent from "@/views/user/components/VideViewComponent.vue";
+import {listByUserId} from "@/api/article";
+import {useRoute} from "vue-router";
+
+const menuIdValueSet = ref('1');
+const instance = getCurrentInstance()
+instance?.proxy?.$Bus.on("menuId", (param: any) => {
+  menuIdValueSet.value = param;
+})
+
+</script>
+
 <template>
   <div class="content-grid"
        style="width: 100%; padding-top: 84px; transform: translate(261.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
@@ -17,7 +40,7 @@
           </div>
         </div>
       </div> <!---->
-      <UserHeaderComponent/>
+      <UserHeaderComponent />
       <SilderHomeComponent/>
 
       <!--  时间线    -->
@@ -47,25 +70,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import UserHeaderComponent from "@/views/user/components/UserHeaderComponent.vue";
-import SilderHomeComponent from "@/views/user/components/SilderHomeComponent.vue";
-import LeftComponent from "@/views/user/components/LeftComponent.vue";
-import UserMainComponent from "@/views/user/components/UserMainComponent.vue";
-import RightComponent from "@/views/user/components/RightComponent.vue";
-import {getCurrentInstance, ref} from "vue";
-import UserListComponent from "@/views/userMembers/components/UserListComponent.vue";
-import UserSearchComponent from "@/views/userMembers/components/UserSearchComponent.vue";
-import ImgViewComponent from "@/views/user/components/ImgViewComponent.vue";
-import VideViewComponent from "@/views/user/components/VideViewComponent.vue";
-
-const menuIdValueSet = ref('1');
-const instance = getCurrentInstance()
-instance?.proxy?.$Bus.on("menuId", (param: any) => {
-  menuIdValueSet.value = param;
-})
-</script>
 
 <style scoped>
 @media screen and (min-width: 1366px) {

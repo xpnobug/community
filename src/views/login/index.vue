@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {computed, reactive, ref} from 'vue'
-import {login, register} from "@/api/userLogin";
+import {login, register} from "@/api/user";
 import { message } from 'ant-design-vue';
 
 const isLogin = ref(true);

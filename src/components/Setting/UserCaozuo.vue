@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {logout} from "@/api/userLogin";
+import {logout} from "@/api/user";
 import {message} from "ant-design-vue";
 //获取用户信息
 const props = defineProps(['user'])

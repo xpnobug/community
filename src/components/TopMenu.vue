@@ -49,7 +49,7 @@
 import {getCurrentInstance, onMounted, reactive, ref, watchEffect} from 'vue'
 import BgColorChange from "@/components/BgColorChange.vue";
 import {useRouter} from "vue-router";
-import {isLogin, tokenInfo,userInfo} from "@/api/userLogin";
+import {isLogin, tokenInfo} from "@/api/user";
 import UserCaozuo from "@/components/Setting/UserCaozuo.vue";
 import {useUserInfo} from "@/hooks/useCached";
 import EditArticle from "@/components/Setting/EditArticle.vue";

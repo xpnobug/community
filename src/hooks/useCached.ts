@@ -1,6 +1,6 @@
 import type {ComputedRef} from 'vue'
 import {computed, type Ref, ref, getCurrentInstance} from 'vue'
-import {isLogin, tokenInfo, userInfo} from "@/api/userLogin";
+import {isLogin, tokenInfo, userInfo} from "@/api/user";
 
 
 /**

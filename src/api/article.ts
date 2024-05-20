@@ -1,28 +1,10 @@
 import axios from "@/request/axios";
-import {userInfo} from "@/api/userLogin";
+import {userInfo} from "@/api/user";
 import {reactive} from "vue";
+import {Page} from "@/api/base";
 
 const BASE_URL = '/article';
 
-
-//    private int pageSize = DEFAULT_PAGE_SIZE;
-//     private int currentPage = 1;
-//     private long count;
-//     private int maxPage;
-//     private int minPage = 1;
-//     private int firstResult = 0;
-//
-//     private boolean recount;
-// 设置分页
-export interface Page {
-    pageSize: number;
-    currentPage: number;
-    count: number;
-    maxPage: number;
-    minPage: number;
-    firstResult: number;
-    recount: boolean;
-}
 interface Article  {
     articleId: string;
     title: string;
@@ -56,6 +38,15 @@ interface Article  {
 export function pageList(page: Page) {
     return axios.get(`${BASE_URL}/pageList`,{
         params: {
+            pageSize: page.pageSize,
+            currentPage: page.currentPage,
+        }
+    });
+}
+export function listByUserId(page: Page,id: string) {
+    return axios.get(`${BASE_URL}/listByUserId`,{
+        params: {
+            userId: id,
             pageSize: page.pageSize,
             currentPage: page.currentPage,
         }

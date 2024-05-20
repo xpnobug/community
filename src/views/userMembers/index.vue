@@ -1,3 +1,32 @@
+
+<script lang="ts" setup>
+import UserSearchComponent from "@/views/userMembers/components/UserSearchComponent.vue";
+import UserListComponent from "@/views/userMembers/components/UserListComponent.vue";
+import {pageList} from "@/api/user";
+import {reactive, ref} from "vue";
+interface Page {
+  pageSize: number;
+  currentPage: number;
+  count: number;
+  maxPage: number;
+  minPage: number;
+  // firstResult: number;
+  // recount: boolean;
+}
+
+const page = reactive<Page>({
+  pageSize: 10,
+  currentPage: 1,
+  count: 10,
+  maxPage: 10,
+  minPage: 1,
+});
+const userList = ref([]);
+pageList(page).then(res => {
+  userList.value = res.data.data;
+})
+</script>
+
 <template>
   <div class="content-grid"
        style="width: 100%; padding-top: 84px;  transition: transform 0.4s ease-in-out 0s;">
@@ -7,8 +36,8 @@
         <p class="section-banner-title"></p>
         <p class="section-banner-text"></p>
       </div>
-      <UserSearchComponent/>
-      <UserListComponent/>
+      <UserSearchComponent :userList="userList"/>
+      <UserListComponent :userList="userList"/>
 <!--      <div class="section-pager-bar" data-v-a0c93e92="">-->
 <!--        <ul aria-disabled="false" aria-label="Pagination" class="pagination b-pagination" data-v-418cb67c="" data-v-a0c93e92=""-->
 <!--            role="menubar" style="margin-bottom: 0px;">-->
@@ -56,14 +85,6 @@
   </div>
 </template>
 
-<script>
-import UserSearchComponent from "@/views/userMembers/components/UserSearchComponent.vue";
-import UserListComponent from "@/views/userMembers/components/UserListComponent.vue";
-export default {
-  name: "index",
-  components: {UserListComponent, UserSearchComponent}
-}
-</script>
 
 <style scoped>
 @media screen and (min-width: 1366px) {
