@@ -24,5 +24,4 @@ app.config.globalProperties.$Bus = Mitt
 app.use(route);
 app.use(ElementPlus);
 app.use(Antd);
-app.use(VueMarkdownEditor);
 app.mount('#app')
