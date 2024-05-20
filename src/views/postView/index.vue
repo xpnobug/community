@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {selectOne} from "@/api/article";
 import {useRoute} from 'vue-router';
-import {getCurrentInstance, ref} from "vue";
+import {ref} from "vue";
 import {MdCatalog, MdPreview} from 'md-editor-v3';
 // preview.css相比style.css少了编辑器那部分样式
 import 'md-editor-v3/lib/preview.css';
@@ -10,12 +10,6 @@ const id = 'preview-only';
 const text = ref('# Hello Editor');
 const scrollElement = document.documentElement;
 
-//获取登录人信息
-const instance = getCurrentInstance()
-const userInfo = ref({});
-instance?.proxy?.$Bus.on("userInfo", (param: any) => {
-  userInfo.value = param;
-})
 
 //获取地址栏中id
 const route = useRoute();
@@ -30,317 +24,311 @@ selectOne(ids).then(res => {
 
 <template>
   <div class="content-grid snipcss-tMNNJ" style="  padding-top: 84px;   transition: transform 0.4s ease-in-out 0s;">
-    <div class="post-content post-container" data-v-6b6dbdf2="">
-      <div class="breadcrumb" data-v-6b6dbdf2="">
-        <div class="breadcrumb-container" data-v-186a823a="" data-v-6b6dbdf2="">
-          <div class="ant-breadcrumb" data-v-186a823a=""><span class="" data-v-186a823a=""><span
-              class="ant-breadcrumb-link"><a class="link nuxt-link-active" data-v-186a823a=""
+    <div class="post-content post-container">
+      <div class="breadcrumb">
+        <div class="breadcrumb-container">
+          <div class="ant-breadcrumb"><span class=""><span
+              class="ant-breadcrumb-link"><a class="link nuxt-link-active"
                                              href="/">社区</a></span><span
-              class="ant-breadcrumb-separator">/</span></span><span class="" data-v-186a823a=""><span
-              class="ant-breadcrumb-link"><a class="link" data-v-186a823a="" href="/forum?id=7"> 运营干货 </a></span><span
-              class="ant-breadcrumb-separator">/</span></span><span class="" data-v-186a823a=""><span
+              class="ant-breadcrumb-separator">/</span></span><span class=""><span
+              class="ant-breadcrumb-link"><a class="link" href="/forum?id=7"> 运营干货 </a></span><span
+              class="ant-breadcrumb-separator">/</span></span><span class=""><span
               class="ant-breadcrumb-link">正文</span><span class="ant-breadcrumb-separator">/</span></span></div>
         </div>
       </div>
-      <div class="oprate" data-v-6b6dbdf2="">
-        <div class="oprate-container" data-v-6b6dbdf2="" data-v-91ba2966="">
-          <div class="oprate-container-thumbs" data-v-91ba2966="">
-            <svg class="oprate-container-thumbs-icon" data-v-91ba2966="">
-              <use data-v-91ba2966="" xlink:href="#svg-thumbs-up"></use>
+      <div class="oprate">
+        <div class="oprate-container">
+          <div class="oprate-container-thumbs">
+            <svg class="oprate-container-thumbs-icon">
+              <use xlink:href="#svg-thumbs-up"></use>
             </svg>
-            <div class="oprate-container-thumbs-count" data-v-91ba2966="">1</div>
+            <div class="oprate-container-thumbs-count">1</div>
           </div>
-          <div class="oprate-container-commons" data-v-91ba2966="">
-            <svg class="oprate-container-commons-icon" data-v-91ba2966="">
-              <use data-v-91ba2966="" xlink:href="#svg-comment"></use>
+          <div class="oprate-container-commons">
+            <svg class="oprate-container-commons-icon">
+              <use xlink:href="#svg-comment"></use>
             </svg>
-            <div class="oprate-container-commons-count" data-v-91ba2966=""> 1</div>
+            <div class="oprate-container-commons-count"> 1</div>
           </div>
-          <div class="oprate-container-collections" data-v-91ba2966="">
-            <svg class="oprate-container-collections-icon" data-v-91ba2966="">
-              <use data-v-91ba2966="" xlink:href="#svg-collection"></use>
+          <div class="oprate-container-collections">
+            <svg class="oprate-container-collections-icon">
+              <use xlink:href="#svg-collection"></use>
             </svg>
-            <div class="oprate-container-collections-count" data-v-91ba2966="">1</div>
+            <div class="oprate-container-collections-count">1</div>
           </div>
-          <div class="oprate-container-share" data-v-91ba2966="">
-            <svg class="oprate-container-share-icon" data-v-91ba2966="">
-              <use data-v-91ba2966="" xlink:href="#svg-share"></use>
+          <div class="oprate-container-share">
+            <svg class="oprate-container-share-icon">
+              <use xlink:href="#svg-share"></use>
             </svg>
           </div>
         </div>
       </div>
-      <a data-v-6b6dbdf2="" href="#comment" style="display: none;"></a>
-      <div class="about" data-v-6b6dbdf2="">
-        <div class="about-container" data-v-05b26ca4="" data-v-6b6dbdf2="">
-          <div class="forum-container about-container-box" data-v-05b26ca4="" data-v-e27424ca="" style="height: 315px;">
-            <figure class="forum-container-background user-preview-cover" data-v-62854a42="" data-v-e27424ca=""
+      <a href="#comment" style="display: none;"></a>
+      <div class="about">
+        <div class="about-container">
+          <div class="forum-container about-container-box" style="height: 315px;">
+            <figure class="forum-container-background user-preview-cover"
                     style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5d5771c92ac3d1625714373?imageMogr2/crop/568x140/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);">
               <img alt="图片"
-                   data-v-62854a42=""
                    src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5d5771c92ac3d1625714373?imageMogr2/crop/568x140/gravity/center"
                    style="display: none;"></figure>
-            <a class="" data-v-e27424ca="" href="/forum?id=7">
-              <div class="xm-header user-avatar forum-container-head user-short-description-avatar" data-v-2fadc57c=""
-                   data-v-e27424ca=""
+            <a class="" href="/forum?id=7">
+              <div class="xm-header user-avatar forum-container-head user-short-description-avatar"
                    style="width: 90px; height: 90px; border: 9px solid rgb(255, 255, 255); cursor: pointer; border-radius: 12px;">
-                <div class="xm-avatar" data-v-2fadc57c="" style="padding: 11px;"><img alt="头像"
-                                                                                      class="img-full"
-                                                                                      data-v-2fadc57c=""
-                                                                                      src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5e058460bc75d1625714318?imageMogr2/crop/196x196/gravity/center"
-                                                                                      style="border-radius: 12px;">
+                <div class="xm-avatar" style="padding: 11px;"><img alt="头像"
+                                                                   class="img-full"
+                                                                   src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5e058460bc75d1625714318?imageMogr2/crop/196x196/gravity/center"
+                                                                   style="border-radius: 12px;">
                 </div>
               </div>
-            </a> <a class="" data-v-e27424ca="" href="/forum?id=7">
-            <div class="forum-container-title" data-v-e27424ca="" style="cursor: pointer;"><span
-                data-v-e27424ca="">运营干货</span></div>
+            </a> <a class="" href="/forum?id=7">
+            <div class="forum-container-title" style="cursor: pointer;"><span
+            >运营干货</span></div>
           </a>
-            <div class="forum-container-describe" data-v-e27424ca=""> 社群运营经验交流</div>
-            <a class="" data-v-e27424ca="" href="/forum?id=7">
-              <div class="forum-container-msg user-stats" data-v-e27424ca="">
-                <div class="user-stat" data-v-e27424ca="">
-                  <p class="user-stat-title" data-v-e27424ca="">506</p>
-                  <p class="user-stat-text" data-v-e27424ca="">内容</p>
+            <div class="forum-container-describe"> 社群运营经验交流</div>
+            <a class="" href="/forum?id=7">
+              <div class="forum-container-msg user-stats">
+                <div class="user-stat">
+                  <p class="user-stat-title">506</p>
+                  <p class="user-stat-text">内容</p>
                 </div>
-                <div class="user-stat" data-v-e27424ca="">
-                  <p class="user-stat-title" data-v-e27424ca="">397</p>
-                  <p class="user-stat-text" data-v-e27424ca="">成员</p>
+                <div class="user-stat">
+                  <p class="user-stat-title">397</p>
+                  <p class="user-stat-text">成员</p>
                 </div>
-                <div class="user-stat" data-v-e27424ca="">
-                  <p class="user-stat-title" data-v-e27424ca="">7</p>
-                  <p class="user-stat-text" data-v-e27424ca="">精华</p>
+                <div class="user-stat">
+                  <p class="user-stat-title">7</p>
+                  <p class="user-stat-text">精华</p>
                 </div>
               </div>
             </a>
-            <hr data-v-e27424ca="" style="margin-bottom: 12px;">
-            <div class="forum-container-button user-preview-actions" data-v-e27424ca="">
-              <p class="button btn" data-v-e27424ca="">
-                <svg class="icon button-icon icon-join-group" data-v-e27424ca="">
-                  <use data-v-e27424ca="" xlink:href="#svg-join-group"></use>
+            <hr style="margin-bottom: 12px;">
+            <div class="forum-container-button user-preview-actions">
+              <p class="button btn">
+                <svg class="icon button-icon icon-join-group">
+                  <use xlink:href="#svg-join-group"></use>
                 </svg>
-                <span class="text" data-v-e27424ca=""> &nbsp;加入版块 </span></p>
+                <span class="text"> &nbsp;加入版块 </span></p>
             </div>
           </div>
         </div>
       </div>
-      <div class="postStyle" data-v-6b6dbdf2="">
+      <div class="postStyle">
         <img :src="postInfo.coverImage"
              class="post-bg"
-             data-v-6b6dbdf2="" style="height: 450px;">
-        <div class="content-container" data-v-6b6dbdf2="">
-          <div class="container-head" data-v-6b6dbdf2="">
-            <div class="heads" data-v-6b6dbdf2="">
-              <div class="text" data-v-6b6dbdf2="">{{ postInfo.publishDate }} · 未知</div>
-              <div class="widget-box-settings" data-v-6b6dbdf2="" style="display: flex; flex-flow: row;">
-                <div data-v-6b6dbdf2="" style="position: relative;">
+             style="height: 450px;">
+        <div class="content-container">
+          <div class="container-head">
+            <div class="heads">
+              <div class="text">{{ postInfo.publishDate }} · 未知</div>
+              <div class="widget-box-settings" style="display: flex; flex-flow: row;">
+                <div style="position: relative;">
                   <div>
-                    <div class="post-settings widget-box-post-settings-dropdown-trigger" data-v-6b6dbdf2="">
-                      <svg class="post-settings-icon icon-more-dots" data-v-6b6dbdf2="">
-                        <use data-v-6b6dbdf2="" xlink:href="#svg-more-dots"></use>
+                    <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                      <svg class="post-settings-icon icon-more-dots">
+                        <use xlink:href="#svg-more-dots"></use>
                       </svg>
                     </div>
                   </div>
                   <div
                       style="position: absolute; z-index: 9999; top: 44px; right: -6px; opacity: 0; visibility: hidden; transform: translate(0px, -40px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
-                    <div class="simple-dropdown" data-v-6b6dbdf2="">
-                      <p class="simple-dropdown-link" data-v-6b6dbdf2="">收藏</p>
-                      <p class="simple-dropdown-link" data-v-6b6dbdf2="">举报</p>
-                      <div data-v-6b6dbdf2=""></div>
-                      <div data-v-6b6dbdf2=""></div>
+                    <div class="simple-dropdown">
+                      <p class="simple-dropdown-link">收藏</p>
+                      <p class="simple-dropdown-link">举报</p>
+                      <div></div>
+                      <div></div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="title" data-v-6b6dbdf2="">{{ postInfo.title }}</div>
-            <div class="user-status" data-v-6b6dbdf2="">
-              <div class="xm-header user-avatar" data-v-2fadc57c="" data-v-6b6dbdf2=""
+            <div class="title">{{ postInfo.title }}</div>
+            <div class="user-status">
+              <div class="xm-header user-avatar"
                    style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; margin-right: 8px;">
-                <div class="xm-avatar" data-v-2fadc57c="" style="padding: 6.4px;"><img :src="userInfo.avatar"
-                                                                                       alt="头像"
-                                                                                       class=""
-                                                                                       data-v-2fadc57c=""
-                                                                                       style="border-radius: 50%;">
+                <div class="xm-avatar" style="padding: 6.4px;"><img :src="postInfo.avatar"
+                                                                    alt="头像"
+                                                                    class=""
+
+                                                                    style="border-radius: 50%;">
                 </div>
-                <svg data-v-2fadc57c="" style="width: 44px; height: 44px;" viewBox="0 0 100 100">
-                  <defs data-v-2fadc57c="">
-                    <linearGradient id="svg79e8c30f-eae2-45fa-a496-08d0df0d3878" data-v-2fadc57c="" x1="0%" x2="100%"
+                <svg style="width: 44px; height: 44px;" viewBox="0 0 100 100">
+                  <defs>
+                    <linearGradient id="svg79e8c30f-eae2-45fa-a496-08d0df0d3878" x1="0%" x2="100%"
                                     y1="0%" y2="0%">
-                      <stop data-v-2fadc57c="" offset="0%"></stop>
-                      <stop data-v-2fadc57c="" offset="100%"></stop>
+                      <stop offset="0%"></stop>
+                      <stop offset="100%"></stop>
                     </linearGradient>
                   </defs>
-                  <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" data-v-2fadc57c="" fill-opacity="0"
+                  <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
                         stroke="#e9e9f0" stroke-width="8"></path>
-                  <path :style="[{strokeDasharray: userInfo.exp + ',287'}]"
+                  <path :style="[{strokeDasharray: postInfo.exp + ',287'}]"
                         d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                        data-v-2fadc57c="" fill-opacity="0" stroke="url(#svg79e8c30f-eae2-45fa-a496-08d0df0d3878)"
+                        fill-opacity="0" stroke="url(#svg79e8c30f-eae2-45fa-a496-08d0df0d3878)"
                         stroke-width="8"></path>
                 </svg>
-                <div class="xm-level" data-v-2fadc57c="" style="background: transparent;">
-                  <img data-v-2fadc57c=""
-                       src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS"
-                       style="width: 18px; height: 18px;">
+                <div class="xm-level" style="background: transparent;">
+                  <img
+                      src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS"
+                      style="width: 18px; height: 18px;">
                 </div>
               </div>
-              <div data-v-6b6dbdf2="" style="display: flex; flex-direction: column; justify-content: center;">
-                <p class="user-status-title medium" data-v-6b6dbdf2="" style="width: 100%;">
+              <div style="display: flex; flex-direction: column; justify-content: center;">
+                <p class="user-status-title medium" style="width: 100%;">
                   <span class="bold"
-                        data-v-6b6dbdf2=""
                         href="profile-timeline.html"
-                        style="cursor: pointer; color: rgb(251, 91, 90);"> {{ userInfo.username }} </span>
+                        style="cursor: pointer; color: rgb(251, 91, 90);"> {{ postInfo.author }} </span>
                 </p>
-                <p class="user-status-text small" data-v-6b6dbdf2="">售后产品经理</p>
+                <p class="user-status-text small">售后产品经理</p>
               </div>
-              <div class="action-request-list" data-v-6b6dbdf2="">
-                <div class="action-request accept" data-v-6b6dbdf2="">
-                  <svg class="action-request-icon icon-add-friend" data-v-6b6dbdf2="">
-                    <use data-v-6b6dbdf2="" xlink:href="#svg-add-friend"></use>
+              <div class="action-request-list">
+                <div class="action-request accept">
+                  <svg class="action-request-icon icon-add-friend">
+                    <use xlink:href="#svg-add-friend"></use>
                   </svg>
                 </div>
               </div>
             </div>
-            <div class="container-text w-e-text" data-v-6b6dbdf2="">
-              <MdPreview :editorId="id" :modelValue="postInfo.content" :codeFoldable="false"/>
+            <div class="container-text w-e-text">
+              <MdPreview :codeFoldable="false" :editorId="id" :modelValue="postInfo.content"/>
               <MdCatalog :editorId="id" :scrollElement="scrollElement"/>
             </div>
-            <div class="tag-list" data-v-6b6dbdf2=""><a class="tag-item secondary" data-v-6b6dbdf2="">运营干货</a></div>
+            <div class="tag-list"><a class="tag-item secondary">运营干货</a></div>
           </div>
         </div>
-        <div id="comment" data-v-6b6dbdf2="" style="transform: translateY(-80px);"></div>
-        <div class="post-comment-list" data-v-6b6dbdf2="">
-          <div class="post-comment-form" data-v-6b6dbdf2="">
-            <div class="xm-header user-avatar" data-v-2fadc57c="" data-v-6b6dbdf2=""
+        <div id="comment" style="transform: translateY(-80px);"></div>
+        <div class="post-comment-list">
+          <div class="post-comment-form">
+            <div class="xm-header user-avatar"
                  style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%;">
-              <div class="xm-avatar" data-v-2fadc57c="" style=" padding: 6.4px;"><img alt="头像"
-                                                                                      class=""
-                                                                                      data-v-2fadc57c=""
-                                                                                      src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_746181715702761?imageMogr2/crop/128x128/gravity/center"
-                                                                                      style="border-radius: 50%;"></div>
-              <svg data-v-2fadc57c="" style="width: 44px; height: 44px;" viewBox="0 0 100 100">
-                <defs data-v-2fadc57c="">
-                  <linearGradient id="svge2877b9c-016c-4fa1-953a-d106adec913b" data-v-2fadc57c="" x1="0%" x2="100%"
+              <div class="xm-avatar" style=" padding: 6.4px;"><img alt="头像"
+                                                                   class=""
+
+                                                                   src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_746181715702761?imageMogr2/crop/128x128/gravity/center"
+                                                                   style="border-radius: 50%;"></div>
+              <svg style="width: 44px; height: 44px;" viewBox="0 0 100 100">
+                <defs>
+                  <linearGradient id="svge2877b9c-016c-4fa1-953a-d106adec913b" x1="0%" x2="100%"
                                   y1="0%" y2="0%">
-                    <stop data-v-2fadc57c="" offset="0%"></stop>
-                    <stop data-v-2fadc57c="" offset="100%"></stop>
+                    <stop offset="0%"></stop>
+                    <stop offset="100%"></stop>
                   </linearGradient>
                 </defs>
-                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" data-v-2fadc57c="" fill-opacity="0"
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
                       stroke="#e9e9f0" stroke-width="8"></path>
-                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" data-v-2fadc57c=""
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
                       fill-opacity="0" stroke="url(#svge2877b9c-016c-4fa1-953a-d106adec913b)" stroke-width="8"
                       style="stroke-dasharray: 74.62, 287;"></path>
               </svg>
-              <div class="xm-level" data-v-2fadc57c=""
+              <div class="xm-level"
                    style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
-                <span data-v-2fadc57c="" style="display: block;">2</span></div>
+                <span style="display: block;">2</span></div>
             </div>
-            <form class="form" data-v-6b6dbdf2="" onsubmit="return false">
-              <div class="loginComment" data-v-6b6dbdf2="" style="padding: 1px 54px 1px 0px;">
+            <form class="form" onsubmit="return false">
+              <div class="loginComment" style="padding: 1px 54px 1px 0px;">
               </div>
-              <div data-v-6b6dbdf2="">
-                <div class="form-row" data-v-6b6dbdf2="">
-                  <div class="form-item" data-v-6b6dbdf2="">
-                    <div class="form-input with-button small" data-v-28de1f87="" data-v-6b6dbdf2=""><label
-                        data-v-28de1f87="" for="groups-search"> <span data-v-28de1f87="">我的评论</span></label> <textarea
-                        data-v-28de1f87="" maxlength="256" placeholder="" style="height: 49px;" type="text"></textarea>
+              <div>
+                <div class="form-row">
+                  <div class="form-item">
+                    <div class="form-input with-button small"><label
+                        for="groups-search"> <span>我的评论</span></label> <textarea
+                        maxlength="256" placeholder="" style="height: 49px;" type="text"></textarea>
                     </div>
                   </div>
                 </div>
                 <input id="post-input" accept="image/png,image/jpeg,image/gif,image/jpg" alt="" class="post-pload"
-                       data-v-6b6dbdf2=""
                        name="input" style="display: none;" type="file">
-                <div class="alltextInfo" data-v-6b6dbdf2="">
-                  <p data-v-6b6dbdf2="" style="display: flex; align-items: center; line-height: 30px;">
-                    <svg class="section-menu-item-icon icon-#svg-photos" data-v-6b6dbdf2="" style="cursor: pointer;">
-                      <use data-v-6b6dbdf2="" xlink:href="#svg-photos"></use>
+                <div class="alltextInfo">
+                  <p style="display: flex; align-items: center; line-height: 30px;">
+                    <svg class="section-menu-item-icon icon-#svg-photos" style="cursor: pointer;">
+                      <use xlink:href="#svg-photos"></use>
                     </svg>
-                    <svg class="section-menu-item-icon icon-#svg-friend" data-v-6b6dbdf2=""
+                    <svg class="section-menu-item-icon icon-#svg-friend"
                          style="margin-left: 24px; cursor: pointer;">
-                      <use data-v-6b6dbdf2="" xlink:href="#svg-friend"></use>
+                      <use xlink:href="#svg-friend"></use>
                     </svg>
                   </p>
-                  <div class="dialog" data-v-6b6dbdf2=""
+                  <div class="dialog"
                        style="z-index: 10; position: absolute; margin-top: 146px; margin-left: 62px;"></div>
-                  <div class="alltextInfo-textInfo" data-v-6b6dbdf2=""><span class="textInfo"
-                                                                             data-v-6b6dbdf2=""> 0/256 </span>
-                    <div class="quick-post-footer-actions" data-v-6b6dbdf2="">
-                      <p class="button small secondary" data-v-6b6dbdf2="" style="width: 100%; height: 100%;">评论</p>
+                  <div class="alltextInfo-textInfo"><span class="textInfo"
+                  > 0/256 </span>
+                    <div class="quick-post-footer-actions">
+                      <p class="button small secondary" style="width: 100%; height: 100%;">评论</p>
                     </div>
                   </div>
                 </div>
               </div>
             </form>
           </div>
-          <div data-v-6b6dbdf2="">
-            <div class="post-comment" data-v-6b6dbdf2="">
-              <div class="xm-header user-avatar" data-v-2fadc57c="" data-v-6b6dbdf2=""
+          <div>
+            <div class="post-comment">
+              <div class="xm-header user-avatar"
                    style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%;">
-                <div class="xm-avatar" data-v-2fadc57c="" style="padding: 6.4px;"><img alt="头像"
-                                                                                       class=""
-                                                                                       data-v-2fadc57c=""
-                                                                                       src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_359541709740168?imageMogr2/crop/80x80/gravity/center"
-                                                                                       style="border-radius: 50%;">
+                <div class="xm-avatar" style="padding: 6.4px;"><img alt="头像"
+                                                                    class=""
+
+                                                                    src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_359541709740168?imageMogr2/crop/80x80/gravity/center"
+                                                                    style="border-radius: 50%;">
                 </div>
-                <svg data-v-2fadc57c="" style="width: 44px; height: 44px;" viewBox="0 0 100 100">
-                  <defs data-v-2fadc57c="">
-                    <linearGradient id="svg4f04d0ef-4884-415a-bb8c-be51ce1799d1" data-v-2fadc57c="" x1="0%" x2="100%"
+                <svg style="width: 44px; height: 44px;" viewBox="0 0 100 100">
+                  <defs>
+                    <linearGradient id="svg4f04d0ef-4884-415a-bb8c-be51ce1799d1" x1="0%" x2="100%"
                                     y1="0%" y2="0%">
-                      <stop data-v-2fadc57c="" offset="0%"></stop>
-                      <stop data-v-2fadc57c="" offset="100%"></stop>
+                      <stop offset="0%"></stop>
+                      <stop offset="100%"></stop>
                     </linearGradient>
                   </defs>
-                  <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" data-v-2fadc57c="" fill-opacity="0"
+                  <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
                         stroke="#e9e9f0" stroke-width="8"></path>
-                  <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" data-v-2fadc57c=""
+                  <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
                         fill-opacity="0" stroke="url(#svg4f04d0ef-4884-415a-bb8c-be51ce1799d1)" stroke-width="8"
                         style="stroke-dasharray: 80.36, 287;"></path>
                 </svg>
-                <div class="xm-level" data-v-2fadc57c=""
+                <div class="xm-level"
                      style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
-                  <span data-v-2fadc57c="" style="display: block;">3</span></div>
+                  <span style="display: block;">3</span></div>
               </div>
-              <div class="post-comment-top" data-v-6b6dbdf2="">
-                <div class="post-comment-author" data-v-6b6dbdf2="">
-                  <p class="post-comment-text" data-v-6b6dbdf2=""><a class="post-comment-text-author"
-                                                                     data-v-6b6dbdf2="">jimxu</a></p>
-                  <p class="post-comment-text text-long-ellipsis" data-v-6b6dbdf2=""
+              <div class="post-comment-top">
+                <div class="post-comment-author">
+                  <p class="post-comment-text"><a class="post-comment-text-author"
+                  >jimxu</a></p>
+                  <p class="post-comment-text text-long-ellipsis"
                      style="font-size: 12px; color: rgb(153, 153, 153);">03-07 00:11<span> · 安徽</span></p>
                 </div>
               </div>
-              <div class="post-comment-emoji" data-v-6b6dbdf2="" style="word-break: break-all;">欢迎提供技术咨询</div>
-              <div class="post-comment-img" data-v-6b6dbdf2=""></div>
-              <div class="content-actions" data-v-6b6dbdf2="">
-                <div class="content-action" data-v-6b6dbdf2="">
-                  <div class="meta-line" data-v-6b6dbdf2="">
-                    <div class="meta-line-list reaction-item-list" data-v-6b6dbdf2="">
-                      <div class="reaction-item" data-v-6b6dbdf2="" style="position: relative;"><img
+              <div class="post-comment-emoji" style="word-break: break-all;">欢迎提供技术咨询</div>
+              <div class="post-comment-img"></div>
+              <div class="content-actions">
+                <div class="content-action">
+                  <div class="meta-line">
+                    <div class="meta-line-list reaction-item-list">
+                      <div class="reaction-item" style="position: relative;"><img
                           alt="reaction-happy"
                           class="reaction-image"
-                          data-v-6b6dbdf2=""
                           src="https://pc.opensns.cn/img/reaction/like.png">
                       </div>
                     </div>
-                    <p class="meta-line-text" data-v-6b6dbdf2="">0</p>
+                    <p class="meta-line-text">0</p>
                   </div>
-                  <div class="meta-line" data-v-6b6dbdf2="">
-                    <p class="meta-line-link light" data-v-6b6dbdf2="">点赞</p>
+                  <div class="meta-line">
+                    <p class="meta-line-link light">点赞</p>
                   </div>
-                  <div class="meta-line" data-v-6b6dbdf2="">
-                    <p class="meta-line-link light" data-v-6b6dbdf2="">回复</p>
+                  <div class="meta-line">
+                    <p class="meta-line-link light">回复</p>
                   </div>
-                  <div class="meta-line" data-v-6b6dbdf2="">
-                    <div data-v-6b6dbdf2="" style="position: relative;">
+                  <div class="meta-line">
+                    <div style="position: relative;">
                       <div>
-                        <div class="post-settings" data-v-6b6dbdf2="">
-                          <svg class="post-settings-icon icon-more-dots" data-v-6b6dbdf2="">
-                            <use data-v-6b6dbdf2="" xlink:href="#svg-more-dots"></use>
+                        <div class="post-settings">
+                          <svg class="post-settings-icon icon-more-dots">
+                            <use xlink:href="#svg-more-dots"></use>
                           </svg>
                         </div>
                       </div>
                       <div
                           style="position: absolute; z-index: 9999; top: 44px; right: -6px; opacity: 0; visibility: hidden; transform: translate(0px, -40px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
-                        <div class="simple-dropdown" data-v-6b6dbdf2="">
-                          <p class="simple-dropdown-link" data-v-6b6dbdf2="">举报</p>
+                        <div class="simple-dropdown">
+                          <p class="simple-dropdown-link">举报</p>
                         </div>
                       </div>
                     </div>
@@ -370,7 +358,7 @@ selectOne(ids).then(res => {
   background-color: #337fff;
 }
 
-.post-content[data-v-6b6dbdf2] {
+.post-content {
   margin: 50px 60px 0;
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
   border-radius: 12px;
@@ -378,7 +366,7 @@ selectOne(ids).then(res => {
   color: #3e3f5e;
 }
 
-.post-container[data-v-6b6dbdf2] {
+.post-container {
   width: 80%;
   position: relative;
   margin-top: 45px;
@@ -386,7 +374,7 @@ selectOne(ids).then(res => {
 }
 
 @media screen and (min-width: 1366px) {
-  .post-container[data-v-6b6dbdf2] {
+  .post-container {
     width: 800px;
     margin-right: 280px;
     margin-left: 100px;
@@ -394,7 +382,7 @@ selectOne(ids).then(res => {
   }
 }
 
-[data-v-6b6dbdf2]:selection {
+:selection {
   background-color: #337fff;
 }
 
@@ -408,14 +396,14 @@ selectOne(ids).then(res => {
   border-radius: .25rem;
 }
 
-.breadcrumb[data-v-6b6dbdf2] {
+.breadcrumb {
   position: absolute;
   top: -48px;
   left: -16px;
   background-color: transparent;
 }
 
-.oprate[data-v-6b6dbdf2] {
+.oprate {
   position: absolute;
   top: 0;
   left: -65px;
@@ -476,12 +464,12 @@ a:active, a:hover {
   outline: 0;
 }
 
-.about[data-v-6b6dbdf2] {
+.about {
   display: none;
 }
 
 @media screen and (min-width: 1366px) {
-  .about[data-v-6b6dbdf2] {
+  .about {
     display: inline-block;
     position: absolute;
     top: 0;
@@ -490,25 +478,25 @@ a:active, a:hover {
   }
 }
 
-.breadcrumb-container[data-v-186a823a] {
+.breadcrumb-container {
   background-color: transparent;
 }
 
-[data-v-186a823a]:selection {
+:selection {
   background-color: #337fff;
 }
 
-.oprate-container[data-v-91ba2966] {
+.oprate-container {
   position: sticky;
   top: 152px;
 }
 
-[data-v-91ba2966]:selection {
+:selection {
   background-color: #337fff;
 }
 
 @media screen and (min-width: 1366px) {
-  .about-container[data-v-05b26ca4] {
+  .about-container {
     position: sticky;
     top: 112px;
     mix-blend-mode: normal;
@@ -517,7 +505,7 @@ a:active, a:hover {
   }
 }
 
-[data-v-05b26ca4]:selection {
+:selection {
   background-color: #337fff;
 }
 
@@ -530,19 +518,19 @@ img {
   border-style: none;
 }
 
-.post-content .post-bg[data-v-6b6dbdf2] {
+.post-content .post-bg {
   width: 100%;
   border-radius: 12px 12px 0 0;
   -o-object-fit: cover;
   object-fit: cover;
 }
 
-.post-content .content-container[data-v-6b6dbdf2] {
+.post-content .content-container {
   /*width: 100%;*/
   padding: 30px 30px;
 }
 
-.post-comment-list[data-v-6b6dbdf2] {
+.post-comment-list {
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
 }
@@ -559,7 +547,7 @@ img {
   font-size: 14px;
 }
 
-.oprate-container-thumbs[data-v-91ba2966] {
+.oprate-container-thumbs {
   width: 48px;
   height: 48px;
   background: #fff;
@@ -572,7 +560,7 @@ img {
   cursor: pointer;
 }
 
-.oprate-container-commons[data-v-91ba2966] {
+.oprate-container-commons {
   width: 48px;
   height: 48px;
   background: #fff;
@@ -585,7 +573,7 @@ img {
   cursor: pointer;
 }
 
-.oprate-container-collections[data-v-91ba2966] {
+.oprate-container-collections {
   width: 48px;
   height: 48px;
   background: #fff;
@@ -598,7 +586,7 @@ img {
   cursor: pointer;
 }
 
-.oprate-container-share[data-v-91ba2966] {
+.oprate-container-share {
   width: 48px;
   height: 48px;
   background: #fff;
@@ -611,7 +599,7 @@ img {
   cursor: pointer;
 }
 
-.forum-container[data-v-e27424ca] {
+.forum-container {
   background-color: #fff;
   border-radius: 15px;
   overflow: hidden;
@@ -619,19 +607,19 @@ img {
 }
 
 @media screen and (min-width: 1366px) {
-  .about-container-box[data-v-05b26ca4] {
+  .about-container-box {
     width: 284px;
     margin-bottom: 18px;
     padding-bottom: 12px;
   }
 
-  .about-container-box[data-v-05b26ca4]:last-child {
+  .about-container-box:last-child {
     margin-bottom: 0;
     padding-bottom: 0;
   }
 }
 
-[data-v-e27424ca]:selection {
+:selection {
   background-color: #337fff;
 }
 
@@ -663,7 +651,7 @@ svg:not(:root) {
   overflow: hidden;
 }
 
-.oprate-container-thumbs-icon[data-v-91ba2966] {
+.oprate-container-thumbs-icon {
   height: 20px;
   width: 20px;
   position: absolute;
@@ -673,7 +661,7 @@ svg:not(:root) {
   fill: #afb0c0;
 }
 
-.oprate-container-thumbs-count[data-v-91ba2966] {
+.oprate-container-thumbs-count {
   color: #999;
   position: absolute;
   top: 50px;
@@ -682,7 +670,7 @@ svg:not(:root) {
   cursor: default;
 }
 
-.oprate-container-commons-icon[data-v-91ba2966] {
+.oprate-container-commons-icon {
   height: 20px;
   width: 20px;
   position: absolute;
@@ -692,7 +680,7 @@ svg:not(:root) {
   fill: #afb0c0;
 }
 
-.oprate-container-commons-count[data-v-91ba2966] {
+.oprate-container-commons-count {
   color: #999;
   position: absolute;
   top: 50px;
@@ -701,7 +689,7 @@ svg:not(:root) {
   cursor: default;
 }
 
-.oprate-container-collections-icon[data-v-91ba2966] {
+.oprate-container-collections-icon {
   height: 20px;
   width: 20px;
   position: absolute;
@@ -711,7 +699,7 @@ svg:not(:root) {
   fill: #afb0c0;
 }
 
-.oprate-container-collections-count[data-v-91ba2966] {
+.oprate-container-collections-count {
   color: #999;
   position: absolute;
   top: 50px;
@@ -720,7 +708,7 @@ svg:not(:root) {
   cursor: default;
 }
 
-.oprate-container-share-icon[data-v-91ba2966] {
+.oprate-container-share-icon {
   height: 20px;
   width: 20px;
   position: absolute;
@@ -750,15 +738,15 @@ figure {
   margin: 0 0 1em;
 }
 
-.forum-container-background[data-v-e27424ca] {
+.forum-container-background {
   height: 72px;
 }
 
-[data-v-62854a42]:selection {
+:selection {
   background-color: #337fff;
 }
 
-.forum-container-describe[data-v-e27424ca] {
+.forum-container-describe {
   mix-blend-mode: normal;
   color: rgba(0, 0, 0, .85);
   width: 100px;
@@ -768,7 +756,7 @@ figure {
   padding-bottom: 5px;
 }
 
-.forum-container-describe[data-v-e27424ca] {
+.forum-container-describe {
   position: absolute;
   top: 115px;
   left: 148px;
@@ -788,19 +776,19 @@ hr {
   overflow: visible;
 }
 
-.forum-container-button[data-v-e27424ca] {
+.forum-container-button {
   width: 228px;
   margin: auto;
 }
 
-.post-content .content-container .heads[data-v-6b6dbdf2] {
+.post-content .content-container .heads {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   margin-bottom: 8px;
 }
 
-.post-content .content-container .title[data-v-6b6dbdf2] {
+.post-content .content-container .title {
   display: inline-block;
   width: 100%;
   height: auto;
@@ -817,7 +805,7 @@ hr {
   position: relative;
 }
 
-.user-status[data-v-6b6dbdf2] {
+.user-status {
   display: flex;
   align-items: inherit;
   padding-left: 0;
@@ -828,12 +816,12 @@ hr {
   overflow-y: auto;
 }
 
-.post-content .content-container .container-text[data-v-6b6dbdf2] {
+.post-content .content-container .container-text {
   margin-top: 16px;
   word-break: break-all;
 }
 
-.post-content .content-container .w-e-text[data-v-6b6dbdf2] {
+.post-content .content-container .w-e-text {
   padding: 0;
 }
 
@@ -845,7 +833,7 @@ hr {
   margin-top: -12px;
 }
 
-.post-content .content-container .tag-list[data-v-6b6dbdf2] {
+.post-content .content-container .tag-list {
   align-items: center;
   margin-top: 0;
 }
@@ -863,13 +851,13 @@ hr {
   left: 28px;
 }
 
-.xm-header[data-v-2fadc57c] {
+.xm-header {
   background: #fff;
   border-radius: 50%;
   box-sizing: content-box;
 }
 
-[data-v-2fadc57c]:selection {
+:selection {
   background-color: #337fff;
 }
 
@@ -883,12 +871,12 @@ hr {
   position: relative;
 }
 
-.post-content .post-comment[data-v-6b6dbdf2] {
+.post-content .post-comment {
   border-top: 1px solid #eee;
   border-radius: 0 0 12px 12px;
 }
 
-[data-v-186a823a] .ant-breadcrumb-link {
+.ant-breadcrumb-link {
   color: #afb0c0;
   font-size: 18px;
 }
@@ -898,7 +886,7 @@ hr {
   color: rgba(0, 0, 0, .45);
 }
 
-[data-v-186a823a] .ant-breadcrumb-separator {
+.ant-breadcrumb-separator {
   margin: 0 8px;
   color: #afb0c0;
 }
@@ -912,13 +900,13 @@ figure > img {
   height: 100%;
 }
 
-.forum-container-head[data-v-e27424ca] {
+.forum-container-head {
   position: absolute;
   top: 50px;
   left: 20px;
 }
 
-.forum-container-title[data-v-e27424ca] {
+.forum-container-title {
   mix-blend-mode: normal;
   color: rgba(0, 0, 0, .85);
   width: 100px;
@@ -928,7 +916,7 @@ figure > img {
   padding-bottom: 5px;
 }
 
-.forum-container-title[data-v-e27424ca] {
+.forum-container-title {
   position: absolute;
   top: 86px;
   left: 148px;
@@ -942,7 +930,7 @@ figure > img {
   justify-content: center;
 }
 
-.forum-container-msg[data-v-e27424ca] {
+.forum-container-msg {
   margin-top: 100px;
   margin-bottom: 28px;
 }
@@ -1004,7 +992,7 @@ p {
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-.forum-container-button p[data-v-e27424ca] {
+.forum-container-button p {
   width: 100%;
   background: #337fff;
   height: 48px;
@@ -1015,7 +1003,7 @@ p {
   cursor: pointer;
 }
 
-.forum-container-button .btn[data-v-e27424ca] {
+.forum-container-button .btn {
   background-color: #337fff;
   color: #fff;
   border-radius: 10px;
@@ -1023,7 +1011,7 @@ p {
   font-weight: 700;
 }
 
-.post-content .content-container .heads .text[data-v-6b6dbdf2] {
+.post-content .content-container .heads .text {
   font-size: 12px;
   color: #999;
 }
@@ -1039,7 +1027,7 @@ p {
   right: 0;
 }
 
-.user-status .action-request-list[data-v-6b6dbdf2] {
+.user-status .action-request-list {
   position: relative;
   left: 24px;
 }
@@ -1074,11 +1062,11 @@ p {
   background-color: #337fff;
 }
 
-.tag-item.secondary[data-v-6b6dbdf2] {
+.tag-item.secondary {
   background-color: #337fff;
 }
 
-.post-content .content-container .tag-list a[data-v-6b6dbdf2] {
+.post-content .content-container .tag-list a {
   cursor: pointer;
 }
 
@@ -1087,11 +1075,11 @@ p {
   background-color: #23d2e2;
 }
 
-.post-content .tag-item.secondary[data-v-6b6dbdf2]:hover {
+.post-content .tag-item.secondary:hover {
   background-color: #337fff;
 }
 
-.xm-avatar[data-v-2fadc57c] {
+.xm-avatar {
   position: absolute;
   display: flex;
   align-items: center;
@@ -1099,7 +1087,7 @@ p {
   border-radius: 50%;
 }
 
-.xm-level[data-v-2fadc57c] {
+.xm-level {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -1113,7 +1101,7 @@ p {
   overflow: hidden;
 }
 
-.loginComment[data-v-6b6dbdf2] {
+.loginComment {
   display: flex;
   justify-content: center;
   font-size: 12px;
@@ -1127,7 +1115,7 @@ p {
   left: 28px;
 }
 
-.post-content .post-comment-img[data-v-6b6dbdf2] {
+.post-content .post-comment-img {
   display: flex;
   flex-wrap: wrap;
   width: 33%;
@@ -1148,7 +1136,7 @@ p {
   margin-top: 14px;
 }
 
-.post-content .content-actions[data-v-6b6dbdf2] {
+.post-content .content-actions {
   padding: 0;
 }
 
@@ -1157,7 +1145,7 @@ p {
   transition: color .3s;
 }
 
-.breadcrumb-container .link[data-v-186a823a] {
+.breadcrumb-container .link {
   color: #afb0c0;
   cursor: pointer;
 }
@@ -1166,7 +1154,7 @@ p {
   color: #40a9ff;
 }
 
-.breadcrumb-container .link[data-v-186a823a]:hover {
+.breadcrumb-container .link:hover {
   color: #337fff;
 }
 
@@ -1203,14 +1191,14 @@ p {
   transition: fill .2s ease-in-out;
 }
 
-.forum-container-button .icon[data-v-e27424ca] {
+.forum-container-button .icon {
   position: absolute;
   top: 50%;
   left: 70px;
   transform: translateY(-50%);
 }
 
-.forum-container-button .text[data-v-e27424ca] {
+.forum-container-button .text {
   position: absolute;
   top: 50%;
   left: 100px;
@@ -1294,7 +1282,7 @@ strong {
   box-shadow: 0 0 5px #333;
 }
 
-.xm-avatar img[data-v-2fadc57c] {
+.xm-avatar img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -1315,7 +1303,7 @@ strong {
   margin-left: -5px;
 }
 
-.form-row[data-v-6b6dbdf2] {
+.form-row {
   margin: 0;
 }
 
@@ -1351,12 +1339,12 @@ input:not([type="range"]) {
   touch-action: manipulation;
 }
 
-.alltextInfo[data-v-6b6dbdf2] {
+.alltextInfo {
   margin-top: 5px;
   justify-content: space-between;
 }
 
-.alltextInfo[data-v-6b6dbdf2] {
+.alltextInfo {
   display: flex;
   align-items: center;
 }
@@ -1368,7 +1356,7 @@ input:not([type="range"]) {
   flex-wrap: wrap;
 }
 
-.xm-avatar .img-full[data-v-2fadc57c] {
+.xm-avatar .img-full {
   width: 130%;
   height: 130%;
   border-radius: 50%;
@@ -1402,7 +1390,7 @@ input:not([type="range"]) {
   -webkit-font-smoothing: antialiased;
 }
 
-.user-status-title .bold[data-v-6b6dbdf2] {
+.user-status-title .bold {
   cursor: pointer;
 }
 
@@ -1427,7 +1415,7 @@ input:not([type="range"]) {
   width: 100%;
 }
 
-.alltextInfo-textInfo[data-v-6b6dbdf2] {
+.alltextInfo-textInfo {
   display: flex;
   align-items: center;
 }
@@ -1444,7 +1432,7 @@ input:not([type="range"]) {
   overflow: hidden;
 }
 
-.text-long-ellipsis[data-v-6b6dbdf2] {
+.text-long-ellipsis {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -1481,11 +1469,11 @@ input:not([type="range"]) {
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.12);
 }
 
-stop[data-v-2fadc57c]:first-child {
+stop:first-child {
   stop-color: rgba(51, 127, 255, 0);
 }
 
-stop[data-v-2fadc57c]:nth-child(2) {
+stop:nth-child(2) {
   stop-color: #337fff;
 }
 
@@ -1493,30 +1481,30 @@ stop[data-v-2fadc57c]:nth-child(2) {
   position: relative;
 }
 
-[data-v-28de1f87]:selection {
+:selection {
   background-color: #337fff;
 }
 
-.section-menu-item-icon[data-v-6b6dbdf2] {
+.section-menu-item-icon {
   fill: #adafca;
   width: 20px;
   height: 20px;
 }
 
-.alltextInfo-textInfo .textInfo[data-v-6b6dbdf2] {
+.alltextInfo-textInfo .textInfo {
   font-size: 12px;
   color: #999;
   margin-right: 8px;
 }
 
-.post-content .textInfo[data-v-6b6dbdf2] {
+.post-content .textInfo {
   font-size: 12px;
   color: #999;
   text-align: right;
   margin-top: 5px;
 }
 
-.quick-post-footer-actions[data-v-6b6dbdf2] {
+.quick-post-footer-actions {
   width: 88px;
   height: 40px;
 }
@@ -1672,7 +1660,7 @@ textarea {
   resize: vertical;
 }
 
-textarea[data-v-28de1f87] {
+textarea {
   resize: none;
   word-break: break-all;
   overflow: hidden;
@@ -1703,7 +1691,7 @@ textarea[data-v-28de1f87] {
   background-color: #337fff;
 }
 
-.button.secondary[data-v-6b6dbdf2] {
+.button.secondary {
   background-color: #337fff;
 }
 
@@ -1737,28 +1725,35 @@ textarea[data-v-28de1f87] {
 /*设置手机端样式*/
 @media screen and (max-width: 768px) {
   .post-container {
-     width: 100% !important;
-     margin-left: 0 !important;
-     margin-top: 80px !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-top: 80px !important;
   }
+
   .post-content {
     margin: 0;
   }
-  .oprate{
-   display: none !important;
+
+  .oprate {
+    display: none !important;
   }
-  .post-bg{
+
+  .post-bg {
     height: 200px !important;
   }
-  .breadcrumb{
+
+  .breadcrumb {
     left: 0 !important;
   }
-  .postStyle{
+
+  .postStyle {
     margin: 15px;
   }
+
   .post-content .content-container {
     padding: 15px !important;
   }
+
   :deep(.md-editor-preview-wrapper) {
     padding: 0 !important;
   }
