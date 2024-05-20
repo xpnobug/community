@@ -248,7 +248,7 @@ img {
 
 /*左侧排行榜*/
 .box .public .contents .left-content {
-  width: 320px;
+  width: 280px;
   border-radius: 12px;
   background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
@@ -336,6 +336,7 @@ img {
 
   .box .public .contents .right-content {
     width: auto !important;
+    margin-right: 0 !important;
   }
 
   .box .public .contents-tow .right-content .subject-matter-text ul li .picture {

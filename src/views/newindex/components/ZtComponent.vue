@@ -101,7 +101,7 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
               <div class="content-list">
                 <div class="" >
                   <ul v-if="props.loadings">
-                    <li v-for="item in props.posts.slice(1,11)">
+                    <li v-for="item in props.posts.slice(1,12)">
                       <div class="explain" style="width: 34px;">{{ item.tag }}</div>
                       <div class="explain-content"><a class="" href="#">
                         {{ item.title }}
@@ -170,7 +170,7 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
 }
 
 .box .public .contents .right-content {
-  /*margin-right: 15px;*/
+  margin-right: 15px;
   /*width: 848px;*/
   border-radius: 12px;
   background-color: var(--reaicc-meta-theme-post-color);
@@ -398,7 +398,9 @@ a {
   .box .public .contents {
     flex-direction: column;
   }
-
+  .box .public .contents .right-content{
+    margin-right: 0 !important;
+  }
   .box .public .contents-one .right-content {
     width: auto;
     flex-direction: column;

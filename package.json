@@ -10,9 +10,9 @@
     "nuxtdev": "nuxt dev"
   },
   "dependencies": {
-    "@kangc/v-md-editor": "^2.3.18",
     "ant-design-vue": "^4.2.1",
     "element-plus": "^2.7.1",
+    "md-editor-v3": "^4.15.0",
     "mitt": "^3.0.1",
     "prismjs": "^1.29.0",
     "vue": "^3.4.21",

@@ -5,7 +5,13 @@ import {add} from "@/api/article";
 import {message} from "ant-design-vue";
 import CascaderCom from "@/views/Edit/compontents/CascaderCom.vue";
 
-const text = ref("");
+import { MdEditor } from 'md-editor-v3';
+import 'md-editor-v3/lib/style.css';
+
+const state = reactive({
+  text: '',
+  theme: ''
+});
 const instance = getCurrentInstance()
 
 interface FormState {
@@ -122,8 +128,8 @@ const onFinishFailed = (errorInfo: any) => {
                       </a-form-item>
                     </div>
                   </div>
-                  <v-md-editor v-model="formState.content" height="600px"></v-md-editor>
 
+                  <MdEditor v-model="formState.content" height="600px" :theme="state.theme" />
 
                   <div class="set-up">
                     <div class="more-set-box" style="padding-bottom: 0px;">

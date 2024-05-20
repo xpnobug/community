@@ -21,7 +21,7 @@
         <!--        <el-button type="primary">搜索框</el-button>-->
         <div class="search-btn">
           <input data-v-4d901bbe="" id="search-main" type="text" autocomplete="off" name="search_main"
-                 placeholder="搜索用户或内容" style="padding-right: 60px;">
+                 placeholder="搜索用户或内容">
         </div>
         <el-button type="primary" @click="login" v-if="userInfo == null" style="margin-right:10px;">登录</el-button>
         <div v-else style="display: flex; ">

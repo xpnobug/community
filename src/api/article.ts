@@ -53,10 +53,6 @@ interface Article  {
     avatar: string;
 }
 
-
-// 文章列表
-//异步加载
-
 export function pageList(page: Page) {
     return axios.get(`${BASE_URL}/pageList`,{
         params: {
@@ -67,4 +63,8 @@ export function pageList(page: Page) {
 }
 export function add(article: Article) {
     return axios.post(`${BASE_URL}/add`, article);
+}
+
+export function selectOne(id: string) {
+    return axios.get(`${BASE_URL}/`+ id);
 }

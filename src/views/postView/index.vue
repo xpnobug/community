@@ -1,89 +1,149 @@
-<script setup lang="ts">
+<script lang="ts" setup>
+import {selectOne} from "@/api/article";
+import {useRoute} from 'vue-router';
+import {getCurrentInstance, ref} from "vue";
+import {MdCatalog, MdPreview} from 'md-editor-v3';
+// preview.css相比style.css少了编辑器那部分样式
+import 'md-editor-v3/lib/preview.css';
 
+const id = 'preview-only';
+const text = ref('# Hello Editor');
+const scrollElement = document.documentElement;
+
+//获取登录人信息
+const instance = getCurrentInstance()
+const userInfo = ref({});
+instance?.proxy?.$Bus.on("userInfo", (param: any) => {
+  userInfo.value = param;
+})
+
+//获取地址栏中id
+const route = useRoute();
+const ids = route.params.id;
+const postInfo = ref([]);
+selectOne(ids).then(res => {
+  postInfo.value = res.data.data
+  console.log(postInfo.value)
+})
 </script>
 
 
 <template>
   <div class="content-grid snipcss-tMNNJ" style="  padding-top: 84px;   transition: transform 0.4s ease-in-out 0s;">
-    <div data-v-6b6dbdf2="" class="post-content post-container">
-      <div data-v-6b6dbdf2="" class="breadcrumb">
-        <div data-v-186a823a="" data-v-6b6dbdf2="" class="breadcrumb-container">
-          <div data-v-186a823a="" class="ant-breadcrumb"><span data-v-186a823a="" class=""><span class="ant-breadcrumb-link"><a data-v-186a823a="" href="/" class="link nuxt-link-active">社区</a></span><span class="ant-breadcrumb-separator">/</span></span><span data-v-186a823a="" class=""><span class="ant-breadcrumb-link"><a data-v-186a823a="" href="/forum?id=7" class="link"> 运营干货 </a></span><span class="ant-breadcrumb-separator">/</span></span><span data-v-186a823a="" class=""><span class="ant-breadcrumb-link">正文</span><span class="ant-breadcrumb-separator">/</span></span></div>
+    <div class="post-content post-container" data-v-6b6dbdf2="">
+      <div class="breadcrumb" data-v-6b6dbdf2="">
+        <div class="breadcrumb-container" data-v-186a823a="" data-v-6b6dbdf2="">
+          <div class="ant-breadcrumb" data-v-186a823a=""><span class="" data-v-186a823a=""><span
+              class="ant-breadcrumb-link"><a class="link nuxt-link-active" data-v-186a823a=""
+                                             href="/">社区</a></span><span
+              class="ant-breadcrumb-separator">/</span></span><span class="" data-v-186a823a=""><span
+              class="ant-breadcrumb-link"><a class="link" data-v-186a823a="" href="/forum?id=7"> 运营干货 </a></span><span
+              class="ant-breadcrumb-separator">/</span></span><span class="" data-v-186a823a=""><span
+              class="ant-breadcrumb-link">正文</span><span class="ant-breadcrumb-separator">/</span></span></div>
         </div>
       </div>
-      <div data-v-6b6dbdf2="" class="oprate">
-        <div data-v-91ba2966="" data-v-6b6dbdf2="" class="oprate-container">
-          <div data-v-91ba2966="" class="oprate-container-thumbs"><svg data-v-91ba2966="" class="oprate-container-thumbs-icon">
-            <use data-v-91ba2966="" xlink:href="#svg-thumbs-up"></use>
-          </svg>
-            <div data-v-91ba2966="" class="oprate-container-thumbs-count">1</div>
+      <div class="oprate" data-v-6b6dbdf2="">
+        <div class="oprate-container" data-v-6b6dbdf2="" data-v-91ba2966="">
+          <div class="oprate-container-thumbs" data-v-91ba2966="">
+            <svg class="oprate-container-thumbs-icon" data-v-91ba2966="">
+              <use data-v-91ba2966="" xlink:href="#svg-thumbs-up"></use>
+            </svg>
+            <div class="oprate-container-thumbs-count" data-v-91ba2966="">1</div>
           </div>
-          <div data-v-91ba2966="" class="oprate-container-commons"><svg data-v-91ba2966="" class="oprate-container-commons-icon">
-            <use data-v-91ba2966="" xlink:href="#svg-comment"></use>
-          </svg>
-            <div data-v-91ba2966="" class="oprate-container-commons-count"> 1 </div>
+          <div class="oprate-container-commons" data-v-91ba2966="">
+            <svg class="oprate-container-commons-icon" data-v-91ba2966="">
+              <use data-v-91ba2966="" xlink:href="#svg-comment"></use>
+            </svg>
+            <div class="oprate-container-commons-count" data-v-91ba2966=""> 1</div>
           </div>
-          <div data-v-91ba2966="" class="oprate-container-collections"><svg data-v-91ba2966="" class="oprate-container-collections-icon">
-            <use data-v-91ba2966="" xlink:href="#svg-collection"></use>
-          </svg>
-            <div data-v-91ba2966="" class="oprate-container-collections-count">1</div>
+          <div class="oprate-container-collections" data-v-91ba2966="">
+            <svg class="oprate-container-collections-icon" data-v-91ba2966="">
+              <use data-v-91ba2966="" xlink:href="#svg-collection"></use>
+            </svg>
+            <div class="oprate-container-collections-count" data-v-91ba2966="">1</div>
           </div>
-          <div data-v-91ba2966="" class="oprate-container-share"><svg data-v-91ba2966="" class="oprate-container-share-icon">
-            <use data-v-91ba2966="" xlink:href="#svg-share"></use>
-          </svg></div>
+          <div class="oprate-container-share" data-v-91ba2966="">
+            <svg class="oprate-container-share-icon" data-v-91ba2966="">
+              <use data-v-91ba2966="" xlink:href="#svg-share"></use>
+            </svg>
+          </div>
         </div>
-      </div> <a data-v-6b6dbdf2="" href="#comment" style="display: none;"></a>
-      <div data-v-6b6dbdf2="" class="about">
-        <div data-v-05b26ca4="" data-v-6b6dbdf2="" class="about-container">
-          <div data-v-e27424ca="" data-v-05b26ca4="" class="forum-container about-container-box" style="height: 315px;">
-            <figure data-v-62854a42="" data-v-e27424ca="" class="forum-container-background user-preview-cover" style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5d5771c92ac3d1625714373?imageMogr2/crop/568x140/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);"><img data-v-62854a42="" src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5d5771c92ac3d1625714373?imageMogr2/crop/568x140/gravity/center" alt="图片" style="display: none;"> </figure> <a data-v-e27424ca="" href="/forum?id=7" class="">
-            <div data-v-2fadc57c="" data-v-e27424ca="" class="xm-header user-avatar forum-container-head user-short-description-avatar" style="width: 90px; height: 90px; border: 9px solid rgb(255, 255, 255); cursor: pointer; border-radius: 12px;">
-              <div data-v-2fadc57c="" class="xm-avatar" style="padding: 11px;"><img data-v-2fadc57c="" src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5e058460bc75d1625714318?imageMogr2/crop/196x196/gravity/center" alt="头像" class="img-full" style="border-radius: 12px;"></div>
-            </div>
-          </a> <a data-v-e27424ca="" href="/forum?id=7" class="">
-            <div data-v-e27424ca="" class="forum-container-title" style="cursor: pointer;"><span data-v-e27424ca="">运营干货</span></div>
+      </div>
+      <a data-v-6b6dbdf2="" href="#comment" style="display: none;"></a>
+      <div class="about" data-v-6b6dbdf2="">
+        <div class="about-container" data-v-05b26ca4="" data-v-6b6dbdf2="">
+          <div class="forum-container about-container-box" data-v-05b26ca4="" data-v-e27424ca="" style="height: 315px;">
+            <figure class="forum-container-background user-preview-cover" data-v-62854a42="" data-v-e27424ca=""
+                    style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5d5771c92ac3d1625714373?imageMogr2/crop/568x140/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);">
+              <img alt="图片"
+                   data-v-62854a42=""
+                   src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5d5771c92ac3d1625714373?imageMogr2/crop/568x140/gravity/center"
+                   style="display: none;"></figure>
+            <a class="" data-v-e27424ca="" href="/forum?id=7">
+              <div class="xm-header user-avatar forum-container-head user-short-description-avatar" data-v-2fadc57c=""
+                   data-v-e27424ca=""
+                   style="width: 90px; height: 90px; border: 9px solid rgb(255, 255, 255); cursor: pointer; border-radius: 12px;">
+                <div class="xm-avatar" data-v-2fadc57c="" style="padding: 11px;"><img alt="头像"
+                                                                                      class="img-full"
+                                                                                      data-v-2fadc57c=""
+                                                                                      src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5e058460bc75d1625714318?imageMogr2/crop/196x196/gravity/center"
+                                                                                      style="border-radius: 12px;">
+                </div>
+              </div>
+            </a> <a class="" data-v-e27424ca="" href="/forum?id=7">
+            <div class="forum-container-title" data-v-e27424ca="" style="cursor: pointer;"><span
+                data-v-e27424ca="">运营干货</span></div>
           </a>
-            <div data-v-e27424ca="" class="forum-container-describe"> 社群运营经验交流 </div> <a data-v-e27424ca="" href="/forum?id=7" class="">
-            <div data-v-e27424ca="" class="forum-container-msg user-stats">
-              <div data-v-e27424ca="" class="user-stat">
-                <p data-v-e27424ca="" class="user-stat-title">506</p>
-                <p data-v-e27424ca="" class="user-stat-text">内容</p>
+            <div class="forum-container-describe" data-v-e27424ca=""> 社群运营经验交流</div>
+            <a class="" data-v-e27424ca="" href="/forum?id=7">
+              <div class="forum-container-msg user-stats" data-v-e27424ca="">
+                <div class="user-stat" data-v-e27424ca="">
+                  <p class="user-stat-title" data-v-e27424ca="">506</p>
+                  <p class="user-stat-text" data-v-e27424ca="">内容</p>
+                </div>
+                <div class="user-stat" data-v-e27424ca="">
+                  <p class="user-stat-title" data-v-e27424ca="">397</p>
+                  <p class="user-stat-text" data-v-e27424ca="">成员</p>
+                </div>
+                <div class="user-stat" data-v-e27424ca="">
+                  <p class="user-stat-title" data-v-e27424ca="">7</p>
+                  <p class="user-stat-text" data-v-e27424ca="">精华</p>
+                </div>
               </div>
-              <div data-v-e27424ca="" class="user-stat">
-                <p data-v-e27424ca="" class="user-stat-title">397</p>
-                <p data-v-e27424ca="" class="user-stat-text">成员</p>
-              </div>
-              <div data-v-e27424ca="" class="user-stat">
-                <p data-v-e27424ca="" class="user-stat-title">7</p>
-                <p data-v-e27424ca="" class="user-stat-text">精华</p>
-              </div>
-            </div>
-          </a>
+            </a>
             <hr data-v-e27424ca="" style="margin-bottom: 12px;">
-            <div data-v-e27424ca="" class="forum-container-button user-preview-actions">
-              <p data-v-e27424ca="" class="button btn"><svg data-v-e27424ca="" class="icon button-icon icon-join-group">
-                <use data-v-e27424ca="" xlink:href="#svg-join-group"></use>
-              </svg> <span data-v-e27424ca="" class="text"> &nbsp;加入版块 </span></p>
+            <div class="forum-container-button user-preview-actions" data-v-e27424ca="">
+              <p class="button btn" data-v-e27424ca="">
+                <svg class="icon button-icon icon-join-group" data-v-e27424ca="">
+                  <use data-v-e27424ca="" xlink:href="#svg-join-group"></use>
+                </svg>
+                <span class="text" data-v-e27424ca=""> &nbsp;加入版块 </span></p>
             </div>
           </div>
         </div>
       </div>
-      <div data-v-6b6dbdf2=""><img data-v-6b6dbdf2="" src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/7c66ecbc555ed9400297ee923c7f8c3f.png?imageMogr2/crop/2128x1196/gravity/center" class="post-bg" style="height: 450px;">
-        <div data-v-6b6dbdf2="" class="content-container">
-          <div data-v-6b6dbdf2="" class="container-head">
-            <div data-v-6b6dbdf2="" class="heads">
-              <div data-v-6b6dbdf2="" class="text">2023-12-14 · 未知</div>
-              <div data-v-6b6dbdf2="" class="widget-box-settings" style="display: flex; flex-flow: row;">
+      <div class="postStyle" data-v-6b6dbdf2="">
+        <img :src="postInfo.coverImage"
+             class="post-bg"
+             data-v-6b6dbdf2="" style="height: 450px;">
+        <div class="content-container" data-v-6b6dbdf2="">
+          <div class="container-head" data-v-6b6dbdf2="">
+            <div class="heads" data-v-6b6dbdf2="">
+              <div class="text" data-v-6b6dbdf2="">{{ postInfo.publishDate }} · 未知</div>
+              <div class="widget-box-settings" data-v-6b6dbdf2="" style="display: flex; flex-flow: row;">
                 <div data-v-6b6dbdf2="" style="position: relative;">
                   <div>
-                    <div data-v-6b6dbdf2="" class="post-settings widget-box-post-settings-dropdown-trigger"><svg data-v-6b6dbdf2="" class="post-settings-icon icon-more-dots">
-                      <use data-v-6b6dbdf2="" xlink:href="#svg-more-dots"></use>
-                    </svg></div>
+                    <div class="post-settings widget-box-post-settings-dropdown-trigger" data-v-6b6dbdf2="">
+                      <svg class="post-settings-icon icon-more-dots" data-v-6b6dbdf2="">
+                        <use data-v-6b6dbdf2="" xlink:href="#svg-more-dots"></use>
+                      </svg>
+                    </div>
                   </div>
-                  <div style="position: absolute; z-index: 9999; top: 44px; right: -6px; opacity: 0; visibility: hidden; transform: translate(0px, -40px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
-                    <div data-v-6b6dbdf2="" class="simple-dropdown">
-                      <p data-v-6b6dbdf2="" class="simple-dropdown-link">收藏</p>
-                      <p data-v-6b6dbdf2="" class="simple-dropdown-link">举报</p>
+                  <div
+                      style="position: absolute; z-index: 9999; top: 44px; right: -6px; opacity: 0; visibility: hidden; transform: translate(0px, -40px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
+                    <div class="simple-dropdown" data-v-6b6dbdf2="">
+                      <p class="simple-dropdown-link" data-v-6b6dbdf2="">收藏</p>
+                      <p class="simple-dropdown-link" data-v-6b6dbdf2="">举报</p>
                       <div data-v-6b6dbdf2=""></div>
                       <div data-v-6b6dbdf2=""></div>
                     </div>
@@ -91,100 +151,120 @@
                 </div>
               </div>
             </div>
-            <div data-v-6b6dbdf2="" class="title">关于网站相关调整的通知汇总</div>
-            <div data-v-6b6dbdf2="" class="user-status">
-              <div data-v-2fadc57c="" data-v-6b6dbdf2="" class="xm-header user-avatar" style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; margin-right: 8px;">
-                <div data-v-2fadc57c="" class="xm-avatar" style="padding: 6.4px;"><img data-v-2fadc57c="" src="https://h5a.opensns.cn/public/uploads/avatar/216/693e921e8408e05fe347c719b8864677.png_128x128m1" alt="头像" class="" style="border-radius: 50%;"></div> <svg data-v-2fadc57c="" viewBox="0 0 100 100" style="width: 44px; height: 44px;">
+            <div class="title" data-v-6b6dbdf2="">{{ postInfo.title }}</div>
+            <div class="user-status" data-v-6b6dbdf2="">
+              <div class="xm-header user-avatar" data-v-2fadc57c="" data-v-6b6dbdf2=""
+                   style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; margin-right: 8px;">
+                <div class="xm-avatar" data-v-2fadc57c="" style="padding: 6.4px;"><img :src="userInfo.avatar"
+                                                                                       alt="头像"
+                                                                                       class=""
+                                                                                       data-v-2fadc57c=""
+                                                                                       style="border-radius: 50%;">
+                </div>
+                <svg data-v-2fadc57c="" style="width: 44px; height: 44px;" viewBox="0 0 100 100">
+                  <defs data-v-2fadc57c="">
+                    <linearGradient id="svg79e8c30f-eae2-45fa-a496-08d0df0d3878" data-v-2fadc57c="" x1="0%" x2="100%"
+                                    y1="0%" y2="0%">
+                      <stop data-v-2fadc57c="" offset="0%"></stop>
+                      <stop data-v-2fadc57c="" offset="100%"></stop>
+                    </linearGradient>
+                  </defs>
+                  <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" data-v-2fadc57c="" fill-opacity="0"
+                        stroke="#e9e9f0" stroke-width="8"></path>
+                  <path :style="[{strokeDasharray: userInfo.exp + ',287'}]"
+                        d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
+                        data-v-2fadc57c="" fill-opacity="0" stroke="url(#svg79e8c30f-eae2-45fa-a496-08d0df0d3878)"
+                        stroke-width="8"></path>
+                </svg>
+                <div class="xm-level" data-v-2fadc57c="" style="background: transparent;">
+                  <img data-v-2fadc57c=""
+                       src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS"
+                       style="width: 18px; height: 18px;">
+                </div>
+              </div>
+              <div data-v-6b6dbdf2="" style="display: flex; flex-direction: column; justify-content: center;">
+                <p class="user-status-title medium" data-v-6b6dbdf2="" style="width: 100%;">
+                  <span class="bold"
+                        data-v-6b6dbdf2=""
+                        href="profile-timeline.html"
+                        style="cursor: pointer; color: rgb(251, 91, 90);"> {{ userInfo.username }} </span>
+                </p>
+                <p class="user-status-text small" data-v-6b6dbdf2="">售后产品经理</p>
+              </div>
+              <div class="action-request-list" data-v-6b6dbdf2="">
+                <div class="action-request accept" data-v-6b6dbdf2="">
+                  <svg class="action-request-icon icon-add-friend" data-v-6b6dbdf2="">
+                    <use data-v-6b6dbdf2="" xlink:href="#svg-add-friend"></use>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="container-text w-e-text" data-v-6b6dbdf2="">
+              <MdPreview :editorId="id" :modelValue="postInfo.content" :codeFoldable="false"/>
+              <MdCatalog :editorId="id" :scrollElement="scrollElement"/>
+            </div>
+            <div class="tag-list" data-v-6b6dbdf2=""><a class="tag-item secondary" data-v-6b6dbdf2="">运营干货</a></div>
+          </div>
+        </div>
+        <div id="comment" data-v-6b6dbdf2="" style="transform: translateY(-80px);"></div>
+        <div class="post-comment-list" data-v-6b6dbdf2="">
+          <div class="post-comment-form" data-v-6b6dbdf2="">
+            <div class="xm-header user-avatar" data-v-2fadc57c="" data-v-6b6dbdf2=""
+                 style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%;">
+              <div class="xm-avatar" data-v-2fadc57c="" style=" padding: 6.4px;"><img alt="头像"
+                                                                                      class=""
+                                                                                      data-v-2fadc57c=""
+                                                                                      src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_746181715702761?imageMogr2/crop/128x128/gravity/center"
+                                                                                      style="border-radius: 50%;"></div>
+              <svg data-v-2fadc57c="" style="width: 44px; height: 44px;" viewBox="0 0 100 100">
                 <defs data-v-2fadc57c="">
-                  <linearGradient data-v-2fadc57c="" id="svg79e8c30f-eae2-45fa-a496-08d0df0d3878" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <linearGradient id="svge2877b9c-016c-4fa1-953a-d106adec913b" data-v-2fadc57c="" x1="0%" x2="100%"
+                                  y1="0%" y2="0%">
                     <stop data-v-2fadc57c="" offset="0%"></stop>
                     <stop data-v-2fadc57c="" offset="100%"></stop>
                   </linearGradient>
                 </defs>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0" stroke-width="8" fill-opacity="0"></path>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="url(#svg79e8c30f-eae2-45fa-a496-08d0df0d3878)" stroke-width="8" fill-opacity="0" style="stroke-dasharray: 269.78, 287;"></path>
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" data-v-2fadc57c="" fill-opacity="0"
+                      stroke="#e9e9f0" stroke-width="8"></path>
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" data-v-2fadc57c=""
+                      fill-opacity="0" stroke="url(#svge2877b9c-016c-4fa1-953a-d106adec913b)" stroke-width="8"
+                      style="stroke-dasharray: 74.62, 287;"></path>
               </svg>
-                <div data-v-2fadc57c="" class="xm-level" style="background: transparent;"><img data-v-2fadc57c="" src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS" style="width: 18px; height: 18px;"></div>
-              </div>
-              <div data-v-6b6dbdf2="" style="display: flex; flex-direction: column; justify-content: center;">
-                <p data-v-6b6dbdf2="" class="user-status-title medium" style="width: 100%;"><span data-v-6b6dbdf2="" href="profile-timeline.html" class="bold" style="cursor: pointer; color: rgb(251, 91, 90);"> 短说小芋头 </span></p>
-                <p data-v-6b6dbdf2="" class="user-status-text small">售后产品经理</p>
-              </div>
-              <div data-v-6b6dbdf2="" class="action-request-list">
-                <div data-v-6b6dbdf2="" class="action-request accept"><svg data-v-6b6dbdf2="" class="action-request-icon icon-add-friend">
-                  <use data-v-6b6dbdf2="" xlink:href="#svg-add-friend"></use>
-                </svg></div>
-              </div>
+              <div class="xm-level" data-v-2fadc57c=""
+                   style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
+                <span data-v-2fadc57c="" style="display: block;">2</span></div>
             </div>
-            <div data-v-6b6dbdf2="" class="container-text w-e-text">
-              <p style="text-indent: 0px; line-height: 1.5em;"><strong><span style="font-size: 18px;">关于网站备案：</span></strong></p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;根据工信部《关于开展移动互联网应用程序备案工作的通知》，所有在中华人民共和国境内从事互联网信息服务的APP主办者，应当依照《中华人民共和国反电信网络诈骗法》《互联网信息服务管理办法》（国务院令第292号）等规定履行备案手续，未履行备案手续的，不得从事APP互联网信息服务。</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;根据通知信息，自2023年9月1日起，在安卓、IOS 等操作系统平台运行的 APP均需完成APP备案。<strong>新上架APP需完成备案后才能上架应用市场。</strong>在通知之前<strong>已上架的APP</strong>需在<strong>2024年3月31日前及时完成APP备案</strong>，否则各大应用市场将按照相关法律法规进行处理。<strong>微信小程序需要在登录小程序进行备案。</strong></p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;另各省、自治区、直辖市通信管理局将于2024年4月-2024年6月期间对开展业务的APP进行检查，对未履行备案程序、从事违法违规活动的APP，各省、自治区、直辖市通信管理局应按照相关法律法规规定处理。</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;此外：从事新闻、出版、教育、影视、宗教等APP互联网信息服务的主办者，在履行备案手续时，还应向其住所所在地省级通信管理局提交相关主管部门审核同意的文件。</p>
-              <p style="text-indent: 0px; line-height: 1.5em;"><span style="font-size: 18px;"><strong>APP备案流程：</strong></span></p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;参照网站备案的方式，APP 主办者通过接入商备案系统提交备案申请，由主办者所在省级通信管理局审核。备案材料需提供主办者的真实身份信息、APP 基础信息、网络接入信息等。</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;<strong>APP 备案申请需要提供的备案材料：</strong></p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;APP 名称</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;APP 图标</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;APP 运行平台（iOS、安卓）</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;APP 包名或者 Bundle ID</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;公钥、MD5值</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;SDK 功能类型与服务厂商信息</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;接入商可备案的云资源</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;前置审批文件（新闻、出版、教育、影视、宗教等审批文件）</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;APP 解析到服务商的域名（域名实名认证与备案主体一致）</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;<strong>APP 备案审核时间：</strong></p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;省级通信管理局在收到 APP 备案材料后，材料准确无误的，在二十个工作日内完成审批，发放备案号，并通过短信、邮件形式告知主办者。</p>
-              <p style="text-indent: 0px; line-height: 1.5em;"><span style="font-size: 18px;"><strong>小程序端：</strong></span></p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;1. 微信小程序备案，已上架小程序需在2024年3月31日前完成小程序备案，登录微信小程序进行备案操作。</p>
-              <p><img style="max-width:100%;height: auto;padding: 5px 0;box-shadow: none" src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/2a58c0e9fd562dead130655d7323a448.png?upload_type/Tencent_COS" title="1702534407994723.png"></p>
-              <p><br></p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;2. 微信自2023年9月底起，取消小程序复用资质开通，按此流程开通的小程序仍需进行微信认证，且需支付300年费。</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;且包含之前复用微信公众号资质开通的小程序，均需要额外支付小程序认证年费。逾期30天未完成年审将影响新用户访问及支付功能。</p>
-              <p style="text-indent: 0px; line-height: 1.5em;"><img style="max-width:100%;height: auto;padding: 5px 0;box-shadow: none" src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/9be6fd84fd2466577d6b2632452a075e.png?upload_type/Tencent_COS" title="1702534407546937.png"></p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;3. 自2023年8月28日起，小程序开发者调用微信小程序开放能力“手机号码快速验证”和“手机号码实时验证”接口按用量收费开始生效。</p>
-              <p style="text-indent: 0px; line-height: 1.5em;">&nbsp; &nbsp; &nbsp; &nbsp;4. 微信小程序接口调整，请及时关注确认小程序网站功能是否有受到影响。</p>
-              <p><br></p>
-            </div>
-            <div data-v-6b6dbdf2="" class="tag-list"> <a data-v-6b6dbdf2="" class="tag-item secondary">运营干货</a></div>
-          </div>
-        </div>
-        <div data-v-6b6dbdf2="" id="comment" style="transform: translateY(-80px);"></div>
-        <div data-v-6b6dbdf2="" class="post-comment-list">
-          <div data-v-6b6dbdf2="" class="post-comment-form">
-            <div data-v-2fadc57c="" data-v-6b6dbdf2="" class="xm-header user-avatar" style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%;">
-              <div data-v-2fadc57c="" class="xm-avatar" style=" padding: 6.4px;"><img data-v-2fadc57c="" src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_746181715702761?imageMogr2/crop/128x128/gravity/center" alt="头像" class="" style="border-radius: 50%;"></div> <svg data-v-2fadc57c="" viewBox="0 0 100 100" style="width: 44px; height: 44px;">
-              <defs data-v-2fadc57c="">
-                <linearGradient data-v-2fadc57c="" id="svge2877b9c-016c-4fa1-953a-d106adec913b" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop data-v-2fadc57c="" offset="0%"></stop>
-                  <stop data-v-2fadc57c="" offset="100%"></stop>
-                </linearGradient>
-              </defs>
-              <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0" stroke-width="8" fill-opacity="0"></path>
-              <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="url(#svge2877b9c-016c-4fa1-953a-d106adec913b)" stroke-width="8" fill-opacity="0" style="stroke-dasharray: 74.62, 287;"></path>
-            </svg>
-              <div data-v-2fadc57c="" class="xm-level" style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);"><span data-v-2fadc57c="" style="display: block;">2</span></div>
-            </div>
-            <form data-v-6b6dbdf2="" onsubmit="return false" class="form">
-              <div data-v-6b6dbdf2="" class="loginComment" style="padding: 1px 54px 1px 0px;">
+            <form class="form" data-v-6b6dbdf2="" onsubmit="return false">
+              <div class="loginComment" data-v-6b6dbdf2="" style="padding: 1px 54px 1px 0px;">
               </div>
               <div data-v-6b6dbdf2="">
-                <div data-v-6b6dbdf2="" class="form-row">
-                  <div data-v-6b6dbdf2="" class="form-item">
-                    <div data-v-28de1f87="" data-v-6b6dbdf2="" class="form-input with-button small"><label data-v-28de1f87="" for="groups-search"> <span data-v-28de1f87="">我的评论</span></label> <textarea data-v-28de1f87="" type="text" maxlength="256" placeholder="" style="height: 49px;"></textarea> </div>
+                <div class="form-row" data-v-6b6dbdf2="">
+                  <div class="form-item" data-v-6b6dbdf2="">
+                    <div class="form-input with-button small" data-v-28de1f87="" data-v-6b6dbdf2=""><label
+                        data-v-28de1f87="" for="groups-search"> <span data-v-28de1f87="">我的评论</span></label> <textarea
+                        data-v-28de1f87="" maxlength="256" placeholder="" style="height: 49px;" type="text"></textarea>
+                    </div>
                   </div>
-                </div> <input data-v-6b6dbdf2="" id="post-input" alt="" type="file" name="input" accept="image/png,image/jpeg,image/gif,image/jpg" class="post-pload" style="display: none;">
-                <div data-v-6b6dbdf2="" class="alltextInfo">
-                  <p data-v-6b6dbdf2="" style="display: flex; align-items: center; line-height: 30px;"><svg data-v-6b6dbdf2="" class="section-menu-item-icon icon-#svg-photos" style="cursor: pointer;">
-                    <use data-v-6b6dbdf2="" xlink:href="#svg-photos"></use>
-                  </svg> <svg data-v-6b6dbdf2="" class="section-menu-item-icon icon-#svg-friend" style="margin-left: 24px; cursor: pointer;">
-                    <use data-v-6b6dbdf2="" xlink:href="#svg-friend"></use>
-                  </svg> </p>
-                  <div data-v-6b6dbdf2="" class="dialog" style="z-index: 10; position: absolute; margin-top: 146px; margin-left: 62px;"></div>
-                  <div data-v-6b6dbdf2="" class="alltextInfo-textInfo"><span data-v-6b6dbdf2="" class="textInfo"> 0/256 </span>
-                    <div data-v-6b6dbdf2="" class="quick-post-footer-actions">
-                      <p data-v-6b6dbdf2="" class="button small secondary" style="width: 100%; height: 100%;">评论</p>
+                </div>
+                <input id="post-input" accept="image/png,image/jpeg,image/gif,image/jpg" alt="" class="post-pload"
+                       data-v-6b6dbdf2=""
+                       name="input" style="display: none;" type="file">
+                <div class="alltextInfo" data-v-6b6dbdf2="">
+                  <p data-v-6b6dbdf2="" style="display: flex; align-items: center; line-height: 30px;">
+                    <svg class="section-menu-item-icon icon-#svg-photos" data-v-6b6dbdf2="" style="cursor: pointer;">
+                      <use data-v-6b6dbdf2="" xlink:href="#svg-photos"></use>
+                    </svg>
+                    <svg class="section-menu-item-icon icon-#svg-friend" data-v-6b6dbdf2=""
+                         style="margin-left: 24px; cursor: pointer;">
+                      <use data-v-6b6dbdf2="" xlink:href="#svg-friend"></use>
+                    </svg>
+                  </p>
+                  <div class="dialog" data-v-6b6dbdf2=""
+                       style="z-index: 10; position: absolute; margin-top: 146px; margin-left: 62px;"></div>
+                  <div class="alltextInfo-textInfo" data-v-6b6dbdf2=""><span class="textInfo"
+                                                                             data-v-6b6dbdf2=""> 0/256 </span>
+                    <div class="quick-post-footer-actions" data-v-6b6dbdf2="">
+                      <p class="button small secondary" data-v-6b6dbdf2="" style="width: 100%; height: 100%;">评论</p>
                     </div>
                   </div>
                 </div>
@@ -192,52 +272,75 @@
             </form>
           </div>
           <div data-v-6b6dbdf2="">
-            <div data-v-6b6dbdf2="" class="post-comment">
-              <div data-v-2fadc57c="" data-v-6b6dbdf2="" class="xm-header user-avatar" style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%;">
-                <div data-v-2fadc57c="" class="xm-avatar" style="padding: 6.4px;"><img data-v-2fadc57c="" src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_359541709740168?imageMogr2/crop/80x80/gravity/center" alt="头像" class="" style="border-radius: 50%;"></div> <svg data-v-2fadc57c="" viewBox="0 0 100 100" style="width: 44px; height: 44px;">
-                <defs data-v-2fadc57c="">
-                  <linearGradient data-v-2fadc57c="" id="svg4f04d0ef-4884-415a-bb8c-be51ce1799d1" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop data-v-2fadc57c="" offset="0%"></stop>
-                    <stop data-v-2fadc57c="" offset="100%"></stop>
-                  </linearGradient>
-                </defs>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0" stroke-width="8" fill-opacity="0"></path>
-                <path data-v-2fadc57c="" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="url(#svg4f04d0ef-4884-415a-bb8c-be51ce1799d1)" stroke-width="8" fill-opacity="0" style="stroke-dasharray: 80.36, 287;"></path>
-              </svg>
-                <div data-v-2fadc57c="" class="xm-level" style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);"><span data-v-2fadc57c="" style="display: block;">3</span></div>
+            <div class="post-comment" data-v-6b6dbdf2="">
+              <div class="xm-header user-avatar" data-v-2fadc57c="" data-v-6b6dbdf2=""
+                   style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%;">
+                <div class="xm-avatar" data-v-2fadc57c="" style="padding: 6.4px;"><img alt="头像"
+                                                                                       class=""
+                                                                                       data-v-2fadc57c=""
+                                                                                       src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_359541709740168?imageMogr2/crop/80x80/gravity/center"
+                                                                                       style="border-radius: 50%;">
+                </div>
+                <svg data-v-2fadc57c="" style="width: 44px; height: 44px;" viewBox="0 0 100 100">
+                  <defs data-v-2fadc57c="">
+                    <linearGradient id="svg4f04d0ef-4884-415a-bb8c-be51ce1799d1" data-v-2fadc57c="" x1="0%" x2="100%"
+                                    y1="0%" y2="0%">
+                      <stop data-v-2fadc57c="" offset="0%"></stop>
+                      <stop data-v-2fadc57c="" offset="100%"></stop>
+                    </linearGradient>
+                  </defs>
+                  <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" data-v-2fadc57c="" fill-opacity="0"
+                        stroke="#e9e9f0" stroke-width="8"></path>
+                  <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" data-v-2fadc57c=""
+                        fill-opacity="0" stroke="url(#svg4f04d0ef-4884-415a-bb8c-be51ce1799d1)" stroke-width="8"
+                        style="stroke-dasharray: 80.36, 287;"></path>
+                </svg>
+                <div class="xm-level" data-v-2fadc57c=""
+                     style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
+                  <span data-v-2fadc57c="" style="display: block;">3</span></div>
               </div>
-              <div data-v-6b6dbdf2="" class="post-comment-top">
-                <div data-v-6b6dbdf2="" class="post-comment-author">
-                  <p data-v-6b6dbdf2="" class="post-comment-text"><a data-v-6b6dbdf2="" class="post-comment-text-author">jimxu</a></p>
-                  <p data-v-6b6dbdf2="" class="post-comment-text text-long-ellipsis" style="font-size: 12px; color: rgb(153, 153, 153);">03-07 00:11<span> · 安徽</span></p>
+              <div class="post-comment-top" data-v-6b6dbdf2="">
+                <div class="post-comment-author" data-v-6b6dbdf2="">
+                  <p class="post-comment-text" data-v-6b6dbdf2=""><a class="post-comment-text-author"
+                                                                     data-v-6b6dbdf2="">jimxu</a></p>
+                  <p class="post-comment-text text-long-ellipsis" data-v-6b6dbdf2=""
+                     style="font-size: 12px; color: rgb(153, 153, 153);">03-07 00:11<span> · 安徽</span></p>
                 </div>
               </div>
-              <div data-v-6b6dbdf2="" class="post-comment-emoji" style="word-break: break-all;">欢迎提供技术咨询</div>
-              <div data-v-6b6dbdf2="" class="post-comment-img"></div>
-              <div data-v-6b6dbdf2="" class="content-actions">
-                <div data-v-6b6dbdf2="" class="content-action">
-                  <div data-v-6b6dbdf2="" class="meta-line">
-                    <div data-v-6b6dbdf2="" class="meta-line-list reaction-item-list">
-                      <div data-v-6b6dbdf2="" class="reaction-item" style="position: relative;"><img data-v-6b6dbdf2="" src="https://pc.opensns.cn/img/reaction/like.png" alt="reaction-happy" class="reaction-image"></div>
+              <div class="post-comment-emoji" data-v-6b6dbdf2="" style="word-break: break-all;">欢迎提供技术咨询</div>
+              <div class="post-comment-img" data-v-6b6dbdf2=""></div>
+              <div class="content-actions" data-v-6b6dbdf2="">
+                <div class="content-action" data-v-6b6dbdf2="">
+                  <div class="meta-line" data-v-6b6dbdf2="">
+                    <div class="meta-line-list reaction-item-list" data-v-6b6dbdf2="">
+                      <div class="reaction-item" data-v-6b6dbdf2="" style="position: relative;"><img
+                          alt="reaction-happy"
+                          class="reaction-image"
+                          data-v-6b6dbdf2=""
+                          src="https://pc.opensns.cn/img/reaction/like.png">
+                      </div>
                     </div>
-                    <p data-v-6b6dbdf2="" class="meta-line-text">0</p>
+                    <p class="meta-line-text" data-v-6b6dbdf2="">0</p>
                   </div>
-                  <div data-v-6b6dbdf2="" class="meta-line">
-                    <p data-v-6b6dbdf2="" class="meta-line-link light">点赞</p>
+                  <div class="meta-line" data-v-6b6dbdf2="">
+                    <p class="meta-line-link light" data-v-6b6dbdf2="">点赞</p>
                   </div>
-                  <div data-v-6b6dbdf2="" class="meta-line">
-                    <p data-v-6b6dbdf2="" class="meta-line-link light">回复</p>
+                  <div class="meta-line" data-v-6b6dbdf2="">
+                    <p class="meta-line-link light" data-v-6b6dbdf2="">回复</p>
                   </div>
-                  <div data-v-6b6dbdf2="" class="meta-line">
+                  <div class="meta-line" data-v-6b6dbdf2="">
                     <div data-v-6b6dbdf2="" style="position: relative;">
                       <div>
-                        <div data-v-6b6dbdf2="" class="post-settings"><svg data-v-6b6dbdf2="" class="post-settings-icon icon-more-dots">
-                          <use data-v-6b6dbdf2="" xlink:href="#svg-more-dots"></use>
-                        </svg></div>
+                        <div class="post-settings" data-v-6b6dbdf2="">
+                          <svg class="post-settings-icon icon-more-dots" data-v-6b6dbdf2="">
+                            <use data-v-6b6dbdf2="" xlink:href="#svg-more-dots"></use>
+                          </svg>
+                        </div>
                       </div>
-                      <div style="position: absolute; z-index: 9999; top: 44px; right: -6px; opacity: 0; visibility: hidden; transform: translate(0px, -40px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
-                        <div data-v-6b6dbdf2="" class="simple-dropdown">
-                          <p data-v-6b6dbdf2="" class="simple-dropdown-link">举报</p>
+                      <div
+                          style="position: absolute; z-index: 9999; top: 44px; right: -6px; opacity: 0; visibility: hidden; transform: translate(0px, -40px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
+                        <div class="simple-dropdown" data-v-6b6dbdf2="">
+                          <p class="simple-dropdown-link" data-v-6b6dbdf2="">举报</p>
                         </div>
                       </div>
                     </div>
@@ -269,7 +372,7 @@
 
 .post-content[data-v-6b6dbdf2] {
   margin: 50px 60px 0;
-  box-shadow: 0 0 40px 0 rgba(94,92,154,.06);
+  box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
   border-radius: 12px;
   background: #fff;
   color: #3e3f5e;
@@ -282,7 +385,7 @@
   margin-left: 15%;
 }
 
-@media screen and (min-width: 1366px){
+@media screen and (min-width: 1366px) {
   .post-container[data-v-6b6dbdf2] {
     width: 800px;
     margin-right: 280px;
@@ -368,7 +471,7 @@ a:hover {
   color: #40a9ff;
 }
 
-a:active,a:hover {
+a:active, a:hover {
   text-decoration: none;
   outline: 0;
 }
@@ -377,7 +480,7 @@ a:active,a:hover {
   display: none;
 }
 
-@media screen and (min-width: 1366px){
+@media screen and (min-width: 1366px) {
   .about[data-v-6b6dbdf2] {
     display: inline-block;
     position: absolute;
@@ -404,12 +507,12 @@ a:active,a:hover {
   background-color: #337fff;
 }
 
-@media screen and (min-width: 1366px){
+@media screen and (min-width: 1366px) {
   .about-container[data-v-05b26ca4] {
     position: sticky;
     top: 112px;
     mix-blend-mode: normal;
-    color: rgba(0,0,0,.85);
+    color: rgba(0, 0, 0, .85);
     font-size: 16px;
   }
 }
@@ -427,16 +530,16 @@ img {
   border-style: none;
 }
 
-.post-content .post-bg[data-v-6b6dbdf2]  {
+.post-content .post-bg[data-v-6b6dbdf2] {
   width: 100%;
   border-radius: 12px 12px 0 0;
   -o-object-fit: cover;
   object-fit: cover;
 }
 
-.post-content .content-container[data-v-6b6dbdf2]  {
+.post-content .content-container[data-v-6b6dbdf2] {
   /*width: 100%;*/
-  padding: 50px 100px;
+  padding: 30px 30px;
 }
 
 .post-comment-list[data-v-6b6dbdf2] {
@@ -448,11 +551,11 @@ img {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: rgba(0,0,0,.45);
+  color: rgba(0, 0, 0, .45);
   font-variant: tabular-nums;
   line-height: 1.5;
   list-style: none;
-  font-feature-settings: "tnum","tnum";
+  font-feature-settings: "tnum", "tnum";
   font-size: 14px;
 }
 
@@ -461,7 +564,7 @@ img {
   height: 48px;
   background: #fff;
   background-blend-mode: normal;
-  box-shadow: 0 0 40px rgba(94,92,154,.06);
+  box-shadow: 0 0 40px rgba(94, 92, 154, .06);
   border-radius: 32px;
   mix-blend-mode: normal;
   margin-bottom: 40px;
@@ -474,7 +577,7 @@ img {
   height: 48px;
   background: #fff;
   background-blend-mode: normal;
-  box-shadow: 0 0 40px rgba(94,92,154,.06);
+  box-shadow: 0 0 40px rgba(94, 92, 154, .06);
   border-radius: 32px;
   mix-blend-mode: normal;
   margin-bottom: 40px;
@@ -487,7 +590,7 @@ img {
   height: 48px;
   background: #fff;
   background-blend-mode: normal;
-  box-shadow: 0 0 40px rgba(94,92,154,.06);
+  box-shadow: 0 0 40px rgba(94, 92, 154, .06);
   border-radius: 32px;
   mix-blend-mode: normal;
   margin-bottom: 40px;
@@ -500,7 +603,7 @@ img {
   height: 48px;
   background: #fff;
   background-blend-mode: normal;
-  box-shadow: 0 0 40px rgba(94,92,154,.06);
+  box-shadow: 0 0 40px rgba(94, 92, 154, .06);
   border-radius: 32px;
   mix-blend-mode: normal;
   margin-bottom: 40px;
@@ -515,7 +618,7 @@ img {
   position: relative;
 }
 
-@media screen and (min-width: 1366px){
+@media screen and (min-width: 1366px) {
   .about-container-box[data-v-05b26ca4] {
     width: 284px;
     margin-bottom: 18px;
@@ -540,12 +643,12 @@ img {
   position: relative;
 }
 
-.post-comment-list > .post-comment-form  {
+.post-comment-list > .post-comment-form {
   border-top: 1px solid #eaeaf5;
 }
 
-.ant-breadcrumb > span:last-child  {
-  color: rgba(0,0,0,.65);
+.ant-breadcrumb > span:last-child {
+  color: rgba(0, 0, 0, .65);
 }
 
 svg {
@@ -566,7 +669,7 @@ svg:not(:root) {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   fill: #afb0c0;
 }
 
@@ -585,7 +688,7 @@ svg:not(:root) {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   fill: #afb0c0;
 }
 
@@ -604,7 +707,7 @@ svg:not(:root) {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   fill: #afb0c0;
 }
 
@@ -623,7 +726,7 @@ svg:not(:root) {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   fill: #afb0c0;
 }
 
@@ -657,7 +760,7 @@ figure {
 
 .forum-container-describe[data-v-e27424ca] {
   mix-blend-mode: normal;
-  color: rgba(0,0,0,.85);
+  color: rgba(0, 0, 0, .85);
   width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -676,7 +779,7 @@ hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
   border: 0;
-  border-top: 1px solid rgba(0,0,0,.1);
+  border-top: 1px solid rgba(0, 0, 0, .1);
 }
 
 hr {
@@ -690,14 +793,14 @@ hr {
   margin: auto;
 }
 
-.post-content .content-container .heads[data-v-6b6dbdf2]  {
+.post-content .content-container .heads[data-v-6b6dbdf2] {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   margin-bottom: 8px;
 }
 
-.post-content .content-container .title[data-v-6b6dbdf2]  {
+.post-content .content-container .title[data-v-6b6dbdf2] {
   display: inline-block;
   width: 100%;
   height: auto;
@@ -725,12 +828,12 @@ hr {
   overflow-y: auto;
 }
 
-.post-content .content-container .container-text[data-v-6b6dbdf2]  {
+.post-content .content-container .container-text[data-v-6b6dbdf2] {
   margin-top: 16px;
   word-break: break-all;
 }
 
-.post-content .content-container .w-e-text[data-v-6b6dbdf2]  {
+.post-content .content-container .w-e-text[data-v-6b6dbdf2] {
   padding: 0;
 }
 
@@ -742,7 +845,7 @@ hr {
   margin-top: -12px;
 }
 
-.post-content .content-container .tag-list[data-v-6b6dbdf2]  {
+.post-content .content-container .tag-list[data-v-6b6dbdf2] {
   align-items: center;
   margin-top: 0;
 }
@@ -754,7 +857,7 @@ hr {
   position: relative;
 }
 
-.post-comment-form .user-avatar  {
+.post-comment-form .user-avatar {
   position: absolute;
   top: 28px;
   left: 28px;
@@ -780,31 +883,31 @@ hr {
   position: relative;
 }
 
-.post-content .post-comment[data-v-6b6dbdf2]  {
+.post-content .post-comment[data-v-6b6dbdf2] {
   border-top: 1px solid #eee;
   border-radius: 0 0 12px 12px;
 }
 
-[data-v-186a823a] .ant-breadcrumb-link  {
+[data-v-186a823a] .ant-breadcrumb-link {
   color: #afb0c0;
   font-size: 18px;
 }
 
 .ant-breadcrumb-separator {
   margin: 0 8px;
-  color: rgba(0,0,0,.45);
+  color: rgba(0, 0, 0, .45);
 }
 
-[data-v-186a823a] .ant-breadcrumb-separator  {
+[data-v-186a823a] .ant-breadcrumb-separator {
   margin: 0 8px;
   color: #afb0c0;
 }
 
-.ant-breadcrumb > span:last-child .ant-breadcrumb-separator  {
+.ant-breadcrumb > span:last-child .ant-breadcrumb-separator {
   display: none;
 }
 
-figure > img  {
+figure > img {
   width: 100%;
   height: 100%;
 }
@@ -817,7 +920,7 @@ figure > img  {
 
 .forum-container-title[data-v-e27424ca] {
   mix-blend-mode: normal;
-  color: rgba(0,0,0,.85);
+  color: rgba(0, 0, 0, .85);
   width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -898,10 +1001,10 @@ p {
   font-size: 1rem;
   line-height: 1.5;
   border-radius: .25rem;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-.forum-container-button p[data-v-e27424ca]  {
+.forum-container-button p[data-v-e27424ca] {
   width: 100%;
   background: #337fff;
   height: 48px;
@@ -912,7 +1015,7 @@ p {
   cursor: pointer;
 }
 
-.forum-container-button .btn[data-v-e27424ca]  {
+.forum-container-button .btn[data-v-e27424ca] {
   background-color: #337fff;
   color: #fff;
   border-radius: 10px;
@@ -920,7 +1023,7 @@ p {
   font-weight: 700;
 }
 
-.post-content .content-container .heads .text[data-v-6b6dbdf2]  {
+.post-content .content-container .heads .text[data-v-6b6dbdf2] {
   font-size: 12px;
   color: #999;
 }
@@ -930,18 +1033,18 @@ p {
   display: flex;
 }
 
-.user-status .action-request-list  {
+.user-status .action-request-list {
   position: absolute;
   top: 2px;
   right: 0;
 }
 
-.user-status .action-request-list[data-v-6b6dbdf2]  {
+.user-status .action-request-list[data-v-6b6dbdf2] {
   position: relative;
   left: 24px;
 }
 
-.w-e-text p  {
+.w-e-text p {
   margin: 10px 0;
   line-height: 1.5;
 }
@@ -958,7 +1061,7 @@ p {
   line-height: 24px;
 }
 
-.tag-list .tag-item  {
+.tag-list .tag-item {
   margin: 12px 12px 0 0;
 }
 
@@ -975,7 +1078,7 @@ p {
   background-color: #337fff;
 }
 
-.post-content .content-container .tag-list a[data-v-6b6dbdf2]  {
+.post-content .content-container .tag-list a[data-v-6b6dbdf2] {
   cursor: pointer;
 }
 
@@ -1018,13 +1121,13 @@ p {
   color: #afb0c0;
 }
 
-.post-comment .user-avatar  {
+.post-comment .user-avatar {
   position: absolute;
   top: 28px;
   left: 28px;
 }
 
-.post-content .post-comment-img[data-v-6b6dbdf2]  {
+.post-content .post-comment-img[data-v-6b6dbdf2] {
   display: flex;
   flex-wrap: wrap;
   width: 33%;
@@ -1040,21 +1143,21 @@ p {
   height: 52px;
 }
 
-.post-comment .content-actions  {
+.post-comment .content-actions {
   height: 20px;
   margin-top: 14px;
 }
 
-.post-content .content-actions[data-v-6b6dbdf2]  {
+.post-content .content-actions[data-v-6b6dbdf2] {
   padding: 0;
 }
 
-.ant-breadcrumb a  {
-  color: rgba(0,0,0,.45);
+.ant-breadcrumb a {
+  color: rgba(0, 0, 0, .45);
   transition: color .3s;
 }
 
-.breadcrumb-container .link[data-v-186a823a]  {
+.breadcrumb-container .link[data-v-186a823a] {
   color: #afb0c0;
   cursor: pointer;
 }
@@ -1071,7 +1174,7 @@ p {
   padding: 0 24px;
 }
 
-.user-stats .user-stat  {
+.user-stats .user-stat {
   position: relative;
 }
 
@@ -1095,33 +1198,33 @@ p {
   height: 20px;
 }
 
-.button .button-icon  {
+.button .button-icon {
   fill: #fff;
   transition: fill .2s ease-in-out;
 }
 
-.forum-container-button .icon[data-v-e27424ca]  {
+.forum-container-button .icon[data-v-e27424ca] {
   position: absolute;
   top: 50%;
   left: 70px;
   transform: translateY(-50%);
 }
 
-.forum-container-button .text[data-v-e27424ca]  {
+.forum-container-button .text[data-v-e27424ca] {
   position: absolute;
   top: 50%;
   left: 100px;
   transform: translateY(-50%);
 }
 
-.user-status .user-status-title  {
+.user-status .user-status-title {
   color: #3e3f5e;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.4285714286em;
 }
 
-.user-status .user-status-title.medium  {
+.user-status .user-status-title.medium {
   font-size: 1rem;
 }
 
@@ -1130,22 +1233,22 @@ p {
   font-weight: 400;
 }
 
-.user-status .user-status-text  {
+.user-status .user-status-text {
   margin-top: 4px;
   color: #3e3f5e;
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-.user-status .user-status-text  {
+.user-status .user-status-text {
   font-size: 12px;
 }
 
-.user-status .user-status-text.small  {
+.user-status .user-status-text.small {
   font-size: 0.75rem;
 }
 
-.user-status .user-status-title.medium + .user-status-text  {
+.user-status .user-status-title.medium + .user-status-text {
   margin-top: 2px;
 }
 
@@ -1167,7 +1270,7 @@ p {
   transition: border-color .2s ease-in-out, background-color .2s ease-in-out, color .2s ease-in-out;
 }
 
-.action-request-list .action-request  {
+.action-request-list .action-request {
   margin-right: 12px;
 }
 
@@ -1175,7 +1278,7 @@ p {
   background-color: #337fff;
 }
 
-.action-request-list .action-request:last-child  {
+.action-request-list .action-request:last-child {
   margin-right: 0;
 }
 
@@ -1183,7 +1286,7 @@ strong {
   font-weight: bolder;
 }
 
-.w-e-text img  {
+.w-e-text img {
   cursor: pointer;
 }
 
@@ -1191,7 +1294,7 @@ strong {
   box-shadow: 0 0 5px #333;
 }
 
-.xm-avatar img[data-v-2fadc57c]  {
+.xm-avatar img[data-v-2fadc57c] {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -1258,48 +1361,48 @@ input:not([type="range"]) {
   align-items: center;
 }
 
-.content-actions .content-action  {
+.content-actions .content-action {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 
-.xm-avatar .img-full[data-v-2fadc57c]  {
+.xm-avatar .img-full[data-v-2fadc57c] {
   width: 130%;
   height: 130%;
   border-radius: 50%;
 }
 
-.user-stat .user-stat-title  {
+.user-stat .user-stat-title {
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
 }
 
-.user-stat .user-stat-title  {
+.user-stat .user-stat-title {
   font-size: 0.875rem;
 }
 
-.user-stat .user-stat-text  {
+.user-stat .user-stat-text {
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
 }
 
-.user-stat .user-stat-text  {
+.user-stat .user-stat-text {
   margin-top: 10px;
   color: #adafca;
   font-size: 0.6875rem;
 }
 
-.user-status .user-status-title .bold  {
+.user-status .user-status-title .bold {
   color: #3e3f5e;
   font-weight: 600;
   -webkit-font-smoothing: antialiased;
 }
 
-.user-status-title .bold[data-v-6b6dbdf2]  {
+.user-status-title .bold[data-v-6b6dbdf2] {
   cursor: pointer;
 }
 
@@ -1309,13 +1412,13 @@ input:not([type="range"]) {
   height: 20px;
 }
 
-.action-request .action-request-icon  {
+.action-request .action-request-icon {
   fill: #adafca;
   opacity: .6;
   transition: fill .2s ease-in-out, opacity .2s ease-in-out;
 }
 
-.action-request.accept .action-request-icon  {
+.action-request.accept .action-request-icon {
   fill: #fff;
   opacity: 1;
 }
@@ -1329,7 +1432,7 @@ input:not([type="range"]) {
   align-items: center;
 }
 
-.post-comment .post-comment-text  {
+.post-comment .post-comment-text {
   font-size: 0.875rem;
   line-height: 1.7142857143em;
   font-weight: 500;
@@ -1354,7 +1457,7 @@ input:not([type="range"]) {
   align-items: center;
 }
 
-.meta-line + .meta-line  {
+.meta-line + .meta-line {
   margin-left: 22px;
 }
 
@@ -1379,7 +1482,7 @@ input:not([type="range"]) {
 }
 
 stop[data-v-2fadc57c]:first-child {
-  stop-color: rgba(51,127,255,0);
+  stop-color: rgba(51, 127, 255, 0);
 }
 
 stop[data-v-2fadc57c]:nth-child(2) {
@@ -1400,13 +1503,13 @@ stop[data-v-2fadc57c]:nth-child(2) {
   height: 20px;
 }
 
-.alltextInfo-textInfo .textInfo[data-v-6b6dbdf2]  {
+.alltextInfo-textInfo .textInfo[data-v-6b6dbdf2] {
   font-size: 12px;
   color: #999;
   margin-right: 8px;
 }
 
-.post-content .textInfo[data-v-6b6dbdf2]  {
+.post-content .textInfo[data-v-6b6dbdf2] {
   font-size: 12px;
   color: #999;
   text-align: right;
@@ -1418,12 +1521,12 @@ stop[data-v-2fadc57c]:nth-child(2) {
   height: 40px;
 }
 
-p a  {
+p a {
   color: #00c7d9;
   font-weight: 600;
 }
 
-.post-comment .post-comment-text .post-comment-text-author  {
+.post-comment .post-comment-text .post-comment-text-author {
   margin-right: 6px;
   color: #3e3f5e;
   font-weight: 700;
@@ -1438,23 +1541,23 @@ p a  {
   flex-direction: row-reverse;
 }
 
-.meta-line .meta-line-text  {
+.meta-line .meta-line-text {
   font-size: 0.75rem;
   font-weight: 700;
 }
 
-.meta-line .meta-line-list + .meta-line-text  {
+.meta-line .meta-line-list + .meta-line-text {
   margin-left: 10px;
 }
 
-.meta-line .meta-line-link  {
+.meta-line .meta-line-link {
   font-size: 0.75rem;
   font-weight: 700;
   cursor: pointer;
   transition: color .2s ease-in-out;
 }
 
-.meta-line .meta-line-link.light  {
+.meta-line .meta-line-link.light {
   color: #adafca;
 }
 
@@ -1464,13 +1567,13 @@ p a  {
   height: 6px;
 }
 
-.post-settings .post-settings-icon  {
+.post-settings .post-settings-icon {
   fill: #adafca;
   opacity: .4;
   transition: opacity .2s ease-in-out, fill .2s ease-in-out;
 }
 
-.simple-dropdown .simple-dropdown-link  {
+.simple-dropdown .simple-dropdown-link {
   padding: 8px 16px;
   font-size: 0.75rem;
   font-weight: 700;
@@ -1502,7 +1605,7 @@ label {
   touch-action: manipulation;
 }
 
-.form-input label  {
+.form-input label {
   color: #adafca;
   font-size: 1rem;
   font-weight: 600;
@@ -1513,11 +1616,11 @@ label {
   pointer-events: none;
 }
 
-.form-input.small label  {
+.form-input.small label {
   font-size: 0.875rem;
 }
 
-.form-input.small label  {
+.form-input.small label {
   top: 16px;
 }
 
@@ -1577,11 +1680,11 @@ textarea[data-v-28de1f87] {
   line-height: normal;
 }
 
-.form-input.small textarea  {
+.form-input.small textarea {
   font-size: 0.875rem;
 }
 
-.form-input.small textarea  {
+.form-input.small textarea {
   height: 100px;
 }
 
@@ -1604,7 +1707,7 @@ textarea[data-v-28de1f87] {
   background-color: #337fff;
 }
 
-.reaction-item-list .reaction-item  {
+.reaction-item-list .reaction-item {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
@@ -1618,7 +1721,7 @@ textarea[data-v-28de1f87] {
   margin-left: -6px;
 }
 
-.reaction-item-list .reaction-item:last-child  {
+.reaction-item-list .reaction-item:last-child {
   margin-left: 0;
 }
 
@@ -1627,10 +1730,39 @@ textarea[data-v-28de1f87] {
   height: 20px;
 }
 
-.reaction-item-list .reaction-item > .reaction-image  {
+.reaction-item-list .reaction-item > .reaction-image {
   cursor: pointer;
 }
 
+/*设置手机端样式*/
+@media screen and (max-width: 768px) {
+  .post-container {
+     width: 100% !important;
+     margin-left: 0 !important;
+     margin-top: 80px !important;
+  }
+  .post-content {
+    margin: 0;
+  }
+  .oprate{
+   display: none !important;
+  }
+  .post-bg{
+    height: 200px !important;
+  }
+  .breadcrumb{
+    left: 0 !important;
+  }
+  .postStyle{
+    margin: 15px;
+  }
+  .post-content .content-container {
+    padding: 15px !important;
+  }
+  :deep(.md-editor-preview-wrapper) {
+    padding: 0 !important;
+  }
+}
 
 
 </style>
