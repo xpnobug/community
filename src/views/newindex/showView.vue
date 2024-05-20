@@ -4,8 +4,8 @@
     <div class="box-s">
       <PictureComponent :posts="banner"/>
       <ZskComponent :posts="postList" :loadings="loadings"/>
-      <ZtComponent :posts="postList"/>
-      <LiveComponent :posts="postList"/>
+      <ZtComponent :posts="ztList" :loadings="loadings"/>
+      <LiveComponent :posts="liveList" :loadings="loadings"/>
     </div>
   </div>
 </template>
@@ -37,6 +37,8 @@ const page = reactive<Page>({
 });
 const postList = ref([]);
 const banner = ref([]);
+const ztList = ref([]);
+const liveList = ref([]);
 const loadings = ref(false);
 pageList(page).then(res => {
   //是否还在加载中
@@ -47,8 +49,13 @@ pageList(page).then(res => {
   //循环输出
   postList.value.forEach((item: any) => {
     if (item.typeName === 'banner') {
-      // console.log(item.articleList)
       banner.value = item.articleList;
+    }
+    if (item.typeName === 'LT-REAI专题' || item.typeName === '功能前瞻') {
+      ztList.value = item.articleList;
+    }
+    if (item.typeName === '七彩生活' || item.typeName === '新鲜事') {
+      liveList.value = item.articleList;
     }
   })
 });

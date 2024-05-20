@@ -1,47 +1,9 @@
 <script lang="ts" setup>
-import {ref} from 'vue'
+import {ref, watch} from 'vue'
+const props = defineProps(['posts','loadings'])
+watch(()=>props.loadings,(newValue,oldValue)=>{
+},{immediate:true,deep:true})
 
-const props = defineProps(['posts'])
-// const liveList = ref([
-//   {
-//     id: '1',
-//     title: '秋天，金黄，真美',
-//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg',
-//   },
-//   {
-//     id: '2',
-//     title: '匿名发帖显示ip属地吗？',
-//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg',
-//   }, {
-//     id: '3',
-//     title: '风景分享给大家',
-//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/2fa903f1-d440-4e2d-8699-e283822b79c6.jpg',
-//   }
-// ]);
-const serialList = ref([
-  {
-    id: '1',
-    no: 1,
-    content: '升职加薪好办法',
-  },
-  {
-    id: '2',
-    no: 2,
-    content: '玩好抖音，你不能忽视的短视频内容套路化创作技巧！',
-  }, {
-    id: '3',
-    no: 3,
-    content: '这套版块图标有喜欢的可以自取',
-  }, {
-    id: '4',
-    no: 4,
-    content: '文案新人首先要做的事',
-  }, {
-    id: '5',
-    no: 5,
-    content: 'CC社区：“知识付费”解读（下）',
-  }
-]);
 </script>
 <template>
   <div><!----> <!---->
@@ -51,10 +13,10 @@ const serialList = ref([
         <div class="contents contents-tow">
           <div class="right-content">
             <div class="subject-matter-text">
-              <ul v-for="live in props.posts">
-                <li v-if="live.typeName === '七彩生活'" v-for="item in live.articleList.slice(0,3)" :key="item.id">
+              <ul v-if="props.loadings" >
+                <li v-for="item in props.posts.slice(0,3)" :key="item.id">
                   <div class="picture"><!---->
-                    <a class="" href="#" style="width: 100%; height: 100%; display: block;"><img
+                    <a class="" :href="/post/+item.articleId" style="width: 100%; height: 100%; display: block;"><img
                         :src="item.coverImage"
                         alt=""
                         style="width: 100%; height: 100%; border-radius: 8px;">
@@ -65,12 +27,15 @@ const serialList = ref([
                   </a></div>
                 </li>
               </ul>
+              <div v-else>
+                <a-skeleton active avatar :paragraph="{ rows: 3 }" />
+              </div>
             </div>
             <div class="subject-matter-text">
-              <ul v-for="live in props.posts">
-                <li v-if="live.typeName === '七彩生活'" v-for="item in live.articleList.slice(3,6)" :key="item.id">
+              <ul v-if="props.loadings" >
+                <li v-for="item in props.posts.slice(3,6)" :key="item.id">
                   <div class="picture"><!---->
-                    <a class="" href="#" style="width: 100%; height: 100%; display: block;"><img
+                    <a class="" :href="/post/+item.articleId" style="width: 100%; height: 100%; display: block;"><img
                         :src="item.coverImage"
                         alt=""
                         style="width: 100%; height: 100%; border-radius: 8px;">
@@ -81,6 +46,9 @@ const serialList = ref([
                   </a></div>
                 </li>
               </ul>
+              <div v-else>
+                <a-skeleton active avatar :paragraph="{ rows: 3 }" />
+              </div>
             </div>
 
           </div>
@@ -88,14 +56,16 @@ const serialList = ref([
             <div class="">
               <div class="identification">新鲜事</div>
               <div class="content-list">
-                <ul v-for="live in props.posts">
-                  <li v-if="live.typeName === '新鲜事'" v-for="(item,index) in live.articleList" :key="item.id">
+                <ul v-if="props.loadings" >
+                  <li v-for="(item,index) in props.posts" :key="item.articleId">
                     <div class="serial-no">{{ index+1 }}</div>
-                    <div class="serial-no-content"><a class="" href="#">{{ item.content }}</a>
+                    <div class="serial-no-content"><a class="" :href="/post/+item.articleId">{{ item.content }}</a>
                     </div>
                   </li>
-
                 </ul>
+                <div class="content-list" v-else v-for="item in 3">
+                  <a-skeleton active />
+                </div>
               </div>
             </div>
           </div>
@@ -357,12 +327,15 @@ img {
 
 /*设置手机端样式*/
 @media screen and (max-width: 768px) {
+  .box .public .title{
+    margin: 20px !important;
+  }
   .box .public .contents {
     flex-direction: column;
   }
 
   .box .public .contents .right-content {
-    width: auto;
+    width: auto !important;
   }
 
   .box .public .contents-tow .right-content .subject-matter-text ul li .picture {

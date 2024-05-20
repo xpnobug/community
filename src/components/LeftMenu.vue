@@ -202,6 +202,10 @@ const handleMenuItemClick = (item: any) => {
     display: block;
     /*width: 83%;*/
   }
+
+  .is-showCard{
+    display: none;
+  }
 }
 
 

@@ -24,8 +24,6 @@ const bannerList = ref([
     state: 'true'
   }
 ]);
-const avatarShape = ref<SkeletonAvatarProps['shape']>('circle');
-
 </script>
 <template>
   <div class="box" style="margin-bottom: 17px;">
@@ -33,9 +31,6 @@ const avatarShape = ref<SkeletonAvatarProps['shape']>('circle');
 <!--      <a-skeleton-image active :shape="avatarShape" />-->
       <div class="banner"
            :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}">
-<!--        //鼠标移入移出事件-->
-<!--        //鼠标移入给class 添加一个类名 hover-->
-<!--        //鼠标移出给class 移除一个类名 hover-->
         <div class="content">
           <span>{{ item.title }}</span>
         </div>

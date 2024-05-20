@@ -1,3 +1,8 @@
+<script setup lang="ts">
+
+</script>
+
+
 <template>
   <div class="content-grid snipcss-tMNNJ" style="  padding-top: 84px;   transition: transform 0.4s ease-in-out 0s;">
     <div data-v-6b6dbdf2="" class="post-content post-container">
@@ -246,12 +251,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: "index"
-}
-</script>
 
 <style scoped>
 :selection {

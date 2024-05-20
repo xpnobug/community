@@ -6,7 +6,6 @@ const props = defineProps(['posts','loadings'])
 //监听loadings.value，修改loadings
 
 watch(()=>props.loadings,(newValue,oldValue)=>{
-  // console.log('workOrder变化了',newValue,oldValue)
 },{immediate:true,deep:true})
 // const recommendList = ref([
 //   {
@@ -47,7 +46,7 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
             <div v-if="props.loadings" v-for="item in props.posts">
               <div v-if="item.typeName === '运营知识库'">
                 <div v-for="info in item.articleList.slice(0, 5)" class="content-box">
-                  <a class="links" href="#">
+                  <a class="links" :href="/post/+info.articleId">
                     <div class="pictures">
                       <div class="class-ification">{{ info.tag }}</div>
                       <img :src="info.coverImage" alt="" style="width: 100%; height: 100%; border-radius: 8px;">
@@ -55,7 +54,7 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
                   </a>
                   <div class="picture-box"
                        style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <a class="links" href="#" style="display: block;">
+                    <a class="links" :href="/post/+info.articleId" style="display: block;">
                       <div class="pictures-title" style="margin-bottom: 5px;">{{ info.title }}</div>
                       <div class="picture-content">{{ info.content }}</div>
                     </a>
@@ -92,7 +91,7 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
                 <ul v-if="props.loadings" v-for="list in props.posts" class="recommended">
                   <li v-for="item in list.articleList" v-if="list.typeName === '产品共创'" :key="item.id"
                       class="recommended-li">
-                    <a class="link" href="#" target="_blank">
+                    <a class="link" :href="/post/+item.articleId" target="_blank">
                       <div class="recommended-contents">{{ item.content }}</div>
                     </a>
                     <a class="" href="#">
@@ -378,16 +377,19 @@ dl, ol, ul {
 
 /*设置手机端样式*/
 @media screen and (max-width: 768px) {
+  .box .public .title{
+    margin: 20px !important;
+  }
   .box .public .contents {
     flex-direction: column;
   }
 
   .box .public .contents .right-content {
-    /*width: 375px;*/
+    width: 375px;
   }
 
   .box .public .contents .left-content {
-    /*width: 375px;*/
+    width: 375px;
     padding: 0px 27px;
   }
 

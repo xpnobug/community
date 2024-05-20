@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-import {onMounted, reactive, ref} from "vue";
+import {watch, reactive, ref} from "vue";
 //获取用户信息
-const props = defineProps(['posts'])
+const props = defineProps(['posts','loadings'])
+watch(()=>props.loadings,(newValue,oldValue)=>{
+},{immediate:true,deep:true})
 // const ztList = ref([
 //   {
 //     id: 1,
@@ -78,9 +80,9 @@ const props = defineProps(['posts'])
       <div class="public">
         <div class="title">LT-REAI专题</div>
         <div class="contents contents-one">
-          <div v-for="post in props.posts">
-            <div class="right-content" v-if="post.typeName === 'LT-REAI专题'" v-for="item in post.articleList.slice(0,1)"  >
-              <div class="subject-matter-text">
+          <div>
+            <div class="right-content">
+              <div class="subject-matter-text" v-if="props.loadings" v-for="item in props.posts.slice(0,1)"  >
                 <a class="link" href="#" style="line-height: 20px;">
                   <div class="picture"><!---->
                     <img :src="item.coverImage"
@@ -93,10 +95,13 @@ const props = defineProps(['posts'])
                   </div>
                 </a>
               </div>
+              <div class="subject-matter-text" v-else>
+                <a-skeleton active />
+              </div>
               <div class="content-list">
-                <div class="">
-                  <ul>
-                    <li v-for="item in post.articleList.slice(1,11)">
+                <div class="" >
+                  <ul v-if="props.loadings">
+                    <li v-for="item in props.posts.slice(1,11)">
                       <div class="explain" style="width: 34px;">{{ item.tag }}</div>
                       <div class="explain-content"><a class="" href="#">
                         {{ item.title }}
@@ -105,17 +110,21 @@ const props = defineProps(['posts'])
                       </div>
                     </li>
                   </ul>
+                  <div class="content-list" v-else v-for="item in 3">
+                    <a-skeleton active />
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
 
           <div class="left-content left-content-public">
             <div class="">
               <div class="identification">功能前瞻</div>
-              <div class="content-list">
-                <ul v-for="post in props.posts">
-                  <li v-if="post.typeName === '功能前瞻'" v-for="(item,index) in post.articleList" :key="index">
+              <div class="content-list" v-if="props.loadings">
+                <ul>
+                  <li v-for="(item,index) in props.posts.slice(0,10)" :key="index">
                     <div class="serial-no">{{ index+1 }}</div>
                     <div class="serial-no-content">
                       <a class="" href="#">
@@ -124,6 +133,9 @@ const props = defineProps(['posts'])
                     </div>
                   </li>
                 </ul>
+              </div>
+              <div class="content-list" v-else v-for="item in 3">
+                <a-skeleton active />
               </div>
             </div>
           </div>
@@ -158,7 +170,7 @@ const props = defineProps(['posts'])
 }
 
 .box .public .contents .right-content {
-  margin-right: 15px;
+  /*margin-right: 15px;*/
   /*width: 848px;*/
   border-radius: 12px;
   background-color: var(--reaicc-meta-theme-post-color);
@@ -380,6 +392,9 @@ a {
 
 /*设置手机端样式*/
 @media screen and (max-width: 768px) {
+  .box .public .title{
+    margin: 20px !important;
+  }
   .box .public .contents {
     flex-direction: column;
   }

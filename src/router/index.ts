@@ -45,10 +45,7 @@ export default createRouter({
                     name: 'user',
                     component: User,
                 },
-                {
-                    path: '/post/:id',
-                    component: PostInfoComponent,
-                },
+
                 {
                     path: '/task',
                     name: 'task',
@@ -65,7 +62,7 @@ export default createRouter({
                     component: () => import('@/views/Edit/index.vue')
                 },
                 {
-                    path: '/post',
+                    path: '/post/:id',
                     name: 'post',
                     component: () => import('@/views/postView/index.vue')
                 },

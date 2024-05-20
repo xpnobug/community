@@ -16,6 +16,10 @@ const options: CascaderProps['options'] = [
     label: '首页',
     children: [
       {
+        value: 'banner',
+        label: 'banner',
+      },
+      {
         value: '运营知识库',
         label: '运营知识库',
       }, {
