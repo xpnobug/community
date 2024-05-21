@@ -85,8 +85,8 @@ instance?.proxy?.$Bus.on("menuId", (param: any) => {
     transform: none !important;
   }
   .grid.grid-3-6-3 {
-    grid-template-areas: 'sidebar1 content sidebar2';
-    grid-template-columns: 0 92% 0;
+    grid-template-areas: 'sidebar1 content sidebar2' !important;
+    grid-template-columns: 0 92% 0 !important;
   }
 }
 .content-grid {

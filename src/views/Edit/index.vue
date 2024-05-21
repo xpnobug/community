@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import Upload from "./compontents/upload.vue";
-import {getCurrentInstance, reactive, ref} from "vue";
+import {getCurrentInstance, reactive} from "vue";
 import {add} from "@/api/article";
 import {message} from "ant-design-vue";
 import CascaderCom from "@/views/Edit/compontents/CascaderCom.vue";
 
-import { MdEditor } from 'md-editor-v3';
+import {MdEditor} from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 
 const state = reactive({
@@ -122,14 +122,15 @@ const onFinishFailed = (errorInfo: any) => {
                   <div class="content-item thread" style="">
                     <div class="form-row form-post-title">
                       <a-form-item
-                          name="title"
-                          :rules="[{ required: true, message: '标题不能为空!' }]">
-                        <a-input  v-model:value="formState.title" class="video-title" :maxlength="40" placeholder="请输入标题"/>
+                          :rules="[{ required: true, message: '标题不能为空!' }]"
+                          name="title">
+                        <a-input v-model:value="formState.title" :maxlength="40" class="video-title"
+                                 placeholder="请输入标题"/>
                       </a-form-item>
                     </div>
                   </div>
 
-                  <MdEditor v-model="formState.content" height="600px" :theme="state.theme" />
+                  <MdEditor v-model="formState.content" :theme="state.theme" height="600px"/>
 
                   <div class="set-up">
                     <div class="more-set-box" style="padding-bottom: 0px;">
@@ -177,7 +178,7 @@ const onFinishFailed = (errorInfo: any) => {
                           </div>
                         </div>
                         <CascaderCom :handleClick="cascaderChange"/>
-<!--                        <button class="select-forum-btn ant-btn" type="button"><span>请选择</span></button>-->
+                        <!--                        <button class="select-forum-btn ant-btn" type="button"><span>请选择</span></button>-->
                       </div>
                     </div>
                     <div class="more-set-box" style="padding-bottom: 0px;">
@@ -192,7 +193,7 @@ const onFinishFailed = (errorInfo: any) => {
                           </div>
                         </div>
                         <button class="select-forum-btn ant-btn" type="button"><span>请选择</span></button>
-<!--                        <CascaderCom/>-->
+                        <!--                        <CascaderCom/>-->
                       </div>
                     </div>
                     <div class="more-set-box" style="padding-bottom: 0px;">
@@ -266,8 +267,7 @@ const onFinishFailed = (errorInfo: any) => {
                           </div>
                         </div>
                         <div>
-                          <button class="ant-switch" role="switch" type="button"><span class="ant-switch-inner"></span>
-                          </button>
+                          <a-switch v-model:checked="formState.delivery" />
                         </div>
                       </div>
                       <div class="more-item">
@@ -283,8 +283,7 @@ const onFinishFailed = (errorInfo: any) => {
                           </div>
                         </div>
                         <div>
-                          <button class="ant-switch" role="switch" type="button"><span class="ant-switch-inner"></span>
-                          </button>
+                          <a-switch v-model:checked="formState.delivery" />
                         </div>
                       </div>
                       <div class="more-item">
@@ -341,25 +340,25 @@ const onFinishFailed = (errorInfo: any) => {
                   <div class="header-contenter-footer">
                     <div class="header-contenter">
                       <div class="header-contenter-left">
-                        <div class="number-words-box"><i aria-label="icon: check-circle"
-                                                         class="icons anticon anticon-check-circle">
-                          <svg aria-hidden="true" class="" data-icon="check-circle" fill="currentColor"
-                               focusable="false" height="1em" viewBox="64 64 896 896" width="1em">
-                            <path
-                                d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"></path>
-                            <path
-                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path>
-                          </svg>
-                        </i> <span class="sum"><span><span>0</span> / 12000</span> 字</span></div>
-                        <div class="more-settings"><span class="set">更多设置</span> <i aria-label="icon: down"
-                                                                                    class="icons anticon anticon-down"
-                                                                                    style="transform: rotate(0deg);">
-                          <svg aria-hidden="true" class="" data-icon="down" fill="currentColor" focusable="false"
-                               height="1em" viewBox="64 64 896 896" width="1em">
-                            <path
-                                d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
-                          </svg>
-                        </i></div>
+                        <!--                        <div class="number-words-box"><i aria-label="icon: check-circle"-->
+                        <!--                                                         class="icons anticon anticon-check-circle">-->
+                        <!--                          <svg aria-hidden="true" class="" data-icon="check-circle" fill="currentColor"-->
+                        <!--                               focusable="false" height="1em" viewBox="64 64 896 896" width="1em">-->
+                        <!--                            <path-->
+                        <!--                                d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"></path>-->
+                        <!--                            <path-->
+                        <!--                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path>-->
+                        <!--                          </svg>-->
+                        <!--                        </i> <span class="sum"><span><span>0</span> / 12000</span> 字</span></div>-->
+                        <!--                        <div class="more-settings"><span class="set">更多设置</span> <i aria-label="icon: down"-->
+                        <!--                                                                                    class="icons anticon anticon-down"-->
+                        <!--                                                                                    style="transform: rotate(0deg);">-->
+                        <!--                          <svg aria-hidden="true" class="" data-icon="down" fill="currentColor" focusable="false"-->
+                        <!--                               height="1em" viewBox="64 64 896 896" width="1em">-->
+                        <!--                            <path-->
+                        <!--                                d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>-->
+                        <!--                          </svg>-->
+                        <!--                        </i></div>-->
                       </div>
                       <div class="header-contenter-right">
                         <div class="cancellation">
@@ -435,7 +434,7 @@ const onFinishFailed = (errorInfo: any) => {
 }
 
 .contenter-box {
-  width: 800px;
+  width: 100%;
   margin: 0 auto;
   overflow: visible;
   position: relative;
@@ -596,12 +595,12 @@ p {
 }
 
 .contenter .content {
-  width: 800px;
+  width: 100%;
   border-radius: 10px;
   background: #fff;
   box-shadow: 0 0 40px rgba(94, 92, 154, .04);
   margin: 25px auto 0;
-  /*padding-top: 30px;*/
+  padding-top: 30px;
   padding-bottom: 56px;
   position: relative;
 }

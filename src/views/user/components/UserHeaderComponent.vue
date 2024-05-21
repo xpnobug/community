@@ -91,6 +91,10 @@ userInfo(ids).then(res => {
 <style scoped>
 
 @media screen and (max-width: 768px) {
+  .user-short-description.big .user-short-description-avatar {
+    margin-left: 0 !important;
+  }
+
   .profile-header .profile-header-cover[data-v-883ac611] {
     height: 150px;
   }
@@ -290,7 +294,7 @@ figure > img {
 
 .user-short-description.big .user-short-description-avatar {
   top: -116px;
-  margin-left: -74px;
+  /*margin-left: -74px;*/
 }
 
 .user-short-description .user-short-description-avatar {
