@@ -95,7 +95,7 @@ userInfo(ids).then(res => {
     margin-left: 0 !important;
   }
 
-  .profile-header .profile-header-cover[data-v-883ac611] {
+  .profile-header .profile-header-cover {
     height: 150px;
   }
 
@@ -103,23 +103,23 @@ userInfo(ids).then(res => {
     margin: 10px;
   }
 
-  figure[data-v-883ac611] {
+  figure {
     margin: 0px 0px 1em !important;
   }
 
-  .profile-header .profile-header-info[data-v-883ac611] {
+  .profile-header .profile-header-info {
     height: 205px;
     width: 100%;
     position: relative;
   }
 
-  .profile-header .profile-header-info .user-stats[data-v-883ac611] {
+  .profile-header .profile-header-info .user-stats {
     position: static;
     width: 100%;
     margin-top: 15px;
   }
 
-  .profile-header .profile-header-info .profile-header-info-actions[data-v-883ac611] {
+  .profile-header .profile-header-info .profile-header-info-actions {
     position: static;
     margin-top: 15px;
   }
