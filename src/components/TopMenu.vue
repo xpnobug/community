@@ -65,8 +65,8 @@ const userInfo = useUserInfo();
 
 //导航菜单动态加载
 const menuItems = ref([
-  { id: "1", label: '首页', url: 'index', expanded: false },
-  { id: "2", label: '社区', url: 'dynamic', expanded: false},
+  { id: "1", label: '首页', url: '/index', expanded: false },
+  { id: "2", label: '社区', url: '/dynamic', expanded: false},
   { id: "3", label: '版块', url: '/pages/aboutus', expanded: false },
   // { id: "5", label: '频道', url: '/pages/aboutus', expanded: false },
 ]);

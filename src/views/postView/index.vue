@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {selectOne} from "@/api/article";
-import {useRoute} from 'vue-router';
+import {useRoute, useRouter} from 'vue-router';
 import {ref} from "vue";
 import {MdCatalog, MdPreview} from 'md-editor-v3';
 // preview.css相比style.css少了编辑器那部分样式
@@ -18,6 +18,7 @@ selectOne(ids).then(res => {
   postInfo.value = res.data.data
   console.log(postInfo.value)
 })
+
 </script>
 
 

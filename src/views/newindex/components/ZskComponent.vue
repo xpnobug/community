@@ -1,39 +1,17 @@
 <script lang="ts" setup>
 //获取用户信息
 import {onMounted, watch} from "vue";
+import {useRouter} from "vue-router";
 
 const props = defineProps(['posts','loadings'])
 //监听loadings.value，修改loadings
 
 watch(()=>props.loadings,(newValue,oldValue)=>{
 },{immediate:true,deep:true})
-// const recommendList = ref([
-//   {
-//     contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-//     author: 'LT-REAI小芋头',
-//     avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-//     time: '12:00:00',
-//     place: '深圳',
-//   }, {
-//     contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-//     author: 'LT-REAI小芋头',
-//     avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-//     time: '12:00:00',
-//     place: '深圳',
-//   }, {
-//     contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-//     author: 'LT-REAI小芋头',
-//     avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-//     time: '12:00:00',
-//     place: '深圳',
-//   }, {
-//     contents: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-//     author: 'LT-REAI小芋头',
-//     avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg',
-//     time: '12:00:00',
-//     place: '深圳',
-//   }
-// ]);
+const router = useRouter();
+const toUserInfo = (item: any) => {
+  router.push({path: '/post/' + item.articleId})
+}
 </script>
 
 <template>
@@ -46,7 +24,7 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
             <div v-if="props.loadings" v-for="item in props.posts">
               <div v-if="item.typeName === '运营知识库'">
                 <div v-for="info in item.articleList.slice(0, 5)" class="content-box">
-                  <a class="links" :href="/post/+info.articleId">
+                  <a class="links" @click="toUserInfo(info)">
                     <div class="pictures">
                       <div class="class-ification">{{ info.tag }}</div>
                       <img :src="info.coverImage" alt="" style="width: 100%; height: 100%; border-radius: 8px;">
@@ -54,7 +32,7 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
                   </a>
                   <div class="picture-box"
                        style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <a class="links" :href="/post/+info.articleId" style="display: block;">
+                    <a class="links" @click="toUserInfo(info)" style="display: block;">
                       <div class="pictures-title" style="margin-bottom: 5px;">{{ info.title }}</div>
                       <div class="picture-content">{{ info.content }}</div>
                     </a>
@@ -91,10 +69,10 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
                 <ul v-if="props.loadings" v-for="list in props.posts" class="recommended">
                   <li v-for="item in list.articleList" v-if="list.typeName === '产品共创'" :key="item.id"
                       class="recommended-li">
-                    <a class="link" :href="/post/+item.articleId" target="_blank">
+                    <a class="link" @click="toUserInfo(item)">
                       <div class="recommended-contents">{{ item.content }}</div>
                     </a>
-                    <a class="" href="#">
+                    <a class="" @click="toUserInfo(item)">
                       <div class="recommended-author">
                         <div class="author">
                           <div class="head-portrait"><img

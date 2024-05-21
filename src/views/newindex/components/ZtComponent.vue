@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import {watch, reactive, ref} from "vue";
+import {watch} from "vue";
+import {useRouter} from "vue-router";
 //获取用户信息
-const props = defineProps(['posts','loadings'])
-watch(()=>props.loadings,(newValue,oldValue)=>{
-},{immediate:true,deep:true})
+const props = defineProps(['posts', 'loadings'])
+watch(() => props.loadings, (newValue, oldValue) => {
+}, {immediate: true, deep: true})
 // const ztList = ref([
 //   {
 //     id: 1,
@@ -71,6 +72,10 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
 //     content: 'CC社区：“知识付费”解读（下）',
 //   }
 // ]);
+const router = useRouter();
+const toUserInfo = (item: any) => {
+  router.push({path: '/post/' + item.articleId})
+}
 </script>
 
 <template>
@@ -83,7 +88,7 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
           <div>
             <div class="right-content">
               <div class="subject-matter-text" v-if="props.loadings" v-for="item in props.posts.slice(0,1)"  >
-                <a class="link" href="#" style="line-height: 20px;">
+                <a class="link"  @click="toUserInfo(item)" style="line-height: 20px;">
                   <div class="picture"><!---->
                     <img :src="item.coverImage"
                          alt=""
@@ -103,9 +108,10 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
                   <ul v-if="props.loadings">
                     <li v-for="item in props.posts.slice(1,12)">
                       <div class="explain" style="width: 34px;">{{ item.tag }}</div>
-                      <div class="explain-content"><a class="" href="#">
-                        {{ item.title }}
-                      </a></div>
+                      <div class="explain-content">
+                        <a class=""  @click="toUserInfo(item)">
+                          {{ item.title }}
+                        </a></div>
                       <div class="author"><a class="" href="#">{{ item.author }}</a>
                       </div>
                     </li>
@@ -127,7 +133,7 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
                   <li v-for="(item,index) in props.posts.slice(0,10)" :key="index">
                     <div class="serial-no">{{ index+1 }}</div>
                     <div class="serial-no-content">
-                      <a class="" href="#">
+                      <a class=""  @click="toUserInfo(item)">
                         {{ item.content }}
                       </a>
                     </div>

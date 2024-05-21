@@ -27,7 +27,7 @@
           'width: 55px; height: 55px; top:30px; margin-left:-33px;'"
                  class="xm-header user-avatar user-short-description-avatar navigation-widget-close"
             >
-              <div :style="djValueSet === false ? 'padding:13px':'padding:10px'" class="xm-avatar">
+              <div @click="toUserInfo(userInfo)" :style="djValueSet === false ? 'padding:13px':'padding:10px'" class="xm-avatar">
 <!--                <img-->
 <!--                    :src="userInfo.avatar" alt="头像"-->
 <!--                    class=""-->
@@ -56,12 +56,14 @@
               ><span
                   style="display:block">{{ userInfo.level }}</span></div>
             </div>
-            <p v-show="djValueSet === false" class="user-short-description-title navigation-widget-close"
-            ><a href="JavaScript:;" style="color:;"> {{ userInfo.username }} </a>
+            <p  @click="toUserInfo(userInfo)" v-show="djValueSet === false" class="user-short-description-title navigation-widget-close"
+            >
+              <a href="JavaScript:;" style="color:;"> {{ userInfo.username }} </a>
             </p>
-            <p class="user-short-description-text navigation-widget-close"><a
-                href="JavaScript:;">
-            </a></p>
+            <p class="user-short-description-text navigation-widget-close">
+              <a
+                  href="JavaScript:;">
+              </a></p>
           </div>
           <div v-show="djValueSet === false" class="user-stats" style="">
             <div class="user-stat">
@@ -135,6 +137,10 @@ const handleMenuItemClick = (item: any) => {
   router.push({path: item.url})
   // console.log(routeName, item.url)
 };
+
+const toUserInfo = (item: any) => {
+  router.push({path: '/user/' + item.userId})
+}
 
 </script>
 

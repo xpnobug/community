@@ -2,6 +2,7 @@
 import {ref} from 'vue'
 const props = defineProps(['posts'])
 import type { SkeletonButtonProps, SkeletonAvatarProps } from 'ant-design-vue';
+import {useRouter} from "vue-router";
 
 const bannerList = ref([
   {
@@ -24,25 +25,29 @@ const bannerList = ref([
     state: 'true'
   }
 ]);
+const router = useRouter();
+const toUserInfo = (item: any) => {
+  router.push({path: '/post/' + item.articleId})
+}
 </script>
 <template>
   <div class="box" style="margin-bottom: 17px;">
     <div class="top" v-for="item in props.posts.slice(0,1)" :key="item.id">
 <!--      <a-skeleton-image active :shape="avatarShape" />-->
-      <div class="banner"
+      <div class="banner" @click="toUserInfo(item)"
            :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}">
         <div class="content">
           <span>{{ item.title }}</span>
         </div>
       </div>
       <div class="identification"  v-for="item in props.posts.slice(1,2)" :key="item.id">
-        <div class="bg-picture"
+        <div class="bg-picture" @click="toUserInfo(item)"
              :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}">
 
           <div class="content"><span>{{ item.title }}</span>
           </div>
         </div>
-        <div class="bg-picture"  v-for="item in props.posts.slice(2,3)" :key="item.id"
+        <div class="bg-picture" @click="toUserInfo(item)"  v-for="item in props.posts.slice(2,3)" :key="item.id"
              :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}">
           <div class="content"><span>{{ item.title }}</span></div>
         </div>

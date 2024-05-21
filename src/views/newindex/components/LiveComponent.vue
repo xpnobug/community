@@ -1,9 +1,14 @@
 <script lang="ts" setup>
 import {ref, watch} from 'vue'
+import {useRouter} from "vue-router";
 const props = defineProps(['posts','loadings'])
 watch(()=>props.loadings,(newValue,oldValue)=>{
 },{immediate:true,deep:true})
 
+const router = useRouter();
+const toUserInfo = (item: any) => {
+  router.push({path: '/post/' + item.articleId})
+}
 </script>
 <template>
   <div><!----> <!---->
@@ -16,13 +21,13 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
               <ul v-if="props.loadings" >
                 <li v-for="item in props.posts.slice(0,3)" :key="item.id">
                   <div class="picture"><!---->
-                    <a class="" :href="/post/+item.articleId" style="width: 100%; height: 100%; display: block;"><img
+                    <a class="" @click="toUserInfo(item)" style="width: 100%; height: 100%; display: block;"><img
                         :src="item.coverImage"
                         alt=""
                         style="width: 100%; height: 100%; border-radius: 8px;">
                     </a>
                   </div>
-                  <div class="picture-title"><a class="" href="#">
+                  <div class="picture-title"><a class="" @click="toUserInfo(item)">
                     {{ item.title }}
                   </a></div>
                 </li>
@@ -35,13 +40,13 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
               <ul v-if="props.loadings" >
                 <li v-for="item in props.posts.slice(3,6)" :key="item.id">
                   <div class="picture"><!---->
-                    <a class="" :href="/post/+item.articleId" style="width: 100%; height: 100%; display: block;"><img
+                    <a class="" @click="toUserInfo(item)" style="width: 100%; height: 100%; display: block;"><img
                         :src="item.coverImage"
                         alt=""
                         style="width: 100%; height: 100%; border-radius: 8px;">
                     </a>
                   </div>
-                  <div class="picture-title"><a class="" href="#">
+                  <div class="picture-title"><a class="" @click="toUserInfo(item)">
                     {{ item.title }}
                   </a></div>
                 </li>
@@ -59,7 +64,7 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
                 <ul v-if="props.loadings" >
                   <li v-for="(item,index) in props.posts" :key="item.articleId">
                     <div class="serial-no">{{ index+1 }}</div>
-                    <div class="serial-no-content"><a class="" :href="/post/+item.articleId">{{ item.content }}</a>
+                    <div class="serial-no-content"><a class="" @click="toUserInfo(item)">{{ item.content }}</a>
                     </div>
                   </li>
                 </ul>
