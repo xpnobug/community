@@ -145,11 +145,13 @@ selectOne(ids).then(res => {
             <div class="user-status">
               <div class="xm-header user-avatar"
                    style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; margin-right: 8px;">
-                <div class="xm-avatar" style="padding: 6.4px;"><img :src="postInfo.avatar"
-                                                                    alt="头像"
-                                                                    class=""
+                <div class="xm-avatar" style="padding: 6.4px;">
+<!--                  <img :src="postInfo.avatar"-->
+<!--                       alt="头像"-->
+<!--                       class=""-->
 
-                                                                    style="border-radius: 50%;">
+<!--                       style="border-radius: 50%;">-->
+                  <a-avatar :size="{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80 }" :src="postInfo.avatar"></a-avatar>
                 </div>
                 <svg style="width: 44px; height: 44px;" viewBox="0 0 100 100">
                   <defs>
@@ -1285,6 +1287,7 @@ strong {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .form-row {

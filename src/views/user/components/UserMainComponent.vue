@@ -1444,6 +1444,7 @@ a:active, a:hover {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .cad > div > .icon {

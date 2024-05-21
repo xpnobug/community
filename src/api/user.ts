@@ -38,3 +38,7 @@ export function userInfo(id: string) {
 export function logout() {
     return axios.get(`${BASE_URL}/logout`);
 }
+
+export function updateUser(user: userInfo) {
+    return axios.put(`${BASE_URL}/upd`, user);
+}

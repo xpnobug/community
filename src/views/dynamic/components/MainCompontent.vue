@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 
-import {ref} from "vue";
+import {reactive, ref} from "vue";
+import {list} from "@/api/article";
 
 const tagList = ref([
   {id: "1", label: '推荐'},
@@ -14,33 +15,32 @@ const tagList = ref([
   {id: "9", label: '问答'},
   // Add more menu items as needed
 ]);
-const postInfo = ref([
-  {
-    id: "1",
-    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
-    userName: 'LT-REAI小芋头',
-    pushData: '04-19 14:57',
-    positionName: '售后产品经理',
-    userPlace: '中国',
-    postCover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/67feeb2f-7d98-4167-bd9d-95062f7547e2.jpg',
-    postTitle: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-    tagItem: '产品共创',
-    tagId: '1',
-  }, {
-    id: "2",
-    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
-    userName: 'LT-REAI小芋头',
-    pushData: '04-19 14:57',
-    positionName: '售后产品经理',
-    userPlace: '中国',
-    postCover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/67feeb2f-7d98-4167-bd9d-95062f7547e2.jpg',
-    postTitle: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-    tagItem: '奶皮',
-    tagId: '3',
-  },
-]);
+
+interface Page {
+  pageSize: number;
+  currentPage: number;
+  count: number;
+  maxPage: number;
+  minPage: number;
+  // firstResult: number;
+  // recount: boolean;
+}
+
+const page = reactive<Page>({
+  pageSize: 10,
+  currentPage: 1,
+  count: 10,
+  maxPage: 10,
+  minPage: 1,
+});
+const postInfo = ref([]);
+list(page).then(res => {
+  postInfo.value = res.data.data;
+  console.log(postInfo.value)
+});
+
 const tagId = ref("1");
-const handleTag = (value:any) => {
+const handleTag = (value: any) => {
   tagId.value = value.id
 }
 </script>
@@ -69,7 +69,7 @@ const handleTag = (value:any) => {
     <div>
       <div class="widget-box no-padding post-card" video-height="0"
            v-for="post in postInfo"
-           v-show="tagId === post.tagId"
+           v-show="tagId === '1'"
            v-if="postInfo.length !== 0">
         <div class="widget-box-settings" style="z-index: 100;">
           <div class="post-settings-wrap" style="display: none;">
@@ -115,27 +115,36 @@ const handleTag = (value:any) => {
                         style="stroke-dasharray: 258.3, 287;"></path>
                 </svg> <!---->
                 <div class="xm-level" style="background: transparent;">
-                  <img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS" style="width: 18px; height: 18px;">
+                  <img
+                      src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS"
+                      style="width: 18px; height: 18px;">
                 </div>
               </div>
-              <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">{{post.userName}}</span></p>
-              <p class="user-status-text small">{{ post.pushData }} · {{ post.positionName }}<span> · {{post.userPlace}}</span></p>
+              <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">{{
+                  post.author
+                }}</span>
+              </p>
+              <p class="user-status-text small">{{ post.publishDate }} · {{ post.positionName }}<span> · 未知</span></p>
               <div class="cad" style="right: 0px;"><!----> <!----> <!----> <!----></div>
               <p></p>
             </div>
           </div>
           <div class="post-preview medium" style="margin: 16px 28px 0px;">
             <figure class="post-preview-image post-preview-info"
-                    style="margin: 0px auto !important; border-top: 1px solid rgb(230, 230, 230); border-right: 1px solid rgb(230, 230, 230); border-bottom: none; border-left: 1px solid rgb(230, 230, 230); border-image: initial; border-top-left-radius: 12px; border-top-right-radius: 12px; box-shadow: none; cursor: pointer; background: url(https://alist.reaicc.com/nas/image/jpeg/2024-04/1/fb5eaec3-4c7f-45d2-833f-283046525dd6.jpg) center center / cover no-repeat rgb(255, 255, 255); ">
-              <img :src="post.postCover" alt="图片" style="display: none;">
+                    :style="{background: 'url(' + post.coverImage + ') center center / cover no-repeat rgb(255, 255, 255)'}"
+              style="margin: 0px auto !important; border-top: 1px solid rgb(230, 230, 230); border-right: 1px solid
+              rgb(230, 230, 230); border-bottom: none; border-left: 1px solid rgb(230, 230, 230); border-image: initial;
+              border-top-left-radius: 12px; border-top-right-radius: 12px; box-shadow: none; cursor: pointer; ">
+              <img :src="post.coverImage" alt="图片" style="display: none;">
             </figure>
             <div class="post-preview-info with-cover" style="margin-top: 0px;"><p></p>
               <p class="post-preview-title text-long-ellipsis ellipsis" style="display: inline-block; width: 100%;">
-                {{ post.postTitle }}
+                {{ post.title }}
               </p>
-<!--              插入小广告-->
-              <!--              <p class="post-preview-text ellipsis ellipsis-content-cover">体验及咨询可V+小番茄</p> &lt;!&ndash;&ndash;&gt;-->
-              <!---->
+              <!--              插入小广告-->
+<!--              <p class="post-preview-text ellipsis ellipsis-content-cover">体验及咨询可V+小番茄</p>-->
+              <p class="post-preview-text ellipsis ellipsis-content-cover">{{ post.content }}</p>
+
               <div><a href="#" class="post-preview-link" target="_blank">
                 <svg
                     style="width: 16px; height: 16px; margin: -2px 5px 0px 0px; fill: rgb(51, 127, 255);">
@@ -146,7 +155,7 @@ const handleTag = (value:any) => {
           <div class="widget-box-status-content">
             <div class="tag-list">
               <div class="topic-forum-box"><!----> <a class="tag-item secondary"
-                                                      style="margin-top: 16px;">{{ post.tagItem }}</a></div>
+                                                      style="margin-top: 16px;">{{ post.tag }}</a></div>
               <div class="to-detail" style="margin-top: 16px; flex-grow: 1; text-align: right;"><a
                   href="#" class="to-detail" target="_blank">查看详情</a></div>
             </div>
@@ -448,6 +457,7 @@ h1, h2, h3, h4, h5, h6, a, p {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 img {

@@ -35,6 +35,14 @@ interface Article  {
     avatar: string;
 }
 
+export function list(page: Page) {
+    return axios.get(`${BASE_URL}/list`,{
+        params: {
+            pageSize: page.pageSize,
+            currentPage: page.currentPage,
+        }
+    });
+}
 export function pageList(page: Page) {
     return axios.get(`${BASE_URL}/pageList`,{
         params: {

@@ -27,10 +27,12 @@
           'width: 55px; height: 55px; top:30px; margin-left:-33px;'"
                  class="xm-header user-avatar user-short-description-avatar navigation-widget-close"
             >
-              <div :style="djValueSet === false ? 'padding:13px':'padding:10px'" class="xm-avatar"><img
-                  :src="userInfo.avatar" alt="头像"
-                  class=""
-                  style="border-radius: 50%;">
+              <div :style="djValueSet === false ? 'padding:13px':'padding:10px'" class="xm-avatar">
+<!--                <img-->
+<!--                    :src="userInfo.avatar" alt="头像"-->
+<!--                    class=""-->
+<!--                    style="border-radius: 50%;">-->
+                <a-avatar :size="{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 85 }" :src="userInfo.avatar"></a-avatar>
               </div>
               <svg :style="djValueSet === false ? 'width:110px;height:110px;':'width:55px;height:55px;'"
                    viewBox="0 0 100 100">
@@ -602,6 +604,7 @@ a:active, a:hover {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .icon-newsfeed {

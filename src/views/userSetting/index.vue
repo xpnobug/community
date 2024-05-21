@@ -1,10 +1,57 @@
 
 <script setup lang="ts">
 import {useUserInfo} from "@/hooks/useCached";
+import {getCurrentInstance, reactive, ref} from "vue";
+import {message, UploadProps} from "ant-design-vue";
+import UserInfoUpload from "@/views/userSetting/compontents/UserInfoUpload.vue";
+import {updateUser} from "@/api/user";
 
+interface FormState {
+  username: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+  userCover: string;
+  avatar: string;
+  userId: string;
+}
+
+const formState = reactive<FormState>({
+  username: "",
+  email: "",
+  phoneNumber: "",
+  address: "",
+  userCover: "",
+  avatar: "",
+  userId: "",
+});
+const fileList = ref<UploadProps['fileList']>([]);
 //获取登录人信息
+const tx = ref("tx");
+const cover = ref("cover");
+const avatar = ref();
+const userCover = ref();
 const userInfo = useUserInfo();
+const handleUp = (value) => {
+  avatar.value = value;
+  formState.avatar = value;
+}
+const handleCover = (value) => {
+  userCover.value = value
+  formState.userCover = value;
+}
+const instance = getCurrentInstance()
+instance?.proxy?.$Bus.on("userInfo", (param: any) => {
+  formState.userId = param.userId;
+})
 
+const update = (val) => {
+  updateUser(formState).then(res => {
+    if (res.status === 200) {
+      message.success("修改成功");
+    }
+  })
+}
 </script>
 
 <template>
@@ -153,62 +200,50 @@ const userInfo = useUserInfo();
             <div class="grid grid-3-3-3 centered">
               <div class="user-preview small fixed-height"
                    style="position: relative;cursor: default">
-                <figure class="user-preview-cover liquid"><img
-                    :src="userInfo.userCover"
-                    style="border-top-left-radius: 12px; border-top-right-radius: 12px; object-fit: cover;">
+                <figure class="user-preview-cover liquid">
+                  <img
+                      :src="userCover == null ? userInfo.userCover : userCover"
+                      style="border-top-left-radius: 12px; border-top-right-radius: 12px; object-fit: cover;">
+                  <input v-model="formState.userCover" style="display:none;" type="input">
                 </figure>
                 <div class="user-preview-info">
                   <div class="user-short-description small">
                     <div class="xm-header user-avatar user-short-description-avatar"
-                         data-v-2fadc57c=""
                          style="width:85px;height:85px;border:none;cursor:default;border-radius:50%;display:block;">
-                      <div class="xm-avatar" data-v-2fadc57c="" style="width:85px;height:85px;padding:10.5px;"><img
-                          alt="头像" class="" data-v-2fadc57c=""
-                          :src="userInfo.avatar"
-                          style="border-radius: 50%;">
+                      <div class="xm-avatar" style="width:85px;height:85px;padding:10.5px;">
+                        <img
+                            :src="avatar == null ? userInfo.avatar : avatar" alt="头像" class=""
+                            style="border-radius: 50%;">
                       </div>
-                      <svg data-v-2fadc57c="" style="width:85px;height:85px;" viewBox="0 0 100 100">
-                        <defs data-v-2fadc57c="">
-                          <linearGradient id="svgabc18a0f-2756-4227-9735-f5f6aa5b0ffd" data-v-2fadc57c="" x1="0%"
+                      <svg style="width:85px;height:85px;" viewBox="0 0 100 100">
+                        <defs>
+                          <linearGradient id="svgabc18a0f-2756-4227-9735-f5f6aa5b0ffd" x1="0%"
                                           x2="100%" y1="0%"
                                           y2="0%">
-                            <stop data-v-2fadc57c="" offset="0%"></stop>
-                            <stop data-v-2fadc57c="" offset="100%"></stop>
+                            <stop offset="0%"></stop>
+                            <stop offset="100%"></stop>
                           </linearGradient>
                         </defs>
-                        <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" data-v-2fadc57c=""
+                        <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
                               fill-opacity="0" stroke="#e9e9f0" stroke-width="8"></path>
                         <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                              data-v-2fadc57c="" fill-opacity="0" stroke="url(#svgabc18a0f-2756-4227-9735-f5f6aa5b0ffd)"
+                              fill-opacity="0" stroke="url(#svgabc18a0f-2756-4227-9735-f5f6aa5b0ffd)"
                               stroke-width="8" :style="[{strokeDasharray: userInfo.exp + ',287'}]"></path>
                       </svg>
                       <div class="xm-level"
-                           data-v-2fadc57c=""
                            style="box-sizing:content-box;font-size:12.75px;width:21.25px;height:21.25px;border:3px solid #fff;">
-                        <span data-v-2fadc57c="" style="display:block">{{userInfo.level}}</span></div>
+                        <span style="display:block">{{ userInfo.level }}</span></div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="upload-box"><input id="avatar" accept="image/png,image/jpeg,image/gif,image/jpg" alt=""
-                                             class="upload"
-
-                                             multiple="multiple"
-                                             name="input" type="file">
-                <svg class="upload-box-icon icon-members" style="fill: #337FFF">
-                  <use xlink:href="#svg-members"></use>
-                </svg>
+              <div class="upload-box">
+                <UserInfoUpload :handleUp="handleUp" :imgType="tx"/>
                 <p class="upload-box-title">更换头像</p>
                 <p class="upload-box-text">最小支持尺寸：110px110px</p>
               </div>
-              <div class="upload-box"><input id="cover" accept="image/png,image/jpeg,image/gif,image/jpg" alt=""
-                                             class="upload"
-
-                                             multiple="multiple"
-                                             name="input" type="file">
-                <svg class="upload-box-icon icon-photos" style="fill: #337FFF;opacity: 0.6">
-                  <use xlink:href="#svg-photos"></use>
-                </svg>
+              <div class="upload-box">
+                <UserInfoUpload  :handleCover="handleCover" :imgType="cover"/>
                 <p class="upload-box-title">更换封面</p>
                 <p class="upload-box-text">最小支持尺寸：1184x300px </p>
               </div>
@@ -220,54 +255,55 @@ const userInfo = useUserInfo();
                     <div class="form-item">
                       <div class="form-input with-button active small"><label for="groups-search">
                         <span>昵称</span></label>
-                        <input maxlength="" name="" placeholder="" type="text" :value="userInfo.username"></div>
-                    </div>
-                    <div class="form-item">
-                      <div class="form-select"><label for="profile-sex">性别</label>
-                        <select id="profile-sex" name="profile_sex">
-                          <option selected="selected" value="0">保密</option>
-                          <option value="1">男生</option>
-                          <option value="2">女生</option>
-                        </select>
-                        <svg class="form-select-icon icon-small-arrow">
-                          <use xlink:href="#svg-small-arrow"></use>
-                        </svg>
+                        <input v-model="formState.username" maxlength="" name="username" placeholder="" type="text">
                       </div>
                     </div>
+<!--                    <div class="form-item">-->
+<!--                      <div class="form-select"><label for="profile-sex">性别</label>-->
+<!--                        <select id="profile-sex" name="profile_sex">-->
+<!--                          <option selected="selected" value="0">保密</option>-->
+<!--                          <option value="1">男生</option>-->
+<!--                          <option value="2">女生</option>-->
+<!--                        </select>-->
+<!--                        <svg class="form-select-icon icon-small-arrow">-->
+<!--                          <use xlink:href="#svg-small-arrow"></use>-->
+<!--                        </svg>-->
+<!--                      </div>-->
+<!--                    </div>-->
                   </div>
+<!--                  <div class="form-row split">-->
+<!--                    <div class="form-item">-->
+<!--                      <div class="form-select" style="position: relative;"><label-->
+<!--                          for="profile-sex"-->
+<!--                          style="z-index: 999;">工作单位</label>-->
+<!--                        <div class="custom-choose hands">-->
+<!--                          <div class="custom-choose-text custom-choose-text-hui">去选择工作单位</div>-->
+<!--                        </div>-->
+<!--                        <div class="hands hands-button">-->
+<!--                          <svg class="icon-magnifying-glass">-->
+<!--                            <use xlink:href="#svg-magnifying-glass"></use>-->
+<!--                          </svg>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-select " style="position: relative;"><label-->
+<!--                        for="profile-sex"-->
+<!--                        style="z-index: 999;">学校</label>-->
+<!--                      <div class="custom-choose hands">-->
+<!--                        <div class="custom-choose-text custom-choose-text-hui">去选择学校</div>-->
+<!--                      </div>-->
+<!--                      <div class="hands hands-button">-->
+<!--                        <svg class="icon-magnifying-glass">-->
+<!--                          <use xlink:href="#svg-magnifying-glass"></use>-->
+<!--                        </svg>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
                   <div class="form-row split">
                     <div class="form-item">
-                      <div class="form-select" style="position: relative;"><label
-                          for="profile-sex"
-                          style="z-index: 999;">工作单位</label>
-                        <div class="custom-choose hands">
-                          <div class="custom-choose-text custom-choose-text-hui">去选择工作单位</div>
-                        </div>
-                        <div class="hands hands-button">
-                          <svg class="icon-magnifying-glass">
-                            <use xlink:href="#svg-magnifying-glass"></use>
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-select " style="position: relative;"><label
-                        for="profile-sex"
-                        style="z-index: 999;">学校</label>
-                      <div class="custom-choose hands">
-                        <div class="custom-choose-text custom-choose-text-hui">去选择学校</div>
-                      </div>
-                      <div class="hands hands-button">
-                        <svg class="icon-magnifying-glass">
-                          <use xlink:href="#svg-magnifying-glass"></use>
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-row split">
-                    <div class="form-item">
-                      <div class="form-input with-button active small" data-v-28de1f87=""><label
-                          data-v-28de1f87="" for="groups-search"> <span data-v-28de1f87="">个性签名</span></label> <textarea
-                          data-v-28de1f87="" maxlength="100" placeholder="最多支持100字" style="height:;" type="text"
+                      <div class="form-input with-button active small"><label
+                          for="groups-search"> <span>个性签名</span></label> <textarea
+                          maxlength="100" placeholder="最多支持100字" style="height:;" type="text"
                           value=""></textarea></div>
                     </div>
                     <div class="form-item"></div>
@@ -279,7 +315,7 @@ const userInfo = useUserInfo();
               <button class="button cancel" style="color:#AFB0C0;margin-right:16px;display:none;"
                       type="primay">忽略修改
               </button>
-              <button class="button" style="background: #337FFF;color: #FFF;" type="primay">保存修改
+              <button class="button" style="background: #337FFF;color: #FFF;" type="primay" @click="update">保存修改
               </button>
             </div>
           </div>
@@ -1175,6 +1211,7 @@ label {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .form-input label {
