@@ -96,11 +96,11 @@ userInfo(ids).then(res => {
   }
 
   .profile-header .profile-header-cover {
-    height: 150px;
+    height: 150px !important;
   }
 
   .profile-header {
-    margin: 10px;
+    margin: 10px !important;
   }
 
   figure {
@@ -108,20 +108,20 @@ userInfo(ids).then(res => {
   }
 
   .profile-header .profile-header-info {
-    height: 205px;
+    height: 205px !important;
     width: 100%;
     position: relative;
   }
 
   .profile-header .profile-header-info .user-stats {
-    position: static;
+    position: static !important;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 15px !important;
   }
 
   .profile-header .profile-header-info .profile-header-info-actions {
-    position: static;
-    margin-top: 15px;
+    position: static !important;
+    margin-top: 15px !important;
   }
 }
 
