@@ -13,13 +13,10 @@
              class="simplebar-content snipcss-WosQN">
           <figure v-show="djValueSet === false"
                   :style="{background: 'url('+userInfo.userCover+') center center / cover no-repeat rgb(255, 255, 255)'}"
-                  class="navigation-widget-cover"
-
-          >
+                  class="navigation-widget-cover">
             <img
                 :src="userInfo.userCover"
                 alt="图片"
-
                 style="display: none;"></figure>
           <div class="user-short-description" style="">
             <div :style="djValueSet === false ?
@@ -123,6 +120,7 @@ instance?.proxy?.$Bus.on("pmView", (param) => {
 const userInfo = ref({});
 instance?.proxy?.$Bus.on("userInfo", (param: any) => {
   userInfo.value = param;
+  console.log(userInfo);
 })
 
 const handleOpen = (key: string, keyPath: string[]) => {

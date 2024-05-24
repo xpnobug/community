@@ -43,13 +43,8 @@ export function list(page: Page) {
         }
     });
 }
-export function pageList(page: Page) {
-    return axios.get(`${BASE_URL}/pageList`,{
-        params: {
-            pageSize: page.pageSize,
-            currentPage: page.currentPage,
-        }
-    });
+export function pageList() {
+    return axios.get(`${BASE_URL}/pageList`);
 }
 export function listByUserId(page: Page,id: string) {
     return axios.get(`${BASE_URL}/listByUserId`,{

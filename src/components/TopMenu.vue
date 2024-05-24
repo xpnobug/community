@@ -53,15 +53,10 @@ import {isLogin, tokenInfo} from "@/api/user";
 import UserCaozuo from "@/components/Setting/UserCaozuo.vue";
 import {useUserInfo} from "@/hooks/useCached";
 import EditArticle from "@/components/Setting/EditArticle.vue";
+import {message} from "ant-design-vue";
 
 const postpush = ref<boolean>(false);
 const visible = ref<boolean>(false);
-//获取token
-isLogin().then(res => {
-  console.log(res)
-});
-//获取登录人信息
-const userInfo = useUserInfo();
 
 //导航菜单动态加载
 const menuItems = ref([
@@ -80,6 +75,18 @@ const handleMenuItemClick = (item:any) => {
 const djValue = ref(false);
 const pmView = ref(false);
 const instance = getCurrentInstance()
+
+//获取token
+isLogin().then(async res => {
+  const emit = async () => {
+    instance?.proxy?.$Bus.emit("isLogins", res.data.data)
+  }
+  await emit();
+});
+
+//获取登录人信息
+const userInfo = useUserInfo();
+
 
 //监听如果屏幕小于max-width: 768px，设置pmView
 //获取屏幕大小

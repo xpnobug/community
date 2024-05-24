@@ -67,7 +67,7 @@ const toUserInfo = (item: any) => {
             <div class="">
               <div class="recommended-title">产品共创</div>
                 <ul v-if="props.loadings" v-for="list in props.posts" class="recommended">
-                  <li v-for="item in list.articleList" v-if="list.typeName === '产品共创'" :key="item.id"
+                  <li v-for="item in list.articleList.slice(0,6)" v-if="list.typeName === '产品共创'" :key="item.id"
                       class="recommended-li">
                     <a class="link" @click="toUserInfo(item)">
                       <div class="recommended-contents">{{ item.content }}</div>

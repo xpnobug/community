@@ -40,7 +40,7 @@ const banner = ref([]);
 const ztList = ref([]);
 const liveList = ref([]);
 const loadings = ref(false);
-pageList(page).then(res => {
+pageList().then(res => {
   //是否还在加载中
   if (res.status === 200){
     loadings.value = true;

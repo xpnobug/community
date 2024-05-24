@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import {getCurrentInstance, onBeforeMount, ref} from "vue";
+import {getCurrentInstance, onBeforeMount, reactive, ref} from "vue";
 import {useRouter} from "vue-router";
+import {addFollow} from "@/api/follow";
+import {message} from "ant-design-vue";
+import {isLogin} from "@/api/user";
 
 const viewIdValueSet = ref('1');
 const tagIdValueSet = ref('1');
@@ -60,82 +63,57 @@ const addWh = (width: any, height: any) => {
 //获取用户信息
 const props = defineProps(['userList'])
 
-const userList = ref([
-  {
-    id: "1",
-    previewCover: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/e4891d7fa7bc75b326ae03fdae32173c.png?imageMogr2/crop/2368x600/gravity/center',
-    avatar: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/0afddd45da2cfd506c24d3e7a74b3937.png?imageMogr2/crop/216x216/gravity/center',
-    level: '10',
-    userName: 'qaq',
-    userPush: '11',
-    follows: '22',
-    fans: '22',
-    signature: '23456',
-    color: '',
-    experience: '100',
-    role: '1',
-    tagId: '1'
-  },
-  {
-    id: "2",
-    previewCover: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/e4891d7fa7bc75b326ae03fdae32173c.png?imageMogr2/crop/2368x600/gravity/center',
-    avatar: 'https://q1.qlogo.cn/g?b=qq&nk=2877406366&s=640',
-    level: '1',
-    userName: 'eee',
-    userPush: '33',
-    follows: '54',
-    fans: '45',
-    signature: '66666',
-    color: '#000000',
-    experience: '100',
-    role: '2',
-    tagId: '1'
-  },
-  {
-    id: "3",
-    previewCover: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_130251625737050?imageMogr2/crop/768x192/gravity/center',
-    avatar: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_668781628835603?imageMogr2/crop/216x216/gravity/center',
-    level: '22',
-    userName: 'aaa',
-    userPush: '122',
-    follows: '1111',
-    fans: '222',
-    signature: '1',
-    color: '#f37373',
-    experience: '100',
-    role: '2',
-    tagId: '3'
-  },
-  {
-    id: "4",
-    previewCover: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/e4891d7fa7bc75b326ae03fdae32173c.png?imageMogr2/crop/2368x600/gravity/center',
-    avatar: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/0afddd45da2cfd506c24d3e7a74b3937.png?imageMogr2/crop/216x216/gravity/center',
-    level: '10',
-    userName: 'qaq',
-    userPush: '11',
-    follows: '22',
-    fans: '22',
-    signature: '23456',
-    color: '',
-    experience: '300',
-    role: '',
-    tagId: '3'
-  },
-]);
 const router = useRouter();
 const toUserInfo = (item:any) => {
   router.push({ path: '/user/'+item.userId })
 }
 
+interface Follow  {
+  userId: string;
+  username: string;
+  followUserId: string;
+  isLogin: boolean;
+}
+const follow = reactive<Follow>({
+  userId: '',
+  username: '',
+  followUserId: '',
+  isLogin: false,
+});
+isLogin().then((res) => {
+  follow.isLogin = res.data.data;
+})
+instance?.proxy?.$Bus.on("userInfo", (param: any) => {
+  follow.userId = param.userId;
+  console.log(follow.userId)
+});
+const addFollows = (item:any) => {
+  if (!follow.isLogin){
+    message.warning('请先登录');
+    return
+  }
+  follow.username = item.username;
+  follow.followUserId = item.userId;
+  addFollow(follow).then((res) => {
+    if (res.status === 200) {
+      message.success('关注成功');
+    }
+  })
+}
 </script>
 
 <template>
-  <div class="grid centered" :class="[{'grid-4-4-4' : viewIdValueSet === '1' , 'grid-3-3-3-3': viewIdValueSet === '2'}]"
+  <div :class="[{'grid-4-4-4' : viewIdValueSet === '1' , 'grid-3-3-3-3': viewIdValueSet === '2'}]"
+       class="grid centered"
        style="margin-top: 16px; justify-content: flex-start;">
-    <div class="user-preview" :class="[{'small' : viewIdValueSet === '2'}]" v-for="item in props.userList"
-         v-show="tagIdValueSet === '1'" @click="toUserInfo(item)">
-      <div class="user-preview" :class="[{'small' : viewIdValueSet === '2' , 'landscape': viewIdValueSet === '3'}]">
+    <div v-for="item in props.userList"
+         v-show="tagIdValueSet === '1'"
+         :class="[{'small' : viewIdValueSet === '2'}]"
+         class="user-preview">
+      <div :class="[{'small' : viewIdValueSet === '2' , 'landscape': viewIdValueSet === '3'}]"
+           class="user-preview">
         <figure class="user-preview-cover"
+                @click="toUserInfo(item)"
                 :style="{background: 'url(' + item.userCover + ') center center / cover no-repeat rgb(255, 255, 255)',}">
           <img alt="图片" :src=item.userCover style="display: none;"> <!----></figure>
         <div class="user-preview-info">
@@ -143,6 +121,7 @@ const toUserInfo = (item:any) => {
             <div class="xm-header user-avatar user-short-description-avatar"
                  :style="[{width: addWidth + 'px', height: addHeight + 'px'} ,'border: 11px solid rgb(255, 255, 255); cursor: pointer; border-radius: 50%;']">
               <div class="xm-avatar"
+                   @click="toUserInfo(item)"
                    :style="[{width: avatarWidth + 'px', height: avatarHeight + 'px'},'padding:13px']">
                 <img
                     alt="头像"
@@ -177,7 +156,9 @@ const toUserInfo = (item:any) => {
               </div>
 
             </div>
-            <p class="user-short-description-title text-long-ellipsis" :style="{color: item.color}">
+            <p class="user-short-description-title text-long-ellipsis"
+               @click="toUserInfo(item)"
+               :style="{color: item.color}">
               {{ item.username }}
             </p>
             <p class="user-short-description-text">
@@ -231,15 +212,22 @@ const toUserInfo = (item:any) => {
               </div>
             </div>
           </div>
-          <div class="user-preview-actions" style="height: 48px;"><p class="button secondary"
-                                                                     v-if="viewIdValueSet !== '3'">
-            + 关注
-          </p></div>
-          <div class="user-preview-actions" v-if="viewIdValueSet === '3'">
+          <div class="user-preview-actions" style="height: 48px;">
+            <p v-if="viewIdValueSet !== '3' && item.isFollow !== true"
+               @click="addFollows(item)"
+               class="button secondary">
+              + 关注
+            </p>
+            <p v-else class="button secondary">
+              已关注
+            </p>
+          </div>
+
+          <div class="user-preview-actions" v-if="viewIdValueSet === '3' && item.isFollow !== true">
             <p class="button accept">
-<!--              <svg class="button-icon icon-add-friend">-->
-<!--                <use xlink:href="#svg-add-friend"></use>-->
-<!--              </svg>-->
+              <!--              <svg class="button-icon icon-add-friend">-->
+              <!--                <use xlink:href="#svg-add-friend"></use>-->
+              <!--              </svg>-->
               + 关注
             </p>
           </div>
