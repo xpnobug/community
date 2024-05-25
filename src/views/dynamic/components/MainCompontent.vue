@@ -36,7 +36,6 @@ const page = reactive<Page>({
 const postInfo = ref([]);
 list(page).then(res => {
   postInfo.value = res.data.data;
-  console.log(postInfo.value)
 });
 
 const tagId = ref("1");

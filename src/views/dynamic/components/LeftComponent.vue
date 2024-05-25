@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import {ref} from "vue";
+import {recommendList} from "@/api/recom";
 
 const tagList = ref([
   {id: "1", filter: '最近加入'},
@@ -11,36 +12,58 @@ const gGaoList = ref([
   {id: "2", title: '圈子', content: '圈子'},
   {id: "3", title: '最新', content: '最新'},
 ]);
-const tjUserList = ref([
-  {
-    id: "1",
-    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/084059cc-5f23-45eb-b1b8-789c74d6a908.jpg',
-    level: '9',
-    userName: 'qww',
-    small: '3707',
-    tagId: '3'
-  },
-  {
-    id: "2",
-    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/084059cc-5f23-45eb-b1b8-789c74d6a908.jpg',
-    level: '8',
-    userName: '想Vicky',
-    small: '3707',
-    tagId: '3'
-  },
-  {
-    id: "3",
-    avatar: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/084059cc-5f23-45eb-b1b8-789c74d6a908.jpg',
-    level: '7',
-    userName: 'dsa',
-    small: '3707',
-    tagId: '1'
-  },
-]);
+const tjUserList = ref([]);
 const tagId = ref("1");
-const handleTag = (value:any) => {
+const handleTag = (value: any) => {
   tagId.value = value.id
 }
+recommendList().then(res => {
+  tjUserList.value = res.data.data
+})
+
+
+const timeFromNow = (data) => {
+  // data 转换为时间戳
+  const date = new Date(data);
+  const currentDate = new Date();
+
+  // 确保data是一个有效的日期
+  if (isNaN(date.getTime()) || date > currentDate) {
+    return '无效的时间或未来的时间';
+  }
+
+  const difference = currentDate - date;
+
+  // 将毫秒数转换为天数
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  if (days >= 1) {
+    if (days === 1) {
+      return '昨天';
+    }
+    return `${days.toFixed(0)}天前`;
+  }
+
+  // 将剩余的毫秒数转换为小时
+  const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  if (hours > 0) {
+    return `${hours.toFixed(0)}小时前`;
+  }
+
+  // 将剩余的毫秒数转换为分钟
+  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+  if (minutes > 0) {
+    return `${minutes.toFixed(0)}分钟前`;
+  }
+
+  // 将剩余的毫秒数转换为秒，并设置一个阈值（例如10秒）来避免“刚刚”
+  const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+  if (seconds > 0) {
+    return `${seconds.toFixed(0)}秒前`;
+  }
+
+  // 如果时间差小于或等于阈值（例如10秒），则返回“刚刚”
+  return '刚刚';
+};
 </script>
 
 <template>
@@ -66,10 +89,10 @@ const handleTag = (value:any) => {
             </div>
           </div>
         </div>
-
       </div>
     </div>
-    <div class="widget-box"><p class="widget-box-title">推荐用户</p>
+    <div class="widget-box">
+      <p class="widget-box-title">推荐用户</p>
       <div class="widget-box-content">
         <div class="filters">
           <p class="filter"
@@ -77,11 +100,10 @@ const handleTag = (value:any) => {
              :class="[{ 'active': tagId === tag.id}]"
              @click="handleTag(tag)">{{ tag.filter }}</p>
         </div>
-        <div class="user-status-list">
+        <div v-for="item in tjUserList" class="user-status-list">
           <div class="user-status request-small"
-               v-for="user in tjUserList"
-               v-show="tagId === user.tagId"
-          >
+               v-for="user in item.usersVoList"
+               v-if="tagId === item.type">
             <div class="xm-header user-avatar"
                  style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
               <div class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;">
@@ -89,7 +111,7 @@ const handleTag = (value:any) => {
               </div>
               <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
                 <defs>
-                  <linearGradient id="svg22848f93-cdcc-41ca-83ab-2573b39e23f1" x1="0%" y1="0%"
+                  <linearGradient :id="user.userId" x1="0%" y1="0%"
                                   x2="100%" y2="0%">
                     <stop offset="0%"></stop>
                     <stop offset="100%"></stop>
@@ -98,113 +120,27 @@ const handleTag = (value:any) => {
                 <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
                       stroke-width="8" fill-opacity="0"></path>
                 <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                      stroke="url(#svg22848f93-cdcc-41ca-83ab-2573b39e23f1)" stroke-width="8" fill-opacity="0"
-                      style="stroke-dasharray: 183.68, 287;"></path>
+
+                      :stroke="'url(#'+user.userId+')'" :style="{strokeDasharray: user.exp +',287'}" fill-opacity="0"
+                      stroke-width="8"></path>
               </svg>
               <div class="xm-level"
                    style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
                 <span style="display: block;">{{ user.level }}</span></div> <!----></div>
-            <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a
-                href="#" class="bold" style="color: rgb(251, 91, 90);">
-              {{ user.userName }}
-            </a></p>
+            <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);">
+              <a class="bold" href="#" style="color: rgb(251, 91, 90);">{{ user.username }}</a>
+            </p>
             <p class="user-status-text small" v-if="tagId === '2'">
-              {{ user.small }} 粉丝
+              {{ user.fansCount }} 粉丝
             </p>
             <p data-v-2f920749="" class="user-status-text small" v-else>
-              13小时前
-            </p>
-
-            <div class="action-request-list">
-              <div class="action-request accept">
-                <svg class="action-request-icon icon-add-friend">
-                  <use xlink:href="#svg-add-friend"></use>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div class="user-status request-small">
-            <div class="xm-header user-avatar"
-                 style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
-              <div class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
-
-                  src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg"
-                  alt="头像" class="" style="border-radius: 50%;"></div>
-              <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
-                <defs>
-                  <linearGradient id="svg0319ca78-2d6c-4c5f-8669-2a9c304fa461" x1="0%" y1="0%"
-                                  x2="100%" y2="0%">
-                    <stop offset="0%"></stop>
-                    <stop offset="100%"></stop>
-                  </linearGradient>
-                </defs>
-                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
-                      stroke-width="8" fill-opacity="0"></path>
-                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                      stroke="url(#svg0319ca78-2d6c-4c5f-8669-2a9c304fa461)" stroke-width="8" fill-opacity="0"
-                      style="stroke-dasharray: 14.35, 287;"></path>
-              </svg> <!---->
-              <div class="xm-level" style="background: transparent;"><img
-                  src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%BB%84v1605690523?upload_type/Tencent_COS"
-                  style="width: 18px; height: 18px;">
-              </div>
-            </div>
-            <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a
-                href="#" class="bold" style="color: rgb(251, 91, 90);">
-              版主
-            </a></p>
-            <p class="user-status-text small">
-              869 粉丝
+              {{ timeFromNow(user.registrationTime) }}
             </p>
             <div class="action-request-list">
-              <div class="action-request accept">
-                <svg class="action-request-icon icon-add-friend">
-                  <use xlink:href="#svg-add-friend"></use>
-                </svg>
-              </div>
+              <div class="action-request accept"> +</div>
             </div>
           </div>
-          <div class="user-status request-small">
-            <div class="xm-header user-avatar"
-                 style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
-              <div class="xm-avatar" style="width: 30px;height: 30px; padding: 6.4px;"><img
 
-                  src="https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg"
-                  alt="头像" class="" style="border-radius: 50%;"></div>
-              <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
-                <defs>
-                  <linearGradient id="svgf2fcd649-4ec8-4c8f-b35c-a66684c3a6b2" x1="0%" y1="0%"
-                                  x2="100%" y2="0%">
-                    <stop offset="0%"></stop>
-                    <stop offset="100%"></stop>
-                  </linearGradient>
-                </defs>
-                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0"
-                      stroke-width="8" fill-opacity="0"></path>
-                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                      stroke="url(#svgf2fcd649-4ec8-4c8f-b35c-a66684c3a6b2)" stroke-width="8" fill-opacity="0"
-                      style="stroke-dasharray: 175.07, 287;"></path>
-              </svg> <!---->
-              <div class="xm-level" style="background: transparent;"><img
-                  src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS"
-                  style="width: 18px; height: 18px;">
-              </div>
-            </div>
-            <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a
-                href="#" class="bold" style="color: rgb(251, 91, 90);">
-              LT-REAI奕潇
-            </a></p>
-            <p class="user-status-text small">
-              722 粉丝
-            </p>
-            <div class="action-request-list">
-              <div class="action-request accept">
-                <svg class="action-request-icon icon-add-friend">
-                  <use xlink:href="#svg-add-friend"></use>
-                </svg>
-              </div>
-            </div>
-          </div>
 
         </div>
       </div>

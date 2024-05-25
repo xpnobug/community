@@ -23,7 +23,7 @@
           <input data-v-4d901bbe="" id="search-main" type="text" autocomplete="off" name="search_main"
                  placeholder="搜索用户或内容">
         </div>
-        <el-button type="primary" @click="login" v-if="userInfo == null" style="margin-right:10px;">登录</el-button>
+        <el-button v-if="sfLogin === false" style="margin-right:10px;" type="primary" @click="login">登录</el-button>
         <div v-else style="display: flex; ">
           <a-popover v-model:open="postpush" trigger="click">
             <a-button type="primary" style="margin-right:10px;">发布</a-button>
@@ -49,11 +49,10 @@
 import {getCurrentInstance, onMounted, reactive, ref, watchEffect} from 'vue'
 import BgColorChange from "@/components/BgColorChange.vue";
 import {useRouter} from "vue-router";
-import {isLogin, tokenInfo} from "@/api/user";
+import {isLogin} from "@/api/user";
 import UserCaozuo from "@/components/Setting/UserCaozuo.vue";
 import {useUserInfo} from "@/hooks/useCached";
 import EditArticle from "@/components/Setting/EditArticle.vue";
-import {message} from "ant-design-vue";
 
 const postpush = ref<boolean>(false);
 const visible = ref<boolean>(false);
@@ -77,7 +76,9 @@ const pmView = ref(false);
 const instance = getCurrentInstance()
 
 //获取token
+const sfLogin = ref(false);
 isLogin().then(async res => {
+  sfLogin.value = res.data.data;
   const emit = async () => {
     instance?.proxy?.$Bus.emit("isLogins", res.data.data)
   }

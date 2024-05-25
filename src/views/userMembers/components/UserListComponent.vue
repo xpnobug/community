@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {getCurrentInstance, onBeforeMount, reactive, ref} from "vue";
 import {useRouter} from "vue-router";
-import {addFollow} from "@/api/follow";
+import {addFollow, delFollow} from "@/api/follow";
 import {message} from "ant-design-vue";
-import {isLogin} from "@/api/user";
+import {isLogin, pageList} from "@/api/user";
 
 const viewIdValueSet = ref('1');
 const tagIdValueSet = ref('1');
@@ -60,8 +60,6 @@ const addWh = (width: any, height: any) => {
   console.log(addWidth.value, addHeight.value)
 }
 
-//获取用户信息
-const props = defineProps(['userList'])
 
 const router = useRouter();
 const toUserInfo = (item:any) => {
@@ -87,8 +85,33 @@ instance?.proxy?.$Bus.on("userInfo", (param: any) => {
   follow.userId = param.userId;
   console.log(follow.userId)
 });
-const addFollows = (item:any) => {
-  if (!follow.isLogin){
+
+interface Page {
+  pageSize: number;
+  currentPage: number;
+  count: number;
+  maxPage: number;
+  minPage: number;
+  // firstResult: number;
+  // recount: boolean;
+}
+
+const page = reactive<Page>({
+  pageSize: 10,
+  currentPage: 1,
+  count: 10,
+  maxPage: 10,
+  minPage: 1,
+});
+const userList = ref([]);
+const followList = () => {
+  pageList(page).then(res => {
+    userList.value = res.data.data;
+  })
+}
+followList();
+const addFollows = (item: any) => {
+  if (!follow.isLogin) {
     message.warning('请先登录');
     return
   }
@@ -97,6 +120,17 @@ const addFollows = (item:any) => {
   addFollow(follow).then((res) => {
     if (res.status === 200) {
       message.success('关注成功');
+      followList();
+    }
+  })
+}
+
+//del
+const delFollows = (item: any) => {
+  delFollow(item.userId).then((res) => {
+    if (res.status === 200) {
+      message.success('取消关注成功');
+      followList();
     }
   })
 }
@@ -106,7 +140,7 @@ const addFollows = (item:any) => {
   <div :class="[{'grid-4-4-4' : viewIdValueSet === '1' , 'grid-3-3-3-3': viewIdValueSet === '2'}]"
        class="grid centered"
        style="margin-top: 16px; justify-content: flex-start;">
-    <div v-for="item in props.userList"
+    <div v-for="item in userList"
          v-show="tagIdValueSet === '1'"
          :class="[{'small' : viewIdValueSet === '2'}]"
          class="user-preview">
@@ -213,22 +247,29 @@ const addFollows = (item:any) => {
             </div>
           </div>
           <div class="user-preview-actions" style="height: 48px;">
-            <p v-if="viewIdValueSet !== '3' && item.isFollow !== true"
+            <p v-show="viewIdValueSet !== '3' && item.isFollow !== true"
                @click="addFollows(item)"
                class="button secondary">
               + 关注
             </p>
-            <p v-else class="button secondary">
+            <p v-show="viewIdValueSet !== '3' && item.isFollow === true" class="button secondary">
               已关注
+            </p>
+            <p v-show="viewIdValueSet !== '3' && item.isFollow === true" class="button secondary"
+               @click="delFollows(item)">
+              取消关注
             </p>
           </div>
 
-          <div class="user-preview-actions" v-if="viewIdValueSet === '3' && item.isFollow !== true">
-            <p class="button accept">
-              <!--              <svg class="button-icon icon-add-friend">-->
-              <!--                <use xlink:href="#svg-add-friend"></use>-->
-              <!--              </svg>-->
-              + 关注
+          <div class="user-preview-actions">
+            <p v-show="viewIdValueSet === '3' && item.isFollow !== true" class="button accept"
+               @click="addFollows(item)">+ 关注</p>
+            <p v-show="viewIdValueSet === '3' && item.isFollow === true" class="button secondary">
+              已关注
+            </p>
+            <p v-show="viewIdValueSet === '3' && item.isFollow === true" class="button secondary"
+               @click="delFollows(item)">
+              取消关注
             </p>
           </div>
         </div>

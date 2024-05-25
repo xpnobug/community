@@ -9,7 +9,7 @@
         @open="handleOpen"
     >
       <div class="is-showCard">
-        <div v-if="userInfo !== null" :style="djValueSet === false ?'width: 300px':'padding-left: 10px;'"
+        <div v-if="isLogin !== false" :style="djValueSet === false ?'width: 300px':'padding-left: 10px;'"
              class="simplebar-content snipcss-WosQN">
           <figure v-show="djValueSet === false"
                   :style="{background: 'url('+userInfo.userCover+') center center / cover no-repeat rgb(255, 255, 255)'}"
@@ -121,6 +121,10 @@ const userInfo = ref({});
 instance?.proxy?.$Bus.on("userInfo", (param: any) => {
   userInfo.value = param;
   console.log(userInfo);
+})
+const isLogin = ref(false);
+instance?.proxy?.$Bus.on("isLogins", (param: any) => {
+  isLogin.value = param;
 })
 
 const handleOpen = (key: string, keyPath: string[]) => {
