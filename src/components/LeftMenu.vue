@@ -64,15 +64,15 @@
           </div>
           <div v-show="djValueSet === false" class="user-stats" style="">
             <div class="user-stat">
-              <p class="user-stat-title">0</p>
+              <p class="user-stat-title">{{ statistics.publishArticleCount }}</p>
               <p class="user-stat-text">帖子</p>
             </div>
             <div class="user-stat">
-              <p class="user-stat-title">3</p>
+              <p class="user-stat-title">{{ statistics.followCount }}</p>
               <p class="user-stat-text">关注</p>
             </div>
             <div class="user-stat">
-              <p class="user-stat-title">0</p>
+              <p class="user-stat-title">{{ statistics.fansCount }}</p>
               <p class="user-stat-text">粉丝</p>
             </div>
           </div>
@@ -96,6 +96,7 @@
 import {getCurrentInstance, ref} from 'vue'
 // import {Menu as IconMenu} from '@element-plus/icons-vue'
 import {RouterView, useRouter} from 'vue-router';
+import {getStatisticsById} from "@/api/statistics";
 //定义变量
 const menuPmView = ref();
 const djValueSet = ref(false);
@@ -118,14 +119,18 @@ instance?.proxy?.$Bus.on("pmView", (param) => {
 })
 //获取登录人信息
 const userInfo = ref({});
+const statistics = ref({});
 instance?.proxy?.$Bus.on("userInfo", (param: any) => {
+  getStatisticsById(param.userId).then(res => {
+    statistics.value = res.data.data;
+  });
   userInfo.value = param;
-  console.log(userInfo);
 })
 const isLogin = ref(false);
 instance?.proxy?.$Bus.on("isLogins", (param: any) => {
   isLogin.value = param;
 })
+
 
 const handleOpen = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath)

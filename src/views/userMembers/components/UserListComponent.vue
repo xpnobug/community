@@ -67,13 +67,11 @@ const toUserInfo = (item:any) => {
 }
 
 interface Follow  {
-  userId: string;
   username: string;
   followUserId: string;
   isLogin: boolean;
 }
 const follow = reactive<Follow>({
-  userId: '',
   username: '',
   followUserId: '',
   isLogin: false,
@@ -81,10 +79,7 @@ const follow = reactive<Follow>({
 isLogin().then((res) => {
   follow.isLogin = res.data.data;
 })
-instance?.proxy?.$Bus.on("userInfo", (param: any) => {
-  follow.userId = param.userId;
-  console.log(follow.userId)
-});
+
 
 interface Page {
   pageSize: number;
@@ -119,7 +114,7 @@ const addFollows = (item: any) => {
   follow.followUserId = item.userId;
   addFollow(follow).then((res) => {
     if (res.status === 200) {
-      message.success('关注成功');
+      message.success(res.data.message);
       followList();
     }
   })
@@ -214,15 +209,15 @@ const delFollows = (item: any) => {
                       >
                         <div class="user-stats">
                           <div class="user-stat">
-                            <p class="user-stat-title">{{ item.userPush }}</p>
+                            <p class="user-stat-title">{{ item.statistics.publishArticleCount }}</p>
                             <p class="user-stat-text">发布</p>
                           </div>
                           <div class="user-stat">
-                            <p class="user-stat-title">{{ item.follows }}</p>
+                            <p class="user-stat-title">{{ item.statistics.followCount }}</p>
                             <p class="user-stat-text">关注</p>
                           </div>
                           <div class="user-stat">
-                            <p class="user-stat-title">{{ item.fans }}</p>
+                            <p class="user-stat-title">{{ item.statistics.fansCount }}</p>
                             <p class="user-stat-text">粉丝</p>
                           </div>
                         </div>

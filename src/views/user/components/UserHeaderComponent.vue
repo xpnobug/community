@@ -2,14 +2,21 @@
 import {ref} from 'vue'
 import {userInfo} from "@/api/user";
 import {useRoute} from "vue-router";
+import {getStatisticsById} from "@/api/statistics";
 //获取用户信息
 const route = useRoute();
 const ids = route.params.id;
 const users = ref<any>({});
+//获取用户统计信息
+const statistics = ref<any>({});
+getStatisticsById(ids).then(res => {
+  statistics.value = res.data.data;
+});
 userInfo(ids).then(res => {
   users.value = res.data.data;
   console.log(users.value)
 });
+
 </script>
 
 <template>
@@ -67,15 +74,15 @@ userInfo(ids).then(res => {
       </div>
       <div class="user-stats reaicss0-2-12-27">
         <div class="user-stat big reaicss0-3-27-28">
-          <p class="user-stat-title reaicss0-4-28-29">267</p>
+          <p class="user-stat-title reaicss0-4-28-29">{{ statistics.publishArticleCount }}</p>
           <p class="user-stat-text reaicss0-4-28-30">发布</p>
         </div>
         <div class="user-stat big reaicss0-3-27-31">
-          <p class="user-stat-title reaicss0-4-31-32">37</p>
+          <p class="user-stat-title reaicss0-4-31-32">{{ statistics.followCount }}</p>
           <p class="user-stat-text reaicss0-4-31-33">关注</p>
         </div>
         <div class="user-stat big reaicss0-3-27-34">
-          <p class="user-stat-title reaicss0-4-34-35">107</p>
+          <p class="user-stat-title reaicss0-4-34-35">{{ statistics.fansCount }}</p>
           <p class="user-stat-text reaicss0-4-34-36">粉丝</p>
         </div>
       </div>

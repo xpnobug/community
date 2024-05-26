@@ -10,9 +10,9 @@ interface Follow  {
 }
 
 export function addFollow(follow: UnwrapNestedRefs<Follow>) {
-    return axios.post(`${BASE_URL}/add`, follow);
+    return axios.post(`${BASE_URL}/followUser`, follow);
 }
 
 export function delFollow(ids: string) {
-    return axios.delete(`${BASE_URL}/del`+`?id=${ids}`);
+    return axios.delete(`${BASE_URL}/clearFollow`+`?id=${ids}`);
 }

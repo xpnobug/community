@@ -1,6 +1,9 @@
 <script lang="ts" setup>
-import {ref} from "vue";
+import {ref, reactive} from "vue";
 import {recommendList} from "@/api/recom";
+import {message} from "ant-design-vue";
+import {addFollow} from "@/api/follow";
+import {isLogin} from "@/api/user";
 
 const tagList = ref([
   {id: "1", filter: '最近加入'},
@@ -17,9 +20,41 @@ const tagId = ref("1");
 const handleTag = (value: any) => {
   tagId.value = value.id
 }
-recommendList().then(res => {
-  tjUserList.value = res.data.data
+
+const followList = () => {
+  recommendList().then(res => {
+    tjUserList.value = res.data.data
+  })
+}
+followList();
+interface Follow  {
+  username: string;
+  followUserId: string;
+  isLogin: boolean;
+}
+const follow = reactive<Follow>({
+  username: '',
+  followUserId: '',
+  isLogin: false,
+});
+isLogin().then((res) => {
+  follow.isLogin = res.data.data;
 })
+
+const addFollows = (item: any) => {
+  if (!follow.isLogin) {
+    message.warning('请先登录');
+    return
+  }
+  follow.username = item.username;
+  follow.followUserId = item.userId;
+  addFollow(follow).then((res) => {
+    if (res.status === 200) {
+      message.success(res.data.message);
+      followList();
+    }
+  })
+}
 
 
 const timeFromNow = (data) => {
@@ -137,7 +172,8 @@ const timeFromNow = (data) => {
               {{ timeFromNow(user.registrationTime) }}
             </p>
             <div class="action-request-list">
-              <div class="action-request accept"> +</div>
+              <div class="action-request accept" v-if="user.isFollow === false" @click="addFollows(user)"> +</div>
+              <div class="action-request accept" v-else> √ </div>
             </div>
           </div>
 
@@ -607,7 +643,7 @@ a {
   height: 40px;
   border: 1px solid #dedeea;
   border-radius: 10px;
-  color: #adafca;
+  color: #ffffff;
   font-size: 0.75rem;
   font-weight: 700;
   cursor: pointer;
