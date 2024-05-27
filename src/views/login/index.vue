@@ -37,6 +37,8 @@ const upOnFinish = async (values: any) => {
   const res = await register(formState);
   if (res.status === 200){
     message.success("注册成功，请登录！")
+  }else {
+    message.error("注册失败，请检查账号和密码！")
   }
 };
 // const upOnFinishFailed = (errorInfo: any) => {
@@ -44,9 +46,10 @@ const upOnFinish = async (values: any) => {
 // };
 
 const loginOnFinish = async (values: any) => {
+  const res = await login(formState);
   // 登录逻辑
   const key = 'updatable';
-  const res = await login(formState);
+  console.log(res)
   if (res.status === 200){
     message.loading({ content: '登录中...', key });
     setTimeout(() => {
