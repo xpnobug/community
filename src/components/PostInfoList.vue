@@ -1,287 +1,151 @@
+
 <script lang="ts" setup>
-//获取地址栏中id
-import {nextTick, onMounted, reactive, ref} from "vue";
-import {useRoute} from "vue-router";
-import {listByUserId} from "@/api/article.js";
+import { defineProps } from 'vue';
 import Sudoku from "@/views/user/components/Sudoku.vue";
-import PostInfoList from "@/components/PostInfoList.vue";
-
-interface Page {
-  pageSize: number;
-  currentPage: number;
-  count: number;
-  maxPage: number;
-  minPage: number;
-  // firstResult: number;
-  // recount: boolean;
-}
-
-const page = reactive<Page>({
-  pageSize: 10,
-  currentPage: 1,
-  count: 0,
-  maxPage: 10,
-  minPage: 1,
-});
-const route = useRoute();
-const ids = route.params.id;
-const postList = ref<any[]>([]);
-const postCount = ref<number>(1);
-const showList = () => {
-  listByUserId(page, ids).then(res => {
-    page.count = res.data.count;
-    page.maxPage = res.data.maxPage;
-    page.minPage = res.data.minPage;
-    page.pageSize = res.data.pageSize;
-    //.slice((page.currentPage - 1) * page.pageSize, page.currentPage * page.pageSize)
-    postList.value = res.data.data;
-    initLoading.value = false;
-  })
-}
-showList();
-
-const current = ref(1);
-const initLoading = ref(true);
-const loading = ref(false);
-const onLoadMore = () => {
-  page.currentPage++;
-  loading.value = true;
-  listByUserId(page, ids).then(res => {
-    page.count = res.data.count;
-    page.maxPage = res.data.maxPage;
-    page.minPage = res.data.minPage;
-    page.pageSize = res.data.pageSize;
-    // postList.value = res.data.data.concat(
-    //     [...new Array(page.pageSize)].map(() => ({ loading: true, avatar: '' })),
-    // );
-    postCount.value = res.data.data.length;
-    postList.value = postList.value.concat(res.data.data);
-    initLoading.value = false;
-    loading.value = false;
-  })
-
-  nextTick(() => {
-    window.dispatchEvent(new Event('resize'));
-  });
-};
-onMounted(() => {
-  let amount = 1;
-  window.onload = function () {
-    scrollLoadEvent();
-  };
-  window.addEventListener("scroll", scrollLoadEvent);
-  function scrollLoadEvent() {
-    let contents = document.querySelectorAll(".content");
-    let targetValue = window.innerHeight * 1.1;
-
-    contents.forEach(function (content) {
-      let contentTop = content.getBoundingClientRect().top;
-      if (contentTop <= targetValue - 100) {
-        content.classList.add("content-center");
-      } else {
-        content.classList.remove("content-center");
-      }
-    });
-    // createBox();
-  }
-
-  function createBox() {
-    let pageHeight = document.documentElement.scrollHeight;
-    let stop = document.documentElement.scrollTop;
-    let screenHeight = window.innerHeight;
-    let bottom = pageHeight - stop - screenHeight;
-    if (bottom <= 200) {
-      let div = document.createElement("div");
-      div.classList.add("content");
-      div.innerHTML = "内容" + amount;
-      amount++;
-      document.body.appendChild(div);
-    }
-  }
-
-  let styleElement = document.querySelector(".slider-list");
-  // console.log(styleElement);
-  // styleElement.style.width = slider.value + "px";
-});
-
-
+const props = defineProps(['postInfo'])
+console.log(props.postInfo)
 </script>
 
+
 <template>
-  <div class="grid-column snipcss-iJ4SG">
-    <div id="slider_home" class="home-slider" style="height: 65px;">
-      <div class="left">
-        <svg class="slider-control-icon icon-small-arrow">
-          <use xlink:href="#svg-small-arrow"></use>
-        </svg>
-      </div>
-      <div class="right">
-        <svg class="slider-control-icon icon-small-arrow">
-          <use xlink:href="#svg-small-arrow"></use>
-        </svg>
-      </div>
-      <div class="slider-list" style="transform: translateX(0px); ">
-        <div class="slider active" style="min-width: 95px;"><span>全部</span></div>
-        <div class="slider" style="min-width: 95px;"><span>帖子</span></div>
-        <div class="slider" style="min-width: 95px;"><span>动态</span></div>
-        <div class="slider" style="min-width: 95px;"><span>资讯</span></div>
-        <div class="slider" style="min-width: 95px;"><span>视频</span></div>
-        <div class="slider" style="min-width: 95px;"><span>问答</span></div>
+  <div class="widget-box no-padding content" v-for="item in props.postInfo" style="margin-bottom: 15px">
+    <div class="widget-box-settings" style="z-index: 100;">
+      <div class="post-settings-wrap" style="display: none;">
+        <div style="position: relative;">
+          <div>
+            <div class="post-settings widget-box-post-settings-dropdown-trigger">
+              <svg class="post-settings-icon icon-more-dots">
+                <use xlink:href="#svg-more-dots"></use>
+              </svg>
+            </div>
+          </div>
+          <div
+              style="position: absolute; z-index: 9999; top: 44px; right: -6px; opacity: 0; visibility: hidden; transform: translate(0px, -40px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
+            <div class="simple-dropdown">
+              <p class="simple-dropdown-link"> 收藏 </p>
+              <p class="simple-dropdown-link"> 举报 </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <a-list
-        class="demo-loadmore-list"
-        :loading="initLoading"
-        item-layout="vertical"
-        :data-source="postList">
-      <template #loadMore>
-        <div
-            v-if="!initLoading && !loading"
-            :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }"
-        >
-          <a-button @click="onLoadMore" v-if="postCount !== 0 ">加载更多...</a-button>
-          <div v-else disabled>没有更多数据了</div>
+    <div class="widget-box-see"></div>
+    <div class="widget-box-status">
+      <div class="widget-box-status-content">
+        <div class="user-status" style="position: relative;">
+          <div class="xm-header user-avatar" style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
+            <div class="xm-avatar" style="width: 44px; height: 44px; padding: 6.4px;"><img :src=item.avatar alt="头像" class="" style="border-radius: 50%;"></div>
+            <svg style="width: 44px; height: 44px;" viewBox="0 0 100 100">
+              <defs>
+                <linearGradient id="svg23138011-be37-4e64-bd28-75c13aa9289a" x1="0%" x2="100%" y1="0%" y2="0%">
+                  <stop offset="0%"></stop>
+                  <stop offset="100%"></stop>
+                </linearGradient>
+              </defs>
+              <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0" stroke="#e9e9f0"
+                    stroke-width="8"></path>
+              <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
+                    fill-opacity="0" stroke="url(#svg23138011-be37-4e64-bd28-75c13aa9289a)" stroke-width="8"
+                    :style="{strokeDasharray: item.exp +',287'}"></path>
+            </svg>
+            <div v-if="item.exp >= 0  " class="xm-level"
+                 style="box-sizing: content-box; font-size: 10px; width: 15px; height: 15px; border: 2px solid rgb(255, 255, 255);">
+              <span style="display: block;">{{ item.level }}</span>
+            </div>
+            <div v-if="item.exp >= 10 && item.exp < 100" class="xm-level" style="background: transparent;">
+              <img
+                  src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS"
+                  style="width: 18px; height: 18px;">
+            </div>
+          </div>
+          <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">
+            {{item.author }}
+          </span></p>
+          <p class="user-status-text small">{{ item.publishDate }}<span> · 未知</span></p>
+          <div class="cad" style="right: 0px;"></div>
+          <p></p>
         </div>
-      </template>
-      <PostInfoList :postInfo="postList"/>
-    </a-list>
-
-
-    <!--    <div class="widget-box no-padding" video-height="0">-->
-    <!--      <div class="widget-box-settings" style="z-index: 100;">-->
-    <!--        <div class="post-settings-wrap" style="display: none;">-->
-    <!--          <div style="position: relative;">-->
-    <!--            <div>-->
-    <!--              <div class="post-settings widget-box-post-settings-dropdown-trigger">-->
-    <!--                <svg class="post-settings-icon icon-more-dots">-->
-    <!--                  <use xlink:href="#svg-more-dots"></use>-->
-    <!--                </svg>-->
-    <!--              </div>-->
-    <!--            </div>-->
-    <!--            <div-->
-    <!--                style="position: absolute; z-index: 9999; top: 44px; right: -6px; opacity: 0; visibility: hidden; transform: translate(0px, -40px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">-->
-    <!--              <div class="simple-dropdown">-->
-    <!--                <p class="simple-dropdown-link"> 收藏 </p>-->
-    <!--                <p class="simple-dropdown-link"> 举报 </p>-->
-    <!--              </div>-->
-    <!--            </div>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div class="widget-box-see"></div>-->
-    <!--      <div class="widget-box-status">-->
-    <!--        <div class="widget-box-status-content">-->
-    <!--          <div class="user-status" style="position: relative;">-->
-    <!--            <div class="xm-header user-avatar"-->
-    <!--                 style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">-->
-    <!--              <div class="xm-avatar" style="width: 44px; height: 44px; padding: 6.4px;"><img-->
-    <!--                  alt="头像"-->
-    <!--                  class=""-->
-    <!--                  src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_668781628835603?imageMogr2/crop/128x128/gravity/center"-->
-    <!--                  style="border-radius: 50%;"></div>-->
-    <!--              <svg style="width: 44px; height: 44px;" viewBox="0 0 100 100">-->
-    <!--                <defs>-->
-    <!--                  <linearGradient id="svg85c0fb91-96a9-4386-ac65-436696d05170" x1="0%" x2="100%" y1="0%" y2="0%">-->
-    <!--                    <stop offset="0%"></stop>-->
-    <!--                    <stop offset="100%"></stop>-->
-    <!--                  </linearGradient>-->
-    <!--                </defs>-->
-    <!--                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0" stroke="#e9e9f0"-->
-    <!--                      stroke-width="8"></path>-->
-    <!--                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"-->
-    <!--                      fill-opacity="0" stroke="url(#svg85c0fb91-96a9-4386-ac65-436696d05170)" stroke-width="8"-->
-    <!--                      style="stroke-dasharray: 160.72, 287;"></path>-->
-    <!--              </svg>-->
-    <!--              <div class="xm-level" style="background: transparent;"><img-->
-    <!--                  src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%BB%84v1605690523?upload_type/Tencent_COS"-->
-    <!--                  style="width: 18px; height: 18px;"></div>-->
-    <!--            </div>-->
-    <!--            <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">LT-REAI软件小蘑菇</span>-->
-    <!--            </p>-->
-    <!--            <p class="user-status-text small">02-18 09:21<span> · 浙江</span></p>-->
-    <!--            <div class="cad" style="right: 0px;"></div>-->
-    <!--            <p></p>-->
-    <!--          </div>-->
-    <!--          <div>-->
-    <!--            <p class="widget-box-status-text feed-summary" style="margin-top: 0px;">-->
-    <!--              大年初九，开工大吉！愿我们以梦为马，不负韶华，勇往直前，迎接新的挑战！</p>-->
-    <!--            <div class="img-single"><img-->
-    <!--                src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/729aef714f8b96019651ff42576895c1.png?imageMogr2/crop/700x700/gravity/center"-->
-    <!--                style="border-radius: 10px;"></div>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        <div class="widget-box-status-content">-->
-    <!--          <div class="tag-list">-->
-    <!--            <div class="topic-forum-box"><a class="tag-item secondary" style="margin-top: 16px;">闲聊灌水</a></div>-->
-    <!--            <div class="to-detail" style="margin-top: 16px; flex-grow: 1; text-align: right;"><a class="to-detail"-->
-    <!--                                                                                                 href="/post/6241"-->
-    <!--                                                                                                 >查看详情</a>-->
-    <!--            </div>-->
-    <!--          </div>-->
-    <!--          <div class="content-actions" style="margin-top: -2px; border-top: none;">-->
-    <!--            <div class="content-action">-->
-    <!--              <div class="meta-line">-->
-    <!--                <div class="meta-line-list reaction-item-list">-->
-    <!--                  <div class="reaction-item"><img alt="reaction-like" class="reaction-image"-->
-    <!--                                                  src="https://pc.opensns.cn/img/reaction/like.png"></div>-->
-    <!--                </div>-->
-    <!--                <div style="margin-left: 5px;"><img-->
-    <!--                    class="support-list-avatar"-->
-    <!--                    src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_134861708632920?imageMogr2/crop/80x80/gravity/center">-->
-    <!--                </div>-->
-    <!--                <p class="meta-line-text" style="margin-left: 5px;"> 1 人点赞 </p>-->
-    <!--              </div>-->
-    <!--            </div>-->
-    <!--            <div class="content-action">-->
-    <!--              <div class="meta-line">-->
-    <!--                <p class="meta-line-text">66 浏览</p>-->
-    <!--              </div>-->
-    <!--            </div>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div class="post-options">-->
-    <!--        <div class="post-option-wrap">-->
-    <!--          <div class="post-option">-->
-    <!--            <svg class="post-option-icon icon-thumbs-up">-->
-    <!--              <use xlink:href="#svg-thumbs-up"></use>-->
-    <!--            </svg>-->
-    <!--            <p class="post-option-text">点赞</p>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        <div class="post-option">-->
-    <!--          <svg class="post-option-icon icon-comment">-->
-    <!--            <use xlink:href="#svg-comment"></use>-->
-    <!--          </svg>-->
-    <!--          <p class="post-option-text">0 评论</p>-->
-    <!--        </div>-->
-    <!--        <div class="post-option">-->
-    <!--          <svg class="post-option-icon icon-share">-->
-    <!--            <use xlink:href="#svg-share"></use>-->
-    <!--          </svg>-->
-    <!--          <p class="post-option-text">分享</p>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
-
-
-    <!--    <div class="loader-bars">-->
-    <!--      <div class="loader-bar"></div>-->
-    <!--      <div class="loader-bar"></div>-->
-    <!--      <div class="loader-bar"></div>-->
-    <!--      <div class="loader-bar"></div>-->
-    <!--      <div class="loader-bar"></div>-->
-    <!--      <div class="loader-bar"></div>-->
-    <!--      <div class="loader-bar"></div>-->
-    <!--      <div class="loader-bar"></div>-->
-    <!--    </div>-->
-<!--    <a-pagination-->
-<!--        v-model:current="current"-->
-<!--        :total="page.count"-->
-<!--        @change="onChange"/>-->
+      </div>
+      <div v-if="item.tag !== 'dt'" class="post-preview medium" style="margin: 16px 28px 0px;">
+        <a :href="/post/+item.articleId" class="post-preview-link">
+          <figure :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}"
+                  class="post-preview-image post-preview-info"
+                  style="margin: 0px auto !important; border-top: 1px solid rgb(230, 230, 230); border-right: 1px solid rgb(230, 230, 230); border-bottom: none; border-left: 1px solid rgb(230, 230, 230); border-image: initial; border-top-left-radius: 12px; border-top-right-radius: 12px; box-shadow: none; cursor: pointer;
+                    height: 297px;">
+            <img :src=item.coverImage alt="图片" style="display: none;">
+          </figure>
+        </a>
+        <div class="post-preview-info with-cover" style="margin-top: 0px;">
+          <p></p>
+          <p class="post-preview-title text-long-ellipsis ellipsis" style="display: inline-block; width: 100%;">
+            {{ item.title }}
+          </p>
+          <p class="post-preview-text ellipsis ellipsis-content-cover">{{ item.content }}</p>
+          <div>
+            <a :href="/post/+item.articleId" class="post-preview-link">
+              <svg style="width: 16px; height: 16px; margin: -2px 5px 0px 0px; fill: rgb(51, 127, 255);">
+                <use xlink:href="#svg-md-open"></use>
+              </svg>
+              查看全文
+            </a>
+          </div>
+        </div>
+      </div>
+      <div v-if="item.tag === 'dt'" class="post-preview medium" style="margin: 16px 28px 0px;">
+        <p class="widget-box-status-text feed-summary" style="margin-top: 0px;"> {{item.title}} </p>
+        <Sudoku :imgList="item.imgList"/>
+      </div>
+      <div class="widget-box-status-content">
+        <div class="tag-list">
+          <div class="topic-forum-box"><a class="tag-item secondary" style="margin-top: 16px;">产品共创</a></div>
+          <div class="to-detail" style="margin-top: 16px; flex-grow: 1; text-align: right;">
+            <a :href="/post/+item.articleId"
+               class="to-detail"
+            >查看详情</a>
+          </div>
+        </div>
+        <div class="content-actions" style="margin-top: -2px; border-top: none;">
+          <div class="content-action">
+            <div class="meta-line">
+              <div class="meta-line-list reaction-item-list">
+                <div class="reaction-item"><img alt="reaction-like" class="reaction-image" src="https://pc.opensns.cn/img/reaction/like.png"></div>
+              </div>
+              <div style="margin-left: 5px;"></div>
+              <p class="meta-line-text" style="margin-left: 5px;"> {{ item.likeCount }} 人点赞 </p>
+            </div>
+          </div>
+          <div class="content-action">
+            <div class="meta-line">
+              <p class="meta-line-text">{{ item.readCount }} 浏览</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="post-options">
+      <div class="post-option-wrap">
+        <div class="post-option">
+          <svg class="post-option-icon icon-thumbs-up">
+            <use xlink:href="#svg-thumbs-up"></use>
+          </svg>
+          <p class="post-option-text">点赞</p>
+        </div>
+      </div>
+      <div class="post-option">
+        <svg class="post-option-icon icon-comment">
+          <use xlink:href="#svg-comment"></use>
+        </svg>
+        <p class="post-option-text">0 评论</p>
+      </div>
+      <div class="post-option">
+        <svg class="post-option-icon icon-share">
+          <use xlink:href="#svg-share"></use>
+        </svg>
+        <p class="post-option-text">分享</p>
+      </div>
+    </div>
   </div>
 </template>
-
 
 <style scoped>
 @media screen and (max-width: 768px) {

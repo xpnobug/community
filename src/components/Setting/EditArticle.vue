@@ -5,32 +5,36 @@
       <div data-v-4d901bbe="" class="class-fication-drafts snipcss0-2-2-4">草稿箱（<span data-v-4d901bbe="" class="snipcss0-3-4-5">0</span>）</div>
     </div>
     <ul data-v-4d901bbe="" class="class-fication-box snipcss0-1-1-6">
-      <li data-v-4d901bbe="" class="snipcss0-2-6-7">
+      <li data-v-4d901bbe="" class="snipcss0-2-6-7" @click="pushPost('dt')">
         <div data-v-4d901bbe="" class="top snipcss0-3-7-8"><svg data-v-4d901bbe="" class="option-item-icon icon-status snipcss0-4-8-9">
           <use data-v-4d901bbe="" xlink:href="#svg-status" class="snipcss0-5-9-10"></use>
         </svg></div>
         <div data-v-4d901bbe="" class="bottom snipcss0-3-7-11">动态</div>
       </li>
-      <li data-v-4d901bbe="" class="snipcss0-2-6-12">
+      <li data-v-4d901bbe="" class="snipcss0-2-6-12" @click="pushPost('tz')">
         <div data-v-4d901bbe="" class="top snipcss0-3-12-13"><svg data-v-4d901bbe="" class="option-item-icon icon-blog-posts snipcss0-4-13-14">
           <use data-v-4d901bbe="" xlink:href="#svg-blog-posts" class="snipcss0-5-14-15"></use>
         </svg></div>
-        <div data-v-4d901bbe="" class="bottom snipcss0-3-12-16"><a href="/release">帖子</a></div>
+        <div data-v-4d901bbe="" class="bottom snipcss0-3-12-16"> 帖子 </div>
       </li>
-      <li data-v-4d901bbe="" class="snipcss0-2-6-17">
+      <li data-v-4d901bbe="" class="snipcss0-2-6-17" @click="pushPost('video')">
         <div data-v-4d901bbe="" class="top snipcss0-3-17-18"><svg data-v-4d901bbe="" class="option-item-icon icon-videos snipcss0-4-18-19">
           <use data-v-4d901bbe="" xlink:href="#svg-videos" class="snipcss0-5-19-20"></use>
         </svg></div>
-        <div data-v-4d901bbe="" class="bottom snipcss0-3-17-21">视频</div>
+        <div data-v-4d901bbe="" class="bottom snipcss0-3-17-21" >视频</div>
       </li>
     </ul>
   </div>
 </template>
 
-<script>
-export default {
-  name: "EditArticle"
-}
+<script setup lang="ts">
+import {useRouter} from "vue-router";
+
+const router = useRouter();
+ const pushPost = (val) => {
+   //跳转页面 path: '/post/:id',
+   router.push({ path: '/release/'+ val })
+ }
 </script>
 
 <style scoped>

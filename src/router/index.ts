@@ -57,7 +57,7 @@ export default createRouter({
                     component: () => import('@/views/userSetting/index.vue')
                 },
                 {
-                    path: '/release',
+                    path: '/release/:type',
                     name: 'release',
                     component: () => import('@/views/Edit/index.vue')
                 },

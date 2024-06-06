@@ -5,6 +5,7 @@ import {ref} from "vue";
 import {MdCatalog, MdPreview} from 'md-editor-v3';
 // preview.css相比style.css少了编辑器那部分样式
 import 'md-editor-v3/lib/preview.css';
+import Sudoku from "@/views/user/components/Sudoku.vue";
 
 const id = 'preview-only';
 const text = ref('# Hello Editor');
@@ -114,7 +115,7 @@ selectOne(ids).then(res => {
         </div>
       </div>
       <div class="postStyle">
-        <img :src="postInfo.coverImage"
+        <img v-if="postInfo.coverImage !== ''" :src="postInfo.coverImage"
              class="post-bg"
              style="height: 450px;">
         <div class="content-container">
@@ -194,6 +195,7 @@ selectOne(ids).then(res => {
             <div class="container-text w-e-text">
               <MdPreview :codeFoldable="false" :editorId="id" :modelValue="postInfo.content"/>
               <MdCatalog :editorId="id" :scrollElement="scrollElement"/>
+              <Sudoku :imgList="postInfo.imgList"/>
             </div>
             <div class="tag-list"><a class="tag-item secondary">运营干货</a></div>
           </div>

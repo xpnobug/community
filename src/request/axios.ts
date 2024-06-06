@@ -11,7 +11,7 @@ service.interceptors.request.use(
     (config) => {
         // 尝试从localStorage中获取token
         const token = localStorage.getItem('satoken');
-        console.log('token:', token)
+        // console.log('token:', token)
         // 如果token存在，则将其添加到请求头中
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;

@@ -8,7 +8,7 @@
         @preview="handlePreview"
         @change="uploadChange"
     >
-      <div v-if="fileList.length < 8">
+      <div v-if="fileList.length < 9">
         <plus-outlined />
         <div style="margin-top: 8px">Upload</div>
       </div>
@@ -56,12 +56,22 @@ const handlePreview = async (file: UploadProps['fileList'][number]) => {
 const props = defineProps({
   handleClick: {
     type: Function
+  },
+  imgLists: {
+    type: Function
   }
 })
+const list = ref<UploadProps['fileList']>([])
 function uploadChange({file}: { event?: ProgressEvent }) {
   const res = (file as XMLHttpRequest).response
   if (res){
-    props.handleClick(res.data.downloadUrl)
+    list.value = [...list.value, res.data.downloadUrl]
+    if (props.handleClick != undefined) {
+      props.handleClick(res.data.downloadUrl)
+    }
+    if (props.imgLists != undefined) {
+      props.imgLists(list.value)
+    }
     message.success("上传成功")
   }
   return file

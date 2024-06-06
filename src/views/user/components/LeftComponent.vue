@@ -273,6 +273,7 @@ export default {
 
 .widget-box .widget-box-content  {
   margin-top: 36px;
+  color: #1a1a1a;
 }
 
 p {

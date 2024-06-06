@@ -14,7 +14,7 @@ getStatisticsById(ids).then(res => {
 });
 userInfo(ids).then(res => {
   users.value = res.data.data;
-  console.log(users.value)
+  // console.log(users.value)
 });
 
 </script>

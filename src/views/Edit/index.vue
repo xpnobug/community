@@ -1,12 +1,14 @@
-<script lang="ts" setup>
+<script lang="ts" setup xmlns="http://www.w3.org/1999/html">
 import Upload from "./compontents/upload.vue";
-import {getCurrentInstance, reactive} from "vue";
+import {getCurrentInstance, onMounted, reactive, ref, watch} from "vue";
 import {add} from "@/api/article";
 import {message} from "ant-design-vue";
 import CascaderCom from "@/views/Edit/compontents/CascaderCom.vue";
 
 import {MdEditor} from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
+import {useRoute} from "vue-router";
+import {useUserInfo} from "@/hooks/useCached";
 
 const state = reactive({
   text: '',
@@ -42,6 +44,7 @@ interface FormState {
   publishPlatform: string;
   userId: string;
   avatar: string;
+  imgList: string[];
 }
 
 //时间
@@ -56,7 +59,7 @@ const formState = reactive<FormState>({
   content: "",
   author: "",
   publishDate: date.getDate(),
-  tag: "帖子",
+  tag: "",
   coverImage: "",
   readCount: 0,
   likeCount: 0,
@@ -78,25 +81,43 @@ const formState = reactive<FormState>({
   publishPlatform: "LT-REAI专题",
   userId: "",
   avatar: "",
+  imgList: "",
 });
 
 //接收子组件传递的数据
 const parentClick = (value) => {
   formState.coverImage = value;
 }
+const imgLists = (value) => {
+  formState.imgList = value;
+  console.log(value)
+}
 const cascaderChange = (value) => {
   formState.publishPlatform = value;
 }
-instance?.proxy?.$Bus.on("userInfo", (param: any) => {
-  formState.userId = param.userId;
+
+//获取地址栏中id
+const route = useRoute();
+const type = ref();
+type.value = route.params.type;
+//监听type 是否变化
+watch(() => route.params.type, (newVal, oldVal) => {
+  type.value = newVal;
 })
 
-const onFinish = (values: any) => {
+//获取登录人信息
+const userInfo = useUserInfo();
+const addPost = () => {
+  formState.userId = userInfo.value.userId;
+  formState.tag = type.value;
   add(formState).then(res => {
     if (res.status === 200) {
       message.success("发布成功");
     }
   })
+}
+const onFinish = (values: any) => {
+  addPost();
 };
 
 const onFinishFailed = (errorInfo: any) => {
@@ -119,7 +140,8 @@ const onFinishFailed = (errorInfo: any) => {
                     @finish="onFinish"
                     @finishFailed="onFinishFailed"
                 >
-                  <div class="content-item thread" style="">
+                  <!-- 帖子-->
+                  <div class="content-item thread" style="" v-if="type === 'tz'">
                     <div class="form-row form-post-title">
                       <a-form-item
                           :rules="[{ required: true, message: '标题不能为空!' }]"
@@ -128,12 +150,29 @@ const onFinishFailed = (errorInfo: any) => {
                                  placeholder="请输入标题"/>
                       </a-form-item>
                     </div>
+                    <MdEditor v-model="formState.content" :theme="state.theme" height="600px"/>
+                  </div>
+                  <!-- 图文混排-->
+                  <div class="content-item feed snipcss-UkDxX" v-if="type === 'dt'">
+                    <div class="quick-post-body">
+                      <form class="form">
+                        <div class="form-row" style="margin-left: 0px;">
+                          <div class="form-item">
+                            <div class="form-textarea">
+                              <a-textarea v-model:value="formState.title" :rows="4" placeholder="请输入" :maxlength="500" />
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <upload :imgLists="imgLists"/>
                   </div>
 
-                  <MdEditor v-model="formState.content" :theme="state.theme" height="600px"/>
-
                   <div class="set-up">
-                    <div class="more-set-box" style="padding-bottom: 0px;">
+                    <div class="more-set-box" style="padding-bottom: 0px;" v-if="type === 'tz'">
                       <div class="more-item new-release">
                         <div class="title">
                           <div class="set-icon">

@@ -25,7 +25,7 @@
         </div>
         <el-button v-if="sfLogin === false" style="margin-right:10px;" type="primary" @click="login">登录</el-button>
         <div v-else style="display: flex; ">
-          <a-popover v-model:open="postpush" trigger="click">
+          <a-popover v-model:open="postpush" trigger="focus">
             <a-button type="primary" style="margin-right:10px;">发布</a-button>
             <template #content>
               <EditArticle/>
