@@ -254,11 +254,11 @@ h1, h2, h3, h4, h5, h6, p, ol, ul, figure, .table, .form-row {
   /*width: 85%;*/
   padding: 28px;
   border-radius: 12px;
-  background: #fff;
+  background: var(--reaicc-meta-theme-post-color);
 }
 
 .bulletin-board-box .head {
-  color: rgba(0, 0, 0, .85);
+  color: var(--reaicc-fontcolor);;
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 14px;
@@ -310,7 +310,7 @@ svg:not(:root) {
 
 .content-box .viewport {
   width: 100%;
-  background: #f8f8fb;
+  background: var(--reaicc-meta-theme-post-color);
   border-radius: 8px;
   margin: 0 auto;
   height: 150px;
@@ -324,13 +324,14 @@ svg:not(:root) {
 }
 
 .content-box .viewport .box-content > .box {
+  background: var(--reaicc-meta-theme-post-color);
   cursor: pointer;
   padding: 16px;
   flex: 0 0 100%;
 }
 
 .content-box .viewport .box-content > .box .title {
-  color: rgba(0, 0, 0, .85);
+  color:var(--reaicc-fontcolor);
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 7px;
@@ -343,7 +344,7 @@ svg:not(:root) {
 .content-box .viewport .box-content > .box .content {
   font-size: 14px;
   font-weight: 400;
-  color: rgba(0, 0, 0, .85);
+  color: var(--reaicc-fontcolor);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -371,12 +372,13 @@ svg:not(:root) {
 .widget-box {
   padding: 32px 28px;
   border-radius: 12px;
-  background-color: #fff;
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
   position: relative;
 }
 
 .widget-box .widget-box-title {
+  color: var(--reaicc-fontcolor);;
   font-size: 1rem;
   font-weight: 700;
 }
@@ -403,7 +405,7 @@ p {
 .filters .filter {
   margin-right: 20px;
   padding-bottom: 4px;
-  color: #adafca;
+  color: var(--reaicc-fontcolor);;
   font-size: 0.875rem;
   font-weight: 700;
   opacity: .6;
@@ -587,6 +589,7 @@ a {
 }
 
 .user-status .user-status-text.small {
+  color: var(--reaicc-fontcolor);
   font-size: 0.75rem;
 }
 

@@ -126,7 +126,7 @@ const tjBanKList = ref([
 
 <style scoped>
 h1, h2, h3, h4, h5, h6, a, p {
-  color: #3e3f5e;
+  color: var(--reaicc-fontcolor);
   /*font-family: "Rajdhani", sans-serif;*/
   line-height: 1em;
 }
@@ -156,7 +156,7 @@ h1, h2, h3, h4, h5, h6, p, ol, ul, figure, .table, .form-row {
 .widget-box {
   padding: 32px 28px;
   border-radius: 12px;
-  background-color: #fff;
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
   position: relative;
 }
@@ -212,7 +212,7 @@ p {
 }
 
 .filters .filter.active, .filters .filter:hover {
-  color: #3e3f5e;
+  color: var(--reaicc-fontcolor);
   opacity: 1;
 }
 
@@ -337,7 +337,7 @@ img, svg {
 }
 
 .user-status .user-status-title {
-  color: #3e3f5e;
+  color: var(--reaicc-fontcolor);
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.4285714286em;
@@ -350,7 +350,7 @@ img, svg {
 }
 
 .user-status .user-status-title .bold {
-  color: #3e3f5e;
+  color: var(--reaicc-fontcolor);
   font-weight: 600;
   -webkit-font-smoothing: antialiased;
 }
@@ -384,7 +384,7 @@ a {
 
 .user-status .user-status-text {
   margin-top: 4px;
-  color: #3e3f5e;
+  color: var(--reaicc-fontcolor);
   font-size: 0.875rem;
   font-weight: 500;
 }

@@ -228,17 +228,6 @@ const props = defineProps(['postInfo'])
   background-color: #337fff;
 }
 
-.home-slider {
-  display: flex;
-  flex-wrap: nowrap;
-  width: 100%;
-  border-radius: 12px;
-  background: #fcfcfd;
-  box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
-  padding: 0 40px;
-  position: relative;
-  overflow: hidden;
-}
 
 :selection {
   background-color: #337fff;
@@ -247,7 +236,7 @@ const props = defineProps(['postInfo'])
 .widget-box {
   padding: 32px 28px;
   border-radius: 12px;
-  background-color: #fff;
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
   position: relative;
 }
@@ -348,14 +337,14 @@ const props = defineProps(['postInfo'])
   justify-content: space-between;
   height: 65px;
   padding: 0 28px;
-  border-top: 1px solid #eaeaf5;
+  border-top: 1px solid var(--reaicc-post-line-bg);
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   background-color: #fcfcfd;
 }
 
 .post-options {
-  background-color: #fcfcfd;
+  background-color: var(--reaicc-meta-theme-post-color);;
 }
 
 .loader-bars .loader-bar {
@@ -496,7 +485,7 @@ svg:not(:root) {
 .post-preview {
   min-height: 516px;
   border-radius: 12px;
-  background-color: #fff;
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
 }
 
@@ -580,7 +569,7 @@ p {
 }
 
 p {
-  color: #3e3f5e;
+  color: var(--reaicc-fontcolor);
   font-family: "Rajdhani", sans-serif;
   line-height: 1em;
 }
@@ -726,7 +715,7 @@ figure {
 
 .user-status .user-status-text {
   margin-top: 4px;
-  color: #3e3f5e;
+  color: var(--reaicc-fontcolor);;
   font-size: 0.875rem;
   font-weight: 500;
 }
@@ -967,7 +956,7 @@ figure > img {
 }
 
 .user-status .user-status-title .bold {
-  color: #3e3f5e;
+  color: var(--reaicc-fontcolor);;
   font-weight: 600;
   -webkit-font-smoothing: antialiased;
 }

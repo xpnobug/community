@@ -335,7 +335,7 @@ onMounted(() => {
   flex-wrap: nowrap;
   /*width: 100%;*/
   border-radius: 12px;
-  background: #fcfcfd;
+  background: var(--reaicc-meta-theme-post-color);;
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
   padding: 0 40px;
   position: relative;
@@ -349,7 +349,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fcfcfd;
+  background: var(--reaicc-meta-theme-post-color);;
   z-index: 1;
   cursor: pointer;
 }
@@ -371,7 +371,7 @@ onMounted(() => {
 }
 
 .home-slider .active {
-  color: #212529 !important;
+  color: var(--reaicc-hovertext) !important;
   border-bottom: 4px solid #337fff !important;
 }
 
@@ -379,7 +379,7 @@ onMounted(() => {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  color: #bababa;
+  color: var(--reaicc-fontcolor);
   cursor: pointer;
   display: flex;
   justify-content: center;

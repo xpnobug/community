@@ -141,6 +141,7 @@
   --reaicc-nav-bg: #337fff;
   --reaicc-leftnav-bg: #fff;
   --reaicc-menu-active-color: #1d1e22;
+  --reaicc-post-line-bg: #eaeaf5;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -185,7 +186,8 @@
   /*----*/
   --reaicc-nav-bg: #1d1e22;
   --reaicc-leftnav-bg: #1d1e22;
-  --reaicc-menu-active-color: #fff
+  --reaicc-menu-active-color: #fff;
+  --reaicc-post-line-bg: #3e3f5e;
 }
 
 .icon-comment, .icon-thumbs-up, .icon-friend, .icon-info, .icon-group, .icon-marketplace, .icon-add-friend, .icon-remove-friend, .icon-delete, .icon-send-message, .icon-settings, .icon-cross-thin, .icon-newsfeed, .icon-overview, .icon-members, .icon-badges, .icon-quests, .icon-streams, .icon-events, .icon-events-monthly, .icon-events-weekly, .icon-events-daily, .icon-pin, .icon-ticket, .icon-forums, .icon-profile, .icon-timeline, .icon-photos, .icon-videos, .icon-blog-posts, .icon-forum, .icon-store, .icon-share, .icon-pinned, .icon-status, .icon-big-grid-view, .icon-small-grid-view, .icon-list-grid-view, .icon-poll, .icon-camera, .icon-gif, .icon-tags, .icon-trophy, .icon-return, .icon-clock, .icon-earnings, .icon-wallet, .icon-item, .icon-revenue {
