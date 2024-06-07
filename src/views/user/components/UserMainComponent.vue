@@ -145,7 +145,9 @@ onMounted(() => {
       </template>
       <PostInfoList :postInfo="postList"/>
     </a-list>
-
+    <div :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }">
+      <a-spin tip="Loading..."  v-show="loading === true"/>
+    </div>
 
     <!--    <div class="widget-box no-padding" video-height="0">-->
     <!--      <div class="widget-box-settings" style="z-index: 100;">-->

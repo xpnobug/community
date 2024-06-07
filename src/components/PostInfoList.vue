@@ -91,7 +91,7 @@ const props = defineProps(['postInfo'])
         </div>
       </div>
       <div v-if="item.tag === 'dt'" class="post-preview medium" style="margin: 16px 28px 0px;">
-        <p class="widget-box-status-text feed-summary" style="margin-top: 0px;"> {{item.title}} </p>
+        <p class="widget-box-status-text feed-summary" style="margin-top: 0px;"> {{item.content}} </p>
         <Sudoku :imgList="item.imgList"/>
       </div>
       <div class="widget-box-status-content">

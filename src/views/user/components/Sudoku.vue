@@ -24,9 +24,62 @@ const visible = ref(false);
 </script>
 
 <style scoped>
+@media screen and (max-width: 768px) {
+  .tl-photos{
+    display: flex;
+    width: 350px !important;
+    flex-wrap: wrap;
+  }
+  /*两张图片*/
+  .tl-photos>img:first-child:nth-last-child(2),
+  .tl-photos>img:nth-child(2):nth-last-child(1){
+    width: 150px!important;
+  }
+  .tl-photos>img:nth-child(2):nth-last-child(1){
+    margin-left: 5px;
+  }
+  /*三张图片*/
+  .tl-photos>img:first-child:nth-last-child(3),
+  .tl-photos>img:nth-child(2):nth-last-child(2),
+  .tl-photos>img:nth-child(3):nth-last-child(1){
+    width: 113px!important;
+  }
+  .tl-photos>img:nth-child(2):nth-last-child(2),
+  .tl-photos>img:nth-child(3):nth-last-child(1){
+    margin-left: 5px;
+  }
+  /*四张图片*/
+  .tl-photos>img:first-child:nth-last-child(4),
+  .tl-photos>img:first-child:nth-last-child(4) ~ img{
+    width: 150px!important;
+  }
+  .tl-photos>img:nth-child(2):nth-last-child(3),
+  .tl-photos>img:nth-child(4):nth-last-child(1){
+    margin-left: 5px;
+  }
+  .tl-photos>img:nth-child(2):nth-last-child(3) ~ img{
+    margin-top: 5px;
+  }
+  /*五张图片*/
+  .tl-photos>img:first-child:nth-last-child(n + 5),
+  .tl-photos>img:first-child:nth-last-child(n + 5) ~ img{
+    width: 100px !important;
+  }
+  .tl-photos>img:nth-child(3n -1),
+  .tl-photos>img:nth-child(3n){
+    margin-left: 5px;
+  }
+  /*解决margin-left 只有4张照片的特殊情况*/
+  .tl-photos>img:nth-child(3):nth-last-child(2){
+    margin-left: 0;
+  }
+  .tl-photos>img:nth-child(3) ~ img{
+    margin-top: 5px;
+  }
+}
 .tl-photos{
   display: flex;
-  width: 400px;
+  /*width: 400px;*/
   flex-wrap: wrap;
 }
 .tl-photos img{

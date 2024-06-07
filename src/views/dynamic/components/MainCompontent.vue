@@ -152,16 +152,21 @@ onMounted(() => {
           class="demo-loadmore-list"
           item-layout="vertical">
         <template #loadMore>
+
           <div
               v-if="!initLoading && !loading"
               :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }"
           >
             <a-button v-if="postCount !== 0 " @click="onLoadMore">加载更多...</a-button>
-            <div v-else disabled>没有更多数据了</div>
+            <div v-if="postCount === 0 " disabled>没有更多数据了</div>
           </div>
         </template>
         <PostInfoList :postInfo="postList"/>
       </a-list>
+      <div :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }">
+        <a-spin tip="Loading..."  v-show="loading === true"/>
+      </div>
+
       <!--      <div class="widget-box no-padding post-card content" video-height="0"-->
       <!--           v-for="post in postInfo"-->
       <!--           v-show="tagId === '1'"-->

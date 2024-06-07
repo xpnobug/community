@@ -81,7 +81,7 @@ const formState = reactive<FormState>({
   publishPlatform: "LT-REAI专题",
   userId: "",
   avatar: "",
-  imgList: "",
+  imgList:[],
 });
 
 //接收子组件传递的数据
@@ -159,7 +159,7 @@ const onFinishFailed = (errorInfo: any) => {
                         <div class="form-row" style="margin-left: 0px;">
                           <div class="form-item">
                             <div class="form-textarea">
-                              <a-textarea v-model:value="formState.title" :rows="4" placeholder="请输入" :maxlength="500" />
+                              <a-textarea v-model:value="formState.content" :rows="4" placeholder="请输入" :maxlength="500" />
                             </div>
                           </div>
                         </div>
