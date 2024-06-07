@@ -3,7 +3,6 @@
 import { defineProps } from 'vue';
 import Sudoku from "@/views/user/components/Sudoku.vue";
 const props = defineProps(['postInfo'])
-console.log(props.postInfo)
 </script>
 
 
@@ -163,7 +162,6 @@ console.log(props.postInfo)
 }
 
 .content {
-  color: #fff;
   /* 添加过度效果 */
   transition: transform 0.4s ease;
 }

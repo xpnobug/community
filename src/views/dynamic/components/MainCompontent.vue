@@ -313,29 +313,6 @@ onMounted(() => {
 
 
 <style scoped>
-.content {
-  color: #fff;
-  /* 添加过度效果 */
-  transition: transform 0.4s ease;
-}
-
-/* 奇数盒子 */
-.content:nth-child(odd):first-child {
-  transform: translateX(0%);
-}
-
-.content:nth-child(odd) {
-  transform: translateX(110%);
-}
-
-/* 偶数盒子 */
-.content:nth-child(even) {
-  transform: translateX(-110%);
-}
-
-.content.content-center {
-  transform: translateX(0);
-}
 
 .grid.grid-3-6-3 > .grid-column:nth-child(2) {
   grid-area: content;

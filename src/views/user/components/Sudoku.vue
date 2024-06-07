@@ -1,12 +1,26 @@
 <template>
   <div class="tl-photos">
-    <img v-for="item in props.imgList" :src="item" alt="">
+    <img
+        v-for="item in props.imgList"
+        :src="item" :width="200"
+        @click="visible = true"
+    />
+  </div>
+  <div style="display: none">
+    <a-image-preview-group
+        :preview="{ visible, onVisibleChange: vis => (visible = vis) }">
+      <a-image
+          v-for="item in props.imgList" :src="item"
+      />
+    </a-image-preview-group>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import {defineProps, ref} from 'vue';
+
 const props = defineProps(['imgList'])
+const visible = ref(false);
 </script>
 
 <style scoped>
