@@ -3,8 +3,26 @@
 import {nextTick, onMounted, reactive, ref} from "vue";
 import {useRoute} from "vue-router";
 import {listByUserId} from "@/api/article.js";
-import Sudoku from "@/views/user/components/Sudoku.vue";
+import {createFromIconfontCN} from "@ant-design/icons-vue";
 import PostInfoList from "@/components/PostInfoList.vue";
+
+//svg图标
+const IconFont = createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/c/font_1898478_9kwtleoivm4.js',
+});
+
+const tagList = ref([
+  {id: "1", label: '推荐'},
+  {id: "2", label: '圈子'},
+  {id: "3", label: '最新'},
+  {id: "4", label: '新手必学'},
+  {id: "5", label: '功能前瞻'},
+  {id: "6", label: '瀑布频道'},
+  {id: "7", label: '功能讲解'},
+  {id: "8", label: '文章'},
+  {id: "9", label: '问答'},
+  // Add more menu items as needed
+]);
 
 interface Page {
   pageSize: number;
@@ -99,34 +117,52 @@ onMounted(() => {
     }
   }
 
-  let styleElement = document.querySelector(".slider-list");
-  // console.log(styleElement);
-  // styleElement.style.width = slider.value + "px";
 });
+// CategoryBar滚动
+function scrollCategoryBarToRight() {
+  // 获取需要操作的元素
+  const items = document.getElementById("catalog-list");
+  const nextButton = document.getElementById("category-bar-next");
 
+  // 检查元素是否存在
+  if (items && nextButton) {
+    const itemsWidth = items.clientWidth;
+
+    // 判断是否已经滚动到最右侧
+    if (items.scrollLeft + items.clientWidth + 1 >= items.scrollWidth) {
+      // 滚动到初始位置并更新按钮内容
+      items.scroll({
+        left: 0,
+        behavior: "smooth",
+      });
+      // nextButton.innerHTML = '<icon-font class="icon svg" type="icon-xiayige"/>';
+    } else {
+      // 滚动到下一个视图
+      items.scrollBy({
+        left: itemsWidth,
+        behavior: "smooth",
+      });
+    }
+  } else {
+    console.error("Element(s) not found: 'catalog-list' and/or 'category-bar-next'.");
+  }
+}
+const tagId = ref("1");
+const handleTag = (value: any) => {
+  tagId.value = value.id
+}
 
 </script>
 
 <template>
   <div class="grid-column snipcss-iJ4SG">
-    <div id="slider_home" class="home-slider" style="height: 65px;">
-      <div class="left">
-        <svg class="slider-control-icon icon-small-arrow">
-          <use xlink:href="#svg-small-arrow"></use>
-        </svg>
+    <div id="slider_home" class="home-slider" style="height:65px;">
+      <div class="right" id="category-bar-next" style="" @click="scrollCategoryBarToRight()">
+        <icon-font class="icon svg" type="icon-xiayige"/>
       </div>
-      <div class="right">
-        <svg class="slider-control-icon icon-small-arrow">
-          <use xlink:href="#svg-small-arrow"></use>
-        </svg>
-      </div>
-      <div class="slider-list" style="transform: translateX(0px); ">
-        <div class="slider active" style="min-width: 95px;"><span>全部</span></div>
-        <div class="slider" style="min-width: 95px;"><span>帖子</span></div>
-        <div class="slider" style="min-width: 95px;"><span>动态</span></div>
-        <div class="slider" style="min-width: 95px;"><span>资讯</span></div>
-        <div class="slider" style="min-width: 95px;"><span>视频</span></div>
-        <div class="slider" style="min-width: 95px;"><span>问答</span></div>
+      <div class="slider-list" id="catalog-list" style="transform:translateX(0px);">
+        <div class="slider" style="min-width: 95px;" v-for="tag in tagList" :class="[{ 'active': tagId === tag.id}]"
+             @click="handleTag(tag) "><span>{{ tag.label }}</span></div>
       </div>
     </div>
     <a-list
@@ -1484,4 +1520,155 @@ stop:nth-child(2) {
 
 }
 
+
+
+
+.home-slider .active {
+  color: var(--reaicc-hovertext) !important;
+  border-bottom: 4px solid #337fff !important;
+}
+:selection {
+  background: #2128bd;
+  color: #f7f7f7;
+}
+
+:-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+:-webkit-scrollbar-thumb {
+  background-color: #888;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+:-webkit-scrollbar-thumb {
+  background: var(--scrollbar-color);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+:-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+:-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+#category-bar #catalog-bar  {
+  margin-bottom: 0;
+  overflow-y: hidden;
+}
+
+#catalog-list {
+  display: flex;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+#catalog-list:-webkit-scrollbar {
+  display: none;
+}
+
+.category-bar-next {
+  margin-left: 16px;
+  cursor: pointer;
+  display: flex;
+}
+
+.category-bar-next:hover {
+  color: var(--reaicc-lighttext);
+}
+
+a {
+  background-color: transparent;
+}
+
+a {
+  color: var(--reaicc-fontcolor);
+  text-decoration: none;
+  word-wrap: break-word;
+  -webkit-transition: all 0.2s ease 0s;
+  -moz-transition: all 0.2s ease 0s;
+  -o-transition: all 0.2s ease 0s;
+  -ms-transition: all 0.2s ease 0s;
+  transition: all 0.2s ease 0s;
+  overflow-wrap: break-word;
+}
+
+a.catalog-more {
+  min-width: fit-content;
+  font-weight: bold;
+  color: var(--reaicc-fontcolor);
+  margin-left: 16px;
+}
+
+a:hover {
+  color: #425aef;
+}
+
+a.catalog-more:hover {
+  color: var(--reaicc-theme);
+}
+
+.catalog-list-item {
+  display: flex;
+  align-items: center;
+}
+
+.reaiccfont {
+  font-family: "reaiccfont";
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.reaiccfont {
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  font-family: reaiccfont !important;
+}
+
+#catalog-bar i  {
+  line-height: inherit;
+}
+
+.reaiccfont:before {
+  font-family: "reaiccfont" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.reaicc-icon-angle-double-right:before {
+  content: "";
+}
+
+.catalog-list-item a  {
+  margin-right: 0.3rem;
+  font-weight: bold;
+  color: var(--font-color);
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  padding: 0.1rem 0.5rem;
+  border-radius: 8px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.catalog-list-item.select a  {
+  background: var(--reaicc-main);
+  color: var(--reaicc-white);
+  border-radius: 8px;
+}
+
+.catalog-list-item:hover a {
+  background: var(--reaicc-main);
+  color: var(--reaicc-white);
+}
 </style>
