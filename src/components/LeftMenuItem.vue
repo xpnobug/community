@@ -554,12 +554,11 @@ a:active, a:hover {
   .shell {
     display: none;
   }
-  .right-content-style[data-v-af1427b4] {
+  .right-content-style {
     width: 100%;
-     height: 100%;
+    height: 100%;
     background-color: var(--global-bg);
-     display: block;
-    /* justify-content: center; */
+    display: block;
   }
 }
 </style>
