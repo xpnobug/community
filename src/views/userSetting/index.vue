@@ -5,6 +5,7 @@ import {getCurrentInstance, reactive, ref} from "vue";
 import {message, UploadProps} from "ant-design-vue";
 import UserInfoUpload from "@/views/userSetting/compontents/UserInfoUpload.vue";
 import {updateUser} from "@/api/user";
+import MyPushPost from "@/views/userSetting/compontents/MyPushPost.vue";
 
 interface FormState {
   username: string;
@@ -85,14 +86,15 @@ const update = (val) => {
                     <p class="sidebar-menu-header-text">管理发布内容，修改个人消息，管理消息通知</p>
                   </div>
                   <div style="overflow: hidden; height: 161px; transition: all 0.3s ease-in-out 0s;">
-                    <div class="sidebar-menu-body accordion-content-linked accordion-open"><a
-                        class="sidebar-menu-link">我的发布</a> <a class="sidebar-menu-link active"
-                    >我的信息</a> <a
-                        class="sidebar-menu-link">消息通知</a> <a class="sidebar-menu-link"
-                    >邀请注册</a></div>
+                    <div class="sidebar-menu-body accordion-content-linked accordion-open">
+                      <a class="sidebar-menu-link">我的发布</a>
+                      <a class="sidebar-menu-link active">我的信息</a>
+                      <a class="sidebar-menu-link">消息通知</a>
+                      <a class="sidebar-menu-link">邀请注册</a>
+                    </div>
                   </div>
                 </div>
-                <div class="sidebar-menu-item">
+                <div class="sidebar-menu-item" style="display: none;">
                   <div class="sidebar-menu-header accordion-trigger-linked">
                     <svg class="sidebar-menu-header-icon icon-settings">
                       <use xlink:href="#svg-settings"></use>
@@ -114,7 +116,7 @@ const update = (val) => {
                     >修改密码</a></div>
                   </div>
                 </div>
-                <div class="sidebar-menu-item">
+                <div class="sidebar-menu-item" style="display: none;">
                   <div class="sidebar-menu-header accordion-trigger-linked">
                     <svg class="sidebar-menu-header-icon icon-group">
                       <use xlink:href="#svg-group"></use>
@@ -138,7 +140,7 @@ const update = (val) => {
                         class="sidebar-menu-link">申请信息</a></div>
                   </div>
                 </div>
-                <div class="sidebar-menu-item">
+                <div class="sidebar-menu-item" style="display: none;">
                   <div class="sidebar-menu-header accordion-trigger-linked">
                     <svg class="sidebar-menu-header-icon icon-group">
                       <use xlink:href="#svg-dollar"></use>
@@ -163,7 +165,7 @@ const update = (val) => {
                         class="sidebar-menu-link">积分明细</a></div>
                   </div>
                 </div>
-                <div class="sidebar-menu-item">
+                <div class="sidebar-menu-item" style="display: none;">
                   <div class="sidebar-menu-header accordion-trigger-linked">
                     <svg class="sidebar-menu-header-icon icon-profile">
                       <use xlink:href="#svg-profile"></use>
@@ -189,7 +191,7 @@ const update = (val) => {
             </div>
           </div>
         </div>
-        <div class="account-hub-content">
+        <div style="display: none" class="account-hub-content">
           <div class="section-header">
             <div class="section-header-info">
               <p class="section-pretitle">个人</p>
@@ -320,6 +322,7 @@ const update = (val) => {
             </div>
           </div>
         </div>
+        <MyPushPost/>
       </div>
     </div>
   </div>
