@@ -2,11 +2,13 @@
 import TopMenu from '../components/TopMenu.vue'
 import LeftMenu from "../components/LeftMenu.vue";
 import FooterView from "@/views/footer/FooterView.vue";
+import LeftMenuItem from "@/components/LeftMenuItem.vue";
 </script>
 
 <template>
   <TopMenu msg="Vite + Vue" />
-  <LeftMenu/>
+<!--  <LeftMenu/>-->
+  <LeftMenuItem/>
   <FooterView/>
 </template>
 
