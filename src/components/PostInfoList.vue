@@ -1,8 +1,8 @@
 
 <script lang="ts" setup>
-import { defineProps } from 'vue';
 import Sudoku from "@/views/user/components/Sudoku.vue";
-const props = defineProps(['postInfo'])
+import { defineProps } from 'vue';
+const props = defineProps(['postInfo']);
 </script>
 
 
@@ -167,9 +167,6 @@ const props = defineProps(['postInfo'])
 }
 
 /* 奇数盒子 */
-.content:nth-child(odd):first-child {
-  transform: translateX(0%);
-}
 .content:nth-child(odd) {
   transform: translateX(110%);
 }
@@ -181,6 +178,12 @@ const props = defineProps(['postInfo'])
 
 .content.content-center {
   transform: translateX(0);
+}
+
+/* 或者，如果 .content 确实是它的父元素的第一个 .content 子元素，
+   那么也可以使用 :first-of-type 来选择它 */
+.content:first-of-type {
+  transform: translateX(0%);
 }
 
 .grid-column {
