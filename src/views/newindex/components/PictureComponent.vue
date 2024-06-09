@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from 'vue'
+import {ref, defineProps } from 'vue';
 const props = defineProps(['posts'])
 import type { SkeletonButtonProps, SkeletonAvatarProps } from 'ant-design-vue';
 import {useRouter} from "vue-router";

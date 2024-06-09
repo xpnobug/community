@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {watch} from "vue";
+import {watch,defineProps} from "vue";
 import {useRouter} from "vue-router";
 //获取用户信息
 const props = defineProps(['posts', 'loadings'])

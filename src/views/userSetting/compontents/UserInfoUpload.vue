@@ -13,7 +13,7 @@
   </a-upload>
 </template>
 <script lang="ts" setup>
-import {ref} from 'vue';
+import {ref,defineProps} from 'vue';
 import type {UploadProps} from 'ant-design-vue';
 import {message} from "ant-design-vue";
 const fileList = ref<UploadProps['fileList']>([]);
