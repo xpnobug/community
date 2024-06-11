@@ -8,7 +8,7 @@ import mitt from "mitt"
 import App from './App.vue'
 import route from "./router"
 import { Button, message } from 'ant-design-vue';
-
+import store from './store/store.js';
 
 const app = createApp(App)
 const Mitt = mitt()
@@ -22,6 +22,7 @@ app.config.globalProperties.$message = message;
 app.config.globalProperties.$Bus = Mitt
 // 使用路由
 app.use(route);
+app.provide('store', store);
 app.use(ElementPlus);
 app.use(Antd);
 app.mount('#app')

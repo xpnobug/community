@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import {nextTick, onMounted, reactive, ref} from "vue";
+import {nextTick, onMounted, reactive, ref,inject} from "vue";
 import {list} from "@/api/article";
 import {createFromIconfontCN} from "@ant-design/icons-vue";
 import PostInfoList from "@/components/PostInfoList.vue";
@@ -42,6 +42,8 @@ const page = reactive<Page>({
 });
 
 
+const store = inject('store');
+store.setLoading(true);
 const postList = ref<any[]>([]);
 const postCount = ref<number>(1);
 const showList = () => {
@@ -53,6 +55,7 @@ const showList = () => {
     //.slice((page.currentPage - 1) * page.pageSize, page.currentPage * page.pageSize)
     postList.value = res.data.data;
     initLoading.value = false;
+    store.setLoading(false);
   })
 }
 showList();

@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import {selectOne} from "@/api/article";
 import {useRoute, useRouter} from 'vue-router';
-import {ref} from "vue";
+import {ref,inject} from "vue";
 import {MdCatalog, MdPreview} from 'md-editor-v3';
 // preview.css相比style.css少了编辑器那部分样式
 import 'md-editor-v3/lib/preview.css';
 import Sudoku from "@/views/user/components/Sudoku.vue";
+
 
 const id = 'preview-only';
 const text = ref('# Hello Editor');
@@ -15,9 +16,12 @@ const scrollElement = document.documentElement;
 const route = useRoute();
 const ids = route.params.id;
 const postInfo = ref([]);
+const store = inject('store');
+store.setLoading(true);
 selectOne(ids).then(res => {
   postInfo.value = res.data.data
   console.log(postInfo.value)
+  store.setLoading(false);
 })
 
 </script>
@@ -117,7 +121,7 @@ selectOne(ids).then(res => {
       <div class="postStyle">
         <img v-if="postInfo.coverImage !== ''" :src="postInfo.coverImage"
              class="post-bg"
-             style="height: 450px;">
+             style="height: 240px;">
         <div class="content-container">
           <div class="container-head">
             <div class="heads">

@@ -1,24 +1,43 @@
 <template>
-  <div class="heart">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+  <div class="loading-overlay" v-if="store.state.isLoading" >
+    <div class="heart">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </template>
 
 <script>
+import { inject } from 'vue';
+
 export default {
-  name: "LoveHeartLoading"
-}
+  setup() {
+    const store = inject('store');
+    return { store };
+  }
+};
 </script>
 
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 body {
   margin: 0; /* 设置页面外边距为0 */
   height: 100vh; /* 设置高度为视口高度 */
