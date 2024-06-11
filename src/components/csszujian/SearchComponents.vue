@@ -1,0 +1,114 @@
+<template>
+  <div class="searchBar">
+    <div class="icon"><i class="iconfont icon-sousuoxiao"></i></div>
+    <div class="textInput">
+      <input class="inp" type="text" placeholder="请输入搜索关键字">
+      <button class="goBtn">go</button>
+      <div class="clear"><i class="iconfont icon-close"></i></div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "SearchComponents"
+}
+</script>
+
+<style scoped>
+* {
+  margin: 0; /* 设置所有元素的外边距为0 */
+  padding: 0; /* 设置所有元素的内边距为0 */
+  box-sizing: border-box; /* 设置盒模型为border-box，包括内边距和边框在内的尺寸计算方式 */
+}
+
+body {
+  width: 100vw; /* 设置body宽度为视口宽度 */
+  height: 100vh; /* 设置body高度为视口高度 */
+  background: linear-gradient(to bottom, skyblue, #003462); /* 设置背景为从上到下的线性渐变色 */
+  display: flex; /* 使用flex布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+}
+
+.searchBar {
+  width: 60px; /* 设置搜索栏宽度 */
+  height: 60px; /* 设置搜索栏高度 */
+  background-color: #fff; /* 设置背景颜色为白色 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, .4); /* 设置阴影效果 */
+  border-radius: 60px; /* 设置圆角为半径的大小 */
+  position: relative; /* 设置相对定位 */
+  overflow: hidden; /* 超出部分隐藏 */
+  transition: .5s; /* 设置过渡效果时长为0.5秒 */
+}
+
+.icon {
+  width: 60px; /* 设置图标容器宽度 */
+  height: 60px; /* 设置图标容器高度 */
+  display: flex; /* 使用flex布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  cursor: pointer; /* 鼠标移上去显示手型 */
+}
+
+.icon i {
+  color: dodgerblue; /* 设置图标颜色为深蓝色 */
+  font-size: 30px; /* 设置图标大小为30像素 */
+}
+
+.textInput {
+  width: 320px; /* 设置输入框宽度 */
+  height: 60px; /* 设置输入框高度 */
+  display: flex; /* 使用flex布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  background-color: blue; /* 设置背景颜色为蓝色 */
+  position: absolute; /* 设置绝对定位 */
+  top: 0; /* 顶部对齐 */
+  left: 60px; /* 距离左侧60像素 */
+}
+
+.textInput input {
+  width: 100%; /* 输入框宽度占满父容器 */
+  height: 100%; /* 输入框高度占满父容器 */
+  border: none; /* 去除边框 */
+  outline: none; /* 去除外边框 */
+  font-size: 18px; /* 设置字体大小为18像素 */
+}
+
+.clear {
+  width: 15px; /* 设置清除按钮宽度 */
+  height: 15px; /* 设置清除按钮高度 */
+  position: absolute; /* 设置绝对定位 */
+  right: 22%; /* 距离右侧22% */
+  top: 50%; /* 顶部对齐 */
+  transform: translateY(-50%); /* 垂直居中 */
+  cursor: pointer; /* 鼠标移上去显示手型 */
+  display: flex; /* 使用flex布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+}
+
+.clear i {
+  color: #999; /* 设置清除图标颜色为灰色 */
+}
+
+.goBtn {
+  width: 12%; /* 设置按钮宽度为父容器宽度的12% */
+  height: 60%; /* 设置按钮高度为父容器高度的60% */
+  position: absolute; /* 设置绝对定位 */
+  top: 20%; /* 距离顶部20% */
+  right: 0; /* 靠右对齐 */
+  border-radius: 8px; /* 设置圆角为8像素 */
+  outline: none; /* 去除外边框 */
+  border: none; /* 去除边框 */
+  color: #fff; /* 设置文字颜色为白色 */
+  box-shadow: 0 0 2px rgba(0, 0, 0, .4); /* 设置阴影效果 */
+  background: linear-gradient(skyblue, deepskyblue); /* 设置背景为从天蓝色到深天蓝色的线性渐变色 */
+  cursor: pointer; /* 鼠标移上去显示手型 */
+}
+
+.changeWidth {
+  width: 400px; /* 设置具有changeWidth类名元素的宽度为400像素 */
+}
+</style>

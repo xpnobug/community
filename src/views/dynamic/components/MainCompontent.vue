@@ -406,7 +406,7 @@ function scrollCategoryBarToRight() {
   justify-content: center;
   align-items: center;
   position: relative;
-  border-bottom: 4px solid #fff;
+  /*border-bottom: 4px solid #fff;*/
 }
 
 .home-slider .slider:before {

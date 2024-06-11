@@ -187,7 +187,7 @@ p {
 .filters .filter {
   margin-right: 20px;
   padding-bottom: 4px;
-  color: #adafca;
+  /*color: #adafca;*/
   font-size: 0.875rem;
   font-weight: 700;
   opacity: .6;
@@ -216,31 +216,11 @@ p {
   opacity: 1;
 }
 
-.filters .filter {
-  margin-right: 20px;
-  padding-bottom: 4px;
-  color: #adafca;
-  font-size: 0.875rem;
-  font-weight: 700;
-  opacity: .6;
-  cursor: pointer;
-  transition: color .2s ease-in-out, opacity .2s ease-in-out;
-}
 
 .filters .filter:last-child {
   margin-right: 0;
 }
 
-.filters .filter {
-  margin-right: 20px;
-  padding-bottom: 4px;
-  color: #adafca;
-  font-size: 0.875rem;
-  font-weight: 700;
-  opacity: .6;
-  cursor: pointer;
-  transition: color .2s ease-in-out, opacity .2s ease-in-out;
-}
 
 .widget-box .widget-box-content .filters + .user-status-list, .widget-box .widget-box-content .filters + .post-preview-line-list {
   margin-top: 24px;

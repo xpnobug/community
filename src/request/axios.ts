@@ -10,13 +10,12 @@ const service = axios.create({
 service.interceptors.request.use(
     (config) => {
         // 尝试从localStorage中获取token
-        const token = localStorage.getItem('satoken');
-        // console.log('token:', token)
+        const token = localStorage.getItem('token');
+        console.log('token:', token)
         // 如果token存在，则将其添加到请求头中
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
-
         // 返回修改后的配置对象
         return config;
     },

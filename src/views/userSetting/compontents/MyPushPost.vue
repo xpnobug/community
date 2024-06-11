@@ -1,6 +1,8 @@
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import {reactive, ref} from 'vue'
+import TableListView from "@/views/userSetting/compontents/TableListView.vue";
+import {listByUserId} from "@/api/article";
 const tagList = ref([
   {id: "1", label: '全部'},
   {id: "2", label: '帖子'},
@@ -24,6 +26,7 @@ const stateId = ref("1");
 const handleState = (value: any) => {
   stateId.value = value.id
 }
+
 </script>
 
 <template>
@@ -50,7 +53,8 @@ const handleState = (value: any) => {
              @click="handleState(item) "> {{ item.label }} </div>
       </div>
     </div>
-    <a-empty style="color: black" description="暂无数据" />
+    <TableListView />
+<!--    <a-empty style="color: black" description="暂无数据" />-->
   </div>
 </template>
 

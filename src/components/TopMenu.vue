@@ -203,7 +203,7 @@ const login = () => {
   border: none;
   border-radius: 10px;
   margin-right: 10px;
-  background-color: #0051d4;
+  background-color: var(--reaicc-nav-bg);
 }
 
 input[type="text"], input[type="password"] {

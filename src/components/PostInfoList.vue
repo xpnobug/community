@@ -2,6 +2,7 @@
 <script lang="ts" setup>
 import Sudoku from "@/views/user/components/Sudoku.vue";
 import { defineProps } from 'vue';
+import NavClickComponents from "@/components/csszujian/NavClickComponents.vue";
 const props = defineProps(['postInfo']);
 </script>
 
@@ -69,8 +70,7 @@ const props = defineProps(['postInfo']);
         <a :href="/post/+item.articleId" class="post-preview-link">
           <figure :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}"
                   class="post-preview-image post-preview-info"
-                  style="margin: 0px auto !important; border-top: 1px solid rgb(230, 230, 230); border-right: 1px solid rgb(230, 230, 230); border-bottom: none; border-left: 1px solid rgb(230, 230, 230); border-image: initial; border-top-left-radius: 12px; border-top-right-radius: 12px; box-shadow: none; cursor: pointer;
-                    height: 297px;">
+                  style="margin: 0px auto !important;  border-image: initial; border-top-left-radius: 12px; border-top-right-radius: 12px; box-shadow: none; cursor: pointer;">
             <img :src=item.coverImage alt="图片" style="display: none;">
           </figure>
         </a>
@@ -121,28 +121,29 @@ const props = defineProps(['postInfo']);
         </div>
       </div>
     </div>
-    <div class="post-options">
-      <div class="post-option-wrap">
-        <div class="post-option">
-          <svg class="post-option-icon icon-thumbs-up">
-            <use xlink:href="#svg-thumbs-up"></use>
-          </svg>
-          <p class="post-option-text">点赞</p>
-        </div>
-      </div>
-      <div class="post-option">
-        <svg class="post-option-icon icon-comment">
-          <use xlink:href="#svg-comment"></use>
-        </svg>
-        <p class="post-option-text">0 评论</p>
-      </div>
-      <div class="post-option">
-        <svg class="post-option-icon icon-share">
-          <use xlink:href="#svg-share"></use>
-        </svg>
-        <p class="post-option-text">分享</p>
-      </div>
-    </div>
+<!--    <div class="post-options">-->
+<!--      <div class="post-option-wrap">-->
+<!--        <div class="post-option">-->
+<!--          <svg class="post-option-icon icon-thumbs-up">-->
+<!--            <use xlink:href="#svg-thumbs-up"></use>-->
+<!--          </svg>-->
+<!--          <p class="post-option-text">点赞</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="post-option">-->
+<!--        <svg class="post-option-icon icon-comment">-->
+<!--          <use xlink:href="#svg-comment"></use>-->
+<!--        </svg>-->
+<!--        <p class="post-option-text">0 评论</p>-->
+<!--      </div>-->
+<!--      <div class="post-option">-->
+<!--        <svg class="post-option-icon icon-share">-->
+<!--          <use xlink:href="#svg-share"></use>-->
+<!--        </svg>-->
+<!--        <p class="post-option-text">分享</p>-->
+<!--      </div>-->
+<!--    </div>-->
+    <NavClickComponents/>
   </div>
 </template>
 
@@ -443,7 +444,7 @@ svg:not(:root) {
   justify-content: center;
   align-items: center;
   position: relative;
-  border-bottom: 4px solid #fff;
+  /*border-bottom: 4px solid #fff;*/
 }
 
 .home-slider .active {
@@ -634,7 +635,7 @@ figure {
   padding: 28px;
   margin: -48px auto 0;
   border-radius: 12px;
-  background-color: #fff;
+  background-color:var(--reaicc-meta-theme-post-color);
   box-shadow: 3px 5px 40px 0 rgba(94, 92, 154, 0.1);
 }
 
@@ -662,7 +663,7 @@ figure {
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
   background: rgba(0, 0, 0, .02);
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--reaicc-meta-theme-post-color);
   box-shadow: none;
 }
 
@@ -850,7 +851,7 @@ figure > img {
 .post-preview-title {
   font-size: 18px !important;
   font-weight: 700;
-  color: #333;
+  color: var(--reaicc-fontcolor);
   cursor: pointer;
   margin-top: 0 !important;
 }

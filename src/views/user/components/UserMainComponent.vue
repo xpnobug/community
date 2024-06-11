@@ -627,7 +627,7 @@ svg:not(:root) {
   justify-content: center;
   align-items: center;
   position: relative;
-  border-bottom: 4px solid #fff;
+  /*border-bottom: 4px solid #fff;*/
 }
 
 .home-slider .active {
@@ -818,7 +818,7 @@ figure {
   padding: 28px;
   margin: -48px auto 0;
   border-radius: 12px;
-  background-color: #fff;
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 3px 5px 40px 0 rgba(94, 92, 154, 0.1);
 }
 

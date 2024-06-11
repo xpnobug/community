@@ -53,6 +53,11 @@ const loginOnFinish = async (values: any) => {
   if (res.status === 200){
     message.loading({ content: '登录中...', key });
     setTimeout(() => {
+      // 将用户主键保存到localStorage
+      console.log(res.data.data)
+      localStorage.setItem('token', res.data.data.tokenValue);
+      // 将用户主键保存到localStorage
+      localStorage.setItem('userId', res.data.data.loginId);
       message.success({ content: '登录成功!', key, duration: 2 });
       // 登录成功后跳转到首页
       window.location.href = '/';

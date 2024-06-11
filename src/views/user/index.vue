@@ -10,8 +10,7 @@ import UserListComponent from "@/views/userMembers/components/UserListComponent.
 import UserSearchComponent from "@/views/userMembers/components/UserSearchComponent.vue";
 import ImgViewComponent from "@/views/user/components/ImgViewComponent.vue";
 import VideViewComponent from "@/views/user/components/VideViewComponent.vue";
-import {listByUserId} from "@/api/article";
-import {useRoute} from "vue-router";
+
 
 const menuIdValueSet = ref('1');
 const instance = getCurrentInstance()

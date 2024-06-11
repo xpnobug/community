@@ -2,6 +2,7 @@ import axios from "@/request/axios";
 import {userInfo} from "@/api/user";
 import {reactive} from "vue";
 import {Page} from "@/api/base";
+import {s} from "vite/dist/node/types.d-aGj9QkWt";
 
 const BASE_URL = '/article';
 
@@ -61,4 +62,21 @@ export function add(article: Article) {
 
 export function selectOne(id: string) {
     return axios.get(`${BASE_URL}/`+ id);
+}
+
+export function update(article: Article) {
+    return axios.put(`${BASE_URL}/update`, article);
+}
+// public JsonObject delete(@RequestBody List<Long> idList)
+interface idList  {
+    idList: number[];
+}
+
+export function deleteById(idList: idList) {
+    return axios.delete(`${BASE_URL}/delete`, {
+        data: idList,
+        headers: {
+            'Content-Type': 'application/json' // 明确指定内容类型为 JSON
+        }
+    })
 }

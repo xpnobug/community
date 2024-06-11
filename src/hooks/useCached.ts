@@ -25,15 +25,4 @@ export const useUserInfo = (uid?: number | ComputedRef<number | undefined> | Ref
     return userGetInfo
 }
 
-export const userInfoUse = () => {
-    //获取登录人信息
-    const instance = getCurrentInstance()
-    const userInfos = ref([]);
-    instance?.proxy?.$Bus.on("userInfo", (param: any) => {
-        userInfos.value = param;
-        console.log(param)
-    });
-    // 返回用户信息 ref
-    return userInfos
-}
 

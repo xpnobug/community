@@ -520,7 +520,7 @@ a:active, a:hover {
 }
 .shell:nth-child(2) .box:hover{
   background-color: rgb(209, 213, 219);
-  color: rgb(241, 159, 159);
+  color: var(--reaicc-nav-bg);
 }
 .shell:nth-child(2) .box{
   color: var(--reaicc-fontcolor);;
@@ -528,7 +528,7 @@ a:active, a:hover {
 
 .shell:nth-child(2) .active{
   background-color: rgb(209, 213, 219);
-  color: rgb(241, 159, 159);
+  color: var(--reaicc-nav-bg);
 }
 
 .shell:nth-child(3) {
