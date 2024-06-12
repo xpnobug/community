@@ -15,7 +15,7 @@ function getPrerenderRoutes() {
 export default defineConfig({
   plugins: [vue(),
     viteCompression({
-      verbose: true, // 启用日志输出，可以设置为 false 关闭
+      verbose: false, // 启用日志输出，可以设置为 false 关闭
       disable: false, // 是否禁用压缩，默认为 false，即启用压缩
       deleteOriginFile: false, // 是否删除源文件，默认为 false，即不删除
       threshold: 5120, // 压缩前最小文件大小，单位为字节，小于该值的文件不会被压缩
