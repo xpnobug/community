@@ -31,7 +31,7 @@ export default defineConfig({
       staticDir: path.join(__dirname, 'dist'),
       minify: true,
       fallback: "index.html",
-      delay: 500, // 延迟时间，单位为毫秒，默认为 0。
+      delay: 60000 , // 延迟时间，单位为毫秒，默认为 0。
     })],
   server: {
     proxy: {
