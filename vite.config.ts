@@ -31,7 +31,8 @@ export default defineConfig({
       staticDir: path.join(__dirname, 'dist'),
       minify: true,
       fallback: "index.html",
-      delay: 60000 , // 延迟时间，单位为毫秒，默认为 0。
+      delay: 90000 , // 延迟时间，单位为毫秒，默认为 0。
+      publicHtml: true, // 是否将预渲染的 HTML 文件添加到 public 目录中，默认为 false。
     })],
   server: {
     proxy: {
