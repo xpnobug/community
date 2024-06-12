@@ -3,9 +3,11 @@
        style="transform: translate(0px, 0px); transition: transform 0.4s ease-in-out 0s;">
     <div class="box-s">
       <PictureComponent :posts="banner"/>
-      <ZskComponent :posts="postList" :loadings="loadings"/>
+      <keep-alive>
+        <ZskComponent :posts="postList" :loadings="loadings"/>
+      </keep-alive>
       <ZtComponent :posts="ztList" :loadings="loadings"/>
-      <LiveComponent :posts="liveList" :loadings="loadings"/>
+      <LiveComponent v-if="defer" :posts="liveList" :loadings="loadings"/>
     </div>
   </div>
 </template>
@@ -16,7 +18,8 @@ import ZskComponent from "./components/ZskComponent.vue";
 import ZtComponent from "@/views/newindex/components/ZtComponent.vue";
 import LiveComponent from "@/views/newindex/components/LiveComponent.vue";
 import {pageList} from "@/api/article";
-
+import { useDefer } from "@/hooks/useDefer.js";
+const defer = useDefer();
 interface Page {
   pageSize: number;
   currentPage: number;

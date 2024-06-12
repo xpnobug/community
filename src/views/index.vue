@@ -8,7 +8,10 @@ const defer = useDefer();
 </script>
 
 <template>
-  <TopMenu v-if="defer"/>
+  <keep-alive>
+    <TopMenu v-if="defer"/>
+  </keep-alive>
+
 <!--  <LeftMenu/>-->
   <LeftMenuItem v-if="defer"/>
   <FooterView v-if="defer"/>

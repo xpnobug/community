@@ -29,6 +29,7 @@ export default createRouter({
                     path: '/index',
                     name: 'new_index',
                     component: ShowView,
+                    meta: { keepAlive: true }
                 },
                 {
                     path: '/dynamic',

@@ -2,7 +2,8 @@
 //获取用户信息
 import {defineProps, watch} from "vue";
 import {useRouter} from "vue-router";
-
+import { useDefer } from "@/hooks/useDefer.js";
+const defer = useDefer();
 const props = defineProps(['posts','loadings'])
 //监听loadings.value，修改loadings
 
