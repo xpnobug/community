@@ -10,8 +10,9 @@
     "nuxtdev": "nuxt dev"
   },
   "dependencies": {
-    "ant-design-vue": "^4.2.1",
+    "@ant-design-vue/pro-layout": "^3.2.5",
     "@ant-design/icons-vue": "^7.0.1",
+    "ant-design-vue": "^4.2.1",
     "element-plus": "^2.7.1",
     "md-editor-v3": "^4.15.0",
     "mitt": "^3.0.1",
@@ -27,8 +28,11 @@
     "less": "^4.2.0",
     "nuxi": "^3.11.1",
     "sass": "^1.77.1",
+    "terser": "^5.31.1",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-seo-prerender": "^0.5.0",
     "vue-tsc": "^2.0.6"
   }
 }
