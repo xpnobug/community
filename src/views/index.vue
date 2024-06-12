@@ -4,7 +4,11 @@ import FooterView from "@/views/footer/FooterView.vue";
 import LeftMenuItem from "@/components/LeftMenuItem.vue";
 import DtCaiDan from "@/components/csszujian/DtCaiDan.vue";
 import { useDefer } from "@/hooks/useDefer.js";
+import getMenuData from "@/router/menuUtil";
 const defer = useDefer();
+const menu = getMenuData();
+console.log('menu', menu)
+
 </script>
 
 <template>

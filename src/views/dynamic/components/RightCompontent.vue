@@ -12,37 +12,38 @@ const handleTag = (value:any) => {
 }
 
 const tjBanKList = ref([
-  {
-    id: "1",
-    avatar: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%9C%80%E6%B1%821600064352?imageMogr2/crop/160x160/gravity/center',
-    level: '9',
-    userName: '需求市场',
-    small: '3707',
-    tagId: '3'
-  },
-  {
-    id: "2",
-    avatar: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/bbb3fa3b5005b4f6cf3072e79dc12a7e.png?imageMogr2/crop/160x160/gravity/center',
-    level: '8',
-    userName: '产品共创',
-    small: '3707',
-    tagId: '3'
-  },
-  {
-    id: "3",
-    avatar: 'https://h5a.opensns.cn/public/uploads/attach/2019/08/06/5d497c3d4de72.jpg_160x160m1',
-    level: '7',
-    userName: '闲聊灌水',
-    small: '3707',
-    tagId: '1'
-  }, {
-    id: "4",
-    avatar: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5e058460bc75d1625714318?imageMogr2/crop/160x160/gravity/center',
-    level: '7',
-    userName: '干货',
-    small: '3707',
-    tagId: '2'
-  },
+  // {
+  //   id: "1",
+  //   avatar: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%9C%80%E6%B1%821600064352?imageMogr2/crop/160x160/gravity/center',
+  //   level: '9',
+  //   userName: '需求市场',
+  //   small: '3707',
+  //   tagId: '3'
+  // },
+  // {
+  //   id: "2",
+  //   avatar: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/bbb3fa3b5005b4f6cf3072e79dc12a7e.png?imageMogr2/crop/160x160/gravity/center',
+  //   level: '8',
+  //   userName: '产品共创',
+  //   small: '3707',
+  //   tagId: '3'
+  // },
+  // {
+  //   id: "3",
+  //   avatar: 'https://h5a.opensns.cn/public/uploads/attach/2019/08/06/5d497c3d4de72.jpg_160x160m1',
+  //   level: '7',
+  //   userName: '闲聊灌水',
+  //   small: '3707',
+  //   tagId: '1'
+  // },
+  // {
+  //   id: "4",
+  //   avatar: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5e058460bc75d1625714318?imageMogr2/crop/160x160/gravity/center',
+  //   level: '7',
+  //   userName: '干货',
+  //   small: '3707',
+  //   tagId: '2'
+  // },
 ]);
 </script>
 
@@ -87,7 +88,7 @@ const tjBanKList = ref([
         </div>
       </div>
     </div> <!----> <!----> <!---->
-    <div class="widget-box" style="padding: 0px;">
+    <div class="widget-box" style="padding: 0px; display: none">
       <div data-v-2dfd8ab4="">
         <div class="adv ant-carousel">
           <div class="slick-slider slick-initialized">

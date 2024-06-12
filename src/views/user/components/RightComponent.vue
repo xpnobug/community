@@ -1,52 +1,22 @@
 <template>
   <div class="grid-column fixed snipcss-UvfyE tether-target tether-enabled tether-element-attached-top tether-element-attached-center tether-target-attached-top tether-target-attached-center">
     <div class="widget-box">
-      <p class="widget-box-title">照片 <span class="highlighted pointer">257</span></p>
+      <p class="widget-box-title">照片 <span class="highlighted pointer">999</span></p>
       <div class="widget-box-content">
         <div class="picture-item-list small">
           <div class="picture-item">
             <figure class="picture round" style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/59caad9fc524e9433da9bb7b9fd910f4.png?imageMogr2/crop/104x104/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/59caad9fc524e9433da9bb7b9fd910f4.png?imageMogr2/crop/104x104/gravity/center" alt="图片" style="display: none;"> </figure>
           </div>
           <div class="picture-item">
-            <figure class="picture round" style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/c32749031ababe6c5fd7ed07cd5ee0f1.png?imageMogr2/crop/104x104/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/c32749031ababe6c5fd7ed07cd5ee0f1.png?imageMogr2/crop/104x104/gravity/center" alt="图片" style="display: none;"> </figure>
-          </div>
-          <div class="picture-item">
-            <figure class="picture round" style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/729aef714f8b96019651ff42576895c1.png?imageMogr2/crop/104x104/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/729aef714f8b96019651ff42576895c1.png?imageMogr2/crop/104x104/gravity/center" alt="图片" style="display: none;"> </figure>
-          </div>
-          <div class="picture-item">
-            <figure class="picture round" style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/7c841bdfe2211e0a1bbb2317da69340c.jpg?imageMogr2/crop/104x104/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/7c841bdfe2211e0a1bbb2317da69340c.jpg?imageMogr2/crop/104x104/gravity/center" alt="图片" style="display: none;"> </figure>
-          </div>
-          <div class="picture-item">
-            <figure class="picture round" style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/afc908f087290284d035ec4145356ca9.jpg?imageMogr2/crop/104x104/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/afc908f087290284d035ec4145356ca9.jpg?imageMogr2/crop/104x104/gravity/center" alt="图片" style="display: none;"> </figure>
-          </div>
-          <div class="picture-item">
-            <figure class="picture round" style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/68dc92130da35c33f687107eff31fedc.jpg?imageMogr2/crop/104x104/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/68dc92130da35c33f687107eff31fedc.jpg?imageMogr2/crop/104x104/gravity/center" alt="图片" style="display: none;"> </figure>
-          </div>
-          <div class="picture-item">
-            <figure class="picture round" style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/934ed6c09753ee837266013e4ad1900c.jpg?imageMogr2/crop/104x104/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/934ed6c09753ee837266013e4ad1900c.jpg?imageMogr2/crop/104x104/gravity/center" alt="图片" style="display: none;"> </figure>
-          </div>
-          <div class="picture-item">
-            <figure class="picture round" style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/8b411a180fba9170160d0c08dcd98e09.jpg?imageMogr2/crop/104x104/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/8b411a180fba9170160d0c08dcd98e09.jpg?imageMogr2/crop/104x104/gravity/center" alt="图片" style="display: none;"> </figure>
-          </div>
-          <div class="picture-item">
-            <figure class="picture round" style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/cefcc77a715e1e512c6497c2435ab3b2.jpg?imageMogr2/crop/104x104/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/cefcc77a715e1e512c6497c2435ab3b2.jpg?imageMogr2/crop/104x104/gravity/center" alt="图片" style="display: none;"> </figure>
-          </div>
-          <div class="picture-item">
-            <figure class="picture round" style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/029f6a28a0261404a1a0684646e76a8f.jpg?imageMogr2/crop/104x104/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/029f6a28a0261404a1a0684646e76a8f.jpg?imageMogr2/crop/104x104/gravity/center" alt="图片" style="display: none;"> </figure>
-          </div>
-          <div class="picture-item">
-            <figure class="picture round" style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/117fa90ec0939e085504e19856328882.jpg?imageMogr2/crop/104x104/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/117fa90ec0939e085504e19856328882.jpg?imageMogr2/crop/104x104/gravity/center" alt="图片" style="display: none;"> </figure>
-          </div>
-          <div class="picture-item">
             <div class="picture-item-overlay round">
-              <p class="picture-item-overlay-text">+246</p>
+              <p class="picture-item-overlay-text">+999</p>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="widget-box">
-      <p class="widget-box-title">版块 <span class="highlighted" style="cursor:pointer;">17</span></p>
+      <p class="widget-box-title">版块 <span class="highlighted" style="cursor:pointer;">999</span></p>
       <div class="widget-box-content">
         <div class="user-status-list">
           <div class="user-status request-small">
@@ -55,54 +25,6 @@
             </div>
             <p class="user-status-title text-long-ellipsis"><a href="/forum?id=27" class="bold">闲聊灌水</a></p>
             <p class="user-status-text small">491位成员</p>
-            <div class="action-request-list">
-              <div class="action-request accept"><svg class="action-request-icon icon-join-group">
-                <use xlink:href="#svg-join-group"></use>
-              </svg></div>
-            </div>
-          </div>
-          <div class="user-status request-small">
-            <div class="xm-header user-avatar" style="width: 52px; height: 52px; border: none; cursor: pointer; border-radius: 8px; position: absolute; top: 0px; left: 0px;">
-              <div class="xm-avatar" style="width: 52px; height: 52px; padding: 7.2px;"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/bbb3fa3b5005b4f6cf3072e79dc12a7e.png?imageMogr2/crop/160x160/gravity/center" alt="头像" class="" style="border-radius: 8px;"></div>
-            </div>
-            <p class="user-status-title text-long-ellipsis"><a href="/forum?id=5" class="bold">产品共创</a></p>
-            <p class="user-status-text small">638位成员</p>
-            <div class="action-request-list">
-              <div class="action-request accept"><svg class="action-request-icon icon-join-group">
-                <use xlink:href="#svg-join-group"></use>
-              </svg></div>
-            </div>
-          </div>
-          <div class="user-status request-small">
-            <div class="xm-header user-avatar" style="width: 52px; height: 52px; border: none; cursor: pointer; border-radius: 8px; position: absolute; top: 0px; left: 0px;">
-              <div class="xm-avatar" style="width: 52px; height: 52px; padding: 7.2px;"><img src="https://h5a.opensns.cn/public/uploads/attach/2019/12/09/5dee0dc24e9ea.png_160x160m1" alt="头像" class="" style="border-radius: 8px;"></div>
-            </div>
-            <p class="user-status-title text-long-ellipsis"><a href="/forum?id=35" class="bold">免费版</a></p>
-            <p class="user-status-text small">309位成员</p>
-            <div class="action-request-list">
-              <div class="action-request accept"><svg class="action-request-icon icon-join-group">
-                <use xlink:href="#svg-join-group"></use>
-              </svg></div>
-            </div>
-          </div>
-          <div class="user-status request-small">
-            <div class="xm-header user-avatar" style="width: 52px; height: 52px; border: none; cursor: pointer; border-radius: 8px; position: absolute; top: 0px; left: 0px;">
-              <div class="xm-avatar" style="width: 52px; height: 52px; padding: 7.2px;"><img src="https://h5a.opensns.cn/public/uploads/attach/2019/12/09/5dee0dc2321ad.png_160x160m1" alt="头像" class="" style="border-radius: 8px;"></div>
-            </div>
-            <p class="user-status-title text-long-ellipsis"><a href="/forum?id=34" class="bold">新鲜事</a></p>
-            <p class="user-status-text small">43位成员</p>
-            <div class="action-request-list">
-              <div class="action-request accept"><svg class="action-request-icon icon-join-group">
-                <use xlink:href="#svg-join-group"></use>
-              </svg></div>
-            </div>
-          </div>
-          <div class="user-status request-small">
-            <div class="xm-header user-avatar" style="width: 52px; height: 52px; border: none; cursor: pointer; border-radius: 8px; position: absolute; top: 0px; left: 0px;">
-              <div class="xm-avatar" style="width: 52px; height: 52px; padding: 7.2px;"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5e058460bc75d1625714318?imageMogr2/crop/160x160/gravity/center" alt="头像" class="" style="border-radius: 8px;"></div>
-            </div>
-            <p class="user-status-title text-long-ellipsis"><a href="/forum?id=7" class="bold">运营干货</a></p>
-            <p class="user-status-text small">394位成员</p>
             <div class="action-request-list">
               <div class="action-request accept"><svg class="action-request-icon icon-join-group">
                 <use xlink:href="#svg-join-group"></use>

@@ -11,9 +11,9 @@ const tagList = ref([
   {id: "3", filter: '最近活跃'},
 ]);
 const gGaoList = ref([
-  {id: "1", title: '官方社区已更新到4.1.2，欢迎大家一起找bug~', content: '各位社区的朋友，您们好：目前官方社区已经成功更新至4.1.2版，欢迎大家反馈使用'},
-  {id: "2", title: '圈子', content: '圈子'},
-  {id: "3", title: '最新', content: '最新'},
+  {id: "1", title: '欢迎大家一起找bug~', content: '各位社区的朋友，您们好：目前官方社区已经成功更新至4.1.2版，欢迎大家反馈使用'},
+  {id: "2", title: '欢迎大家一起找bug~', content: '欢迎大家一起找bug~'},
+  {id: "3", title: '欢迎大家一起找bug~', content: '欢迎大家一起找bug~'},
 ]);
 const tjUserList = ref([]);
 const tagId = ref("1");
@@ -181,7 +181,7 @@ const timeFromNow = (data) => {
         </div>
       </div>
     </div>
-    <div class="widget-box" style="padding: 0px;">
+    <div class="widget-box" style="padding: 0px; display: none">
       <div data-v-2dfd8ab4="">
         <div class="adv ant-carousel">
           <div class="slick-slider slick-initialized">

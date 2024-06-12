@@ -59,38 +59,38 @@ const userLogout = () => {
     <div class="dropdown-navigation-content">
       <div class="dropdown-navigation-box">
         <div class="dropdown-navigation-category">个人</div>
-        <a class="dropdown-navigation-link">我的发布</a>
-        <a class="dropdown-navigation-link" href="/user/info">我的信息</a> <a
-          class="dropdown-navigation-link">消息通知</a> <a class="dropdown-navigation-link"
-      >邀请注册</a>
+        <a class="dropdown-navigation-link" href="/user/info">我的发布</a>
+        <a class="dropdown-navigation-link" href="/user/info">我的信息</a>
+<!--        <a class="dropdown-navigation-link">消息通知</a>-->
+<!--        <a class="dropdown-navigation-link">邀请注册</a>-->
       </div>
       <div class="dropdown-navigation-box">
         <div class="dropdown-navigation-category">帐号安全</div>
         <a class="dropdown-navigation-link">帐号信息</a> <a class="dropdown-navigation-link"
       >修改密码</a>
       </div>
-      <div class="dropdown-navigation-box">
-        <div class="dropdown-navigation-category">钱包</div>
-        <a class="dropdown-navigation-link">账单明细</a> <a class="dropdown-navigation-link"
-      >积分明细</a>
-      </div>
-      <div class="dropdown-navigation-box">
-        <div class="dropdown-navigation-category">版块</div>
-        <a class="dropdown-navigation-link">我加入的</a> <a class="dropdown-navigation-link"
-      >邀请信息</a> <a
-          class="dropdown-navigation-link">申请信息</a>
-      </div>
-      <div class="dropdown-navigation-box">
-        <div class="dropdown-navigation-category">学堂</div>
-        <a class="dropdown-navigation-link">我的订阅</a> <a class="dropdown-navigation-link"
-      >我的收藏</a>
-      </div>
-      <div class="dropdown-navigation-box">
-        <div class="dropdown-navigation-category">积分</div>
-        <a class="dropdown-navigation-link" href="/task">我的积分</a> <a class="dropdown-navigation-link"
-      >任务中心</a>
-      </div>
-      <div class="dropdown-navigation-box"></div>
+<!--      <div class="dropdown-navigation-box">-->
+<!--        <div class="dropdown-navigation-category">钱包</div>-->
+<!--        <a class="dropdown-navigation-link">账单明细</a> <a class="dropdown-navigation-link"-->
+<!--      >积分明细</a>-->
+<!--      </div>-->
+<!--      <div class="dropdown-navigation-box">-->
+<!--        <div class="dropdown-navigation-category">版块</div>-->
+<!--        <a class="dropdown-navigation-link">我加入的</a> <a class="dropdown-navigation-link"-->
+<!--      >邀请信息</a> <a-->
+<!--          class="dropdown-navigation-link">申请信息</a>-->
+<!--      </div>-->
+<!--      <div class="dropdown-navigation-box">-->
+<!--        <div class="dropdown-navigation-category">学堂</div>-->
+<!--        <a class="dropdown-navigation-link">我的订阅</a> <a class="dropdown-navigation-link"-->
+<!--      >我的收藏</a>-->
+<!--      </div>-->
+<!--      <div class="dropdown-navigation-box">-->
+<!--        <div class="dropdown-navigation-category">积分</div>-->
+<!--        <a class="dropdown-navigation-link" href="/task">我的积分</a> <a class="dropdown-navigation-link"-->
+<!--      >任务中心</a>-->
+<!--      </div>-->
+<!--      <div class="dropdown-navigation-box"></div>-->
     </div>
     <button class="dropdown-navigation-button buttons ant-btn ant-btn-sm" type="button" @click="userLogout"><span>退 出</span></button>
   </div>

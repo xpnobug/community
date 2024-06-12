@@ -633,8 +633,9 @@ p {
   pointer-events: none;
 }
 
+
 .contenter .content {
-  width: 100%;
+  width: 90%;
   border-radius: 10px;
   background: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px rgba(94, 92, 154, .04);
@@ -642,6 +643,12 @@ p {
   padding-top: 30px;
   padding-bottom: 56px;
   position: relative;
+}
+/*设置手机端样式*/
+@media screen and (max-width: 768px) {
+  .contenter .content {
+    width: 100%;
+  }
 }
 
 .contenter .content .content-item {

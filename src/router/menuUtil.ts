@@ -23,8 +23,9 @@ const formatRelativePath = (routes, breadcrumb, parent) => {
 const getMenuData = () => {
     const router = useRouter();
     const routes = clearMenuItem(router.getRoutes());
-    const childrenRoute = routes.find((route) => route.path === "/admin");
+    const childrenRoute = routes.find((route) => route.path === "/");
     const breadcrumb = {};
+    // console.log('menu', routes)
     return {
         menuData: formatRelativePath((childrenRoute == null ? void 0 : childrenRoute.children) || [], breadcrumb),
         breadcrumb
