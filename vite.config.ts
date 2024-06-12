@@ -23,7 +23,7 @@ export default defineConfig({
       ext: '.gz' // 压缩后的文件扩展名
     }),
     seoPrerender({
-      routes: getPrerenderRoutes() // 需要生成的路由
+      // routes: getPrerenderRoutes()
     })],
   server: {
     proxy: {
