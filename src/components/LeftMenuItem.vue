@@ -71,7 +71,11 @@
         </div>
       </div>
     </div>
-    <a href="#" :class="djId === item.id ? 'box active':'box'" v-for="item in menuItems" :key="item.id" :index="item.id" @click="handleMenuItemClick(item)">
+    <a href="#" :class="djId === item.id ? 'box active':'box'"
+       v-for="item in menuItems"
+       @click="handleMenuItemClick(item)"
+       v-if="defer"
+    >
       <i :class="item.icon"></i>
       <span>{{ item.label }}</span>
     </a>
@@ -90,6 +94,8 @@ const menuPmView = ref();
 const djValueSet = ref(true);
 const instance = getCurrentInstance()
 const router = useRouter();
+import { useDefer } from "@/hooks/useDefer.js";
+const defer = useDefer();
 //导航菜单动态加载
 const menuItems = ref([
   {id: "1", label: '首页', url: '/index',icon:'iconfont icon-liebiao', expanded: false},

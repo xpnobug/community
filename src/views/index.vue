@@ -3,15 +3,17 @@ import TopMenu from '../components/TopMenu.vue'
 import FooterView from "@/views/footer/FooterView.vue";
 import LeftMenuItem from "@/components/LeftMenuItem.vue";
 import DtCaiDan from "@/components/csszujian/DtCaiDan.vue";
-
+import { useDefer } from "@/hooks/useDefer.js";
+const defer = useDefer();
 </script>
 
 <template>
-  <TopMenu msg="Vite + Vue" />
+  <TopMenu v-if="defer"/>
 <!--  <LeftMenu/>-->
-  <LeftMenuItem/>
-  <FooterView/>
-  <DtCaiDan/>
+  <LeftMenuItem v-if="defer"/>
+  <FooterView v-if="defer"/>
+  <DtCaiDan v-if="defer"/>
+<!--  <LunBoCompentes/>-->
 
 </template>
 

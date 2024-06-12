@@ -4,7 +4,8 @@ import {nextTick, onMounted, reactive, ref,inject} from "vue";
 import {list} from "@/api/article";
 import {createFromIconfontCN} from "@ant-design/icons-vue";
 import PostInfoList from "@/components/PostInfoList.vue";
-
+import { useDefer } from "@/hooks/useDefer.js";
+const defer = useDefer();
 //svg图标
 const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/c/font_1898478_9kwtleoivm4.js',
@@ -172,6 +173,7 @@ function scrollCategoryBarToRight() {
     <div>
       <a-list
           :data-source="postList"
+          v-if="defer(postList.length)"
           :loading="initLoading"
           class="demo-loadmore-list"
           item-layout="vertical">
