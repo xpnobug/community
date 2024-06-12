@@ -29,7 +29,12 @@ export default createRouter({
                     path: '/index',
                     name: 'new_index',
                     component: ShowView,
-                    meta: { keepAlive: true }
+                    meta: {
+                        keepAlive: true,
+                        title: 'LT-REAI',
+                        keywords: '论坛, 社区',
+                        description: '热爱无需多言'
+                    }
                 },
                 {
                     path: '/dynamic',

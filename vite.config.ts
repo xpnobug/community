@@ -23,7 +23,15 @@ export default defineConfig({
       ext: '.gz' // 压缩后的文件扩展名
     }),
     seoPrerender({
-      // routes: getPrerenderRoutes()
+      //include：需要预渲染的页面路径列表，支持通配符匹配。
+      // staticDir: 静态文件目录，默认为 “dist”，表示从这个目录中读取静态资源。
+      // minify：是否压缩 HTML 文件，默认为 true。
+      // fallback: 网络请求失败、404 错误等情况下应该返回的 HTML 文件，默认为 “index.html”。
+      routes: ['/'],
+      staticDir: path.join(__dirname, 'dist'),
+      minify: true,
+      fallback: "index.html",
+      delay: 500, // 延迟时间，单位为毫秒，默认为 0。
     })],
   server: {
     proxy: {
