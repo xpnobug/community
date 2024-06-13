@@ -2,7 +2,7 @@ import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from "path";
 import viteCompression from 'vite-plugin-compression'
-import seoPrerender from 'vite-plugin-seo-prerender'
+// import seoPrerender from 'vite-plugin-seo-prerender'
 
 const routes = [
   { path: '/' },
@@ -22,18 +22,19 @@ export default defineConfig({
       algorithm: 'gzip', // 压缩算法，这里使用 gzip
       ext: '.gz' // 压缩后的文件扩展名
     }),
-    seoPrerender({
-      //include：需要预渲染的页面路径列表，支持通配符匹配。
-      // staticDir: 静态文件目录，默认为 “dist”，表示从这个目录中读取静态资源。
-      // minify：是否压缩 HTML 文件，默认为 true。
-      // fallback: 网络请求失败、404 错误等情况下应该返回的 HTML 文件，默认为 “index.html”。
-      routes: ['/'],
-      staticDir: path.join(__dirname, 'dist'),
-      minify: true,
-      fallback: "index.html",
-      delay: 90000 , // 延迟时间，单位为毫秒，默认为 0。
-      publicHtml: true, // 是否将预渲染的 HTML 文件添加到 public 目录中，默认为 false。
-    })],
+    // seoPrerender({
+    //   //include：需要预渲染的页面路径列表，支持通配符匹配。
+    //   // staticDir: 静态文件目录，默认为 “dist”，表示从这个目录中读取静态资源。
+    //   // minify：是否压缩 HTML 文件，默认为 true。
+    //   // fallback: 网络请求失败、404 错误等情况下应该返回的 HTML 文件，默认为 “index.html”。
+    //   routes: ['/'],
+    //   staticDir: path.join(__dirname, 'dist'),
+    //   minify: true,
+    //   fallback: "index.html",
+    //   delay: 90000 , // 延迟时间，单位为毫秒，默认为 0。
+    //   publicHtml: true, // 是否将预渲染的 HTML 文件添加到 public 目录中，默认为 false。
+    // })
+  ],
   server: {
     proxy: {
       '/api': {
