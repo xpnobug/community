@@ -5,7 +5,8 @@ import Dynamic from "../views/dynamic/index.vue";
 import UserMember from "../views/userMembers/index.vue";
 import User from "../views/user/index.vue";
 import PostInfoComponent from "@/views/user/components/PostInfoComponent.vue";
-import Login from "@/views/login/index.vue";
+// import Login from "@/views/login/index.vue";
+import Login from "@/views/login/components/LoginComponents.vue";
 
 /**
  * vue-router历史模式的问题： vue3中历史模式默认改为了HTML5模式：createWebHistory()
