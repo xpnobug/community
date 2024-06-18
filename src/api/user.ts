@@ -42,3 +42,11 @@ export function logout() {
 export function updateUser(user: userInfo) {
     return axios.put(`${BASE_URL}/upd`, user);
 }
+
+export function getFollowListById(id: string) {
+    return axios.get(`${BASE_URL}/getFollowListById`,{
+        params: {
+            id: id
+        }
+    });
+}

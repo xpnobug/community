@@ -1,4 +1,4 @@
-<script lang="ts" setup xmlns="http://www.w3.org/1999/html">
+<script lang="ts" setup >
 import Upload from "./compontents/upload.vue";
 import {getCurrentInstance, onMounted, reactive, ref, watch} from "vue";
 import {add} from "@/api/article";
@@ -7,7 +7,7 @@ import CascaderCom from "@/views/Edit/compontents/CascaderCom.vue";
 
 import {MdEditor} from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {useUserInfo} from "@/hooks/useCached";
 
 const state = reactive({
@@ -106,16 +106,20 @@ watch(() => route.params.type, (newVal, oldVal) => {
 })
 
 //获取登录人信息
-const userInfo = useUserInfo();
+const router = useRouter();
+const userId = localStorage.getItem('userId');
 const addPost = () => {
-  formState.userId = userInfo.value.userId;
+  formState.userId = userId;
   formState.tag = type.value;
   add(formState).then(res => {
     if (res.status === 200) {
       message.success("发布成功");
+      //跳转到个人主页
+      router.push({path: '/user/' + userId})
     }
   })
 }
+
 const onFinish = (values: any) => {
   addPost();
 };

@@ -151,8 +151,8 @@ const handleMenu = (value: any) => {
             </div>
           </div>
         </div>
-        <MyPushPost v-if="menuId === '1'"/>
-        <MyInfo v-if="menuId === '2'"/>
+        <MyInfo />
+        <MyPushPost />
       </div>
     </div>
   </div>
@@ -207,9 +207,9 @@ const handleMenu = (value: any) => {
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-gap: 16px;
+  /*display: grid;*/
+  /*grid-template-columns: 100%;*/
+  /*grid-gap: 16px;*/
   -ms-flex-align: start;
   align-items: start;
 }
@@ -220,7 +220,7 @@ const handleMenu = (value: any) => {
 
 .grid.grid-3-9 {
   grid-template-areas: 'sidebar content';
-  grid-template-columns: 23.9864864865% 74.6621621622%;
+  /*grid-template-columns: 23.9864864865% 74.6621621622%;*/
 }
 
 .grid.medium-space {

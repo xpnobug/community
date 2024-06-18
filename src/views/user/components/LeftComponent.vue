@@ -68,26 +68,38 @@
 <!--              </svg></div>-->
 <!--            </div>-->
 <!--          </div>-->
-          <div class="user-status request-small">
-            <div class="xm-header user-avatar" style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
-              <div class="xm-avatar" style="width: 44px; height: 44px; padding: 6.4px;"><img src="https://h5a.opensns.cn/public/uploads/avatar/15/a6dfe8e66b66dbd3c68e89b7036d75c9.png_128x128m1" alt="头像" class="" style="border-radius: 50%;"></div> <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
-              <defs>
-                <linearGradient id="svgbcc0b24d-dc41-4e49-8d78-4d1a3a4a1c4d" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%"></stop>
-                  <stop offset="100%"></stop>
-                </linearGradient>
-              </defs>
-              <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0" stroke-width="8" fill-opacity="0"></path>
-              <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="url(#svgbcc0b24d-dc41-4e49-8d78-4d1a3a4a1c4d)" stroke-width="8" fill-opacity="0" style="stroke-dasharray: 272.65, 287;"></path>
-            </svg>
-              <div class="xm-level" style="background: transparent;"><img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS" style="width: 18px; height: 18px;"></div>
+          <div v-for="item in followUserList" class="user-status request-small">
+            <div class="xm-header user-avatar"
+                 style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
+              <div class="xm-avatar" style="width: 44px; height: 44px; padding: 6.4px;">
+                <img :src="item.avatar" alt="头像" class="" style="border-radius: 50%;"></div>
+              <svg style="width: 44px; height: 44px;" viewBox="0 0 100 100">
+                <defs>
+                  <linearGradient id="svgbcc0b24d-dc41-4e49-8d78-4d1a3a4a1c4d" x1="0%" x2="100%" y1="0%" y2="0%">
+                    <stop offset="0%"></stop>
+                    <stop offset="100%"></stop>
+                  </linearGradient>
+                </defs>
+                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0" stroke="#e9e9f0"
+                      stroke-width="8"></path>
+                <path :style="[{strokeDasharray: item.exp + ',287'}]"
+                      d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0" stroke="url(#svgbcc0b24d-dc41-4e49-8d78-4d1a3a4a1c4d)"
+                      stroke-width="8"></path>
+              </svg>
+              <div class="xm-level" style="background: transparent;">
+                <img
+                    src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS"
+                    style="width: 18px; height: 18px;"></div>
             </div>
-            <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a class="bold" style="color: rgb(251, 91, 90);"> LT-REAI小番茄 </a></p>
-            <p class="user-status-text small text-long-ellipsis">154粉丝</p>
+            <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a class="bold"
+                                                                                                style="color: rgb(251, 91, 90);">{{
+                item.username
+              }}</a></p>
+            <p class="user-status-text small text-long-ellipsis">{{ item.statistics.fansCount }} 粉丝</p>
             <div class="action-request-list">
-              <div class="action-request accept"><svg class="action-request-icon icon-add-friend">
-                <use xlink:href="#svg-add-friend"></use>
-              </svg></div>
+              <div class="action-request accept">
+                <p class="button accept" @click="addFollows(item)">+ 关注</p>
+              </div>
             </div>
           </div>
         </div>
@@ -115,10 +127,21 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "LeftComponent"
+<script lang="ts" setup>
+import {getFollowListById} from "@/api/user";
+import {useRoute} from "vue-router";
+import {ref} from "vue";
+
+const followUserList = ref([]);
+//获取地址栏中id
+const route = useRoute();
+const getFollowList = () => {
+  getFollowListById(route.params.id).then(res => {
+    followUserList.value = res.data.data;
+  })
 }
+getFollowList();
+
 </script>
 
 <style scoped>

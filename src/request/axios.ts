@@ -55,9 +55,14 @@ service.interceptors.response.use(
     },
     (error) => {
         // 如果请求失败，则也抛出一个错误
-        const errorMessage = error.message || 'An unknown error occurred';
-        message.error(errorMessage);
-
+        // const errorMessage = error.message || 'An unknown error occurred';
+        // message.error(errorMessage);
+        if (error.response.data && error.response.data.message) {
+            message.error(error.response.data.message);
+        } else {
+            // 如果响应体中没有message字段，则显示默认的错误消息
+            message.error('An error occurred: ' + error.response.statusText);
+        }
         // 拒绝Promise并返回错误
         return Promise.reject(error);
     }

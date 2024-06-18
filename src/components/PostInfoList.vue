@@ -4,6 +4,56 @@ import Sudoku from "@/views/user/components/Sudoku.vue";
 import { defineProps } from 'vue';
 import NavClickComponents from "@/components/csszujian/NavClickComponents.vue";
 const props = defineProps(['postInfo']);
+
+const timeFromNow = (data) => {
+  // data 转换为时间戳
+  const date = new Date(data);
+  const currentDate = new Date();
+
+  // 确保data是一个有效的日期
+  if (isNaN(date.getTime()) || date > currentDate) {
+    return '无效的时间或未来的时间';
+  }
+
+  const difference = currentDate - date;
+
+  // 将毫秒数转换为天数
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  if (days >= 1) {
+    if (days === 1) {
+      return '昨天';
+    }
+    //如果时间大于七天，返回具体日期2024-01-01 00:00:00 格式
+    if (days > 7){
+      //Fri May 17 2024 00:14:21 GMT+0800 (中国标准时间) 转2024-01-01 00:14:21
+      return date.toLocaleDateString().replace(/\//g, '-') + ' ' + date.toTimeString().substr(0, 8);
+    }
+
+    return `${days.toFixed(0)}天前`;
+
+  }
+
+  // 将剩余的毫秒数转换为小时
+  const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  if (hours > 0) {
+    return `${hours.toFixed(0)}小时前`;
+  }
+
+  // 将剩余的毫秒数转换为分钟
+  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+  if (minutes > 0) {
+    return `${minutes.toFixed(0)}分钟前`;
+  }
+
+  // 将剩余的毫秒数转换为秒，并设置一个阈值（例如10秒）来避免“刚刚”
+  const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+  if (seconds > 0) {
+    return `${seconds.toFixed(0)}秒前`;
+  }
+
+  // 如果时间差小于或等于阈值（例如10秒），则返回“刚刚”
+  return '刚刚';
+};
 </script>
 
 
@@ -61,7 +111,7 @@ const props = defineProps(['postInfo']);
           <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">
             {{item.author }}
           </span></p>
-          <p class="user-status-text small">{{ item.publishDate }}<span> · 未知</span></p>
+          <p class="user-status-text small">{{ timeFromNow(item.publishDate) }} <span> · 未知</span></p>
           <div class="cad" style="right: 0px;"></div>
           <p></p>
         </div>

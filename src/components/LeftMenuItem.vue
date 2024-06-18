@@ -118,10 +118,14 @@ instance?.proxy?.$Bus.on("pmView", (param) => {
 const userInfo = ref({});
 const statistics = ref({});
 instance?.proxy?.$Bus.on("userInfo", (param: any) => {
-  getStatisticsById(param.userId).then(res => {
-    statistics.value = res.data.data;
-  });
-  userInfo.value = param;
+  if (param !== null){
+    getStatisticsById(param.userId).then(res => {
+      statistics.value = res.data.data;
+    });
+    userInfo.value = param;
+  }else {
+    console.error("用户信息获取失败")
+  }
 })
 const isLogin = ref(false);
 instance?.proxy?.$Bus.on("isLogins", (param: any) => {

@@ -173,12 +173,9 @@ const handleCover = (value) => {
   userCover.value = value
   formState.userCover = value;
 }
-const instance = getCurrentInstance()
-instance?.proxy?.$Bus.on("userInfo", (param: any) => {
-  formState.userId = param.userId;
-})
-
+const userId = localStorage.getItem('userId');
 const update = (val) => {
+  formState.userId = userId;
   updateUser(formState).then(res => {
     if (res.status === 200) {
       message.success("修改成功");

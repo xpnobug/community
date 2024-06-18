@@ -21,14 +21,14 @@ const formState: UnwrapRef<FormState> = reactive({
   username: '',
   password: '',
   email: '',
-  remember: true,
+  remember: true
 });
 
 
 const rules: Record<string, Rule[]> = {
   username: [
     {required: true, message: '请输入您的用户名', trigger: 'change'},
-    {min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur'},
+    {min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur'}
   ],
   password: [
     {required: true, message: '请输入您的密码', trigger: 'change'},

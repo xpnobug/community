@@ -85,11 +85,11 @@ const userLogout = () => {
 <!--        <a class="dropdown-navigation-link">我的订阅</a> <a class="dropdown-navigation-link"-->
 <!--      >我的收藏</a>-->
 <!--      </div>-->
-<!--      <div class="dropdown-navigation-box">-->
-<!--        <div class="dropdown-navigation-category">积分</div>-->
-<!--        <a class="dropdown-navigation-link" href="/task">我的积分</a> <a class="dropdown-navigation-link"-->
-<!--      >任务中心</a>-->
-<!--      </div>-->
+      <div class="dropdown-navigation-box">
+        <div class="dropdown-navigation-category">积分</div>
+        <a class="dropdown-navigation-link" href="/task">我的积分</a> <a class="dropdown-navigation-link"
+      >任务中心</a>
+      </div>
 <!--      <div class="dropdown-navigation-box"></div>-->
     </div>
     <button class="dropdown-navigation-button buttons ant-btn ant-btn-sm" type="button" @click="userLogout"><span>退 出</span></button>

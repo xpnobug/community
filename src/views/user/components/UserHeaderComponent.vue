@@ -1,22 +1,54 @@
 <script lang="ts" setup>
-import {ref} from 'vue'
-import {userInfo} from "@/api/user";
+import {ref, reactive} from 'vue'
+import {isLogin, userInfo} from "@/api/user";
 import {useRoute} from "vue-router";
 import {getStatisticsById} from "@/api/statistics";
+import {message} from "ant-design-vue";
+import {addFollow} from "@/api/follow";
+
 //获取用户信息
 const route = useRoute();
 const ids = route.params.id;
 const users = ref<any>({});
 //获取用户统计信息
 const statistics = ref<any>({});
-getStatisticsById(ids).then(res => {
-  statistics.value = res.data.data;
+const getUserInfo = () => {
+  getStatisticsById(ids).then(res => {
+    statistics.value = res.data.data;
+  });
+  userInfo(ids).then(res => {
+    users.value = res.data.data;
+    // console.log(users.value)
+  });
+}
+getUserInfo();
+interface Follow  {
+  username: string;
+  followUserId: string;
+  isLogin: boolean;
+}
+const follow = reactive<Follow>({
+  username: '',
+  followUserId: '',
+  isLogin: false,
 });
-userInfo(ids).then(res => {
-  users.value = res.data.data;
-  // console.log(users.value)
-});
-
+isLogin().then((res) => {
+  follow.isLogin = res.data.data;
+})
+const addFollows = (item: any) => {
+  if (!follow.isLogin) {
+    message.warning('请先登录');
+    return
+  }
+  follow.username = item.username;
+  follow.followUserId = item.userId;
+  addFollow(follow).then((res) => {
+    if (res.status === 200) {
+      message.success(res.data.message);
+      getUserInfo();
+    }
+  })
+}
 </script>
 
 <template>
@@ -87,8 +119,10 @@ userInfo(ids).then(res => {
         </div>
       </div>
       <div class="profile-header-info-actions reaicss0-2-12-37">
-        <p class="profile-header-info-action button secondary reaicss0-3-37-38"><span
-            class="hide-text-mobile reaicss0-4-38-39">+ 点击关注</span></p>
+        <p class="profile-header-info-action button secondary reaicss0-3-37-38">
+          <span class="hide-text-mobile reaicss0-4-38-39" @click="addFollows(users)" v-if="users.isFollow === false">+ 点击关注</span>
+          <span class="hide-text-mobile reaicss0-4-38-39"  v-else>+ 已关注</span>
+        </p>
       </div>
     </div>
   </div>
