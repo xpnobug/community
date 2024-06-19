@@ -2,8 +2,8 @@ import { createApp } from 'vue'
 import './style.css'
 // 引入全局 CSS 文件
 import '@/assets/pink/css/banner.css';
-import '@/assets/pink/css/bar.css';
-import '@/assets/pink/css/bar.dialog.css';
+// import '@/assets/pink/css/bar.css';
+// import '@/assets/pink/css/bar.dialog.css';
 import '@/assets/pink/css/comment.form.css';
 import '@/assets/pink/css/misc.css';
 import '@/assets/pink/css/navigation.css';
