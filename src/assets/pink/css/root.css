@@ -18,7 +18,7 @@ body[data-type="friends"] p  {
     body[data-type="friends"] #body-wrap .layout #page {
         padding: 20px 0px !important;
     }
-/*}*/
+}
 /*@font-face {*/
 /*    font-family: 'HarmonyOS Sans';*/
 /*    src: url('../lib/font/HarmonyOS_Sans_light.woff2') format('woff2');*/
