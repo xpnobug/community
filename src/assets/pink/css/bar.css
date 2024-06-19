@@ -98,15 +98,15 @@
 }
 
 #bar>ul>li.editor {
-    background-image: url(@/assets/pink/img/bar.editor.white.svg);
+    /*background-image: url(@/assets/pink/img/bar.editor.white.svg);*/
 }
 
 #bar.bg>ul>li.editor {
-    background-image: url(@/assets/pink/img/bar.editor.light.svg);
+    /*background-image: url(@/assets/pink/img/bar.editor.light.svg);*/
 }
 
 :root.darkmode #bar.bg>ul>li.editor {
-    background-image: url(@/assets/pink/img/bar.editor.dark.svg);
+    /*background-image: url(@/assets/pink/img/bar.editor.dark.svg);*/
 }
 
 @keyframes hub-new-anim {
@@ -188,15 +188,15 @@
 }
 
 #bar>ul>li.editor::before {
-    background-image: url(@/assets/pink/img/bar.editor.pencil.white.svg);
+    /*background-image: url(@/assets/pink/img/bar.editor.pencil.white.svg);*/
 }
 
 #bar.bg>ul>li.editor::before {
-    background-image: url(@/assets/pink/img/bar.editor.pencil.light.svg);
+    /*background-image: url(@/assets/pink/img/bar.editor.pencil.light.svg);*/
 }
 
 :root.darkmode #bar.bg>ul>li.editor::before {
-    background-image: url(@/assets/pink/img/bar.editor.pencil.dark.svg);
+    /*background-image: url(@/assets/pink/img/bar.editor.pencil.dark.svg);*/
 }
 
 #bar>ul>li.current::after {
@@ -274,15 +274,15 @@
 }
 
 #bgm>div.button.canplay>div.status.play {
-    background-image: url(@/assets/pink/img/bgm.pause.white.svg);
+    /*background-image: url(@/assets/pink/img/bgm.pause.white.svg);*/
 }
 
 #bar.bg>#bgm>div.button.canplay>div.status.play {
-    background-image: url(@/assets/pink/img/bgm.pause.light.svg);
+    /*background-image: url(@/assets/pink/img/bgm.pause.light.svg);*/
 }
 
 :root.darkmode #bar.bg>#bgm>div.button.canplay>div.status.play {
-    background-image: url(@/assets/pink/img/bgm.pause.dark.svg);
+    /*background-image: url(@/assets/pink/img/bgm.pause.dark.svg);*/
 }
 
 #bgm>div.button>div.progress {
