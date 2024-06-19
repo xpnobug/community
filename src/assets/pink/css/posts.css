@@ -113,27 +113,27 @@ html:lang(en) #posts {
 }
 
 #posts>article>div.post-main>header.post-header>div.post-status.sticky {
-    background-image: url(@/assets/pink/img/post.sticky.light.svg);
+    /*background-image: url(@/assets/pink/img/post.sticky.light.svg);*/
 }
 
 :root.darkmode #posts>article>div.post-main>header.post-header>div.post-status.sticky {
-    background-image: url(@/assets/pink/img/post.sticky.dark.svg);
+    /*background-image: url(@/assets/pink/img/post.sticky.dark.svg);*/
 }
 
 #posts>article>div.post-main>header.post-header>div.post-status.private {
-    background-image: url(@/assets/pink/img/post.private.light.svg);
+    /*background-image: url(@/assets/pink/img/post.private.light.svg);*/
 }
 
 :root.darkmode #posts>article>div.post-main>header.post-header>div.post-status.private {
-    background-image: url(@/assets/pink/img/post.private.dark.svg);
+    /*background-image: url(@/assets/pink/img/post.private.dark.svg);*/
 }
 
 #posts>article>div.post-main>header.post-header>div.post-status.password {
-    background-image: url(@/assets/pink/img/post.password.light.svg);
+    /*background-image: url(@/assets/pink/img/post.password.light.svg);*/
 }
 
 :root.darkmode #posts>article>div.post-main>header.post-header>div.post-status.password {
-    background-image: url(@/assets/pink/img/post.password.dark.svg);
+    /*background-image: url(@/assets/pink/img/post.password.dark.svg);*/
 }
 
 #posts>article>div.post-main>header.post-header>div.post-mark {
@@ -300,7 +300,7 @@ html:lang(en) #posts {
 }
 
 #posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box>div.fun-btn.wait {
-    background-image: url(@/assets/pink/img/post.fun.btn.wait.svg);
+    /*background-image: url(@/assets/pink/img/post.fun.btn.wait.svg);*/
 }
 
 #posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box>div.fun-btn::after {
@@ -361,11 +361,11 @@ html:lang(en) #posts {
 }
 
 #posts>article>div.post-main>aside.post-aside>div.post-comment.single::before {
-    background-image: url(@/assets/pink/img/post.aside.comment.light.svg);
+    /*background-image: url(@/assets/pink/img/post.aside.comment.light.svg);*/
 }
 
 :root.darkmode #posts>article>div.post-main>aside.post-aside>div.post-comment.single::before {
-    background-image: url(@/assets/pink/img/post.aside.comment.dark.svg);
+    /*background-image: url(@/assets/pink/img/post.aside.comment.dark.svg);*/
 }
 
 #posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist,
@@ -590,7 +590,7 @@ html:lang(en) #posts {
 }
 
 #posts>article>div.post-main>aside.post-aside>div.post-comment>div.comment-moreitems {
-    background-image: url(@/assets/pink/img/post.aside.comment.more.light.svg);
+    /*background-image: url(@/assets/pink/img/post.aside.comment.more.light.svg);*/
 }
 
 :root.darkmode #posts>article>div.post-main>aside.post-aside>div.post-comment>div.comment-moreitems {

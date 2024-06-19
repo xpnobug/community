@@ -87,7 +87,7 @@
 }
 
 :root.darkmode #likeit.like {
-    background-image: url(@/assets/pink/img/misc.like.dark.svg);
+    /*background-image: url(@/assets/pink/img/misc.like.dark.svg);*/
 }
 
 #likeit.wait {
@@ -95,7 +95,7 @@
 }
 
 :root.darkmode #likeit.wait {
-    background-image: url(@/assets/pink/img/misc.like.wait.dark.svg);
+    /*background-image: url(@/assets/pink/img/misc.like.wait.dark.svg);*/
 }
 
 #likeit.liked {
@@ -103,7 +103,7 @@
 }
 
 :root.darkmode #likeit.liked {
-    background-image: url(@/assets/pink/img/misc.liked.dark.svg);
+    /*background-image: url(@/assets/pink/img/misc.liked.dark.svg);*/
 }
 
 #totop {
@@ -112,7 +112,7 @@
 }
 
 :root.darkmode #totop {
-    background-image: url(@/assets/pink/img/misc.totop.dark.svg);
+    /*background-image: url(@/assets/pink/img/misc.totop.dark.svg);*/
 }
 
 #other {

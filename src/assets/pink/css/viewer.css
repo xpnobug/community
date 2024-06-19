@@ -109,7 +109,7 @@
 }
 
 #viewer>div.back.touchdevice>div.loading::after {
-    background: url(@/assets/pink/img/viewer.loading.svg) 50% 50% no-repeat;
+    /*background: url(@/assets/pink/img/viewer.loading.svg) 50% 50% no-repeat;*/
     animation: g-animation-wait-circle 1s linear infinite;
     opacity: 0.5;
 }
