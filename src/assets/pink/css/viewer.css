@@ -1,0 +1,265 @@
+#viewer {
+    --viewer_button_base_size: 24px;
+    --viewer_base_spacing: 8px;
+    --viewer_loading_height: 4px;
+    --viewer_border_radius: 4px;
+    position: fixed;
+    z-index: 2147483647;
+    left: 0;
+    top: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 1);
+    cursor: zoom-out;
+}
+
+#viewer.show {
+    display: block;
+}
+
+#viewer>div.back {
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - (var(--viewer_button_base_size) * 2 + var(--viewer_base_spacing) * 2) * 2);
+    height: calc(100% - (var(--viewer_button_base_size) * 1 + var(--viewer_base_spacing) * 2) * 2);
+    pointer-events: none;
+}
+
+#viewer>div.back>div.loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    width: 150px;
+    height: var(--viewer_loading_height);
+    border-radius: calc(var(--viewer_loading_height) / 2);
+    overflow: hidden;
+}
+
+#viewer>div.back>div.loading::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.75), transparent);
+    animation: g-animation-wait-line 0.7s ease-in-out infinite;
+    content: '';
+}
+
+#viewer>div.back.load>div.loading {
+    display: block;
+}
+
+@keyframes viewer-image-anim {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, calc(-50% - 15px));
+    }
+}
+
+#viewer>div.back>figure.image {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    height: fit-content;
+    animation: viewer-image-anim 0.3s;
+}
+
+@keyframes viewer-image-out-anim {
+    100% {
+        opacity: 0;
+        transform: translate(-50%, calc(-50% + 15px));
+    }
+}
+
+#viewer>div.back.load>figure.image {
+    animation: viewer-image-out-anim 0.3s forwards;
+}
+
+#viewer>div.back>figure.image>img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: scale-down;
+}
+
+:root.imgradius #viewer>div.back>figure.image>img {
+    border-radius: var(--viewer_border_radius);
+}
+
+/* touchdevice start */
+
+#viewer>div.back.touchdevice {
+    width: 100%;
+    height: 100%;
+}
+
+#viewer>div.back.touchdevice>div.loading {
+    width: calc(var(--viewer_button_base_size) * 4);
+    height: calc(var(--viewer_button_base_size) * 4);
+}
+
+#viewer>div.back.touchdevice>div.loading::after {
+    background: url(@/assets/pink/img/viewer.loading.svg) 50% 50% no-repeat;
+    animation: g-animation-wait-circle 1s linear infinite;
+    opacity: 0.5;
+}
+
+#viewer>div.back.touchdevice>figure.image {
+    animation: g-animation-transparent-to-opaque 0.3s;
+    pointer-events: auto;
+    cursor: move;
+}
+
+#viewer>div.back.touchdevice.load>figure.image {
+    animation: none;
+    opacity: 0;
+}
+
+:root.imgradius #viewer>div.back.touchdevice>figure.image>img {
+    border-radius: 0;
+}
+
+/* touchdevice end */
+
+#viewer>div.front {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#viewer>div.front>div.count {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: fit-content;
+    height: var(--viewer_button_base_size);
+    margin: var(--viewer_base_spacing);
+    color: #eaeaea;
+    font: normal 16px / var(--viewer_button_base_size) 'HarmonyOS Sans', sans-serif;
+    letter-spacing: 3px;
+}
+
+#viewer>div.front>ul.tools {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: var(--viewer_base_spacing);
+    width: fit-content;
+    height: var(--viewer_button_base_size);
+    margin: var(--viewer_base_spacing);
+}
+
+#viewer>div.front>ul.tools>li.viewer-btn {
+    width: var(--viewer_button_base_size);
+    height: var(--viewer_button_base_size);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+#viewer>div.front>ul.tools>li.viewer-btn.download {
+    background-image: url(@/assets/pink/img/viewer.btn.download.svg);
+}
+
+#viewer>div.front>ul.tools>li.viewer-btn.close {
+    background-image: url(@/assets/pink/img/viewer.btn.close.svg);
+}
+
+#viewer>div.front>nav.navigation {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+    height: calc(var(--viewer_button_base_size) * 2);
+}
+
+#viewer>div.front>nav.navigation>div.viewer-btn {
+    width: calc(var(--viewer_button_base_size) * 2);
+    height: calc(var(--viewer_button_base_size) * 2);
+    margin: 0 var(--viewer_base_spacing);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+#viewer>div.front>nav.navigation>div.viewer-btn.prev {
+    background-image: url(@/assets/pink/img/viewer.btn.previous.svg);
+}
+
+#viewer>div.front>nav.navigation>div.viewer-btn.next {
+    background-image: url(@/assets/pink/img/viewer.btn.next.svg);
+}
+
+#viewer>div.front>div.tips {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: calc(var(--viewer_base_spacing) * 2);
+    width: fit-content;
+    height: var(--viewer_button_base_size);
+    margin: var(--viewer_base_spacing);
+    color: #eaeaea;
+    font: normal 12px / var(--viewer_button_base_size) 'HarmonyOS Sans', sans-serif;
+}
+
+#viewer>div.front>div.tips>span.viewer-tip>mark {
+    display: inline-block;
+    height: calc(var(--viewer_button_base_size) - (1px * 2) - (2px * 2));
+    margin: 2px 4px;
+    padding: 0 6px;
+    border: 1px solid rgba(234, 234, 234, 1);
+    border-radius: 4px;
+    font-weight: bold;
+    line-height: calc(var(--viewer_button_base_size) - (1px * 2) - (2px * 2));
+}
+
+@media screen and (max-width: 450px) {
+    #viewer>div.front>div.tips>span.viewer-tip>abbr {
+        display: none;
+    }
+}
+
+#viewer .count,
+#viewer .tips,
+#viewer .viewer-btn {
+    opacity: 0.25;
+    transition: opacity 0.3s linear;
+    pointer-events: auto;
+    cursor: default;
+}
+
+#viewer .count:hover,
+#viewer .tips:hover,
+#viewer .viewer-btn:hover,
+#viewer .count.on,
+#viewer .tips.on,
+#viewer .viewer-btn.on {
+    opacity: 0.75;
+}
+
+#viewer .viewer-btn.allow {
+    cursor: pointer;
+}

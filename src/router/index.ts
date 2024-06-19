@@ -73,6 +73,11 @@ export default createRouter({
                     name: 'post',
                     component: () => import('@/views/postView/index.vue')
                 },
+                {
+                    path: '/friends',
+                    name: 'friends',
+                    component: () => import('@/views/userPyq/index.vue')
+                },
             ]
         },
     ]

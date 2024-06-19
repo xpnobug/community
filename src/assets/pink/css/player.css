@@ -1,0 +1,121 @@
+#player {
+    --player_background_color: rgba(0, 0, 0, 0.065);
+}
+
+:root.darkmode #player {
+    --player_background_color: rgba(0, 0, 0, 0.1);
+}
+
+#player {
+    --player_cover_size: 70px;
+    --player_btn_size: 28px;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    display: none;
+    width: var(--player_cover_size);
+    height: calc(var(--player_cover_size) + var(--player_btn_size));
+    margin: var(--margin, 10px);
+    animation: g-animation-transparent-to-opaque 0.3s;
+    animation-fill-mode: forwards;
+}
+
+#player.show {
+    /*display: none;*/
+}
+
+#player>div.meta {
+    width: var(--player_cover_size);
+    height: var(--player_cover_size);
+    border-radius: 10px 10px 0 0;
+    background-color: var(--player_background_color);
+    cursor: move;
+}
+
+#player>div.meta>img.cover {
+    border-radius: 10px 10px 0 0;
+    pointer-events: none;
+}
+
+#player>div.button {
+    position: relative;
+    width: var(--player_cover_size);
+    height: var(--player_btn_size);
+}
+
+#player>div.button::before {
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 10px 10px;
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
+    content: '';
+}
+
+#player>div.button::after {
+    position: absolute;
+    z-index: -2;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 10px 10px;
+    background: var(--player_background_color) var(--background_image) 50% 100% no-repeat;
+    background-size: cover;
+    content: '';
+}
+
+#player>div.button>div.player-btn {
+    width: var(--player_btn_size);
+    height: var(--player_btn_size);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+#player>div.button>div.status {
+    background-image: url(@/assets/pink/img/post.content.audio.pause.light.svg);
+}
+
+#player>div.button.canplay>div.status {
+    background-image: url(@/assets/pink/img/post.content.audio.play.light.svg);
+}
+
+#player>div.button.canplay>div.status.play {
+    background-image: url(@/assets/pink/img/player.pause.white.svg);
+}
+
+#player>div.button>div.close {
+    background-image: url(@/assets/pink/img/player.close.white.svg);
+}
+
+#player>div.button.canplay>div.player-btn {
+    cursor: pointer;
+}
+
+#player>div.button>div.player-progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(250, 250, 250, 0.1);
+    pointer-events: none;
+}
+
+#player>div.button>div.player-progress::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--width, 0);
+    max-width: 100%;
+    height: 1px;
+    background-color: rgba(250, 250, 250, 0.3);
+    content: '';
+}

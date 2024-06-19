@@ -440,7 +440,7 @@ svg:not(:root) {
   height: 20px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .grid.centered{
     justify-content: center !important;
   }

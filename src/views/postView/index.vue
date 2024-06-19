@@ -1732,7 +1732,7 @@ textarea {
 }
 
 /*设置手机端样式*/
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .post-container {
     width: 100% !important;
     margin-left: 0 !important;

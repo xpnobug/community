@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" 
+width="30" height="30" viewBox="0 0 512 512"
+>
+  <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#191919" stroke-miterlimit="10" stroke-width="10" />
+  <path d="M208 192v128M304 192v128" fill="none" stroke="#191919" stroke-linecap="round" stroke-miterlimit="10" stroke-width="36" />
+</svg>

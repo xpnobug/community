@@ -77,7 +77,7 @@ instance?.proxy?.$Bus.on("menuId", (param: any) => {
     transform: none !important;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .content-grid {
     padding-top: 115px !important;
     margin: auto;

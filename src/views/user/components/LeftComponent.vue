@@ -755,7 +755,7 @@ stop:nth-child(2) {
   stop-color: rgb(51, 127, 255);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .grid.grid-3-6-3 > .grid-column[data-v-21c5d470]:nth-child(1){
     display: none;
   }

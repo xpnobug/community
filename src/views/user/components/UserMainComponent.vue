@@ -322,7 +322,7 @@ const handleTag = (value: any) => {
 
 
 <style scoped>
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .post-preview.medium .post-preview-info {
     height: 180px !important;
   }

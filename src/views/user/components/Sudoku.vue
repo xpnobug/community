@@ -24,7 +24,7 @@ const visible = ref(false);
 </script>
 
 <style scoped>
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .tl-photos{
     display: flex;
     width: 350px !important;

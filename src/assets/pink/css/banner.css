@@ -1,0 +1,150 @@
+#banner {
+    --banner_background_color: var(--text_color_primary);
+    --banner_avatar_background_color: var(--background_color_container);
+    --banner_online_background_color: var(--special_color_green);
+    --banner_info_name_color: #fff;
+    --banner_subinfo_color: var(--text_color_secondary);
+    --banner_font_size_primary: var(--font_size_grande);
+    --banner_font_size_secondary: var(--font_size_short);
+    --banner_line_height_primary: var(--line_height_grande);
+    --banner_line_height_secondary: var(--line_height_short);
+}
+
+#banner {
+    --banner_post_avatar_offset: 50px;
+    --banner_post_lr_offset: 25px;
+    --banner_info_bottom: -12px;
+    --banner_info_avatar_size: 60px;
+    --banner_info_name_offset: 15px;
+    --banner_subinfo_bottom_offset: 10px;
+    position: relative;
+    height: 300px;
+}
+
+:root.mobile #banner {
+    --banner_post_lr_offset: 20px;
+    --banner_info_avatar_size: 68px;
+}
+
+#banner-background {
+    width: 100%;
+    height: 100%;
+    background-color: var(--banner_background_color);
+    background-position-x: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#banner-background.nobg {
+    background-image: url(../../pink/img/banner.nobg.svg);
+    background-position: 50% 50%;
+}
+
+#banner-background.existbg {
+    background-image: var(--banner_background_image);
+    background-position-y: var(--banner_background_image_position);
+}
+
+:root.darkmode #banner-background.existbg {
+    background-image: var(--banner_background_image_dark, var(--banner_background_image));
+    background-position-y: var(--banner_background_image_position_dark, var(--banner_background_image_position));
+}
+
+#banner-info {
+    position: absolute;
+    z-index: 1;
+    right: var(--banner_post_lr_offset);
+    bottom: var(--banner_info_bottom);
+    width: calc(100% - var(--banner_post_lr_offset));
+}
+
+#banner-info>div.name {
+    position: relative;
+    width: calc(100% - var(--banner_info_avatar_size) - var(--banner_info_name_offset));
+    height: var(--banner_line_height_primary);
+    margin: 12px 0 0 0;
+    color: var(--banner_info_name_color);
+    font-weight: 500;
+    font-size: var(--banner_font_size_primary);
+    line-height: var(--banner_line_height_primary);
+    letter-spacing: 1px;
+    text-align: right;
+}
+
+:root.mobile #banner-info>div.name {
+    margin-top: 15px;
+}
+
+#banner-info>div.name>strong {
+    display: inline-block;
+    height: 100%;
+    cursor: pointer;
+    color: #fcfcfc;
+    font-weight: bolder;
+}
+
+@keyframes banner-name-anim {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: -20px;
+    }
+}
+
+#banner-info>div.name>strong:hover {
+    background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 4"%3E%3Cpath d="M0 3.5c5 0 5-3 10-3s5 3 10 3 5-3 10-3 5 3 10 3" fill="none" stroke="rgba(255, 255, 255, 0.9)" /%3E%3C/svg%3E') 0 100% repeat-x;
+    background-size: 20px auto;
+    animation: banner-name-anim 1s infinite linear;
+}
+
+#banner-info>div.avatar {
+    width: var(--banner_info_avatar_size);
+    height: var(--banner_info_avatar_size);
+    border-radius: 7px;
+    background-color: var(--banner_avatar_background_color);
+    overflow: hidden;
+}
+
+#banner-info>div.avatar>a.online-link {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes online-anim {
+    0% {
+        opacity: 0.35;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
+#banner-info>div.avatar>a.online-link::after {
+    position: absolute;
+    z-index: 1;
+    right: 4px;
+    top: 4px;
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--banner_online_background_color);
+    animation: online-anim 2.5s linear infinite alternate;
+    content: '';
+}
+
+#banner-subinfo {
+    position: absolute;
+    z-index: 1;
+    right: var(--banner_post_lr_offset);
+    bottom: calc(var(--banner_info_bottom) - var(--banner_line_height_secondary) - var(--banner_subinfo_bottom_offset));
+    width: calc((100% - var(--banner_post_lr_offset) - var(--banner_post_avatar_offset) - var(--banner_post_lr_offset)) * 2 / 3);
+    height: var(--banner_line_height_secondary);
+    color: var(--banner_subinfo_color);
+    font-size: var(--banner_font_size_secondary);
+    line-height: var(--banner_line_height_secondary);
+    text-align: right;
+}

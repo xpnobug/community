@@ -1,0 +1,44 @@
+.stickers {
+    --sticker_meta_text_color: var(--text_color_secondary);
+    --sticker_error_text_color: var(--special_color_yellow);
+    --sticker_font_size: var(--font_size_short);
+    --sticker_line_height: var(--line_height_short);
+}
+
+.stickers>div.sticker-list {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fill, 1.625em);
+    grid-template-rows: auto;
+    row-gap: 0.625em;
+    justify-items: center;
+}
+
+.stickers>div.sticker-list>img.sticker-img {
+    display: block;
+    width: 1em;
+    height: 1em;
+    object-fit: cover;
+    object-position: 50% 50%;
+    cursor: pointer;
+}
+
+.stickers>div.sticker-list>img.sticker-img.more {
+    cursor: help;
+}
+
+.stickers>div.sticker-meta {
+    height: var(--sticker_line_height);
+    margin: 6px 0 0;
+    color: var(--sticker_meta_text_color);
+    font-size: var(--sticker_font_size);
+    line-height: var(--sticker_line_height);
+    text-align: right;
+    opacity: 0.4;
+}
+
+.stickers>div.sticker-error {
+    color: var(--sticker_error_text_color);
+    font-size: var(--sticker_font_size);
+    line-height: var(--sticker_line_height);
+}

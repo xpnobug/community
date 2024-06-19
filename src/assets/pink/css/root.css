@@ -1,0 +1,315 @@
+body[data-type="friends"] div#page {
+    background: none;
+    box-shadow: none;
+    border: none;
+}
+body[data-type="friends"] #page .page-title {
+    display: none;
+
+}
+body[data-type="friends"] p  {
+    margin: 2px;
+}
+
+.layout > div:first-child:not(.recent-posts) {
+    padding: 0px !important;
+}
+@media screen and (max-width: 768px){
+    body[data-type="friends"] #body-wrap .layout #page {
+        padding: 20px 0px !important;
+    }
+}
+@font-face {
+    font-family: 'HarmonyOS Sans';
+    src: url('../lib/font/HarmonyOS_Sans_light.woff2') format('woff2');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HarmonyOS Sans';
+    src: url('../lib/font/HarmonyOS_Sans_regular.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HarmonyOS Sans';
+    src: url('../lib/font/HarmonyOS_Sans_medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Rounded Mplus 1c';
+    src: url('../lib/font/RoundedMplus1c_regular.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Rounded Mplus 1c';
+    src: url('../lib/font/RoundedMplus1c_bold.woff2') format('woff2');
+    font-weight: bold;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Color Emoji';
+    src: local('Apple Color Emoji'), local('Segoe UI Emoji'), local('Segoe UI Symbol'), local('Noto Color Emoji');
+}
+
+@keyframes g-animation-wait-circle {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes g-animation-wait-line {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes g-animation-transparent-to-opaque {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+:root {
+    --text_color_primary: #191919;
+    --text_color_secondary: #b2b2b2;
+    --text_color_highlight: #576b95;
+    --text_color_reversal: #fff;
+    --background_color_page: #f0f0f0;
+    --background_color_container: #fff;
+    --splitline_color: #f2f2f2;
+    --button_background_color: #f7f7f7;
+    --block_background_color: #f7f7f7;
+    --special_color_green: #07c160;
+    --special_color_yellow: #fa9d3b;
+    --special_color_red: #fa5151;
+}
+
+:root.darkmode {
+    --text_color_primary: #eaeaea;
+    --text_color_secondary: #6c6c6c;
+    --text_color_highlight: #7d90a9;
+    --background_color_page: #6b6b6b;
+    --background_color_container: #2c2c2c;
+    --splitline_color: #323232;
+    --button_background_color: #3d3d3d;
+    --block_background_color: #363636;
+}
+
+:root.darkmode.mobile {
+    --text_color_primary: #d0d0d0;
+    --text_color_secondary: #5d5d5d;
+    --background_color_container: #191919;
+    --splitline_color: #242424;
+    --button_background_color: #2c2c2c;
+    --block_background_color: #202020;
+}
+
+:root {
+    /* font-size */
+    --font_size: 16px;
+    --font_size_grande: var(--font_size);
+    --font_size_tall: calc(var(--font_size) - (2px * 1));
+    --font_size_short: calc(var(--font_size) - (2px * 2));
+    /* line-height */
+    --line_height: 24px;
+    --line_height_grande: var(--line_height);
+    --line_height_tall: calc(var(--line_height) - (2px * 1));
+    --line_height_short: calc(var(--line_height) - (2px * 2));
+}
+
+:root.largerfont,
+:root.mobile {
+    /* font-size */
+    --font_size_grande: calc(var(--font_size) + (2px * 1));
+    --font_size_tall: var(--font_size);
+    --font_size_short: calc(var(--font_size) - (2px * 1));
+    /* line-height */
+    --line_height_grande: calc(var(--line_height) + (2px * 1));
+    --line_height_tall: var(--line_height);
+    --line_height_short: calc(var(--line_height) - (2px * 1));
+}
+
+:root.largerfont.mobile {
+    /* font-size */
+    --font_size_grande: calc(var(--font_size) + (2px * 2));
+    --font_size_tall: calc(var(--font_size) + (2px * 1));
+    --font_size_short: var(--font_size);
+    /* line-height */
+    --line_height_grande: calc(var(--line_height) + (2px * 2));
+    --line_height_tall: calc(var(--line_height) + (2px * 1));
+    --line_height_short: var(--line_height);
+}
+
+/* Edge */
+
+::-webkit-input-placeholder {
+    color: var(--text_color_secondary);
+}
+
+::placeholder {
+    color: var(--text_color_secondary);
+}
+
+/* greater than 550px */
+
+@media screen and (min-width: 550px) {
+    .g-width {
+        width: 550px;
+    }
+}
+
+/* less than or equal to 550px */
+
+@media screen and (max-width: 550px) {
+    .g-width {
+        width: 100%;
+        min-width: 320px;
+    }
+}
+
+.g-clear-both::after {
+    display: block;
+    clear: both;
+    content: '';
+}
+
+.g-left {
+    display: inline;
+    float: left;
+}
+
+.g-left-flex {
+    display: inline-flex;
+    float: left;
+}
+
+.g-right {
+    display: inline;
+    float: right;
+}
+
+.g-right-flex {
+    display: inline-flex;
+    float: right;
+}
+
+.g-ovf-hide {
+    overflow: hidden;
+}
+
+.g-block-center {
+    margin: 0 auto;
+}
+
+.g-inline-center {
+    text-align: center;
+}
+
+.g-inline-justify {
+    /*
+  text-align: justify;
+  text-justify: inter-word;
+  */
+}
+
+.g-txt-hide {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: transparent;
+    font-size: 0;
+    /*text-indent: -100em;*/
+    overflow: hidden;
+}
+
+.g-txt-ellipsis {
+    color: inherit;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.g-user-select {
+    -webkit-user-select: text;
+    /* Safari */
+    user-select: text;
+}
+
+.g-alias-defaultstatus {
+    visibility: hidden;
+}
+
+.g-alias-highlighter {
+    margin: 0 3px;
+    padding: 0 2px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-family: 'Rounded Mplus 1c', sans-serif;
+    background-color: var(--button_background_color);
+}
+
+.g-alias-imgblock {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
+.g-alias-videoblock {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
+/*html {*/
+/*    color: var(--text_color_primary);*/
+/*    font: normal var(--font_size) / var(--line_height) 'HarmonyOS Sans', 'PingFang SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif, 'Color Emoji';*/
+/*    background-color: var(--background_color_page);*/
+/*    overflow-x: hidden;*/
+/*    overflow-y: scroll;*/
+/*    -webkit-user-select: none;*/
+/*    !* Safari *!*/
+/*    user-select: none;*/
+/*    cursor: default;*/
+/*}*/
+
+html.fullscreen {
+    overflow: hidden;
+}
+
+@media screen and (max-width: 550px) {
+    html.normaldialog:not(.fullscreen) {
+        overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    html.smalldialog:not(.fullscreen) {
+        overflow: hidden;
+    }
+}
+
+#container {
+    background-color: var(--background_color_container);
+}

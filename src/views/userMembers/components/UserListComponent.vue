@@ -886,7 +886,7 @@ svg:not(:root) {
   width: 20px;
   height: 20px;
 }
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .user-preview {
     margin-bottom: 16px;
   }

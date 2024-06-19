@@ -1,0 +1,376 @@
+#bar {
+    --bar_background_color: rgba(240, 240, 240, 0.99);
+    --bar_ico_background_color: rgba(0, 0, 0, 0.05);
+    --bar_tip_background_color: var(--special_color_red);
+}
+
+:root.darkmode #bar {
+    --bar_background_color: rgba(107, 107, 107, 0.99);
+    --bar_ico_background_color: rgba(255, 255, 255, 0.035);
+}
+
+#bar {
+    --bar_item_size: 40px;
+    position: fixed;
+    z-index: 10;
+    /*top: 0;*/
+    height: calc(var(--bar_item_size) + (6px * 2));
+}
+
+@keyframes bar-anim {
+    0% {
+        background-color: transparent;
+    }
+    100% {
+        background-color: var(--bar_background_color);
+    }
+}
+
+#bar.bg {
+    background-color: var(--bar_background_color);
+    animation: bar-anim 0.3s;
+}
+
+#bar>ul {
+    height: var(--bar_item_size);
+    padding: 6px 0;
+}
+
+#bar>ul>li {
+    position: relative;
+    display: inline;
+    float: left;
+    width: 24px;
+    height: 24px;
+    padding: calc((var(--bar_item_size) - 24px) / 2);
+    border-radius: 4px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#bar>ul>li:hover {
+    background-color: var(--bar_ico_background_color);
+}
+
+#bar>ul.bar-op>li {
+    margin: 0 0 0 12px;
+}
+
+#bar>ul.bar-main>li {
+    margin: 0 12px 0 0;
+}
+
+#bar>ul>li.user {
+    background-image: url(@/assets/pink/img/bar.user.white.svg);
+}
+
+#bar.bg>ul>li.user {
+    background-image: url(@/assets/pink/img/bar.user.light.svg);
+}
+
+:root.darkmode #bar.bg>ul>li.user {
+    background-image: url(@/assets/pink/img/bar.user.dark.svg);
+}
+
+#bar>ul>li.contacts {
+    background-image: url(@/assets/pink/img/bar.contacts.white.svg);
+}
+
+#bar.bg>ul>li.contacts {
+    background-image: url(@/assets/pink/img/bar.contacts.light.svg);
+}
+
+:root.darkmode #bar.bg>ul>li.contacts {
+    background-image: url(@/assets/pink/img/bar.contacts.dark.svg);
+}
+
+#bar>ul>li.hub {
+    background-image: url(@/assets/pink/img/bar.hub.white.svg);
+}
+
+#bar.bg>ul>li.hub {
+    background-image: url(@/assets/pink/img/bar.hub.light.svg);
+}
+
+:root.darkmode #bar.bg>ul>li.hub {
+    background-image: url(@/assets/pink/img/bar.hub.dark.svg);
+}
+
+#bar>ul>li.editor {
+    background-image: url(@/assets/pink/img/bar.editor.white.svg);
+}
+
+#bar.bg>ul>li.editor {
+    background-image: url(@/assets/pink/img/bar.editor.light.svg);
+}
+
+:root.darkmode #bar.bg>ul>li.editor {
+    background-image: url(@/assets/pink/img/bar.editor.dark.svg);
+}
+
+@keyframes hub-new-anim {
+    0%,
+    100% {
+        transform: none;
+        opacity: 0;
+    }
+    10% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    80% {
+        transform: scale(1.65);
+        opacity: 0;
+    }
+}
+
+#bar>ul>li.hub:not(.current).new::before {
+    position: relative;
+    z-index: -1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    background-color: transparent;
+    animation: hub-new-anim 2s cubic-bezier(0, 0, 0, 1.74) infinite;
+    content: '';
+}
+
+#bar>ul>li.hub:not(.current).new::after {
+    position: absolute;
+    z-index: 1;
+    right: 8px;
+    top: 8px;
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--bar_tip_background_color);
+    opacity: 0.9;
+    content: '';
+}
+
+@keyframes editor-pencil-anim {
+    0%,
+    100% {
+        transform: none;
+    }
+    5% {
+        transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    }
+    10% {
+        transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    }
+    15% {
+        transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    }
+    20% {
+        transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    }
+    25%,
+    26% {
+        transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    }
+}
+
+#bar>ul>li.editor::before {
+    position: absolute;
+    right: 9px;
+    top: 6px;
+    display: block;
+    width: 12px;
+    height: 12px;
+    animation: editor-pencil-anim 4s infinite linear;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    content: '';
+}
+
+#bar>ul>li.editor::before {
+    background-image: url(@/assets/pink/img/bar.editor.pencil.white.svg);
+}
+
+#bar.bg>ul>li.editor::before {
+    background-image: url(@/assets/pink/img/bar.editor.pencil.light.svg);
+}
+
+:root.darkmode #bar.bg>ul>li.editor::before {
+    background-image: url(@/assets/pink/img/bar.editor.pencil.dark.svg);
+}
+
+#bar>ul>li.current::after {
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    bottom: 3px;
+    transform: translateX(-50%);
+    display: block;
+    width: 25%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--bar_tip_background_color);
+    opacity: 0.2;
+    content: '';
+}
+
+#bgm {
+    --bgm_background_color: var(--bar_ico_background_color);
+    --bgm_progress_height: 2px;
+    --bgm_progress_color: #898989;
+    --bgm_progress_color_white: #f5f5f5;
+    --bgm_progress_background_color: rgba(0, 0, 0, 0.05);
+    --bgm_progress_background_color_white: rgba(255, 255, 255, 0.3);
+}
+
+:root.darkmode #bgm {
+    --bgm_progress_color: #aeaeae;
+    --bgm_progress_background_color: rgba(255, 255, 255, 0.15);
+}
+
+#bgm {
+    height: var(--bar_item_size);
+    margin: 6px 0 6px 5px;
+    border-radius: 4px;
+}
+
+#bgm:hover {
+    background-color: var(--bgm_background_color);
+}
+
+#bgm>div.button>div.status {
+    width: 32px;
+    height: var(--bar_item_size);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+#bgm>div.button:not(.canplay)>div.status {
+    background-image: url(@/assets/pink/img/bgm.prepare.white.svg);
+}
+
+#bar.bg>#bgm>div.button:not(.canplay)>div.status {
+    background-image: url(@/assets/pink/img/bgm.prepare.light.svg);
+}
+
+:root.darkmode #bar.bg>#bgm>div.button:not(.canplay)>div.status {
+    background-image: url(@/assets/pink/img/bgm.prepare.dark.svg);
+}
+
+#bgm>div.button.canplay>div.status {
+    cursor: pointer;
+}
+
+#bgm>div.button.canplay>div.status {
+    background-image: url(@/assets/pink/img/bgm.play.white.svg);
+}
+
+#bar.bg>#bgm>div.button.canplay>div.status {
+    background-image: url(@/assets/pink/img/bgm.play.light.svg);
+}
+
+:root.darkmode #bar.bg>#bgm>div.button.canplay>div.status {
+    background-image: url(@/assets/pink/img/bgm.play.dark.svg);
+}
+
+#bgm>div.button.canplay>div.status.play {
+    background-image: url(@/assets/pink/img/bgm.pause.white.svg);
+}
+
+#bar.bg>#bgm>div.button.canplay>div.status.play {
+    background-image: url(@/assets/pink/img/bgm.pause.light.svg);
+}
+
+:root.darkmode #bar.bg>#bgm>div.button.canplay>div.status.play {
+    background-image: url(@/assets/pink/img/bgm.pause.dark.svg);
+}
+
+#bgm>div.button>div.progress {
+    width: 54px;
+    height: var(--bar_item_size);
+}
+
+@media screen and (max-width: 375px) {
+    #bgm>div.button>div.progress {
+        width: 24px;
+    }
+}
+
+#bgm>div.button>div.progress>progress {
+    display: block;
+    width: 100%;
+    height: var(--bgm_progress_height);
+    margin: 19px 0 0;
+    border: 0 none;
+}
+
+/* Firefox */
+
+#bgm>div.button>div.progress>progress::-moz-progress-bar {
+    border-radius: calc(var(--bgm_progress_height) / 2);
+    background-color: var(--bgm_progress_color_white);
+}
+
+@-moz-document url-prefix() {
+    #bgm>div.button>div.progress>progress {
+        border-radius: calc(var(--bgm_progress_height) / 2);
+        background-color: var(--bgm_progress_background_color_white);
+    }
+}
+
+/* Safari or Chrome */
+
+#bgm>div.button>div.progress>progress::-webkit-progress-value {
+    border-radius: calc(var(--bgm_progress_height) / 2);
+    background-color: var(--bgm_progress_color_white);
+}
+
+#bgm>div.button>div.progress>progress::-webkit-progress-bar {
+    border-radius: calc(var(--bgm_progress_height) / 2);
+    background-color: var(--bgm_progress_background_color_white);
+}
+
+/* Firefox */
+
+#bar.bg>#bgm>div.button>div.progress>progress::-moz-progress-bar {
+    background-color: var(--bgm_progress_color);
+}
+
+@-moz-document url-prefix() {
+    #bar.bg>#bgm>div.button>div.progress>progress {
+        background-color: var(--bgm_progress_background_color);
+    }
+}
+
+/* Safari or Chrome */
+
+#bar.bg>#bgm>div.button>div.progress>progress::-webkit-progress-value {
+    background-color: var(--bgm_progress_color);
+}
+
+#bar.bg>#bgm>div.button>div.progress>progress::-webkit-progress-bar {
+    background-color: var(--bgm_progress_background_color);
+}
+
+#bgm>div.change {
+    width: 34px;
+    height: var(--bar_item_size);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+#bgm>div.change {
+    background-image: url(@/assets/pink/img/bgm.change.white.svg);
+}
+
+#bar.bg>#bgm>div.change {
+    background-image: url(@/assets/pink/img/bgm.change.light.svg);
+}
+
+:root.darkmode #bar.bg>#bgm>div.change {
+    background-image: url(@/assets/pink/img/bgm.change.dark.svg);
+}
+
+#bgm>div.change.start {
+    cursor: pointer;
+}

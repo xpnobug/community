@@ -102,6 +102,7 @@ const menuItems = ref([
   {id: "2", label: '社区', url: '/dynamic',icon:'iconfont icon-cangku', expanded: false},
   {id: "3", label: '用户版块', url: '/members',icon:'iconfont icon-zhuti_tiaosepan', expanded: false},
   {id: "5", label: '频道', url: '/pages/aboutus',icon:'iconfont icon-liebiao', expanded: false},
+  {id: "6", label: 'pyq', url: '/friends', expanded: false},
 ]);
 //点击按钮监听事件
 const leave = () => {
@@ -560,7 +561,7 @@ a:active, a:hover {
 }
 
 /*设置手机端样式*/
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .shell {
     display: none;
   }

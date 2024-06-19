@@ -1,0 +1,598 @@
+#posts {
+    --post_title_text_color: var(--text_color_highlight);
+    --post_mark_text_color: var(--text_color_secondary);
+    --post_mark_background_color: var(--button_background_color);
+    --post_attachcontent_text_color: var(--text_color_highlight);
+    --post_info_text_color: var(--text_color_secondary);
+    --post_info_btn_waitico_color_1: rgba(0, 0, 0, 0.15);
+    --post_info_btn_waitico_color_2: rgba(0, 0, 0, 0.35);
+    --post_splitline_color: var(--splitline_color);
+    --post_fun_ico_background_color: var(--button_background_color);
+    --post_fun_ico_url: url(https://beifeng.me/wp-content/themes/pink/img/post.fun.ico.light.svg);
+    --post_fun_box_text_color: var(--text_color_reversal);
+    --post_fun_box_background_color: #4b5153;
+    --post_fun_box_splitline_color: #373d40;
+    --post_aside_background_color: var(--block_background_color);
+    --post_aside_like_text_color_name: var(--text_color_highlight);
+    --post_aside_like_text_color_more: var(--text_color_secondary);
+    --post_aside_comment_text_color_name: var(--text_color_highlight);
+    --post_aside_comment_text_color_info: var(--text_color_secondary);
+    --post_font_size_primary: var(--font_size_tall);
+    --post_font_size_secondary: var(--font_size_short);
+    --post_line_height_primary: var(--line_height_tall);
+    --post_line_height_secondary: var(--line_height_short);
+}
+
+:root.darkmode #posts {
+    --post_info_btn_waitico_color_1: rgba(255, 255, 255, 0.15);
+    --post_info_btn_waitico_color_2: rgba(255, 255, 255, 0.35);
+    --post_fun_ico_url: url(https://beifeng.me/wp-content/themes/pink/img/post.fun.ico.light.svg);
+    --post_fun_box_background_color: #606060;
+    --post_fun_box_splitline_color: #909090;
+}
+
+#posts {
+    --post_lr_offset: 25px;
+    --post_avatar_size: 36px;
+    --post_avatar_offset: 50px;
+    --post_fun_offset: 50px;
+    --post_fun_btn_lr_offset: 20px;
+    --post_aside_avatar_size: 30px;
+    padding: 30px 0 0;
+}
+
+:root.mobile #posts {
+    --post_lr_offset: 20px;
+    --post_avatar_size: 40px;
+    padding: 50px 0 0;
+}
+
+html:lang(en) #posts {
+    --post_fun_btn_lr_offset: 15px;
+}
+
+#posts>article {
+    padding: 15px var(--post_lr_offset) 0;
+}
+
+:root.mobile #posts>article {
+    border-bottom: 1px solid var(--post_splitline_color);
+}
+
+#posts>article>div.post-avatar {
+    width: var(--post_avatar_size);
+    height: var(--post_avatar_size);
+    margin: 0 14px 0 0;
+}
+
+:root.mobile #posts>article>div.post-avatar {
+    margin-right: 10px;
+}
+
+#posts>article>div.post-avatar>img {
+    border-radius: 5px;
+}
+
+#posts>article>div.post-main {
+    width: calc(100% - var(--post_avatar_offset));
+    border-bottom: 1px solid var(--post_splitline_color);
+}
+
+:root.mobile #posts>article>div.post-main {
+    border-bottom: 0 none;
+}
+
+#posts>article>div.post-main>div.post-fold {
+    height: var(--post_avatar_size);
+    padding: 0 0 14px;
+    color: var(--post_title_text_color);
+    font-size: var(--post_font_size_primary);
+    line-height: var(--post_avatar_size);
+    font-weight: 500;
+}
+
+#posts>article>div.post-main>header.post-header {
+    height: var(--post_line_height_primary);
+    padding: 2px 0 6px;
+}
+
+#posts>article>div.post-main>header.post-header>div.post-title {
+    max-width: 50%;
+    height: var(--post_line_height_primary);
+    color: var(--post_title_text_color);
+    font-size: var(--post_font_size_primary);
+    line-height: var(--post_line_height_primary);
+    font-weight: 500;
+}
+
+#posts>article>div.post-main>header.post-header>div.post-status {
+    width: 20px;
+    height: var(--post_line_height_primary);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+#posts>article>div.post-main>header.post-header>div.post-status.sticky {
+    background-image: url(@/assets/pink/img/post.sticky.light.svg);
+}
+
+:root.darkmode #posts>article>div.post-main>header.post-header>div.post-status.sticky {
+    background-image: url(@/assets/pink/img/post.sticky.dark.svg);
+}
+
+#posts>article>div.post-main>header.post-header>div.post-status.private {
+    background-image: url(@/assets/pink/img/post.private.light.svg);
+}
+
+:root.darkmode #posts>article>div.post-main>header.post-header>div.post-status.private {
+    background-image: url(@/assets/pink/img/post.private.dark.svg);
+}
+
+#posts>article>div.post-main>header.post-header>div.post-status.password {
+    background-image: url(@/assets/pink/img/post.password.light.svg);
+}
+
+:root.darkmode #posts>article>div.post-main>header.post-header>div.post-status.password {
+    background-image: url(@/assets/pink/img/post.password.dark.svg);
+}
+
+#posts>article>div.post-main>header.post-header>div.post-mark {
+    height: var(--post_line_height_primary);
+}
+
+#posts>article>div.post-main>header.post-header>div.post-mark>div.mark-block {
+    width: fit-content;
+    height: var(--post_line_height_primary);
+    margin: 0 6px 0 0;
+    padding: 0 5px;
+    border-radius: 4px;
+    color: var(--post_mark_text_color);
+    font-size: var(--post_font_size_secondary);
+    line-height: var(--post_line_height_primary);
+    background-color: var(--post_mark_background_color);
+}
+
+#posts>article>div.post-main>header.post-header>div.post-mark>div.mark-block:last-child {
+    margin: 0;
+}
+
+#posts>article>div.post-main>section.post-content {
+    padding: 0 0 14px;
+    font-size: var(--post_font_size_primary);
+    line-height: var(--post_line_height_primary);
+    word-break: break-all;
+}
+
+#posts>article>div.post-main>section.post-attachcontent {
+    width: calc(100% * 2 / 3);
+    height: var(--post_line_height_secondary);
+    padding: 0 0 6px;
+    color: var(--post_attachcontent_text_color);
+    font-size: var(--post_font_size_secondary);
+    line-height: var(--post_line_height_secondary);
+}
+
+#posts>article>div.post-main>section.post-attachcontent>span.attachcontent-text {
+    margin: 0 6px 0 0;
+}
+
+#posts>article>div.post-main>section.post-attachcontent>span.attachcontent-text:last-child {
+    margin: 0;
+}
+
+#posts>article>div.post-main>footer.post-footer {
+    height: var(--post_line_height_secondary);
+    padding: 0 0 30px;
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-info {
+    width: calc(100% - var(--post_fun_offset));
+    height: var(--post_line_height_secondary);
+    color: var(--post_info_text_color);
+    font-size: var(--post_font_size_secondary);
+    line-height: var(--post_line_height_secondary);
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-info>span {
+    display: inline;
+    float: left;
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-info>span.separator::before {
+    margin: 0 2px;
+    content: attr(data-separator);
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-info>span.info-btn {
+    cursor: pointer;
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-info>span.info-btn.wait {
+    cursor: default;
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-info>span.info-btn.wait::after {
+    display: inline;
+    float: right;
+    width: 4px;
+    height: 4px;
+    margin: 2px;
+    border: 1px solid var(--post_info_btn_waitico_color_1);
+    border-left: 1px solid var(--post_info_btn_waitico_color_2);
+    border-radius: 50%;
+    animation: g-animation-wait-circle 1s linear infinite;
+    content: '';
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-fun {
+    position: relative;
+    width: 30px;
+    height: 20px;
+    margin: 0 0 0 20px;
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-ico {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background: var(--post_fun_ico_background_color) var(--post_fun_ico_url) 50% 50% no-repeat;
+    cursor: pointer;
+}
+
+@keyframes funbox-anim {
+    0% {
+        opacity: 0;
+        transform: translateX(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    width: auto;
+    /*height: var(--post_line_height_primary);*/
+    margin: calc((24px + (7px * 2) - 15px) / 2 * -1) calc(30px + 5px) 0 0;
+    padding: 8px 0;
+    border-radius: 4px;
+    background-color: var(--post_fun_box_background_color);
+    animation: funbox-anim 0.3s;
+    animation-fill-mode: forwards;
+}
+
+#posts>article.funboxshow>div.post-main>footer.post-footer>div.post-fun>div.fun-box {
+    display: flex;
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box>div.fun-btn {
+    position: relative;
+    height: var(--post_line_height_primary);
+    margin: 0 var(--post_fun_btn_lr_offset);
+    padding: 0 0 0 22px;
+    color: var(--post_fun_box_text_color);
+    font-size: var(--post_font_size_primary);
+    line-height: var(--post_line_height_primary);
+    white-space: nowrap;
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box>div.fun-btn.allow {
+    cursor: pointer;
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box>div.fun-btn.like {
+    background-image: url(@/assets/pink/img/post.fun.btn.like.svg);
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box>div.fun-btn.liked {
+    background-image: url(@/assets/pink/img/post.fun.btn.like.svg);
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box>div.fun-btn.comment {
+    /*display: none;*/
+    background-image: url(@/assets/pink/img/post.fun.btn.comment.svg);
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box>div.fun-btn.wait {
+    background-image: url(@/assets/pink/img/post.fun.btn.wait.svg);
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box>div.fun-btn::after {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: calc(var(--post_fun_btn_lr_offset) * -1);
+    display: block;
+    width: 0;
+    height: var(--post_line_height_primary);
+    border-left: 1px solid var(--post_fun_box_splitline_color);
+    content: '';
+}
+
+#posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box>div.fun-btn:last-child::after {
+    content: none;
+}
+
+#posts>article>div.post-main>aside.post-aside {
+    display: none;
+    margin: 0 0 10px;
+    border-radius: 4px;
+    background-color: var(--post_aside_background_color);
+    overflow: hidden;
+}
+
+#posts>article>div.post-main>aside.post-aside.show {
+    display: block;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.fun-area {
+    display: none;
+    padding: 4px 12px;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.fun-area.show {
+    display: block;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like::before,
+#posts>article>div.post-main>aside.post-aside>div.post-comment.single::before {
+    display: inline;
+    float: left;
+    width: 18px;
+    height: var(--post_line_height_primary);
+    margin: 0 8px 0 0;
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+    content: '';
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like::before {
+    background-image: url(@/assets/pink/img/post.aside.like.light.svg);
+}
+
+:root.darkmode #posts>article>div.post-main>aside.post-aside>div.post-like::before {
+    background-image: url(@/assets/pink/img/post.aside.like.dark.svg);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment.single::before {
+    background-image: url(@/assets/pink/img/post.aside.comment.light.svg);
+}
+
+:root.darkmode #posts>article>div.post-main>aside.post-aside>div.post-comment.single::before {
+    background-image: url(@/assets/pink/img/post.aside.comment.dark.svg);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist,
+#posts>article>div.post-main>aside.post-aside>div.post-comment.single>ul.comment-itemslist {
+    width: calc(100% - 18px - 8px);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist {
+    flex-wrap: wrap;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist>li.like-name {
+    height: var(--post_line_height_primary);
+    color: var(--post_aside_like_text_color_name);
+    font-size: var(--post_font_size_primary);
+    line-height: var(--post_line_height_primary);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist>li.like-name::after {
+    margin: 0 6px 0 2px;
+    content: attr(data-separator);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist>li.like-name:last-child::after {
+    content: none;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist>li.like-name.me {
+    position: relative;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist>li.like-name.me::before {
+    position: absolute;
+    top: 2px;
+    left: -4px;
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--post_aside_like_text_color_name);
+    opacity: 0.15;
+    content: '';
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist>li.like-avatar {
+    width: var(--post_aside_avatar_size);
+    height: var(--post_aside_avatar_size);
+    padding: 2px;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist>li.like-avatar.me {
+    position: relative;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist>li.like-avatar.me::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    background-color: var(--post_aside_like_text_color_name);
+    opacity: 0.2;
+    content: '';
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist>li.like-avatar>img {
+    border-radius: 2px;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist>li.like-avatar.me>img {
+    position: relative;
+    z-index: 1;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist>li.like-avatar-more {
+    height: var(--post_aside_avatar_size);
+    padding: 2px;
+    color: var(--post_aside_like_text_color_more);
+    font-size: var(--post_font_size_secondary);
+    line-height: var(--post_aside_avatar_size);
+}
+
+#posts>article.commentform>div.post-main>aside.post-aside:not(.show),
+#posts>article.commentform>div.post-main>aside.post-aside>div.post-comment:not(.show) {
+    display: block;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-like.show+div.post-comment.show,
+#posts>article.commentform>div.post-main>aside.post-aside>div.post-like.show+div.post-comment:not(.show) {
+    border-top: 1px solid var(--post_splitline_color);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist div.comment-item {
+    position: relative;
+    font-size: var(--post_font_size_primary);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist div.comment-item.deleted::after {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: var(--post_aside_background_color);
+    opacity: 0.75;
+    content: '';
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment.index>ul.comment-itemslist div.comment-item {
+    line-height: var(--post_line_height_primary);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment.single>ul.comment-itemslist li.comment-item-container {
+    border-bottom: 1px solid var(--post_splitline_color);
+    clear: both;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment.single>ul.comment-itemslist li.comment-item-container:last-child {
+    border-bottom: 0 none;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment.single>ul.comment-itemslist div.comment-item {
+    display: flex;
+    padding: 4px 0;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment.single>ul.comment-itemslist div.comment-item>div.comment-avatar {
+    width: var(--post_aside_avatar_size);
+    height: var(--post_aside_avatar_size);
+    padding: 2px;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment.single>ul.comment-itemslist div.comment-item>div.comment-avatar>img {
+    border-radius: 2px;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment.single>ul.comment-itemslist div.comment-item>div.comment-main {
+    width: calc(100% - 34px - 6px);
+    margin: 0 0 0 6px;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment.single>ul.comment-itemslist div.comment-item>div.comment-main>div.comment-info {
+    height: var(--post_line_height_secondary);
+    font-size: var(--post_font_size_secondary);
+    line-height: var(--post_line_height_secondary);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment.single>ul.comment-itemslist div.comment-item>div.comment-main>div.comment-content {
+    line-height: var(--post_line_height_primary);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.separator::before {
+    margin: 0 2px;
+    content: attr(data-separator);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment.index>ul.comment-itemslist span.separator::before {
+    margin: 0;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-name {
+    color: var(--post_aside_comment_text_color_name);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-date {
+    color: var(--post_aside_comment_text_color_info);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-status {
+    color: var(--post_aside_comment_text_color_info);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-delete {
+    color: var(--post_aside_comment_text_color_info);
+    cursor: pointer;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-delete::after {
+    content: attr(data-normal);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-delete.wait,
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-delete.error {
+    cursor: default;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-delete.wait::after {
+    content: attr(data-wait);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-delete.error::after {
+    content: attr(data-error);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-text {
+    word-break: break-all;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-text.allow {
+    cursor: help;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-text::before {
+    margin: 0 6px 0 2px;
+    content: attr(data-separator);
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>ul.comment-itemslist span.comment-text.sep-ignore::before {
+    content: none;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>div.comment-moreitems {
+    width: 20px;
+    height: var(--post_line_height_secondary);
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#posts>article>div.post-main>aside.post-aside>div.post-comment>div.comment-moreitems {
+    background-image: url(@/assets/pink/img/post.aside.comment.more.light.svg);
+}
+
+:root.darkmode #posts>article>div.post-main>aside.post-aside>div.post-comment>div.comment-moreitems {
+    background-image: url(@/assets/pink/img/post.aside.comment.more.dark.svg);
+}

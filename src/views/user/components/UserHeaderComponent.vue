@@ -131,7 +131,7 @@ const addFollows = (item: any) => {
 
 <style scoped>
 
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .user-short-description.big .user-short-description-avatar {
     margin-left: 0 !important;
   }

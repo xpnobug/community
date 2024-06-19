@@ -744,7 +744,7 @@ stop:nth-child(2) {
   font-weight: 500;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
 
   .grid .grid-column {
     display: none !important;

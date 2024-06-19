@@ -495,7 +495,7 @@ img, svg {
   vertical-align: middle;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .section-filters-bar .section-filters-bar-actions {
     flex-direction: column;
   }

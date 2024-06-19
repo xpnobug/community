@@ -1,8 +1,7 @@
 import axios from "@/request/axios";
-import {userInfo} from "@/api/user";
-import {reactive} from "vue";
+
 import {Page} from "@/api/base";
-import {s} from "vite/dist/node/types.d-aGj9QkWt";
+
 
 const BASE_URL = '/article';
 
@@ -36,14 +35,25 @@ interface Article  {
     avatar: string;
 }
 
+export function friendCircleList(page: Page, id: string) {
+    return axios.get(`${BASE_URL}/friendCircleList`, {
+        params: {
+            userId: id,
+            pageSize: page.pageSize,
+            currentPage: page.currentPage,
+        }
+    });
+}
+
 export function list(page: Page) {
-    return axios.get(`${BASE_URL}/list`,{
+    return axios.get(`${BASE_URL}/list`, {
         params: {
             pageSize: page.pageSize,
             currentPage: page.currentPage,
         }
     });
 }
+
 export function pageList() {
     return axios.get(`${BASE_URL}/pageList`);
 }

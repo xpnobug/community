@@ -34,7 +34,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .content-grid {
     margin: 10px;
     padding-top: 128px !important;

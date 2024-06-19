@@ -81,7 +81,7 @@ pageList().then(res => {
 }
 
 /*设置手机端样式*/
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .box-s {
     width: 100%;
   }

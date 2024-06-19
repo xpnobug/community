@@ -194,7 +194,7 @@ onBeforeMount(() => {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) {
   .widget-box.no-padding {
     display: none;
   }
