@@ -14,8 +14,8 @@
       </div>
       <div id="banner-subinfo" class="g-txt-ellipsis g-user-select">遇见即是上上签.</div>
     </header>
-    <PostsComponents/>
-    <FooterComponents/>
+    <PostsComponents :externalFriendPostList="externalFriendPostList"/>
+    <FooterComponents @send="receiveFromChild"/>
   </div>
   <AudioComponents/>
   <div id="other" data-containermaxwidth="550">
@@ -27,16 +27,20 @@
   <ViewsComponents/>
 </template>
 
-<script lang="ts" setup>
-import {getCurrentInstance, inject, onMounted, ref} from "vue";
+<script setup>
+import {onMounted, ref} from "vue";
 import ViewsComponents from "@/views/userPyq/component/viewsComponents.vue";
 import AudioComponents from "@/views/userPyq/component/audioComponents.vue";
 import FooterComponents from "@/views/userPyq/component/footerComponents.vue";
 import PostsComponents from "@/views/userPyq/component/postsComponents.vue";
 
+const externalFriendPostList = ref([])
+const receiveFromChild = (value) => {
+  externalFriendPostList.value = value
+}
 
 // 辅助函数来加载脚本并等待其加载完成
-async function loadScript(src: string) {
+async function loadScript(src) {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.type = 'text/javascript';
@@ -48,14 +52,11 @@ async function loadScript(src: string) {
 }
 
 onMounted(async () => {
-  // window.componentViewer_postGalleryButton = postGalleryButton;
-  // if (showBool.isTouchDevice) viewerImage.value?.addEventListener('touchstart', imageTouchStart, {
-  //   passive: false
-  // });
+
   try {
     // 加载 vue.min.js（通常Vue项目中不需要这一步，因为Vue已经作为依赖项被包含）
     // await loadScript('/src/assets/pink/js/vue.min.js');
-    await loadScript('/src/assets/pink/js/global.js');
+    // await loadScript('/src/assets/pink/js/global.js');
     // await loadScript('/src/assets/pink/js/pyq.js');
 
     // 在这里执行依赖于两个脚本都已加载的操作

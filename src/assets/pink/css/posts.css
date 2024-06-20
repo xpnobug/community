@@ -161,6 +161,10 @@ html:lang(en) #posts {
     font-size: var(--post_font_size_primary);
     line-height: var(--post_line_height_primary);
     word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 #posts>article>div.post-main>section.post-attachcontent {

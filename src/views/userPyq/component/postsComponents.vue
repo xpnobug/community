@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {postActionProcessing} from "@/hooks/post.ts"
 import {friendCircleList} from "@/api/article";
-import {reactive, ref} from "vue";
+import {reactive, ref, getCurrentInstance, inject, defineProps, watch} from "vue";
 import {timeUtils} from "@/store/TimeUtil";
 
 interface Page {
@@ -27,8 +27,17 @@ const postsList = () => {
     friendPostList.value = res.data.data;
   })
 }
-
 postsList();
+const props = defineProps(['externalFriendPostList'])
+watch(props, (newVal, oldVal) => {
+  // 监听外部传入的props数据变化
+  if (newVal) {
+    // console.log('props中的数据存在', newVal.externalFriendPostList)
+    friendPostList.value = friendPostList.value.concat(newVal.externalFriendPostList);
+  }
+})
+
+
 </script>
 
 <template>
@@ -75,6 +84,14 @@ postsList();
                  data-attachment2="https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg?param=400y400"
                  :data-index="music.sid"></div>
           </figure>
+
+          <figure v-if="item.videoList.length !== 0" class="post-content-video aspectratio vertical" style="--aspectratio: 888 / 1182;">
+            <video class="play-vedio g-alias-videoblock"
+                   controls="controls" controlslist="nodownload noplaybackrate noremoteplayback" oncontextmenu="return false"
+                   poster="" preload="metadata"
+                   :src="item.videoList"></video>
+          </figure>
+
         </section>
         <section class="post-attachcontent g-txt-ellipsis g-user-select" v-if="item.address != null">{{ item.address }}</section>
         <footer class="post-footer g-clear-both">
