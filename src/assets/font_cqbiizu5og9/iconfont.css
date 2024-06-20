@@ -43,3 +43,173 @@
   content: "\eb45";
 }
 
+@font-face {
+  font-family: "iconfont"; /* Project id 1898478 */
+  src: url('//at.alicdn.com/t/c/font_1898478_nf3xp3v5cxf.woff2?t=1718890078854') format('woff2'),
+  url('//at.alicdn.com/t/c/font_1898478_nf3xp3v5cxf.woff?t=1718890078854') format('woff'),
+  url('//at.alicdn.com/t/c/font_1898478_nf3xp3v5cxf.ttf?t=1718890078854') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-a-pengyouquan1:before {
+  content: "\e626";
+}
+
+.icon-pengyouquan:before {
+  content: "\e625";
+}
+
+.icon-youxiang:before {
+  content: "\e624";
+}
+
+.icon-yonghu:before {
+  content: "\e622";
+}
+
+.icon-mima:before {
+  content: "\e623";
+}
+
+.icon-xiayige:before {
+  content: "\e621";
+}
+
+.icon-taotu:before {
+  content: "\e620";
+}
+
+.icon-zhuxiao:before {
+  content: "\e61f";
+}
+
+.icon-liaotian-zaixian:before {
+  content: "\e61c";
+}
+
+.icon-sousuo:before {
+  content: "\e61d";
+}
+
+.icon-guanbi:before {
+  content: "\e61e";
+}
+
+.icon-a-weixin2:before {
+  content: "\e61a";
+}
+
+.icon-a-weixin21:before {
+  content: "\e61b";
+}
+
+.icon-a-QQ1:before {
+  content: "\e619";
+}
+
+.icon-Cat:before {
+  content: "\e618";
+}
+
+.icon-html:before {
+  content: "\e613";
+}
+
+.icon-ppt:before {
+  content: "\e614";
+}
+
+.icon-xlsx:before {
+  content: "\e615";
+}
+
+.icon-wendang-docx_doc:before {
+  content: "\e616";
+}
+
+.icon-zip:before {
+  content: "\e617";
+}
+
+.icon-tupian:before {
+  content: "\e608";
+}
+
+.icon-shipin:before {
+  content: "\e60d";
+}
+
+.icon-wenjianleixing-yinpin:before {
+  content: "\e60e";
+}
+
+.icon-wendang:before {
+  content: "\e60f";
+}
+
+.icon-qita:before {
+  content: "\e611";
+}
+
+.icon-quanbu:before {
+  content: "\e612";
+}
+
+.icon-wenjianleixing-biaozhuntu-tupianwenjian:before {
+  content: "\e607";
+}
+
+.icon-wenjian:before {
+  content: "\e604";
+}
+
+.icon-daichuzhishijianzongshu:before {
+  content: "\e605";
+}
+
+.icon-a-007_zhishichanquan:before {
+  content: "\e606";
+}
+
+.icon-gongju:before {
+  content: "\e603";
+}
+
+.icon-wode:before {
+  content: "\e602";
+}
+
+.icon-shouye:before {
+  content: "\e601";
+}
+
+.icon-jianli:before {
+  content: "\e609";
+}
+
+.icon-qq:before {
+  content: "\e60a";
+}
+
+.icon-qqkongjian:before {
+  content: "\e60c";
+}
+
+.icon-QQkongjian:before {
+  content: "\e666";
+}
+
+.icon-QQ1:before {
+  content: "\e60b";
+}
+
+.icon-QQ:before {
+  content: "\e610";
+}

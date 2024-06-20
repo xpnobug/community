@@ -23,16 +23,12 @@
 <script lang="ts" setup>
 import {getCurrentInstance, onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
+import {menuItems} from "@/hooks/useMenu";
 //定义变量
 const instance = getCurrentInstance()
 const router = useRouter();
 //导航菜单动态加载
-const menuItems = ref([
-  {id: "1", label: '首页', url: '/index', icon: 'iconfont icon-liebiao', expanded: false},
-  {id: "2", label: '社区', url: '/dynamic', icon: 'iconfont icon-cangku', expanded: false},
-  {id: "3", label: '用户版块', url: '/members', icon: 'iconfont icon-zhuti_tiaosepan', expanded: false},
-  {id: "5", label: '频道', url: '/pages/aboutus', icon: 'iconfont icon-liebiao', expanded: false},
-]);
+
 
 const handleMenuItemClick = (item: any) => {
   router.push({path: item.url})
@@ -134,7 +130,7 @@ onMounted(() => {
 
 .menu-list {
   width: 140px;
-  height: 160px;
+  /*height: 160px;*/
   background-color: #fff;
   border-radius: 8px;
   list-style: none;

@@ -8,7 +8,7 @@ import PostInfoList from "@/components/PostInfoList.vue";
 
 //svg图标
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_9kwtleoivm4.js',
+  scriptUrl: '//at.alicdn.com/t/c/font_1898478_4559alb1b0i.js',
 });
 
 const tagList = ref([

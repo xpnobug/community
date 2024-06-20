@@ -10,7 +10,7 @@
 <script>
 import {friendCircleList} from "@/api/article.ts";
 import {getCurrentInstance, ref, inject} from "vue";
-
+const userId = localStorage.getItem('userId');
 const siteParams = {
   userIP: "111.205.14.9",
   userUid: "MTExMjA1MTQ5",
@@ -95,13 +95,10 @@ export default {
       if (!this.autoParam.ajaxLock) {
         this.autoParam.ajaxLock = true;
         this.autoStatus('wait');
-        let html = "";
         setTimeout(() => {
           this.autoParam.index++;
-          let data = new FormData();
-          data.append('nav', 'auto');
           this.page.currentPage = this.autoParam.index;
-          friendCircleList(this.page,"1838721172619927552").then(res => {
+          friendCircleList(this.page,userId ? userId : 'null').then(res => {
             this.$emit('send', res.data.data);
             // this.autoParam.elements.posts.insertAdjacentHTML('beforeend',html);
             this.autoStatus(this.autoParam.index < res.data.maxPage ? 'normal' : 'last');

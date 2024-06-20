@@ -386,6 +386,7 @@ html:lang(en) #posts {
     color: var(--post_aside_like_text_color_name);
     font-size: var(--post_font_size_primary);
     line-height: var(--post_line_height_primary);
+    list-style-type: none;
 }
 
 #posts>article>div.post-main>aside.post-aside>div.post-like>ul.like-userslist>li.like-name::after {

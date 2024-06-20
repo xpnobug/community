@@ -1,33 +1,40 @@
 <template>
   <div id="container" class="g-width g-block-center g-clear-both">
     <header id="banner">
-      <div id="banner-background" class="existbg"
-           style="--banner_background_image: url(https://alist.reaicc.com/nas/image/jpeg/2024-04/1/8360dd93-6f22-45d8-8db3-6004e5d7e645.jpg);--banner_background_image_position: 0;"></div>
+
+      <div v-if="userInfo!=null" id="banner-background"
+           :style="'--banner_background_image: url('+ userInfo.userCover +');--banner_background_image_position: 0;'"
+           class="existbg"></div>
+      <div v-show="userInfo==null" id="banner-background" class="existbg"
+           style="--banner_background_image: url(https://alist.reaicc.com/nas/image/jpeg/2024-06/1/a59a777f-94a2-4542-a337-2054e927a4f9.jpg);--banner_background_image_position: 0;"></div>
       <div id="banner-info" class="g-clear-both">
         <div class="name g-left g-txt-ellipsis g-user-select zh">
-          <strong data-link="/" @click.stop="targetSelf($event.target)">REAI</strong>
+          <strong data-link="/" @click.stop="targetSelf($event.target)">{{
+              userInfo !== null ? userInfo.username : '我是访客'
+            }}</strong>
         </div>
         <div class="avatar g-right">
           <img alt="alt" class="g-alias-imgblock" draggable="false" loading="lazy"
-               src="https://q.qlogo.cn/g?b=qq&amp;nk=2877406366&amp;s=100"/>
+               :src="userInfo != null ? userInfo.avatar : 'https://alist.reaicc.com/nas/image/png/2024-06/1/a99c9b34-65aa-47fc-a8f7-f51060213aa5.png'"/>
         </div>
       </div>
       <div id="banner-subinfo" class="g-txt-ellipsis g-user-select">遇见即是上上签.</div>
+
     </header>
     <PostsComponents :externalFriendPostList="externalFriendPostList"/>
     <FooterComponents @send="receiveFromChild"/>
   </div>
   <AudioComponents/>
-  <div id="other" data-containermaxwidth="550">
-    <div class="row g-clear-both">
-      <div class="other-ico loading g-left"></div>
-      <div class="other-text g-left"></div>
-    </div>
-  </div>
+  <!--  <div id="other" data-containermaxwidth="550">-->
+  <!--    <div class="row g-clear-both">-->
+  <!--      <div class="other-ico loading g-left"></div>-->
+  <!--      <div class="other-text g-left"></div>-->
+  <!--    </div>-->
+  <!--  </div>-->
   <ViewsComponents/>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {onMounted, ref} from "vue";
 import ViewsComponents from "@/views/userPyq/component/viewsComponents.vue";
 import AudioComponents from "@/views/userPyq/component/audioComponents.vue";
@@ -38,6 +45,7 @@ const externalFriendPostList = ref([])
 const receiveFromChild = (value) => {
   externalFriendPostList.value = value
 }
+const userInfo =  JSON.parse(localStorage.getItem('userInfo'));
 
 // 辅助函数来加载脚本并等待其加载完成
 async function loadScript(src) {
@@ -52,25 +60,23 @@ async function loadScript(src) {
 }
 
 onMounted(async () => {
+  // try {
+  // 加载 vue.min.js（通常Vue项目中不需要这一步，因为Vue已经作为依赖项被包含）
+  // await loadScript('/src/assets/pink/js/vue.min.js');
+  // await loadScript('/src/assets/pink/js/global.js');
+  // await loadScript('/src/assets/pink/js/pyq.js');
 
-  try {
-    // 加载 vue.min.js（通常Vue项目中不需要这一步，因为Vue已经作为依赖项被包含）
-    // await loadScript('/src/assets/pink/js/vue.min.js');
-    // await loadScript('/src/assets/pink/js/global.js');
-    // await loadScript('/src/assets/pink/js/pyq.js');
-
-    // 在这里执行依赖于两个脚本都已加载的操作
-    // 例如，触发某个按钮的点击事件
-    const autoloadElement = document.getElementById('autoload');
-    if (autoloadElement) {
-      autoloadElement.click();
-      // 如果需要移除元素
-      // autoloadElement.remove();
-    }
-  } catch (error) {
-    console.error('加载脚本时出错:', error);
-  }
-
+  // 在这里执行依赖于两个脚本都已加载的操作
+  // 例如，触发某个按钮的点击事件
+  //   const autoloadElement = document.getElementById('autoload');
+  //   if (autoloadElement) {
+  //     autoloadElement.click();
+  //     // 如果需要移除元素
+  //     // autoloadElement.remove();
+  //   }
+  // } catch (error) {
+  //   console.error('加载脚本时出错:', error);
+  // }
 });
 
 </script>

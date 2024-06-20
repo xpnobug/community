@@ -7,7 +7,7 @@ import type {Rule} from 'ant-design-vue/es/form';
 import {createFromIconfontCN} from "@ant-design/icons-vue";
 //svg图标
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_wm4gdymvnrs.js',
+  scriptUrl: '//at.alicdn.com/t/c/font_1898478_4559alb1b0i.js',
 });
 
 interface FormState {

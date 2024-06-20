@@ -89,21 +89,16 @@
 import {getCurrentInstance, ref} from "vue";
 import {useRouter} from "vue-router";
 import {getStatisticsById} from "@/api/statistics";
+import {useDefer} from "@/hooks/useDefer.js";
+
+import {menuItems} from "@/hooks/useMenu";
 //定义变量
 const menuPmView = ref();
 const djValueSet = ref(true);
 const instance = getCurrentInstance()
 const router = useRouter();
-import { useDefer } from "@/hooks/useDefer.js";
 const defer = useDefer();
-//导航菜单动态加载
-const menuItems = ref([
-  {id: "1", label: '首页', url: '/index',icon:'iconfont icon-liebiao', expanded: false},
-  {id: "2", label: '社区', url: '/dynamic',icon:'iconfont icon-cangku', expanded: false},
-  {id: "3", label: '用户版块', url: '/members',icon:'iconfont icon-zhuti_tiaosepan', expanded: false},
-  {id: "5", label: '频道', url: '/pages/aboutus',icon:'iconfont icon-liebiao', expanded: false},
-  {id: "6", label: 'pyq', url: '/friends', expanded: false},
-]);
+
 //点击按钮监听事件
 const leave = () => {
   djValueSet.value = true;
@@ -227,8 +222,8 @@ figure {
 }
 
 .user-stats {
-  margin-top: 44px;
-  margin-bottom: 44px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 ul {
@@ -482,7 +477,7 @@ a:active, a:hover {
   display: block;
   height: 5rem;
   width: 85%;
-  margin: 9px;
+  /*margin: 9px;*/
   border-radius: 5px;
   position: relative;
   transition: .3s;
@@ -495,7 +490,7 @@ a:active, a:hover {
 }
 
 .box:nth-child(1)::before,
-.box:nth-child(5)::before{
+.box:last-child::before {
   content: '';
   display: block;
   width: 100%;

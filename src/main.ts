@@ -16,9 +16,9 @@ import '@/assets/pink/css/viewer.css';
 
 
 import ElementPlus from 'element-plus'
-import Antd from 'ant-design-vue';
-// import 'ant-design-vue/dist/reset.css';
 import 'element-plus/dist/index.css'
+
+import Antd from 'ant-design-vue';
 import mitt from "mitt"
 import App from './App.vue'
 import route from "./router"
@@ -33,9 +33,11 @@ declare module 'vue'{
         $Bus: typeof Mitt
     }
 }
+
 /* 会自动注册 Button 下的子组件, 例如 Button.Group */
 app.config.globalProperties.$message = message;
 app.config.globalProperties.$Bus = Mitt
+
 // 使用路由
 app.use(route);
 app.provide('store', store);

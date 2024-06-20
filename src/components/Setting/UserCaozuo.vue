@@ -11,6 +11,8 @@ const userLogout = () => {
       const key = 'updatable';
       message.loading({ content: '注销中...', key });
       setTimeout(() => {
+        //清除缓存中的userId
+        localStorage.removeItem('userId')
         message.success({ content: '注销成功!', key, duration: 2 });
         // 登录成功后跳转到首页
         window.location.href = '/login';

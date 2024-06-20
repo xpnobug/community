@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {postActionProcessing} from "@/hooks/post.ts"
 import {friendCircleList} from "@/api/article";
-import {reactive, ref, getCurrentInstance, inject, defineProps, watch} from "vue";
+import {defineProps, reactive, ref, watch} from "vue";
 import {timeUtils} from "@/store/TimeUtil";
 
 interface Page {
@@ -22,8 +22,10 @@ const page = reactive<Page>({
   minPage: 1,
 });
 const friendPostList = ref([]);
+const userId = localStorage.getItem('userId');
+console.log('userId', userId)
 const postsList = () => {
-  friendCircleList(page, "1838721172619927552").then(res => {
+  friendCircleList(page, userId ? userId : 'null').then(res => {
     friendPostList.value = res.data.data;
   })
 }
@@ -122,7 +124,8 @@ watch(props, (newVal, oldVal) => {
         </aside>
       </div>
     </article>
-    <article id="post-1-mxLp" class="g-clear-both" data-author="undefined" data-date="undefined" data-title="undefined"
+    <article v-if="friendPostList.length === 0" id="post-1-mxLp" class="g-clear-both" data-author="undefined"
+             data-date="undefined" data-title="undefined"
              data-url="undefined">
       <div class="post-avatar g-left"><img alt="" class="g-alias-imgblock entered loading"
                                            data-ll-status="loading" draggable="true" loading="lazy"
