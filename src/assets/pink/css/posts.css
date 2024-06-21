@@ -295,7 +295,7 @@ html:lang(en) #posts {
 }
 
 #posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box>div.fun-btn.liked {
-    background-image: url(@/assets/pink/img/post.fun.btn.like.svg);
+    background-image: url(@/assets/pink/img/post.fun.btn.liked.svg);
 }
 
 #posts>article>div.post-main>footer.post-footer>div.post-fun>div.fun-box>div.fun-btn.comment {

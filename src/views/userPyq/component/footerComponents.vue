@@ -7,10 +7,12 @@
   </footer>
 </template>
 
-<script>
+<script lang="ts" setup>
 import {friendCircleList} from "@/api/article.ts";
-import {getCurrentInstance, ref, inject} from "vue";
+import {getCurrentInstance, ref, onMounted} from "vue";
 const userId = localStorage.getItem('userId');
+// 定义父组件事件
+const emit = defineEmits(['send']);
 const siteParams = {
   userIP: "111.205.14.9",
   userUid: "MTExMjA1MTQ5",
@@ -22,118 +24,127 @@ const siteParams = {
   SSL: true
 };
 
-export default {
-  name: "footerComponents",
-  data() {
-    return {
-      page: {
-        pageSize: 10,
-        currentPage: 1,
-        count: 10,
-        maxPage: 1, // 注意：你可能需要根据 count 动态计算 maxPage
-        minPage: 1,
-      },
-      autoParam: {
-        exist: false,
-        index: 1,
-        indexDef: 0,
-        indexMax: 0,
-        navApi: '',
-        isLast: undefined,
-        ajaxLock: false,
-        ajaxDelay: siteParams.ajaxDelay,
-        scrollTopBefore: 0,
-        elements: {
-          posts: null
-        }
-      },
-      autoStatusText: {
-        normaltxt: '',
-        waittxt: '',
-        lasttxt: '',
-        output: ''
-      },
-      autoWaitBool: false
-    }
-  },
-  methods: {
-    targetSelf: function(target) {
-      link(target, 'self');
-    },
-    autoStatus: function(s) {
-      switch (s) {
-        case 'last':
-          this.autoParam.isLast = true;
-          this.autoWaitBool = false;
-          this.autoStatusText.output = this.autoStatusText.lasttxt;
-          // cocoMessage.info(this.autoStatusText.lasttxt);
-          break;
-        case 'wait':
-          this.autoWaitBool = true;
-          this.autoStatusText.output = this.autoStatusText.waittxt;
-          break;
-        case 'normal':
-          this.autoParam.isLast = false;
-          this.autoWaitBool = false;
-          this.autoStatusText.output = this.autoStatusText.normaltxt;
-          break;
-      }
-    },
-    autoHandleClick: function() {
-      if (!this.autoParam.isLast) this.autoAjaxRequest();
-    },
-    autoHandleScroll: function() {
-      if (!this.autoParam.isLast) {
-        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        let windowHeight = document.documentElement.clientHeight;
-        if (scrollTop > this.autoParam.scrollTopBefore && scrollTop + windowHeight > this.$el.offsetTop) this.autoAjaxRequest();
-        this.autoParam.scrollTopBefore = scrollTop;
-      }
-    },
+// 初始化分页参数
+const page = ref({
+  pageSize: 10,
+  currentPage: 1,
+  count: 10,
+  maxPage: 1,
+  minPage: 1,
+});
 
-    autoAjaxRequest: function() {
-      if (!this.autoParam.ajaxLock) {
-        this.autoParam.ajaxLock = true;
-        this.autoStatus('wait');
-        setTimeout(() => {
-          this.autoParam.index++;
-          this.page.currentPage = this.autoParam.index;
-          friendCircleList(this.page,userId ? userId : 'null').then(res => {
-            this.$emit('send', res.data.data);
-            // this.autoParam.elements.posts.insertAdjacentHTML('beforeend',html);
-            this.autoStatus(this.autoParam.index < res.data.maxPage ? 'normal' : 'last');
-            this.autoParam.ajaxLock = false;
-          }).catch(err => {
-            log('nav error: ' + err.message);
-            this.autoParam.ajaxLock = false;
-          });
-        }, this.autoParam.ajaxDelay);
-      }
-    }
-  },
+// 初始化自动加载参数
+const autoParam = ref({
+  exist: false,
+  index: 1,
+  indexDef: 0,
+  indexMax: 0,
+  navApi: '',
+  isLast: undefined,
+  ajaxLock: false,
+  ajaxDelay: siteParams.ajaxDelay,
+  scrollTopBefore: 0,
+  elements: {
+    posts: null as HTMLElement | null
+  }
+});
 
-  mounted: function() {
-    this.autoParam.elements.posts = document.getElementById('posts');
-    this.autoParam.exist = document.getElementById('autoload') ? true : false;
-    this.autoParam.indexDef = document.getElementById('autoload') ? Number(document.getElementById('autoload').getAttribute('data-indexdefault')) : 0;
-    this.autoParam.indexMax = document.getElementById('autoload') ? Number(document.getElementById('autoload').getAttribute('data-totalpages')) : 0;
-    this.autoParam.navApi = document.getElementById('autoload') ? document.getElementById('autoload').getAttribute('data-api') : '';
+// 初始化自动状态文本
+const autoStatusText = ref({
+  normaltxt: '',
+  waittxt: '',
+  lasttxt: '',
+  output: ''
+});
 
-    this.autoStatusText.normaltxt = document.getElementById('autoload') ? document.getElementById('autoload').getAttribute('data-normaltxt') : '';
-    this.autoStatusText.waittxt = document.getElementById('autoload') ? document.getElementById('autoload').getAttribute('data-waittxt') : '';
-    this.autoStatusText.lasttxt = document.getElementById('autoload') ? document.getElementById('autoload').getAttribute('data-lasttxt') : '';
+const autoWaitBool = ref(false);
 
-    if (this.autoParam.exist) {
-      if (this.autoParam.indexDef < this.autoParam.indexMax) {
-        this.autoParam.index = this.autoParam.indexDef;
-        window.addEventListener('scroll', this.autoHandleScroll);
-        this.autoStatus('normal');
-      } else {
-        this.autoStatus('last');
-      }
-    }
+// 目标链接打开方式
+function targetSelf(target: string) {
+  window.location.href = target;
+}
+
+// 自动加载状态更新
+function autoStatus(s: string) {
+  switch (s) {
+    case 'last':
+      autoParam.value.isLast = true;
+      autoWaitBool.value = false;
+      autoStatusText.value.output = autoStatusText.value.lasttxt;
+      break;
+    case 'wait':
+      autoWaitBool.value = true;
+      autoStatusText.value.output = autoStatusText.value.waittxt;
+      break;
+    case 'normal':
+      autoParam.value.isLast = false;
+      autoWaitBool.value = false;
+      autoStatusText.value.output = autoStatusText.value.normaltxt;
+      break;
   }
 }
+
+// 自动加载点击处理
+function autoHandleClick() {
+  if (!autoParam.value.isLast) autoAjaxRequest();
+}
+
+// 自动加载滚动处理
+function autoHandleScroll() {
+  if (!autoParam.value.isLast) {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const windowHeight = document.documentElement.clientHeight;
+    if (scrollTop > autoParam.value.scrollTopBefore && scrollTop + windowHeight > (autoParam.value.elements.posts?.offsetTop || 0)) {
+      autoAjaxRequest();
+    }
+    autoParam.value.scrollTopBefore = scrollTop;
+  }
+}
+
+// 自动加载Ajax请求
+function autoAjaxRequest() {
+  if (!autoParam.value.ajaxLock) {
+    autoParam.value.ajaxLock = true;
+    autoStatus('wait');
+    setTimeout(() => {
+      autoParam.value.index++;
+      page.value.currentPage = autoParam.value.index;
+      // friendCircleList 函数需要在项目中定义并导入
+      friendCircleList(page.value, userId ? userId : 'null').then(res => {
+        // 发送数据到父组件
+        emit('send', res.data.data);
+        autoStatus(autoParam.value.index < res.data.maxPage ? 'normal' : 'last');
+        autoParam.value.ajaxLock = false;
+      }).catch(err => {
+        console.log('nav error: ' + err.message);
+        autoParam.value.ajaxLock = false;
+      });
+    }, autoParam.value.ajaxDelay);
+  }
+}
+
+// 组件挂载时执行的操作
+onMounted(() => {
+  autoParam.value.elements.posts = document.getElementById('posts');
+  autoParam.value.exist = !!document.getElementById('autoload');
+  autoParam.value.indexDef = autoParam.value.exist ? Number(document.getElementById('autoload')?.getAttribute('data-indexdefault')) : 0;
+  autoParam.value.indexMax = autoParam.value.exist ? Number(document.getElementById('autoload')?.getAttribute('data-totalpages')) : 0;
+  autoParam.value.navApi = autoParam.value.exist ? document.getElementById('autoload')?.getAttribute('data-api') || '' : '';
+
+  autoStatusText.value.normaltxt = autoParam.value.exist ? document.getElementById('autoload')?.getAttribute('data-normaltxt') || '' : '';
+  autoStatusText.value.waittxt = autoParam.value.exist ? document.getElementById('autoload')?.getAttribute('data-waittxt') || '' : '';
+  autoStatusText.value.lasttxt = autoParam.value.exist ? document.getElementById('autoload')?.getAttribute('data-lasttxt') || '' : '';
+
+  if (autoParam.value.exist) {
+    if (autoParam.value.indexDef < autoParam.value.indexMax) {
+      autoParam.value.index = autoParam.value.indexDef;
+      window.addEventListener('scroll', autoHandleScroll);
+      autoStatus('normal');
+    } else {
+      autoStatus('last');
+    }
+  }
+});
 </script>
 
 <style scoped>

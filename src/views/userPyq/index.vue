@@ -58,6 +58,59 @@ async function loadScript(src) {
     document.body.appendChild(script);
   });
 }
+// 初始化一些响应式变量
+const miscShowBool = ref(false);
+// 处理滚动事件
+function handleScroll() {
+  const windowHeight = document.documentElement.clientHeight;
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  miscShowBool.value = scrollTop > windowHeight / 2;
+}
+// 回到顶部按钮事件
+function toTopButton() {
+  if (!window.requestAnimationFrame) window.requestAnimationFrame = function (fun) {
+    return setTimeout(fun, 1000 / 60);
+  };
+  if (!window.cancelAnimationFrame) window.cancelAnimationFrame = function (id) {
+    clearTimeout(id);
+  };
+  let timer;
+  let easingStart = 0;
+  let easingBegin = 0;
+  const easingEnd = document.documentElement.scrollTop || document.body.scrollTop;
+  const easingDuring = 50;
+  const easingCalc = (s: number, b: number, e: number, d: number) => {
+    if (s == 0) return b;
+    if (s == d) return b + e;
+    if ((s /= d / 2) < 1) return e / 2 * Math.pow(2, 10 * (s - 1)) + b;
+    return e / 2 * (-Math.pow(2, -10 * --s) + 2) + b;
+  };
+  const smoothUp = () => {
+    const stepMove = easingEnd - easingCalc(easingStart, easingBegin, easingEnd, easingDuring);
+    easingStart++;
+    if (stepMove > 0) {
+      document.body.scrollTop = stepMove;
+      document.documentElement.scrollTop = stepMove;
+      timer = window.requestAnimationFrame(smoothUp);
+    } else {
+      window.cancelAnimationFrame(timer);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  };
+  timer = window.requestAnimationFrame(smoothUp);
+}
+
+// 组件挂载时添加滚动事件监听器
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+// 打开新窗口
+function targetBlank(target: string) {
+  window.open(target, '_blank');
+}
+
 
 onMounted(async () => {
   // try {

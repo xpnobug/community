@@ -1,168 +1,64 @@
-<script lang="ts" setup>
-import {postActionProcessing} from "@/hooks/post.ts"
-import {friendCircleList} from "@/api/article";
-import {defineProps, reactive, ref, watch} from "vue";
-import {timeUtils} from "@/store/TimeUtil";
-
-interface Page {
-  pageSize: number;
-  currentPage: number;
-  count: number;
-  maxPage: number;
-  minPage: number;
-  // firstResult: number;
-  // recount: boolean;
-}
-
-const page = reactive<Page>({
-  pageSize: 10,
-  currentPage: 1,
-  count: 10,
-  maxPage: 10,
-  minPage: 1,
-});
-const friendPostList = ref([]);
-const userId = localStorage.getItem('userId');
-console.log('userId', userId)
-const postsList = () => {
-  friendCircleList(page, userId ? userId : 'null').then(res => {
-    friendPostList.value = res.data.data;
-  })
-}
-postsList();
-const props = defineProps(['externalFriendPostList'])
-watch(props, (newVal, oldVal) => {
-  // 监听外部传入的props数据变化
-  if (newVal) {
-    // console.log('props中的数据存在', newVal.externalFriendPostList)
-    friendPostList.value = friendPostList.value.concat(newVal.externalFriendPostList);
-  }
-})
-
-
-</script>
-
 <template>
   <main id="posts" class="posts" @click="postActionProcessing($event.target)">
-    <article v-for="(item,index) in friendPostList" :id="'post-' + index + '-mxLp'" :data-author="item.author"
-             :data-date="item.publishDate" :data-title="item.title"
-             class="g-clear-both" data-url="undefined">
+    <article v-for="(item, index) in friendPostList" :id="'post-' + index + '-mxLp'" :data-author="item.author"
+             :data-date="item.publishDate" :data-title="item.title" class="g-clear-both" :data-url="item.url || 'undefined'">
       <div class="post-avatar g-left">
-        <img :src="item.avatar" alt="" class="g-alias-imgblock entered loading" data-ll-status="loading"
-             draggable="true"
-             loading="lazy">
+        <img :src="item.avatar" alt="" class="g-alias-imgblock entered loading" data-ll-status="loading" draggable="true" loading="lazy">
       </div>
       <div class="post-main g-right">
         <header class="post-header g-clear-both">
           <div class="post-title g-left g-txt-ellipsis g-user-select">{{ item.author }}</div>
         </header>
         <section class="post-content g-inline-justify g-user-select">
-          <p class=""> {{ item.content }} </p>
-          <div :class="[ 'post-content-gallery',item.imgList.length > 0 ? 'grid-' + item.imgList.length : '']">
-            <figure v-for="img in item.imgList" class="gallery-thumbnail" style="--aspectratio: auto;">
-              <img
-                  :data-index="img"
-                  :src="img"
-                  alt=""
-                  class="thumbnail-image g-alias-imgblock"
-                  data-action="viewimage" draggable="true"
-                  loading="lazy">
+          <p>{{ item.content }}</p>
+          <div :class="['post-content-gallery', item.imgList.length > 0 ? 'grid-' + item.imgList.length : '']">
+            <figure v-for="img in item.imgList" :key="img" class="gallery-thumbnail" style="--aspectratio: auto;">
+              <img :data-index="img" :src="img" alt="" class="thumbnail-image g-alias-imgblock" data-action="viewimage" draggable="true" loading="lazy">
             </figure>
           </div>
-
-          <figure v-for="music in item.musicList" class="post-content-audio"
-                  style="--background_image: url(https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg?param=400y400);">
-            <div class="audio-meta"><span class="meta-image"><img
-                alt=""
-                class="cover g-alias-imgblock" draggable="true" loading="lazy"
-                :src="music.songImg"></span>
+          <figure v-for="music in item.musicList" :key="music.sid" class="post-content-audio" :style="{ '--background_image': `url(${music.songImg})` }">
+            <div class="audio-meta">
+              <span class="meta-image"><img :src="music.songImg" alt="" class="cover g-alias-imgblock" draggable="true" loading="lazy"></span>
               <span class="meta-text">
                 <span class="title g-txt-ellipsis">{{ music.songName }}</span>
                 <span class="artist g-txt-ellipsis">{{ music.singer }}</span>
-              </span></div>
-            <div :id="music.sid" class="audio-btn canplay"
-                 data-action="audioplay"
-                 :data-attachment1="music.songUrl"
-                 data-attachment2="https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg?param=400y400"
-                 :data-index="music.sid"></div>
-          </figure>
-
-          <figure v-if="item.videoList.length !== 0" class="post-content-video aspectratio vertical" style="--aspectratio: 888 / 1182;">
-            <video class="play-vedio g-alias-videoblock"
-                   controls="controls" controlslist="nodownload noplaybackrate noremoteplayback" oncontextmenu="return false"
-                   poster="" preload="metadata"
-                   :src="item.videoList"></video>
-          </figure>
-
-        </section>
-        <section class="post-attachcontent g-txt-ellipsis g-user-select" v-if="item.address != null">{{ item.address }}</section>
-        <footer class="post-footer g-clear-both">
-          <div class="post-info g-left g-txt-ellipsis"><span
-              class="post-date">{{ timeUtils.convertTime(item.publishDate, true) }}</span></div>
-          <div class="post-fun g-right">
-            <div :data-index="index + '-mxLp'" class="fun-ico g-txt-hide" data-action="fun">互动</div>
-            <div :id="item.articleId" class="fun-box">
-              <div :data-index="index" class="fun-btn like allow" data-action="like"
-                   data-likedtext="取消" data-liketext="赞">赞
-              </div>
-              <div :data-index="index + '-mxLp'" class="fun-btn comment allow" data-action="comment" data-count="0"
-                   data-people="0">评论
-              </div>
+              </span>
             </div>
-          </div>
-        </footer>
-        <aside :id="'like-'+item.articleId" class="post-aside show">
-          <div :id="'post-'+item.articleId+'-mxLp-like'"
-               class="fun-area post-like g-clear-both show">
-            <ul class="like-userslist g-right-flex">
-              <li class="like-name more" data-separator=",">1位喜欢</li>
-            </ul>
-          </div>
-          <div id="post-0-mxLp-comment" class="fun-area post-comment g-clear-both index">
-            <ul id="post-0-mxLp-comment-list" class="comment-itemslist" data-hash1="5xVU5S"></ul>
-          </div>
-        </aside>
+            <div :id="music.sid" class="audio-btn canplay" data-action="audioplay" :data-attachment1="music.songUrl" :data-attachment2="music.songImg" :data-index="music.sid"></div>
+          </figure>
+          <figure v-if="item.videoList.length" class="post-content-video aspectratio vertical" style="--aspectratio: 888 / 1182;">
+            <video class="play-vedio g-alias-videoblock" controls controlslist="nodownload noplaybackrate noremoteplayback" oncontextmenu="return false" preload="metadata" :src="item.videoList[0]"></video>
+          </figure>
+        </section>
+        <section class="post-attachcontent g-txt-ellipsis g-user-select" v-if="item.address">{{ item.address }}</section>
+        <LikeComponents :postInfo="item" :index="index" :likeList="likeList" :initLikesList="initLikesList" />
       </div>
     </article>
-    <article v-if="friendPostList.length === 0" id="post-1-mxLp" class="g-clear-both" data-author="undefined"
-             data-date="undefined" data-title="undefined"
-             data-url="undefined">
-      <div class="post-avatar g-left"><img alt="" class="g-alias-imgblock entered loading"
-                                           data-ll-status="loading" draggable="true" loading="lazy"
-                                           src="https://q1.qlogo.cn/g?b=qq&amp;nk=2877406366&amp;s=640"></div>
+    <article v-if="!friendPostList.length" id="post-1-mxLp" class="g-clear-both">
+      <div class="post-avatar g-left">
+        <img alt="" class="g-alias-imgblock entered loading" draggable="true" loading="lazy" src="https://q1.qlogo.cn/g?b=qq&nk=2877406366&s=640">
+      </div>
       <div class="post-main g-right">
         <header class="post-header g-clear-both">
           <div class="post-title g-left g-txt-ellipsis g-user-select">REAI</div>
         </header>
         <section class="post-content g-inline-justify g-user-select">
           <p><br></p>
-          <figure class="post-content-audio"
-                  style="--background_image: url(https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg?param=400y400);">
-            <div class="audio-meta"><span class="meta-image"><img
-                alt=""
-                class="cover g-alias-imgblock" draggable="true" loading="lazy"
-                src="https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg?param=400y400"></span><span
-                class="meta-text"><span class="title g-txt-ellipsis">此生不换</span><span
-                class="artist g-txt-ellipsis">青鸟飞鱼</span></span></div>
-            <div id="asveh6y4c3lfaa954ed117014bd98c0831e012ae1caa" class="audio-btn canplay"
-                 data-action="audioplay"
-                 data-attachment1="https://music.163.com/song/media/outer/url?id=25638340.mp3"
-                 data-attachment2="https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg?param=400y400"
-                 data-index="asveh6y4c3lfaa954ed117014bd98c0831e012ae1caa"></div>
+          <figure class="post-content-audio" style="--background_image: url(https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg?param=400y400);">
+            <div class="audio-meta">
+              <span class="meta-image"><img alt="" class="cover g-alias-imgblock" draggable="true" loading="lazy" src="https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg?param=400y400"></span>
+              <span class="meta-text"><span class="title g-txt-ellipsis">此生不换</span><span class="artist g-txt-ellipsis">青鸟飞鱼</span></span>
+            </div>
+            <div id="asveh6y4c3lfaa954ed117014bd98c0831e012ae1caa" class="audio-btn canplay" data-action="audioplay" data-attachment1="https://music.163.com/song/media/outer/url?id=25638340.mp3" data-attachment2="https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg?param=400y400" data-index="asveh6y4c3lfaa954ed117014bd98c0831e012ae1caa"></div>
           </figure>
         </section>
-        <section></section>
         <footer class="post-footer g-clear-both">
           <div class="post-info g-left g-txt-ellipsis"><span class="post-date">2023-09-03 21:07:33</span></div>
           <div class="post-fun g-right">
             <div class="fun-ico g-txt-hide" data-action="fun" data-index="1-mxLp">互动</div>
             <div id="dzaa954ed117014bd98c0831e012ae1caa" class="fun-box">
-              <div class="fun-btn like allow" data-action="like" data-index="aa954ed117014bd98c0831e012ae1caa"
-                   data-likedtext="取消" data-liketext="赞">赞
-              </div>
-              <div class="fun-btn comment allow" data-action="comment" data-count="0" data-index="1-mxLp"
-                   data-people="0">评论
-              </div>
+              <div class="fun-btn like allow" data-action="like" data-index="aa954ed117014bd98c0831e012ae1caa" data-likedtext="取消" data-liketext="赞">赞</div>
+              <div class="fun-btn comment allow" data-action="comment" data-count="0" data-index="1-mxLp" data-people="0">评论</div>
             </div>
           </div>
         </footer>
@@ -181,6 +77,65 @@ watch(props, (newVal, oldVal) => {
   </main>
 </template>
 
+<script lang="ts" setup>
+import { postActionProcessing } from "@/hooks/post.ts";
+import { friendCircleList } from "@/api/article";
+import { defineProps, reactive, ref, watch } from "vue";
+import LikeComponents from "@/views/userPyq/component/likeComponents.vue";
+import { getLikesList } from "@/api/likes";
+
+interface Page {
+  pageSize: number;
+  currentPage: number;
+  count: number;
+  maxPage: number;
+  minPage: number;
+}
+
+// 定义分页参数
+const page = reactive<Page>({
+  pageSize: 10,
+  currentPage: 1,
+  count: 10,
+  maxPage: 10,
+  minPage: 1,
+});
+
+// 定义文章列表和用户ID
+const friendPostList = ref([]);
+const userId = localStorage.getItem('userId');
+
+// 打印用户ID
+console.log('userId', userId);
+
+// 获取文章列表
+const postsList = () => {
+  friendCircleList(page, userId ? userId : 'null').then(res => {
+    friendPostList.value = res.data.data;
+  })
+}
+postsList();
+
+// 定义props
+const props = defineProps(['externalFriendPostList']);
+
+// 监听props变化
+watch(props, (newVal) => {
+  if (newVal) {
+    friendPostList.value = friendPostList.value.concat(newVal.externalFriendPostList);
+  }
+})
+
+// 获取点赞列表
+const likeList = ref([]);
+const initLikesList = () => {
+  getLikesList().then(res => {
+    likeList.value = res.data.data;
+  })
+}
+initLikesList();
+
+</script>
 
 <style scoped>
 div:first-child:not(.recent-posts) {
