@@ -24,14 +24,24 @@
                 <span class="artist g-txt-ellipsis">{{ music.singer }}</span>
               </span>
             </div>
-            <div :id="music.sid" class="audio-btn canplay" data-action="audioplay" :data-attachment1="music.songUrl" :data-attachment2="music.songImg" :data-index="music.sid"></div>
+            <div :id="music.sid" :data-attachment1="music.songUrl" :data-attachment2="music.songImg" :data-index="music.sid"
+                 class="audio-btn canplay" data-action="audioplay"></div>
           </figure>
-          <figure v-if="item.videoList.length" class="post-content-video aspectratio vertical" style="--aspectratio: 888 / 1182;">
-            <video class="play-vedio g-alias-videoblock" controls controlslist="nodownload noplaybackrate noremoteplayback" oncontextmenu="return false" preload="metadata" :src="item.videoList[0]"></video>
+          <figure v-if="item.videoList.length" class="post-content-video aspectratio vertical"
+                  style="--aspectratio: 888 / 1182;">
+            <video :src="item.videoList[0]" class="play-vedio g-alias-videoblock"
+                   controls controlslist="nodownload noplaybackrate noremoteplayback"
+                   oncontextmenu="return false" preload="metadata"></video>
           </figure>
         </section>
-        <section class="post-attachcontent g-txt-ellipsis g-user-select" v-if="item.address">{{ item.address }}</section>
-        <LikeComponents :postInfo="item" :index="index" :likeList="likeList" :initLikesList="initLikesList" />
+        <section v-if="item.address" class="post-attachcontent g-txt-ellipsis g-user-select">{{
+            item.address
+          }}
+        </section>
+        <LikeComponents :index="index"
+                        :initLikesList="initLikesList"
+                        :ipAddress="ipAddress"
+                        :likeList="likeList" :postInfo="item"/>
       </div>
     </article>
     <article v-if="!friendPostList.length" id="post-1-mxLp" class="g-clear-both">
@@ -78,11 +88,12 @@
 </template>
 
 <script lang="ts" setup>
-import { postActionProcessing } from "@/hooks/post.ts";
-import { friendCircleList } from "@/api/article";
-import { defineProps, reactive, ref, watch } from "vue";
+import {postActionProcessing} from "@/hooks/post.ts";
+import {friendCircleList} from "@/api/article";
+import {defineProps, reactive, ref, watch} from "vue";
 import LikeComponents from "@/views/userPyq/component/likeComponents.vue";
-import { getLikesList } from "@/api/likes";
+import {getLikesList} from "@/api/likes";
+import fetchIpAddress from "@/api/useIp";
 
 interface Page {
   pageSize: number;
@@ -134,6 +145,11 @@ const initLikesList = () => {
   })
 }
 initLikesList();
+
+const ipAddress = ref("");
+fetchIpAddress().then(ip => {
+  ipAddress.value = ip;
+})
 
 </script>
 

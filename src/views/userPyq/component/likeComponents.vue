@@ -42,9 +42,9 @@
 import {computed, nextTick, reactive} from 'vue';
 import {timeUtils} from "@/store/TimeUtil";
 import {giveALike} from "@/api/likes";
-
+import useUniqueId from "@/hooks/useUniqueId";
 // 定义组件属性
-const prop = defineProps(['postInfo', 'index', 'likeList', 'initLikesList']);
+const prop = defineProps(['postInfo', 'index', 'likeList', 'initLikesList', 'ipAddress']);
 // watch(() => prop.likeList, (newVal) => {
 //   // 监听likeList的变化，更新点赞状态
 //   console.log('likeList变化了', newVal);
@@ -71,6 +71,21 @@ const guestCount = computed(() => {
       .filter(item => item.articleId === prop.postInfo.articleId && item.userId === null)
       .length;
 });
+
+const userAgent = navigator.userAgent;
+const guestId = useUniqueId(prop.ipAddress, userAgent);
+// 计算属性，判断当前用户是否已点赞
+const isLikedByUserOrGuest = computed(() => {
+  return prop.likeList.some(item => {
+    // 判断当前用户是否已点赞或访客是否已点赞
+    if (item.guestId != null) {
+      return item.guestId === guestId.uniqueId.value && item.articleId === prop.postInfo.articleId;
+    } else {
+      return item.userId === userId && item.articleId === prop.postInfo.articleId;
+    }
+  });
+});
+
 
 // 点赞参数
 const likes = reactive({
@@ -100,13 +115,6 @@ const page = reactive({
   minPage: 1,
 });
 
-// 计算属性，判断当前用户是否已点赞
-const isLikedByUserOrGuest = computed(() => {
-  return prop.likeList.some(item => {
-    return (item.userId === userId ) && item.articleId === prop.postInfo.articleId;
-  });
-});
-
 // 点赞功能
 const postLike = (info, button) => {
   if (!postsParam.ajaxLock.like) {
@@ -115,7 +123,7 @@ const postLike = (info, button) => {
 
     likes.articleId = info.articleId;
     likes.userId = userId;
-
+    likes.guestId = guestId.uniqueId.value;
     // 发送点赞请求
     giveALike(likes).then(res => {
       nextTick(() => {
