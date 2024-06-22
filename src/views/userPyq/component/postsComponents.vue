@@ -1,5 +1,11 @@
 <template>
+
   <main id="posts" class="posts" @click="postActionProcessing($event.target)">
+    <a-space warp style="width: 100%; justify-content: center;" v-if="userId !=null">
+      <a-button type="text" danger @click="readMeList()">我发布的</a-button>
+<!--      <a-button type="text" danger @click="readMeFollowList()">关注</a-button>-->
+      <a-button type="text" danger @click="readAllList()">所有All</a-button>
+    </a-space>
     <article v-for="(item, index) in friendPostList" :id="'post-' + index + '-mxLp'" :data-author="item.author"
              :data-date="item.publishDate" :data-title="item.title" class="g-clear-both" :data-url="item.url || 'undefined'">
       <div class="post-avatar g-left">
@@ -116,8 +122,6 @@ const page = reactive<Page>({
 const friendPostList = ref([]);
 const userId = localStorage.getItem('userId');
 
-// 打印用户ID
-console.log('userId', userId);
 
 // 获取文章列表
 const postsList = () => {
@@ -126,6 +130,23 @@ const postsList = () => {
   })
 }
 postsList();
+
+const readMeList = () => {
+  friendCircleList(page, userId).then(res => {
+    friendPostList.value = res.data.data;
+  })
+}
+// const readMeFollowList = () => {
+//   friendCircleList(page, "null").then(res => {
+//     friendPostList.value = res.data.data;
+//   })
+// }
+
+const readAllList = () => {
+  friendCircleList(page, "null").then(res => {
+    friendPostList.value = res.data.data;
+  })
+}
 
 // 定义props
 const props = defineProps(['externalFriendPostList']);

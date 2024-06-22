@@ -1,7 +1,6 @@
 <template>
   <div id="container" class="g-width g-block-center g-clear-both">
     <header id="banner">
-
       <div v-if="userInfo!=null" id="banner-background"
            :style="'--banner_background_image: url('+ userInfo.userCover +');--banner_background_image_position: 0;'"
            class="existbg"></div>
@@ -19,7 +18,6 @@
         </div>
       </div>
       <div id="banner-subinfo" class="g-txt-ellipsis g-user-select">遇见即是上上签.</div>
-
     </header>
     <PostsComponents :externalFriendPostList="externalFriendPostList"/>
     <FooterComponents @send="receiveFromChild"/>
