@@ -12,7 +12,7 @@
           {{ isLikedByUserOrGuest ? '取消' : '赞' }}
         </div>
         <div :data-index="prop.index + '-mxLp'" class="fun-btn comment allow" data-action="comment" data-count="0"
-             data-people="0">评论
+             data-people="0" @click="handleComment">评论
         </div>
       </div>
     </div>
@@ -32,17 +32,18 @@
         </li>
       </ul>
     </div>
-    <div :id="'post-'+prop.postInfo.articleId+'-mxLp-comment'" class="fun-area post-comment g-clear-both index">
-      <ul :id="'post-'+prop.postInfo.articleId+'-mxLp-comment-list'" class="comment-itemslist" data-hash1="5xVU5S"></ul>
+    <div :id="'post-'+prop.postInfo.articleId+'-mxLp-comment'" :class="['fun-area post-comment g-clear-both index', { show: isClick }]">
+      <CommentComponents/>
     </div>
   </aside>
 </template>
 
 <script lang="ts" setup>
-import {computed, nextTick, reactive} from 'vue';
+import {computed, nextTick, reactive, ref} from 'vue';
 import {timeUtils} from "@/store/TimeUtil";
 import {giveALike} from "@/api/likes";
 import useUniqueId from "@/hooks/useUniqueId";
+import CommentComponents from "@/views/userPyq/component/commentComponents.vue";
 // 定义组件属性
 const prop = defineProps(['postInfo', 'index', 'likeList', 'initLikesList', 'ipAddress']);
 // watch(() => prop.likeList, (newVal) => {
@@ -152,6 +153,11 @@ const postLike = (info, button) => {
     });
   }
 };
+const isClick = ref(false);
+const handleComment = () => {
+  console.log(isClick)
+  isClick.value = !isClick.value;
+}
 </script>
 
 <style scoped>

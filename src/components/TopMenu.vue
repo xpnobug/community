@@ -40,7 +40,8 @@
             </template>
           </a-popover>
         </div>
-        <BgColorChange/>
+<!--        <BgColorChange/>-->
+        <BgColorChange02/>
       </div>
     </div>
   </div>
@@ -48,12 +49,13 @@
 
 <script lang="ts" setup>
 import {getCurrentInstance, onMounted, reactive, ref, watchEffect} from 'vue'
-import BgColorChange from "@/components/BgColorChange.vue";
+import BgColorChange from "@/components/bgColor/BgColorChange.vue";
 import {useRouter} from "vue-router";
 import {isLogin} from "@/api/user";
 import UserCaozuo from "@/components/Setting/UserCaozuo.vue";
 import {useUserInfo} from "@/hooks/useCached";
 import EditArticle from "@/components/Setting/EditArticle.vue";
+import BgColorChange02 from "@/components/bgColor/BgColorChange02.vue";
 
 const postpush = ref<boolean>(false);
 const visible = ref<boolean>(false);

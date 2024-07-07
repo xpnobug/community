@@ -1,4 +1,4 @@
-import {getCurrentInstance, onMounted, readonly, ref} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
 
 export function postActionProcessing(dom) {
     // console.log('postActionProcessing', dom)
@@ -19,7 +19,6 @@ export function postActionProcessing(dom) {
                 postLike(index, dom);
                 break;
             case 'comment':
-                this.postComment(index, dom);
                 break;
             case 'commentreply':
                 this.postCommentReply(index, dom);
@@ -81,6 +80,43 @@ const touch = ref({
 })
 
 
+const commentformData = ({
+    elements: {
+        targetCommentArea: undefined
+    },
+    api: {
+        guestAvatar: '',
+    },
+    ajaxLock: {
+        guestAvatar: false
+    },
+    formFocusholderBool: false,
+    formSubmittingBool: false,
+    text: '',
+    textPlaceholder: '',
+    textCommentTip: '',
+    textReplyTip: '',
+    textFocusTimer: undefined,
+    stickerShowBool: false,
+    metaSummaryBool: false,
+    avatar: '',
+    avatarError: '',
+    name: '',
+    nameErrorBool: false,
+    email: '',
+    emailErrorBool: false,
+    code: '',
+    codeErrorBool: false,
+    url: '',
+    urlErrorBool: false,
+    post: 0,
+    parentComment: 0,
+    toComment: 0,
+    hash2: null
+})
+const stickerMoreBool = ref(false);
+
+
 // 直接返回计算值，而不是使用 computed 函数（对于简单的计算）
 const isMac = /mac/i.test(window.navigator.platform);
 
@@ -114,14 +150,20 @@ export function postFun(index) {
     }
 }
 
-export function postFunIndirectClose(post = this.postsParam.currentFunBoxPost) {
+export function postFunIndirectClose(post = postsParam.currentFunBoxPost) {
     let classname = 'funboxshow';
     if (post && post.classList.contains(classname)) post.classList.remove(classname);
 }
 
 export function postLike(index, button) {
-    console.log('postLike', index, button)
+    // console.log('postLike', index, button)
 }
+
+export function postidProcessing(index) {
+    let sepPos = index.indexOf('-');
+    return index.slice(0, sepPos);
+}
+
 
 
 export function viewerButton(dom) {
@@ -289,6 +331,19 @@ export default {
             this.postsParam.api.comment = document.getElementById('posts').getAttribute('data-commentapi');
             this.postsParam.api.delete = document.getElementById('posts').getAttribute('data-deleteapi');
             this.postsParam.api.commentDelete = document.getElementById('posts').getAttribute('data-commentdeleteapi');
+
+            this.commentformData.api.guestAvatar = document.getElementById('#comment-form').getAttribute('data-guestavatarapi');
+            this.commentformData.textPlaceholder = document.getElementById('#comment-form').getAttribute('data-textplaceholder');
+            this.commentformData.textCommentTip = document.getElementById('#comment-form').getAttribute('data-commenttip');
+            this.commentformData.textReplyTip = document.getElementById('#comment-form').getAttribute('data-replytip');
+
+            this.commentformData.metaSummaryBool = document.getElementById('#comment-form').hasAttribute('data-metasummary') ? true : false;
+            this.commentformData.avatar = document.getElementById('#comment-form').getAttribute('data-defaultavatar');
+            this.commentformData.avatarError = document.getElementById('#comment-form').getAttribute('data-noavatar');
+            this.commentformData.name = document.getElementById('#comment-form').getAttribute('data-defaultname');
+            this.commentformData.email = document.getElementById('#comment-form').getAttribute('data-defaultemail');
+            this.commentformData.code = document.getElementById('#comment-form').getAttribute('data-defaultcode');
+            this.commentformData.url = document.getElementById('#comment-form').getAttribute('data-defaulturl');
 
             window.componentPosts_postFunIndirectClose = postFunIndirectClose;
         })

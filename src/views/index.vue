@@ -5,6 +5,7 @@ import LeftMenuItem from "@/components/LeftMenuItem.vue";
 import DtCaiDan from "@/components/csszujian/DtCaiDan.vue";
 import { useDefer } from "@/hooks/useDefer.js";
 import getMenuData from "@/router/menuUtil";
+import ChatComponents from "@/components/chat/chatComponents.vue";
 const defer = useDefer();
 const menu = getMenuData();
 console.log('menu', menu)
@@ -20,6 +21,7 @@ console.log('menu', menu)
   <LeftMenuItem v-if="defer"/>
   <FooterView v-if="defer"/>
   <DtCaiDan v-if="defer"/>
+<!--  <ChatComponents/>-->
 <!--  <LunBoCompentes/>-->
 
 </template>

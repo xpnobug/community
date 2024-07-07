@@ -6,6 +6,7 @@ import {MdCatalog, MdPreview} from 'md-editor-v3';
 // preview.css相比style.css少了编辑器那部分样式
 import 'md-editor-v3/lib/preview.css';
 import Sudoku from "@/views/user/components/Sudoku.vue";
+import CommentComponents from "@/views/userPyq/component/commentComponents.vue";
 
 
 const id = 'preview-only';
@@ -205,147 +206,7 @@ selectOne(ids).then(res => {
           </div>
         </div>
         <div id="comment" style="transform: translateY(-80px);"></div>
-        <div style="display: none;" class="post-comment-list">
-          <div class="post-comment-form">
-            <div class="xm-header user-avatar"
-                 style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%;">
-              <div class="xm-avatar" style=" padding: 6.4px;"><img alt="头像"
-                                                                   class=""
-
-                                                                   src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_746181715702761?imageMogr2/crop/128x128/gravity/center"
-                                                                   style="border-radius: 50%;"></div>
-              <svg style="width: 44px; height: 44px;" viewBox="0 0 100 100">
-                <defs>
-                  <linearGradient id="svge2877b9c-016c-4fa1-953a-d106adec913b" x1="0%" x2="100%"
-                                  y1="0%" y2="0%">
-                    <stop offset="0%"></stop>
-                    <stop offset="100%"></stop>
-                  </linearGradient>
-                </defs>
-                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
-                      stroke="#e9e9f0" stroke-width="8"></path>
-                <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                      fill-opacity="0" stroke="url(#svge2877b9c-016c-4fa1-953a-d106adec913b)" stroke-width="8"
-                      style="stroke-dasharray: 74.62, 287;"></path>
-              </svg>
-              <div class="xm-level"
-                   style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
-                <span style="display: block;">2</span></div>
-            </div>
-            <form class="form" onsubmit="return false">
-              <div class="loginComment" style="padding: 1px 54px 1px 0px;">
-              </div>
-              <div>
-                <div class="form-row">
-                  <div class="form-item">
-                    <div class="form-input with-button small"><label
-                        for="groups-search"> <span>我的评论</span></label> <textarea
-                        maxlength="256" placeholder="" style="height: 49px;" type="text"></textarea>
-                    </div>
-                  </div>
-                </div>
-                <input id="post-input" accept="image/png,image/jpeg,image/gif,image/jpg" alt="" class="post-pload"
-                       name="input" style="display: none;" type="file">
-                <div class="alltextInfo">
-                  <p style="display: flex; align-items: center; line-height: 30px;">
-                    <svg class="section-menu-item-icon icon-#svg-photos" style="cursor: pointer;">
-                      <use xlink:href="#svg-photos"></use>
-                    </svg>
-                    <svg class="section-menu-item-icon icon-#svg-friend"
-                         style="margin-left: 24px; cursor: pointer;">
-                      <use xlink:href="#svg-friend"></use>
-                    </svg>
-                  </p>
-                  <div class="dialog"
-                       style="z-index: 10; position: absolute; margin-top: 146px; margin-left: 62px;"></div>
-                  <div class="alltextInfo-textInfo"><span class="textInfo"
-                  > 0/256 </span>
-                    <div class="quick-post-footer-actions">
-                      <p class="button small secondary" style="width: 100%; height: 100%;">评论</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div>
-            <div class="post-comment">
-              <div class="xm-header user-avatar"
-                   style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%;">
-                <div class="xm-avatar" style="padding: 6.4px;"><img alt="头像"
-                                                                    class=""
-
-                                                                    src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/base64_upload_359541709740168?imageMogr2/crop/80x80/gravity/center"
-                                                                    style="border-radius: 50%;">
-                </div>
-                <svg style="width: 44px; height: 44px;" viewBox="0 0 100 100">
-                  <defs>
-                    <linearGradient id="svg4f04d0ef-4884-415a-bb8c-be51ce1799d1" x1="0%" x2="100%"
-                                    y1="0%" y2="0%">
-                      <stop offset="0%"></stop>
-                      <stop offset="100%"></stop>
-                    </linearGradient>
-                  </defs>
-                  <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
-                        stroke="#e9e9f0" stroke-width="8"></path>
-                  <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                        fill-opacity="0" stroke="url(#svg4f04d0ef-4884-415a-bb8c-be51ce1799d1)" stroke-width="8"
-                        style="stroke-dasharray: 80.36, 287;"></path>
-                </svg>
-                <div class="xm-level"
-                     style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
-                  <span style="display: block;">3</span></div>
-              </div>
-              <div class="post-comment-top">
-                <div class="post-comment-author">
-                  <p class="post-comment-text"><a class="post-comment-text-author"
-                  >jimxu</a></p>
-                  <p class="post-comment-text text-long-ellipsis"
-                     style="font-size: 12px; color: rgb(153, 153, 153);">03-07 00:11<span> · 安徽</span></p>
-                </div>
-              </div>
-              <div class="post-comment-emoji" style="word-break: break-all;">欢迎提供技术咨询</div>
-              <div class="post-comment-img"></div>
-              <div class="content-actions">
-                <div class="content-action">
-                  <div class="meta-line">
-                    <div class="meta-line-list reaction-item-list">
-                      <div class="reaction-item" style="position: relative;"><img
-                          alt="reaction-happy"
-                          class="reaction-image"
-                          src="https://pc.opensns.cn/img/reaction/like.png">
-                      </div>
-                    </div>
-                    <p class="meta-line-text">0</p>
-                  </div>
-                  <div class="meta-line">
-                    <p class="meta-line-link light">点赞</p>
-                  </div>
-                  <div class="meta-line">
-                    <p class="meta-line-link light">回复</p>
-                  </div>
-                  <div class="meta-line">
-                    <div style="position: relative;">
-                      <div>
-                        <div class="post-settings">
-                          <svg class="post-settings-icon icon-more-dots">
-                            <use xlink:href="#svg-more-dots"></use>
-                          </svg>
-                        </div>
-                      </div>
-                      <div
-                          style="position: absolute; z-index: 9999; top: 44px; right: -6px; opacity: 0; visibility: hidden; transform: translate(0px, -40px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
-                        <div class="simple-dropdown">
-                          <p class="simple-dropdown-link">举报</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div >
+        <CommentComponents/>
       </div>
     </div>
   </div>

@@ -1,12 +1,11 @@
-import {createRouter,createWebHistory, createWebHashHistory} from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
 import home from "../views/index.vue";
 import ShowView from "../views/newindex/showView.vue";
 import Dynamic from "../views/dynamic/index.vue";
 import UserMember from "../views/userMembers/index.vue";
 import User from "../views/user/index.vue";
-import PostInfoComponent from "@/views/user/components/PostInfoComponent.vue";
-// import Login from "@/views/login/index.vue";
 import Login from "@/views/login/components/LoginComponents.vue";
+import Friends from "@/views/userPyq/index.vue";
 
 /**
  * vue-router历史模式的问题： vue3中历史模式默认改为了HTML5模式：createWebHistory()
@@ -46,6 +45,10 @@ export default createRouter({
                     path: '/members',
                     name: 'members',
                     component: UserMember,
+                }, {
+                    path: '/friends',
+                    name: 'friends',
+                    component: Friends,
                 },
                 {
                     path: '/user/:id',
@@ -74,10 +77,10 @@ export default createRouter({
                     component: () => import('@/views/postView/index.vue')
                 },
                 {
-                    path: '/friends',
-                    name: 'friends',
-                    component: () => import('@/views/userPyq/index.vue')
-                },
+                    path: '/chat',
+                    name: 'chat',
+                    component: () => import('@/views/newchat/demo1/index.vue')
+                }
             ]
         },
     ]

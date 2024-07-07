@@ -1,84 +1,84 @@
 <template>
   <footer id="footer">
-    <div id="footer-wrap">
-      <div id="footer_deal"><a class="deal_link" href="mailto:2877406366@qq.com" title="email" data-pjax-state=""><i
-          class="reaiccfont reaiccfont reaicc-icon-envelope"></i></a><a class="deal_link" target="_blank"
-                                                                           rel="noopener" href="https://weibo.com"
-                                                                           title="微博"><i
-          class="reaiccfont reaiccfont reaicc-icon-weibo"></i></a><a class="deal_link" target="_blank" rel="noopener"
-                                                                        href="https://www.facebook.com/profile.php"
-                                                                        title="facebook"><i
-          class="reaiccfont reaiccfont reaicc-icon-facebook1"></i></a><a class="deal_link" href="/atom.xml"
-                                                                            title="RSS" data-pjax-state=""><i
-          class="reaiccfont reaicc-icon-rss"></i></a><img class="footer_mini_logo entered loaded" title="返回顶部"
-                                                            alt="返回顶部" onclick="reaicc.scrollToDest(0, 500)"
-                                                            src="https://q1.qlogo.cn/g?b=qq&amp;nk=2877406366&amp;s=640"
-                                                            data-lazy-src="https://q1.qlogo.cn/g?b=qq&amp;nk=2877406366&amp;s=640"
-                                                            size="50px" data-ll-status="loaded"><a class="deal_link"
-                                                                                                   target="_blank"
-                                                                                                   rel="noopener"
-                                                                                                   href="https://github.com/"
-                                                                                                   title="Github"><i
-          class="reaiccfont reaiccfont reaicc-icon-github"></i></a><a class="deal_link" target="_blank"
-                                                                         rel="noopener"
-                                                                         href="https://space.bilibili.com"
-                                                                         title="Bilibili"><i
-          class="reaiccfont reaiccfont reaicc-icon-bilibili"></i></a><a class="deal_link" target="_blank"
-                                                                           rel="noopener"
-                                                                           href="https://www.douyin.com/user/MS4wLjABAAAARlF7u0o6BTIX0KiHreekyz5_nqDUauZDgG6AtnpESAI"
-                                                                           title="抖音"><i
-          class="reaiccfont reaiccfont reaicc-icon-tiktok"></i></a></div>
-      <div id="reaicc-footer">
-        <div class="footer-group">
-          <div class="footer-title">服务</div>
-          <div class="footer-links"><a class="footer-item" title="51la统计" target="_blank" rel="noopener"
-                                       href="https://v6.51.la/">51la统计</a><a class="footer-item" title="十年之约"
-                                                                             target="_blank" rel="noopener"
-                                                                             href="https://www.foreverblog.cn/">十年之约</a><a
-              class="footer-item" title="开往" target="_blank" rel="noopener"
-              href="https://github.com/travellings-link/travellings">开往</a></div>
-        </div>
-        <div class="footer-group">
-          <div class="footer-title">主题</div>
-          <div class="footer-links"><a class="footer-item" title="文档" href="/docs/" data-pjax-state="">文档</a><a
-              class="footer-item" title="源码" target="_blank" rel="noopener"
-              href="https://github.com/reaicc-c/hexo-theme-reaicc">源码</a><a class="footer-item" title="更新日志"
-                                                                              href="/update/"
-                                                                              data-pjax-state="">更新日志</a></div>
-        </div>
-        <div class="footer-group">
-          <div class="footer-title">导航</div>
-          <div class="footer-links"><a class="footer-item" title="即刻短文" href="/essay/" data-pjax-state="">即刻短文</a><a
-              class="footer-item" title="友链文章" href="/fcircle/" data-pjax-state="">友链文章</a><a class="footer-item"
-                                                                                              title="留言板"
-                                                                                              href="/comments/"
-                                                                                              data-pjax-state="">留言板</a>
-          </div>
-        </div>
-        <div class="footer-group">
-          <div class="footer-title">协议</div>
-          <div class="footer-links"><a class="footer-item" title="隐私协议" href="/privacy/" data-pjax-state="">隐私协议</a><a
-              class="footer-item" title="Cookies" href="/cookies/" data-pjax-state="">Cookies</a><a class="footer-item"
-                                                                                                    title="版权协议"
-                                                                                                    href="/copyright/"
-                                                                                                    data-pjax-state="">版权协议</a>
-          </div>
-        </div>
-        <div class="footer-group">
-          <div class="footer-title-group">
-            <div class="footer-title">友链</div>
-            <a class="random-friends-btn" id="footer-random-friends-btn" href="javascript:addFriendLinksInFooter();"
-               title="换一批友情链接" data-pjax-state=""
-               style="opacity: 1; transition-duration: 0.3s; transform: rotate(360deg);"><i
-                class="reaiccfont reaicc-icon-arrow-rotate-right"></i></a></div>
-          <div class="footer-links" id="friend-links-in-footer"><a class="footer-item" href="https://blog.reaicc.com"
-                                                                   target="_blank" rel="noopener nofollow">REAI</a><a
-              class="footer-item" href="https://blog.mapleie.cn" target="_blank" rel="noopener nofollow">枫涵</a><a
-              class="footer-item" href="https://reaicc.com" target="_blank" rel="noopener nofollow">聊天室</a><a
-              class="footer-item" href="/link/">更多</a></div>
-        </div>
-      </div>
-    </div>
+<!--    <div id="footer-wrap">-->
+<!--      <div id="footer_deal"><a class="deal_link" href="mailto:2877406366@qq.com" title="email" data-pjax-state=""><i-->
+<!--          class="reaiccfont reaiccfont reaicc-icon-envelope"></i></a><a class="deal_link" target="_blank"-->
+<!--                                                                           rel="noopener" href="https://weibo.com"-->
+<!--                                                                           title="微博"><i-->
+<!--          class="reaiccfont reaiccfont reaicc-icon-weibo"></i></a><a class="deal_link" target="_blank" rel="noopener"-->
+<!--                                                                        href="https://www.facebook.com/profile.php"-->
+<!--                                                                        title="facebook"><i-->
+<!--          class="reaiccfont reaiccfont reaicc-icon-facebook1"></i></a><a class="deal_link" href="/atom.xml"-->
+<!--                                                                            title="RSS" data-pjax-state=""><i-->
+<!--          class="reaiccfont reaicc-icon-rss"></i></a><img class="footer_mini_logo entered loaded" title="返回顶部"-->
+<!--                                                            alt="返回顶部" onclick="reaicc.scrollToDest(0, 500)"-->
+<!--                                                            src="https://q1.qlogo.cn/g?b=qq&amp;nk=2877406366&amp;s=640"-->
+<!--                                                            data-lazy-src="https://q1.qlogo.cn/g?b=qq&amp;nk=2877406366&amp;s=640"-->
+<!--                                                            size="50px" data-ll-status="loaded"><a class="deal_link"-->
+<!--                                                                                                   target="_blank"-->
+<!--                                                                                                   rel="noopener"-->
+<!--                                                                                                   href="https://github.com/"-->
+<!--                                                                                                   title="Github"><i-->
+<!--          class="reaiccfont reaiccfont reaicc-icon-github"></i></a><a class="deal_link" target="_blank"-->
+<!--                                                                         rel="noopener"-->
+<!--                                                                         href="https://space.bilibili.com"-->
+<!--                                                                         title="Bilibili"><i-->
+<!--          class="reaiccfont reaiccfont reaicc-icon-bilibili"></i></a><a class="deal_link" target="_blank"-->
+<!--                                                                           rel="noopener"-->
+<!--                                                                           href="https://www.douyin.com/user/MS4wLjABAAAARlF7u0o6BTIX0KiHreekyz5_nqDUauZDgG6AtnpESAI"-->
+<!--                                                                           title="抖音"><i-->
+<!--          class="reaiccfont reaiccfont reaicc-icon-tiktok"></i></a></div>-->
+<!--      <div id="reaicc-footer">-->
+<!--        <div class="footer-group">-->
+<!--          <div class="footer-title">服务</div>-->
+<!--          <div class="footer-links"><a class="footer-item" title="51la统计" target="_blank" rel="noopener"-->
+<!--                                       href="https://v6.51.la/">51la统计</a><a class="footer-item" title="十年之约"-->
+<!--                                                                             target="_blank" rel="noopener"-->
+<!--                                                                             href="https://www.foreverblog.cn/">十年之约</a><a-->
+<!--              class="footer-item" title="开往" target="_blank" rel="noopener"-->
+<!--              href="https://github.com/travellings-link/travellings">开往</a></div>-->
+<!--        </div>-->
+<!--        <div class="footer-group">-->
+<!--          <div class="footer-title">主题</div>-->
+<!--          <div class="footer-links"><a class="footer-item" title="文档" href="/docs/" data-pjax-state="">文档</a><a-->
+<!--              class="footer-item" title="源码" target="_blank" rel="noopener"-->
+<!--              href="https://github.com/reaicc-c/hexo-theme-reaicc">源码</a><a class="footer-item" title="更新日志"-->
+<!--                                                                              href="/update/"-->
+<!--                                                                              data-pjax-state="">更新日志</a></div>-->
+<!--        </div>-->
+<!--        <div class="footer-group">-->
+<!--          <div class="footer-title">导航</div>-->
+<!--          <div class="footer-links"><a class="footer-item" title="即刻短文" href="/essay/" data-pjax-state="">即刻短文</a><a-->
+<!--              class="footer-item" title="友链文章" href="/fcircle/" data-pjax-state="">友链文章</a><a class="footer-item"-->
+<!--                                                                                              title="留言板"-->
+<!--                                                                                              href="/comments/"-->
+<!--                                                                                              data-pjax-state="">留言板</a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="footer-group">-->
+<!--          <div class="footer-title">协议</div>-->
+<!--          <div class="footer-links"><a class="footer-item" title="隐私协议" href="/privacy/" data-pjax-state="">隐私协议</a><a-->
+<!--              class="footer-item" title="Cookies" href="/cookies/" data-pjax-state="">Cookies</a><a class="footer-item"-->
+<!--                                                                                                    title="版权协议"-->
+<!--                                                                                                    href="/copyright/"-->
+<!--                                                                                                    data-pjax-state="">版权协议</a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="footer-group">-->
+<!--          <div class="footer-title-group">-->
+<!--            <div class="footer-title">友链</div>-->
+<!--            <a class="random-friends-btn" id="footer-random-friends-btn" href="javascript:addFriendLinksInFooter();"-->
+<!--               title="换一批友情链接" data-pjax-state=""-->
+<!--               style="opacity: 1; transition-duration: 0.3s; transform: rotate(360deg);"><i-->
+<!--                class="reaiccfont reaicc-icon-arrow-rotate-right"></i></a></div>-->
+<!--          <div class="footer-links" id="friend-links-in-footer"><a class="footer-item" href="https://blog.reaicc.com"-->
+<!--                                                                   target="_blank" rel="noopener nofollow">REAI</a><a-->
+<!--              class="footer-item" href="https://blog.mapleie.cn" target="_blank" rel="noopener nofollow">枫涵</a><a-->
+<!--              class="footer-item" href="https://reaicc.com" target="_blank" rel="noopener nofollow">聊天室</a><a-->
+<!--              class="footer-item" href="/link/">更多</a></div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
     <div id="footer-bar">
       <div class="footer-bar-links">
         <div class="footer-bar-left">
@@ -88,7 +88,8 @@
           </div>
           <div id="footer-type-tips"></div>
         </div>
-        <div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener"
+        <div class="footer-bar-right">
+          <a class="footer-bar-link" target="_blank" rel="noopener"
                                          href="https://beian.miit.gov.cn/"
                                          title="京ICP备2023019859号-1">京ICP备2023019859号-1</a></div>
       </div>

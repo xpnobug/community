@@ -36,7 +36,7 @@
 }
 
 #banner-background.nobg {
-    background-image: url(../../pink/img/banner.nobg.svg);
+    background-image: url(@/assets/pink/img/banner.nobg.svg);
     background-position: 50% 50%;
 }
 

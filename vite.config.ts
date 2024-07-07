@@ -3,6 +3,9 @@ import vue from '@vitejs/plugin-vue'
 import path from "path";
 import viteCompression from 'vite-plugin-compression'
 // import seoPrerender from 'vite-plugin-seo-prerender'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { UndrawUiResolver } from 'undraw-ui/es/resolvers'
 
 const routes = [
   { path: '/' },
@@ -14,6 +17,9 @@ function getPrerenderRoutes() {
 }
 export default defineConfig({
   plugins: [vue(),
+    Components({
+      resolvers: [UndrawUiResolver]
+    }),
     viteCompression({
       verbose: false, // 启用日志输出，可以设置为 false 关闭
       disable: false, // 是否禁用压缩，默认为 false，即启用压缩
@@ -55,6 +61,7 @@ export default defineConfig({
       "@images": path.resolve(__dirname, "src/assets/images"),
       "@views": path.resolve(__dirname, "src/views"),
       "@store": path.resolve(__dirname, "src/store"),
+      "@plugins": path.resolve(__dirname, "src/plugins"),
     },
   },
   build: {

@@ -74,7 +74,7 @@
             <div class="fun-ico g-txt-hide" data-action="fun" data-index="1-mxLp">互动</div>
             <div id="dzaa954ed117014bd98c0831e012ae1caa" class="fun-box">
               <div class="fun-btn like allow" data-action="like" data-index="aa954ed117014bd98c0831e012ae1caa" data-likedtext="取消" data-liketext="赞">赞</div>
-              <div class="fun-btn comment allow" data-action="comment" data-count="0" data-index="1-mxLp" data-people="0">评论</div>
+              <div class="fun-btn comment allow" @click="handleComment">评论</div>
             </div>
           </div>
         </footer>
@@ -84,8 +84,8 @@
               <li class="like-name more" data-separator=",">13位喜欢</li>
             </ul>
           </div>
-          <div id="post-1-mxLp-comment" class="fun-area post-comment g-clear-both index">
-            <ul id="post-1-mxLp-comment-list" class="comment-itemslist" data-hash1="5xVU5S"></ul>
+          <div id="post-1-mxLp-comment" :class="['fun-area post-comment g-clear-both index', { show: isClick }]">
+            <CommentComponents/>
           </div>
         </aside>
       </div>
@@ -100,6 +100,7 @@ import {defineProps, reactive, ref, watch} from "vue";
 import LikeComponents from "@/views/userPyq/component/likeComponents.vue";
 import {getLikesList} from "@/api/likes";
 import fetchIpAddress from "@/api/useIp";
+import CommentComponents from "@/views/userPyq/component/commentComponents.vue";
 
 interface Page {
   pageSize: number;
@@ -171,6 +172,12 @@ const ipAddress = ref("");
 fetchIpAddress().then(ip => {
   ipAddress.value = ip;
 })
+
+const isClick = ref(false);
+const handleComment = () => {
+  console.log(isClick)
+  isClick.value = !isClick.value;
+}
 
 </script>
 
