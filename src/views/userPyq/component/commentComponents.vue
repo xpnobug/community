@@ -15,7 +15,7 @@ import emoji from '@/assets/emoji'
 import { reactive } from 'vue'
 import { CommentApi, ConfigApi, SubmitParamApi, UToast } from 'undraw-ui'
 // 相对时间
-import { dayjs } from '@/plugins/day.ts'
+import { dayjs } from '@/plugins/day'
 import { isArray, isObject, lang } from 'undraw-ui'
 
 defineOptions({
