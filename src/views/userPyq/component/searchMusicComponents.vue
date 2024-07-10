@@ -7,7 +7,7 @@
 import {reactive, ref} from 'vue'
 import { SearchConfig } from 'undraw-ui'
 import {searchHotMusic, searchMusic} from "@/api/music";
-import ListMusicComponents from "@/views/userPyq/component/music/listMusicComponents.vue";
+import ListMusicComponents from "@/views/userPyq/component/listMusicComponents.vue";
 interface Music {
   limit: number,
   offset: number,
