@@ -3,7 +3,7 @@ import {message} from 'ant-design-vue';
 
 const service = axios.create({
     // baseURL: import.meta.env.VITE_GLOB_API_URL,
-    baseURL: "/music",
+    baseURL: "https://api-mu.reaicc.com",
 })
 
 service.interceptors.request.use(
