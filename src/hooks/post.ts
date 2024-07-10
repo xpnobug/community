@@ -32,7 +32,7 @@ export function postActionProcessing(dom) {
                 break;
             case 'audioplay':
                 if (typeof window.componentPlayer_postAudioButton === 'function') window.componentPlayer_postAudioButton(index, dom.getAttribute('data-attachment1'), dom.getAttribute('data-attachment2'));
-                console.log('audioplay', "audioplay");
+                console.log('audioplay', dom.getAttribute('data-attachment1'));
                 break;
             case 'morecontent':
                 moreContent(index, dom);

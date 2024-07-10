@@ -9,13 +9,11 @@
         @change="uploadChange"
     >
       <div v-if="fileList.length < 9">
-        <plus-outlined />
-        <div style="margin-top: 8px">Upload</div>
+<!--        <plus-outlined />-->
+        <div style=" font-size: 50px;"> + </div>
       </div>
     </a-upload>
-    <a-modal :open="previewVisible" :title="previewTitle" :footer="null" @cancel="handleCancel">
-      <img alt="example" style="width: 100%" :src="previewImage" />
-    </a-modal>
+
   </div>
 </template>
 <script lang="ts" setup>

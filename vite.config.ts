@@ -49,6 +49,12 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
+      '/music': {
+        // target: 'http://182.92.201.19:8070',
+        target: 'https://api-mu.reaicc.com/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/music/, ''),
+      },
     },
     port: 5174
   },

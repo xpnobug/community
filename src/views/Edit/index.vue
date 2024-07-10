@@ -1,6 +1,6 @@
-<script lang="ts" setup >
+<script lang="ts" setup>
 import Upload from "./compontents/upload.vue";
-import {getCurrentInstance, onMounted, reactive, ref, watch} from "vue";
+import {getCurrentInstance, reactive, ref, watch} from "vue";
 import {add} from "@/api/article";
 import {message} from "ant-design-vue";
 import CascaderCom from "@/views/Edit/compontents/CascaderCom.vue";
@@ -8,7 +8,6 @@ import CascaderCom from "@/views/Edit/compontents/CascaderCom.vue";
 import {MdEditor} from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import {useRoute, useRouter} from "vue-router";
-import {useUserInfo} from "@/hooks/useCached";
 
 const state = reactive({
   text: '',
@@ -130,26 +129,19 @@ const onFinishFailed = (errorInfo: any) => {
 </script>
 
 <template>
-  <div class="contenter snipcss-QZvbw">
+  <div class="contenter">
     <div id="release-box" class="contenter-box">
       <div>
         <div class="contenter">
           <div class="ant-spin-nested-loading">
             <div class="ant-spin-container">
               <div class="content">
-                <a-form
-                    :model="formState"
-                    autocomplete="off"
-                    name="basic"
-                    @finish="onFinish"
-                    @finishFailed="onFinishFailed"
-                >
+                <a-form :model="formState" autocomplete="off" name="basic" @finish="onFinish"
+                        @finishFailed="onFinishFailed">
                   <!-- 帖子-->
                   <div class="content-item thread" style="" v-if="type === 'tz'">
                     <div class="form-row form-post-title">
-                      <a-form-item
-                          :rules="[{ required: true, message: '标题不能为空!' }]"
-                          name="title">
+                      <a-form-item :rules="[{ required: true, message: '标题不能为空!' }]" name="title">
                         <a-input v-model:value="formState.title" :maxlength="40" class="video-title"
                                  placeholder="请输入标题"/>
                       </a-form-item>
@@ -163,7 +155,8 @@ const onFinishFailed = (errorInfo: any) => {
                         <div class="form-row" style="margin-left: 0px;">
                           <div class="form-item">
                             <div class="form-textarea">
-                              <a-textarea v-model:value="formState.content" :rows="4" placeholder="请输入" :maxlength="500" />
+                              <a-textarea v-model:value="formState.content" :maxlength="500" :rows="4"
+                                          placeholder="请输入"/>
                             </div>
                           </div>
                         </div>
@@ -189,8 +182,7 @@ const onFinishFailed = (errorInfo: any) => {
                         </div>
                         <div class="select-forum-btn ant-select ant-select-enabled" tabindex="0">
                           <div aria-autocomplete="list" aria-controls="46b3fb0d-c021-4f3d-a6da-2288b4614049"
-                               aria-haspopup="true"
-                               class="ant-select-selection ant-select-selection--single"
+                               aria-haspopup="true" class="ant-select-selection ant-select-selection--single"
                                role="combobox">
                             <div class="ant-select-selection__rendered">
                               <div class="ant-select-selection-selected-value" style="display: block; opacity: 1;"
@@ -201,15 +193,15 @@ const onFinishFailed = (errorInfo: any) => {
                                 aria-label="icon: down" class="anticon anticon-down ant-select-arrow-icon"><svg
                                 aria-hidden="true" class="" data-icon="down" fill="currentColor" focusable="false"
                                 height="1em" viewBox="64 64 896 896" width="1em">
-                                                            <path
-                                                                d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
-                                                        </svg></i></span>
+                                                                    <path
+                                                                        d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+                                                                </svg></i></span>
                           </div>
                         </div>
                       </div>
                       <upload :handleClick="parentClick"/>
                     </div>
-                    <div class="more-set-box" style="padding-bottom: 0px;">
+                    <div class="more-set-box" style="padding-bottom: 0px;" v-if="type !== 'dt'">
                       <div class="more-item new-release">
                         <div class="title">
                           <div class="set-icon">
@@ -224,7 +216,7 @@ const onFinishFailed = (errorInfo: any) => {
                         <!--                        <button class="select-forum-btn ant-btn" type="button"><span>请选择</span></button>-->
                       </div>
                     </div>
-                    <div class="more-set-box" style="padding-bottom: 0px;">
+                    <div class="more-set-box" style="padding-bottom: 0px;" v-if="type !== 'dt'">
                       <div class="more-item new-release">
                         <div class="title">
                           <div class="set-icon">
@@ -239,7 +231,7 @@ const onFinishFailed = (errorInfo: any) => {
                         <!--                        <CascaderCom/>-->
                       </div>
                     </div>
-                    <div class="more-set-box" style="padding-bottom: 0px;">
+                    <div class="more-set-box" style="padding-bottom: 0px;" v-if="type !== 'dt'">
                       <div class="more-item new-release">
                         <div class="title">
                           <div class="set-icon"><span class="iconfont icon-mention at-btn"
@@ -250,7 +242,7 @@ const onFinishFailed = (errorInfo: any) => {
                         <button class="select-forum-btn ant-btn" type="button"><span>请选择联系人</span></button>
                       </div>
                     </div>
-                    <div class="more-set-box" style="padding-bottom: 0px;">
+                    <div class="more-set-box" style="padding-bottom: 0px;" v-if="type !== 'dt'">
                       <div class="more-item new-release">
                         <div class="title">
                           <div class="set-icon">
@@ -270,7 +262,7 @@ const onFinishFailed = (errorInfo: any) => {
                         <div class="attachments" style="display: none;"></div>
                       </div>
                     </div>
-                    <div class="more-set-box" is-forum="0">
+                    <div class="more-set-box" is-forum="0" >
                       <div class="more-item">
                         <div class="title">
                           <div class="set-icon"><i aria-label="icon: security-scan"

@@ -25,6 +25,8 @@ import route from "./router"
 import { Button, message } from 'ant-design-vue';
 import store from './store/store.js';
 import showBool from '@/hooks/post.js';
+//
+import UndrawUi from 'undraw-ui'
 
 const app = createApp(App)
 const Mitt = mitt()
@@ -44,4 +46,5 @@ app.provide('store', store);
 app.provide('showBool', showBool);
 app.use(ElementPlus);
 app.use(Antd);
+app.use(UndrawUi)
 app.mount('#app')

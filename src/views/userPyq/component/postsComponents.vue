@@ -5,6 +5,7 @@
       <a-button type="text" danger @click="readMeList()">我发布的</a-button>
 <!--      <a-button type="text" danger @click="readMeFollowList()">关注</a-button>-->
       <a-button type="text" danger @click="readAllList()">所有All</a-button>
+      <DiaLogComponents/>
     </a-space>
     <article v-for="(item, index) in friendPostList" :id="'post-' + index + '-mxLp'" :data-author="item.author"
              :data-date="item.publishDate" :data-title="item.title" class="g-clear-both" :data-url="item.url || 'undefined'">
@@ -101,6 +102,7 @@ import LikeComponents from "@/views/userPyq/component/likeComponents.vue";
 import {getLikesList} from "@/api/likes";
 import fetchIpAddress from "@/api/useIp";
 import CommentComponents from "@/views/userPyq/component/commentComponents.vue";
+import DiaLogComponents from "@/views/userPyq/component/form/diaLogComponents.vue";
 
 interface Page {
   pageSize: number;
