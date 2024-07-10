@@ -22,14 +22,9 @@
 </template>
 <script lang="ts" setup>
 import {postActionProcessing} from "@/hooks/post.ts";
-import {ref} from "_vue@3.4.31@vue";
+import {ref} from "vue";
 const props = defineProps(['musicList']);
 console.log(props.musicList);
-
-// 响应式变量，用于控制播放器显示状态和音频播放状态
-const showBool = ref(false);
-const playBool = ref(false);
-const canplayBool = ref(false);
 
 // 音频元数据和相关计时器
 const meta = ref({

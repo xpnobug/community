@@ -1,13 +1,13 @@
 <template>
   <u-search :config="config" @submit="submit"></u-search>
-
   <ListMusicComponents :musicList="musicList"/>
 </template>
 <script setup lang="ts">
 import {reactive, ref} from 'vue'
-import { SearchConfig } from 'undraw-ui'
+import {SearchConfig} from 'undraw-ui'
 import {searchHotMusic, searchMusic} from "@/api/music";
 import ListMusicComponents from "@/views/userPyq/component/listMusicComponents.vue";
+
 interface Music {
   limit: number,
   offset: number,
