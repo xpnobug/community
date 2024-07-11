@@ -14,6 +14,7 @@
         <div :data-index="prop.index + '-mxLp'" class="fun-btn comment allow" data-action="comment" data-count="0"
              data-people="0" @click="handleComment">评论
         </div>
+        <div v-if="userId != null" :data-index="prop.index + '-mxLp'" class="fun-btn del allow" @click="deleteInfo(prop.postInfo.articleId)">删除</div>
       </div>
     </div>
   </footer>
@@ -39,11 +40,14 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, nextTick, reactive, ref} from 'vue';
+import {computed, nextTick, reactive, ref, inject} from 'vue';
 import {timeUtils} from "@/store/TimeUtil";
 import {giveALike} from "@/api/likes";
 import useUniqueId from "@/hooks/useUniqueId";
 import CommentComponents from "@/views/userPyq/component/commentComponents.vue";
+import {deleteById} from "@/api/article";
+import {message} from "ant-design-vue";
+
 // 定义组件属性
 const prop = defineProps(['postInfo', 'index', 'likeList', 'initLikesList', 'ipAddress']);
 // watch(() => prop.likeList, (newVal) => {
@@ -157,6 +161,16 @@ const isClick = ref(false);
 const handleComment = () => {
   console.log(isClick)
   isClick.value = !isClick.value;
+}
+//接收传递过来的方法
+const initList = inject('initList');
+const deleteInfo = (v) => {
+  deleteById(v).then(res => {
+    if (res.status === 200) {
+      message.success("删除成功");
+      initList();
+    }
+  })
 }
 </script>
 

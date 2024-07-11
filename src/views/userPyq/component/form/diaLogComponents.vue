@@ -1,17 +1,14 @@
 <template>
-  <a-button type="text" danger style="margin-right: 8px;" @click="showDrawer('default')">发布音乐</a-button>
+  <a-button type="text" danger style="margin-right: 8px;" @click="showDrawer('default')">发布</a-button>
 
   <a-drawer title="发布"     :width="430"
             :size="size" :open="open" @close="onClose">
-    <template #extra>
-      <a-button style="margin-right: 8px" @click="onClose">Cancel</a-button>
-      <a-button type="primary" @click="onClose">Submit</a-button>
-    </template>
+
     <AddOrUpdate/>
   </a-drawer>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, provide } from 'vue';
 import type { DrawerProps } from 'ant-design-vue';
 import AddOrUpdate from "@/views/userPyq/component/form/addOrUpdate.vue";
 
@@ -28,6 +25,9 @@ const showDrawer = (val: DrawerProps['size']) => {
 const onClose = () => {
   open.value = false;
 };
+//传递列表重新加载方法
+provide('onClose', onClose);
+
 </script>
 
 

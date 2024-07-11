@@ -82,7 +82,7 @@ interface idList  {
     idList: number[];
 }
 
-export function deleteById(idList: idList) {
+export function deleteById(idList: string) {
     return axios.delete(`${BASE_URL}/delete`, {
         data: idList,
         headers: {

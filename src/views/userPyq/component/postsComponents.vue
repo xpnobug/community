@@ -18,7 +18,7 @@
         </header>
         <section class="post-content g-inline-justify g-user-select">
           <p>{{ item.content }}</p>
-          <div :class="['post-content-gallery', item.imgList.length > 0 ? 'grid-' + item.imgList.length : '']">
+          <div :class="['post-content-gallery', item.imgList.length > 0 ? 'grid-' +  Math.min(item.imgList.length, 3)  : '']">
             <figure v-for="img in item.imgList" :key="img" class="gallery-thumbnail" style="--aspectratio: auto;">
               <img :data-index="img" :src="img" alt="" class="thumbnail-image g-alias-imgblock" data-action="viewimage" draggable="true" loading="lazy">
             </figure>
@@ -97,7 +97,7 @@
 <script lang="ts" setup>
 import {postActionProcessing} from "@/hooks/post.ts";
 import {friendCircleList} from "@/api/article";
-import {defineProps, reactive, ref, watch} from "vue";
+import {defineProps, reactive, ref, watch, provide} from "vue";
 import LikeComponents from "@/views/userPyq/component/likeComponents.vue";
 import {getLikesList} from "@/api/likes";
 import fetchIpAddress from "@/api/useIp";
@@ -124,8 +124,6 @@ const page = reactive<Page>({
 // 定义文章列表和用户ID
 const friendPostList = ref([]);
 const userId = localStorage.getItem('userId');
-
-
 // 获取文章列表
 const postsList = () => {
   friendCircleList(page, userId ? userId : 'null').then(res => {
@@ -133,6 +131,8 @@ const postsList = () => {
   })
 }
 postsList();
+//传递列表重新加载方法
+provide('initList', postsList);
 
 const readMeList = () => {
   friendCircleList(page, userId).then(res => {
