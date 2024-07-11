@@ -3,7 +3,8 @@ import {message} from 'ant-design-vue';
 
 const service = axios.create({
     // baseURL: import.meta.env.VITE_GLOB_API_URL,
-    baseURL: "/music",
+    baseURL: "https://api-mu.reaicc.com",
+    // baseURL: "/music",
 })
 
 service.interceptors.request.use(
@@ -12,9 +13,9 @@ service.interceptors.request.use(
         const token = localStorage.getItem('token');
         console.log('token:', token)
         // 如果token存在，则将其添加到请求头中
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
+        // if (token) {
+        //     config.headers.Authorization = `Bearer ${token}`;
+        // }
         // 返回修改后的配置对象
         return config;
     },
@@ -66,5 +67,11 @@ service.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+// 设置CORS相关头部配置
+// service.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+// service.defaults.headers.common['Access-Control-Allow-Methods'] = 'PUT, POST, GET, DELETE, OPTIONS';
+// service.defaults.headers.common['Access-Control-Allow-Headers'] = 'X-Requested-With, Content-Type';
+// service.defaults.headers.common['Access-Control-Allow-Headers'] = 'Authorization';
 
+service.defaults.withCredentials = true; // 允许跨域携带cookie
 export default service
