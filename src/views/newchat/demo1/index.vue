@@ -279,7 +279,7 @@ const scrollToBottom = () => {
 
 // 组件挂载时执行的逻辑
 onMounted(() => {
-  socket = new WebSocket('ws://localhost:8070/websocket'); // 替换为你的 WebSocket URL
+  socket = new WebSocket('ws://182.92.201.19:8070/websocket'); // 替换为你的 WebSocket URL
 
   // WebSocket 连接打开时的回调
   socket.onopen = () => {
