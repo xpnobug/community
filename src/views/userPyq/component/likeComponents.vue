@@ -14,7 +14,7 @@
         <div :data-index="prop.index + '-mxLp'" class="fun-btn comment allow" data-action="comment" data-count="0"
              data-people="0" @click="handleComment">评论
         </div>
-        <div v-if="userId != null" :data-index="prop.index + '-mxLp'" class="fun-btn del allow" @click="deleteInfo(prop.postInfo.articleId)">删除</div>
+        <div v-if="userId != null && userId === prop.postInfo.userId" :data-index="prop.index + '-mxLp'" class="fun-btn del allow" @click="deleteInfo(prop.postInfo.articleId)">删除</div>
       </div>
     </div>
   </footer>

@@ -16,6 +16,7 @@
 
 <script lang="ts" setup>
 import {computed, onMounted, ref, watch} from 'vue';
+import {message} from "ant-design-vue";
 
 // 响应式变量，用于控制播放器显示状态和音频播放状态
 const showBool = ref(false);
@@ -204,6 +205,7 @@ function audioReady() {
     canplayBool.value = true;
   });
   meta.value.audio.addEventListener('error', () => {
+    message.warn(`音频加载失败，错误码：${meta.value.audio.error?.code}`);
     console.log('player error code: ' + meta.value.audio.error?.code);
   });
   timer.value.canplay = setInterval(() => {

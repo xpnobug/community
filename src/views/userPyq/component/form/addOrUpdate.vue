@@ -34,7 +34,7 @@ import Upload from "@/views/Edit/compontents/upload.vue";
 import {add} from "@/api/article";
 import {message} from "ant-design-vue";
 import {SearchConfig} from "undraw-ui";
-import {searchHotMusic, searchMusic} from "@/api/music";
+import {getMusicDetail, searchHotMusic, searchMusic} from "@/api/music";
 import ListMusicComponents from "@/views/userPyq/component/listMusicComponents.vue";
 import {addMusic} from "@/api/handleMusic";
 
@@ -81,9 +81,19 @@ const submit = (val: string) => {
 // 搜索音乐
   musicForm.keywords = val;
   searchMusic(musicForm).then(res => {
-    musicList.value = res.data.result;
+    const map = res.data.result.songs.map(item => item.id);
+    getMusicDetail(map).then(res => {
+      musicList.value = res.data.songs.map(item => {
+        return {
+          songName: item.name,
+          singer: item.ar[0].name,
+          songImg: item.al.picUrl,
+          songId: item.id
+        }
+      });
+      console.log(musicList.value);
+    })
   })
-
 }
 
 interface FormState {
@@ -179,11 +189,11 @@ const imgLists = (value) => {
 }
 
 const musicInfo = (value) => {
+  musicFormState.songImg = value.songImg;
   musicFormState.userId = userId;
-  musicFormState.songName = value.name;
-  musicFormState.singer = value.artists[0].name;
-  musicFormState.songImg = value.artists[0].img1v1Url;
-  musicFormState.songId = value.id;
+  musicFormState.songName = value.songName;
+  musicFormState.singer = value.singer;
+  musicFormState.songId = value.songId;
 }
 
 

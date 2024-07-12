@@ -1,21 +1,21 @@
 <template>
-  <a-list :data-source="props.musicList.songs" item-layout="horizontal" @click="postActionProcessing($event.target)">
+  <a-list :data-source="props.musicList" item-layout="horizontal" @click="postActionProcessing($event.target)">
     <template #renderItem="{ item }">
       <a-list-item>
         <a-radio-group v-model:value="value" name="radioGroup">
-          <a-radio :value="item.id" @change="handleChange(item)">
+          <a-radio :value="item.songId" @change="handleChange(item)">
             <a-list-item-meta
-                :description="item.alias[0] + '  ' + item.artists[0].name">
+                :description="item.singer">
               <template #title>
-                {{ item.name }}
-                <div :id="item.id" class="audio-btn canplay" @click="audioStageNode('canplay')"
+                {{ item.songName }}
+                <div :id="item.songId" class="audio-btn canplay" @click="audioStageNode('canplay')"
                      data-action="audioplay"
-                     :data-attachment1="`https://music.163.com/song/media/outer/url?id=${item.id}.mp3`"
-                     data-attachment2="https://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg"
-                     :data-index="item.id"></div>
+                     :data-attachment1="`https://music.163.com/song/media/outer/url?id=${item.songId}.mp3`"
+                     :data-attachment2="item.songImg"
+                     :data-index="item.songId"></div>
               </template>
               <template #avatar>
-                <a-avatar :src="item.album.artist.img1v1Url"/>
+                <a-avatar :src="item.songImg"/>
               </template>
             </a-list-item-meta>
           </a-radio>

@@ -19,3 +19,8 @@ export function searchMusic(music: Music) {
 export function searchHotMusic() {
     return axios.get(`/search/hot`);
 }
+
+//https://api-mu.reaicc.com/song/detail?ids=430685732
+export function getMusicDetail(id: number) {
+    return axios.get(`/song/detail?ids=${id}`);
+}
