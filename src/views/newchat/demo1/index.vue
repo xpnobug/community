@@ -132,39 +132,13 @@
         </button>
         <div class="chat-container">
           <div class="chat-header">
-<!--            <button class="chat-header-button">-->
-<!--              Live Chat-->
-<!--            </button>-->
-            <h3>new Chat</h3>
+            <button class="chat-header-button">
+              Live Chat
+            </button>
+<!--            <h3>new Chat</h3>-->
           </div>
-          <div class="chat-area">
-            <div class="message-wrapper">
-              <div class="profile-picture">
-                <img src="https://images.unsplash.com/photo-1581824283135-0666cf353f35?ixlib=rb-1.2.1&auto=format&fit=crop&w=1276&q=80" alt="pp">
-              </div>
-              <div class="message-content">
-                <p class="name">Ryan Patrick</p>
-                <div class="message">Helloo team!😍</div>
-              </div>
-            </div>
-            <div class="message-wrapper">
-              <div class="profile-picture">
-                <img src="https://images.unsplash.com/photo-1566821582776-92b13ab46bb4?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="pp">
-              </div>
-              <div class="message-content">
-                <p class="name">Andy Will</p>
-                <div class="message">Hello! Can you hear me?🤯 <a class="mention">@ryanpatrick</a></div>
-              </div>
-            </div>
-            <div class="message-wrapper">
-              <div class="profile-picture">
-                <img src="https://images.unsplash.com/photo-1600207438283-a5de6d9df13e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1234&q=80" alt="pp">
-              </div>
-              <div class="message-content">
-                <p class="name">Jessica Bell</p>
-                <div class="message">Hi team! Let's get started it.</div>
-              </div>
-            </div>
+
+          <div class="chat-area" ref="messagesContainer">
             <div class="message-wrapper reverse">
               <div class="profile-picture">
                 <img src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80" alt="pp">
@@ -210,20 +184,25 @@
                 <div class="message">I downloaded the file <a class="mention">@timrussel</a></div>
               </div>
             </div>
-            <div class="message-wrapper reverse">
+            <div :class="msg.type === 'sent' ? ' message-wrapper reverse':' message-wrapper'" v-for="(msg, index) in messages" :key="index">
               <div class="profile-picture">
                 <img src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80" alt="pp">
               </div>
               <div class="message-content">
-                <p class="name">Emmy Lou</p>
-                <div class="message">Woooww! Awesome❤️</div>
+                <p class="name">{{ msg.name }}</p>
+                <template v-if="msg.type === 'sent'">
+                  <div class="message">{{ msg.content }}</div>
+                </template>
+                <template v-else>
+                  <div class="message">{{ msg.content }}</div>
+                </template>
               </div>
             </div>
           </div>
           <div class="chat-typing-area-wrapper">
             <div class="chat-typing-area">
-              <input type="text" placeholder="Type your meesage..." class="chat-input">
-              <button class="send-button">
+              <input v-model="messageMe" @keyup.enter="sendMessage" placeholder="Type your meesage..." class="chat-input">
+              <button class="send-button" @click="sendMessage">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send" viewBox="0 0 24 24">
                   <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                 </svg>
@@ -255,14 +234,83 @@
 
 </template>
 
-<script lang="ts" setup>
-import {ref, onMounted, computed, watch} from 'vue';
 
-const isRightSideExpanded = ref(true);
+<script lang="ts" setup>
+import { ref, onMounted, onUnmounted, nextTick } from 'vue';
+import {message} from "ant-design-vue"; // 导入 Vue 3 的组合式 API
+
+const isRightSideExpanded = ref(true); // 定义一个响应式变量，表示右侧栏是否展开
 const toggleRightSide = () => {
-  isRightSideExpanded.value = !isRightSideExpanded.value;
+  isRightSideExpanded.value = !isRightSideExpanded.value; // 切换右侧栏状态
 };
 
+// WebSocket 逻辑
+const messages = ref<{ type: string; name:string, content: string }[]>([]); // 定义一个响应式变量，用于存储消息列表
+const messageMe = ref(''); // 定义一个响应式变量，用于绑定输入框的内容
+let socket: WebSocket | null = null; // 定义一个变量用于存储 WebSocket 实例
+const messagesContainer = ref<HTMLElement | null>(null); // 定义一个变量用于存储消息容器的引用
+
+// 定义发送消息的方法
+const sendMessage = () => {
+  console.log("发送的消息内容: ", messageMe.value); // 打印发送的消息内容
+  //判断输入的内容不能为空
+  if (messageMe.value === '') {
+    message.warn("内容不能为空")
+    return; // 如果输入的内容为空，则不发送消息
+  }
+  // 添加我发送的消息到列表
+  messages.value.push({ type: 'sent', name:'user', content: messageMe.value });
+  // 检查 WebSocket 连接是否打开
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    socket.send(messageMe.value); // 通过 WebSocket 发送消息
+    messageMe.value = ''; // 清空输入框
+  }
+  scrollToBottom(); // 滚动到消息列表底部
+};
+
+// 滚动到消息列表底部的方法
+const scrollToBottom = () => {
+  nextTick(() => {
+    if (messagesContainer.value) {
+      messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight;
+    }
+  });
+};
+
+// 组件挂载时执行的逻辑
+onMounted(() => {
+  socket = new WebSocket('ws://localhost:8070/websocket'); // 替换为你的 WebSocket URL
+
+  // WebSocket 连接打开时的回调
+  socket.onopen = () => {
+    console.log('WebSocket 连接成功');
+  };
+
+  // 收到 WebSocket 消息时的回调
+  socket.onmessage = (event) => {
+    console.log('收到消息:', event.data);
+    messages.value.push({ type: 'ai', name:'ChatGpt', content: event.data });
+    console.log('消息:', messages.value);
+    scrollToBottom(); // 滚动到消息列表底部
+  };
+
+  // WebSocket 连接关闭时的回调
+  socket.onclose = () => {
+    console.log('WebSocket 连接关闭');
+  };
+
+  // WebSocket 发生错误时的回调
+  socket.onerror = (error) => {
+    console.error('WebSocket 错误:', error);
+  };
+});
+
+// 组件卸载时执行的逻辑
+onUnmounted(() => {
+  if (socket) {
+    socket.close(); // 关闭 WebSocket 连接
+  }
+});
 </script>
 
 <style scoped>
