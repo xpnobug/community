@@ -30,6 +30,8 @@ const handleChange = () => {
 
   // 更新DOM的主题模式
   document.documentElement.setAttribute("data-theme", willChangeMode);
+  // 更新朋友圈主题
+  document.documentElement.className = willChangeMode === "dark" ? "darkmode":"";
 
   // 将主题模式保存到localStorage
   localStorage.setItem('theme', willChangeMode);
@@ -47,6 +49,7 @@ onMounted(() => {
   if (savedTheme) {
     // 如果存在已保存的主题模式，则应用它
     document.documentElement.setAttribute("data-theme", savedTheme);
+    document.documentElement.className = savedTheme === "dark" ? "darkmode":"";
     // 更新isDarkMode变量的值
     isDarkMode.value = savedTheme === "dark";
   }

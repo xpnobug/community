@@ -76,9 +76,9 @@ pageList().then(res => {
   transition: .5s;
 }
 
-.content-grid {
-  padding-top: 84px;
-}
+/*.content-grid {*/
+/*  padding-top: 84px;*/
+/*}*/
 
 /*设置手机端样式*/
 @media screen and (orientation: portrait) {
@@ -86,8 +86,8 @@ pageList().then(res => {
     width: 100%;
   }
 
-  .content-grid {
-    padding-top: 113px;
-  }
+  /*.content-grid {*/
+  /*  padding-top: 113px;*/
+  /*}*/
 }
 </style>

@@ -22,7 +22,7 @@ instance?.proxy?.$Bus.on("menuId", (param: any) => {
 
 <template>
   <div class="content-grid"
-       style="width: 100%; padding-top: 84px; transform: translate(261.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
+       style="width: 100%;  transform: translate(261.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
     <div class="">
       <div class="loading" style="display: none;">
         <div class="page-loader">
@@ -79,7 +79,7 @@ instance?.proxy?.$Bus.on("menuId", (param: any) => {
 }
 @media screen and (orientation: portrait) {
   .content-grid {
-    padding-top: 115px !important;
+    /*padding-top: 115px !important;*/
     margin: auto;
     transform: none !important;
   }
@@ -90,7 +90,7 @@ instance?.proxy?.$Bus.on("menuId", (param: any) => {
 }
 .content-grid {
   max-width: 1184px;
-  padding: 54px 0 32px;
+  /*padding: 54px 0 32px;*/
 }
 
 .grid.grid-3-6-3 {

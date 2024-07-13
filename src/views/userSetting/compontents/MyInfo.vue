@@ -194,7 +194,7 @@ const update = (val) => {
 
 .content-grid {
   max-width: 1184px;
-  padding: 54px 0 32px;
+  /*padding: 54px 0 32px;*/
 }
 
 :before, :after {

@@ -29,7 +29,7 @@ pageList(page).then(res => {
 
 <template>
   <div class="content-grid"
-       style="width: 100%; padding-top: 84px;  transition: transform 0.4s ease-in-out 0s;">
+       style="width: 100%; transition: transform 0.4s ease-in-out 0s;">
     <div data-v-a0c93e92="" style="margin: 10px;">
       <div class="section-banner" data-v-a0c93e92=""
            style="background: url(https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/aedadfd944b6b44687f68d45eca091af.png?imageMogr2/crop/2368x320/gravity/center) center center / cover no-repeat; cursor: default;">
@@ -97,7 +97,7 @@ pageList(page).then(res => {
 @media screen and (orientation: portrait) {
   .content-grid {
     /*margin: 10px;*/
-    padding-top: 128px !important;
+    /*padding-top: 128px !important;*/
   }
 
   .grid {
@@ -108,7 +108,7 @@ pageList(page).then(res => {
 
 .content-grid {
   max-width: 1184px;
-  padding: 54px 0 32px;
+  /*padding: 54px 0 32px;*/
 }
 .section-banner {
   min-height: 160px;
@@ -148,9 +148,6 @@ h1, h2, h3, h4, h5, h6, p, ol, ul, figure, .table, .form-row {
   margin: 0;
 }
 
-.content-grid .section-banner + .section-filters-bar {
-  margin-top: 64px;
-}
 .content-grid .section-filters-bar {
   margin-top: 30px;
 }

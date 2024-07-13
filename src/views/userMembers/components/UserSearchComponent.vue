@@ -80,9 +80,9 @@ const handleTag = (value:any) => {
 
 
 <style scoped>
-.content-grid .section-banner + .section-filters-bar {
-  margin-top: 64px;
-}
+/*.content-grid .section-banner + .section-filters-bar {*/
+/*  margin-top: 64px;*/
+/*}*/
 
 .content-grid .section-filters-bar {
   margin-top: 30px;

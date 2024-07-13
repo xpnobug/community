@@ -8,7 +8,7 @@
     --comment_form_button_text_color: var(--text_color_highlight);
     --comment_form_button_focus_text_color: var(--text_color_reversal);
     --comment_form_button_background_color: var(--button_background_color);
-    /*--comment_form_sticker_ico_url: url(@/assets/pink/img/sticker.ico.light.svg);*/
+    --comment_form_sticker_ico_url: url(@/assets/pink/img/sticker.ico.light.svg);
     --comment_form_sticker_box_background_color: var(--block_background_color);
     --comment_form_font_size_primary: var(--font_size_tall);
     --comment_form_font_size_secondary: var(--font_size_short);
@@ -17,7 +17,7 @@
 }
 
 :root.darkmode #comment-form {
-    /*--comment_form_sticker_ico_url: url(@/assets/pink/img/sticker.ico.dark.svg);*/
+    --comment_form_sticker_ico_url: url(@/assets/pink/img/sticker.ico.dark.svg);
 }
 
 div.single #comment-form {

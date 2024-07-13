@@ -1,6 +1,6 @@
 <template>
   <div class="content-grid"
-       style="padding-top: 84px; transform: translate(253.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
+       style="transform: translate(253.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
     <div class="task snipcss-tzqDC" data-v-b91944aa="">
       <div class="loading" data-v-b91944aa="" data-v-f9d0f44a="" style="display: none;">
         <div class="page-loader" data-v-f9d0f44a="">
@@ -737,7 +737,7 @@ export default {
 }
 .content-grid {
   max-width: 1184px;
-  padding: 54px 0 32px;
+  /*padding: 54px 0 32px;*/
 }
 .task[data-v-b91944aa] {
   white-space: nowrap;

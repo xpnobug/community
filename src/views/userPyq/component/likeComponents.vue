@@ -33,8 +33,8 @@
         </li>
       </ul>
     </div>
-    <div :id="'post-'+prop.postInfo.articleId+'-mxLp-comment'" :class="['fun-area post-comment g-clear-both index', { show: isClick }]">
-      <CommentComponents/>
+    <div :id="'post-'+prop.postInfo.articleId+'-mxLp-comment'" :class="['fun-area post-comment g-clear-both index show', { show: isClick }]">
+      <CommentComponents :isClick="isClick"/>
     </div>
   </aside>
 </template>

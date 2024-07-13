@@ -29,7 +29,7 @@ selectOne(ids).then(res => {
 
 
 <template>
-  <div class="content-grid snipcss-tMNNJ" style="  padding-top: 84px;   transition: transform 0.4s ease-in-out 0s;">
+  <div class="content-grid snipcss-tMNNJ" style="transition: transform 0.4s ease-in-out 0s;">
     <div class="post-content post-container">
       <div class="breadcrumb">
         <div class="breadcrumb-container">

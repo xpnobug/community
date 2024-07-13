@@ -35,10 +35,10 @@ export default {
 }
 
 @media screen and (orientation: portrait) {
-  .content-grid {
-    margin: 10px;
-    padding-top: 128px !important;
-  }
+  /*.content-grid {*/
+  /*  margin: 10px;*/
+  /*  padding-top: 128px !important;*/
+  /*}*/
 
   .grid {
     display: block !important;
@@ -47,8 +47,8 @@ export default {
 
 .content-grid {
   max-width: 1184px;
-  padding: 54px 0 32px;
-  padding-top: 84px;
+  /*padding: 54px 0 32px;*/
+  /*padding-top: 84px;*/
   transition: transform 0.4s ease-in-out 0s;
 }
 

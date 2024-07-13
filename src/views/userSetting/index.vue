@@ -17,7 +17,7 @@ const handleMenu = (value: any) => {
 
 <template>
   <div class="content-grid snipcss0-1-1-433"
-       style="width: 100%; padding-top: 84px; transform: translate(253.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
+       style="width: 100%; transform: translate(253.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
     <div class="snipcss-134kU">
       <div class="section-banner"
            style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/708dc9521e44ae71738a97e18d4bdae8.png?imageMogr2/crop/2368x320/gravity/center&quot;) center center / cover no-repeat; cursor: default;">
@@ -169,7 +169,7 @@ const handleMenu = (value: any) => {
 
 .content-grid {
   max-width: 1184px;
-  padding: 54px 0 32px;
+  /*padding: 54px 0 32px;*/
 }
 
 :before, :after {

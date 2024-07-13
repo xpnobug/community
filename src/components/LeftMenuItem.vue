@@ -548,6 +548,7 @@ a:active, a:hover {
 }
 
 .right-content-style {
+  padding-top: 70px;
   width: 100%;
   /*height: 100%;*/
   background-color: var(--global-bg);
