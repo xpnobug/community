@@ -48,47 +48,8 @@
         <LikeComponents :index="index"
                         :initLikesList="initLikesList"
                         :ipAddress="ipAddress"
-                        :likeList="likeList" :postInfo="item"/>
-      </div>
-    </article>
-    <article v-if="!friendPostList.length" id="post-1-mxLp" class="g-clear-both">
-      <div class="post-avatar g-left">
-        <img alt="" class="g-alias-imgblock entered loading" draggable="true" loading="lazy" src="https://q1.qlogo.cn/g?b=qq&nk=2877406366&s=640">
-      </div>
-      <div class="post-main g-right">
-        <header class="post-header g-clear-both">
-          <div class="post-title g-left g-txt-ellipsis g-user-select">REAI</div>
-        </header>
-        <section class="post-content g-inline-justify g-user-select">
-          <p><br></p>
-          <figure class="post-content-audio" style="--background_image: url(https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg?param=400y400);">
-            <div class="audio-meta">
-              <span class="meta-image"><img alt="" class="cover g-alias-imgblock" draggable="true" loading="lazy" src="https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg?param=400y400"></span>
-              <span class="meta-text"><span class="title g-txt-ellipsis">此生不换</span><span class="artist g-txt-ellipsis">青鸟飞鱼</span></span>
-            </div>
-            <div id="asveh6y4c3lfaa954ed117014bd98c0831e012ae1caa" class="audio-btn canplay" data-action="audioplay" data-attachment1="https://music.163.com/song/media/outer/url?id=25638340.mp3" data-attachment2="https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg?param=400y400" data-index="asveh6y4c3lfaa954ed117014bd98c0831e012ae1caa"></div>
-          </figure>
-        </section>
-        <footer class="post-footer g-clear-both">
-          <div class="post-info g-left g-txt-ellipsis"><span class="post-date">2023-09-03 21:07:33</span></div>
-          <div class="post-fun g-right">
-            <div class="fun-ico g-txt-hide" data-action="fun" data-index="1-mxLp">互动</div>
-            <div id="dzaa954ed117014bd98c0831e012ae1caa" class="fun-box">
-              <div class="fun-btn like allow" data-action="like" data-index="aa954ed117014bd98c0831e012ae1caa" data-likedtext="取消" data-liketext="赞">赞</div>
-              <div class="fun-btn comment allow" @click="handleComment">评论</div>
-            </div>
-          </div>
-        </footer>
-        <aside id="likesaa954ed117014bd98c0831e012ae1caa" class="post-aside show">
-          <div id="post-aa954ed117014bd98c0831e012ae1caa-mxLp-like" class="fun-area post-like g-clear-both show">
-            <ul class="like-userslist g-right-flex">
-              <li class="like-name more" data-separator=",">13位喜欢</li>
-            </ul>
-          </div>
-          <div id="post-1-mxLp-comment" :class="['fun-area post-comment g-clear-both index', { show: isClick }]">
-            <CommentComponents/>
-          </div>
-        </aside>
+                        :likeList="likeList"
+                        :postInfo="item" :pyqCommentList="pyqCommentList"/>
       </div>
     </article>
   </main>
@@ -97,29 +58,13 @@
 <script lang="ts" setup>
 import {postActionProcessing} from "@/hooks/post.ts";
 import {friendCircleList} from "@/api/article";
-import {defineProps, reactive, ref, watch, provide} from "vue";
+import {defineProps, provide, ref, watch} from "vue";
 import LikeComponents from "@/views/userPyq/component/likeComponents.vue";
 import {getLikesList} from "@/api/likes";
 import fetchIpAddress from "@/api/useIp";
-import CommentComponents from "@/views/userPyq/component/commentComponents.vue";
+import page from "@/api/base";
 import DiaLogComponents from "@/views/userPyq/component/form/diaLogComponents.vue";
-
-interface Page {
-  pageSize: number;
-  currentPage: number;
-  count: number;
-  maxPage: number;
-  minPage: number;
-}
-
-// 定义分页参数
-const page = reactive<Page>({
-  pageSize: 10,
-  currentPage: 1,
-  count: 10,
-  maxPage: 10,
-  minPage: 1,
-});
+import {commentList} from "@/api/comment";
 
 // 定义文章列表和用户ID
 const friendPostList = ref([]);
@@ -139,11 +84,7 @@ const readMeList = () => {
     friendPostList.value = res.data.data;
   })
 }
-// const readMeFollowList = () => {
-//   friendCircleList(page, "null").then(res => {
-//     friendPostList.value = res.data.data;
-//   })
-// }
+
 
 const readAllList = () => {
   friendCircleList(page, "null").then(res => {
@@ -180,6 +121,12 @@ const handleComment = () => {
   console.log(isClick)
   isClick.value = !isClick.value;
 }
+
+// 评论数据
+const pyqCommentList = ref([]);
+commentList(page).then(res => {
+  pyqCommentList.value = res.data.data;
+});
 
 </script>
 

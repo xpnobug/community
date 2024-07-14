@@ -9,40 +9,42 @@
 </template>
 
 <script setup lang="ts">
-// 下载表情包资源emoji.zip https://gitee.com/undraw/undraw-ui/releases/tag/v0.0.0
-// static文件放在public下,引入emoji.ts文件可以移动assets下引入,也可以自定义到指定位置
-import emoji from '@/assets/emoji'
-import {reactive, watch} from 'vue'
-import {CommentApi, ConfigApi, isArray, isObject, SubmitParamApi, UToast} from 'undraw-ui'
-// 相对时间
-import {dayjs} from '@/plugins/day'
+import {reactive, watch, defineProps, ref} from 'vue';
+import emoji from '@/assets/emoji';
+import { CommentApi, ConfigApi, isArray, isObject, SubmitParamApi, UToast } from 'undraw-ui';
+import { dayjs } from '@/plugins/day';
+import { addComment } from "@/api/comment";
+import { message } from "ant-design-vue";
 
+// 定义组件名称
 defineOptions({
-  name: 'comment'
-})
+  name: 'Comment'
+});
 
-const prop = defineProps(["isClick"]);
+// 获取父组件传递的 props
+const props = defineProps<{ isClick: boolean, articleId,
+  isShowCom , comArticleId , pyqCommentList
+}>();
 
+// 评论转换函数
 function convertComment(comments: any, callback: (v: CommentApi) => void) {
   if (isArray(comments)) {
     comments.forEach((t: any) => {
-      convertComment(t, callback)
-    })
-    return comments
+      convertComment(t, callback);
+    });
   } else if (isObject(comments)) {
     if (comments.reply) {
-      let replys = comments.reply.list
-      if (replys && replys.length > 0) {
-        convertComment(replys, callback)
+      const replies = comments.reply.list;
+      if (replies && replies.length > 0) {
+        convertComment(replies, callback);
       }
     }
-    callback(comments)
-    return comments
+    callback(comments);
   }
+  return comments;
 }
 
-const comments = []
-
+// 配置对象
 const config = reactive<ConfigApi>({
   user: {} as any,
   emoji: emoji,
@@ -51,61 +53,136 @@ const config = reactive<ConfigApi>({
   showHomeLink: false,
   showAddress: false,
   showLikes: false,
-  showForm: prop.isClick,
+  showForm: props.isClick,
   showContent: false
-})
+});
 
-// 使用 watch 来监听 prop.isClick 的变化
-watch(
-    () => prop.isClick,
-    (newVal) => {
-      config.showForm = newVal;
-    }
-);
+// 监听 props.isClick 的变化
+watch(() => props.isClick, (newVal) => {
+  config.showForm = newVal;
+});
 
+// 评论时间格式化回调
 function commentCall(v: CommentApi) {
-  v.createTime = dayjs(v.createTime).fromNow()
+  v.createTime = dayjs(v.createTime).fromNow();
 }
 
-// 评论数据
+// 初始化评论数据
+// const comments: CommentApi[] = [];
+// commentList(page).then(res => {
+//   const fetchedComments = res.data.data;
+//   fetchedComments.forEach((commentData: any) => {
+//     const comment: CommentApi = {
+//       id: commentData.id,
+//       articleId: commentData.articleId,
+//       parentId: commentData.parentId,
+//       uid: commentData.uid,
+//       content: commentData.content,
+//       createTime: commentData.createTime,
+//       user: {
+//         username: commentData.user.username,
+//         avatar: commentData.user.avatar
+//       },
+//       reply: commentData.reply
+//     };
+//     if (props.articleId === commentData.articleId){
+//       props.comArticleId(commentData.articleId);
+//       comments.push(comment);
+//     }
+//   });
+//
+//   setTimeout(() => {
+//     config.comments = convertComment(comments, commentCall);
+//     config.showContent = true;
+//     props.isShowCom(config.showContent)
+//   }, 200);
+// });
+const comments = ref<CommentApi[]>([]);
+// 监听 props 中 pyqCommentList 的变化
+watch(
+    () => props.pyqCommentList,
+    (newVal) => {
+      // 清空 comments 数组
+      comments.value = [];
+
+      // 遍历新的评论数据
+      newVal.forEach((commentData: any) => {
+        const comment: CommentApi = {
+          id: commentData.id,
+          articleId: commentData.articleId,
+          parentId: commentData.parentId,
+          uid: commentData.uid,
+          content: commentData.content,
+          createTime: commentData.createTime,
+          user: {
+            username: commentData.user.username,
+            avatar: commentData.user.avatar
+          },
+          reply: commentData.reply
+        };
+
+        // 检查是否与当前文章 ID 匹配
+        if (props.articleId === commentData.articleId) {
+          // 更新文章 ID
+          props.comArticleId(commentData.articleId);
+          // 添加评论到 comments 数组
+          comments.value.push(comment);
+        }
+      });
+
+      // 等待一段时间后执行的逻辑
+      setTimeout(() => {
+        // 将 comments 数组传递给 convertComment 函数处理
+        config.comments = convertComment(comments.value, commentCall);
+        config.showContent = true;
+        props.isShowCom(config.showContent);
+      }, 200);
+    },
+    { immediate: true } // 立即执行一次，以便初始数据也能处理
+);
+
+
+
+// 获取当前登录用户ID
+const userId = localStorage.getItem('userId') ?? '';
+const userInfo =  JSON.parse(localStorage.getItem('userInfo')) ?? '';
 setTimeout(() => {
   // 当前登录用户数据
   config.user = {
-    id: 1,
-    username: 'jack',
-    avatar: 'https://static.juzicon.com/avatars/avatar-200602130320-HMR2.jpeg?x-oss-process=image/resize,w_100'
-  }
-  config.comments = convertComment(comments, v => commentCall(v))
-  config.showContent = true
-}, 500)
+    id: userInfo.userId,
+    username: userInfo.username,
+    avatar: userInfo.avatar
+  };
+  config.showContent = true;
+}, 500);
 
-if (comments.length > 0 || config.comments.length > 0) {
-  config.showContent = true
-}
-
-// 评论提交事件
-let temp_id = 100
 // 提交评论事件
-const submit = ({content, parentId, files, finish}: SubmitParamApi) => {
-  console.log('提交评论: ' + content, parentId, files)
-
+// let tempId = 100;
+const submit = ({ content, parentId, files, finish }: SubmitParamApi) => {
+  console.log('提交评论: ' + content, parentId, files);
   const comment: CommentApi = {
-    id: String((temp_id += 1)),
+    id: null,
+    articleId: props.articleId,
     parentId: parentId,
     uid: config.user.id,
     content: content,
-    createTime: new Date().toString(),
+    createTime: new Date().toISOString(),
     user: {
       username: config.user.username,
       avatar: config.user.avatar
     },
     reply: null
-  }
+  };
   setTimeout(() => {
-    finish(convertComment(comment, v => commentCall(v)))
-    UToast({ message: '评论成功!', type: 'info' })
-  }, 200)
-}
+    addComment(comment).then(res => {
+      if (res.status === 200) {
+        message.success(res.data.message);
+        finish(convertComment(comment, commentCall));
+      }
+    });
+    // UToast({ message: '评论成功!', type: 'info' });
+  }, 200);
+};
 </script>
 
 <style scoped>
@@ -133,16 +210,19 @@ const submit = ({content, parentId, files, finish}: SubmitParamApi) => {
   padding: 0;
 }
 
-::v-deep(.comment-primary) {
-  margin-left: 0;
-}
+/*::v-deep(.comment-primary) {*/
+/*  margin-left: 0;*/
+/*}*/
 
 ::v-deep(.comment-list-wrapper) {
-  padding: 0 !important;
+  padding: 10px !important;
 }
 
-::v-deep(.comment-sub) {
-  display: none;
+/*::v-deep(.comment-sub) {*/
+/*  display: none;*/
+/*}*/
+::v-deep(.el-avatar--circle){
+  border-radius: 5px;
 }
 
 ::v-deep(.reply) {

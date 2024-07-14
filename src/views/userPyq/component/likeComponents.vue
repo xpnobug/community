@@ -14,7 +14,18 @@
         <div :data-index="prop.index + '-mxLp'" class="fun-btn comment allow" data-action="comment" data-count="0"
              data-people="0" @click="handleComment">评论
         </div>
-        <div v-if="userId != null && userId === prop.postInfo.userId" :data-index="prop.index + '-mxLp'" class="fun-btn del allow" @click="deleteInfo(prop.postInfo.articleId)">删除</div>
+        <div v-if="userId != null && userId === prop.postInfo.userId" :data-index="prop.index + '-mxLp'"
+             class="fun-btn del allow">
+          <a-popconfirm
+              cancel-text="No"
+              ok-text="Yes"
+              title="确定删除?"
+              @confirm="deleteInfo(prop.postInfo.articleId)"
+          >
+            <a>删除</a>
+          </a-popconfirm>
+
+        </div>
       </div>
     </div>
   </footer>
@@ -33,14 +44,16 @@
         </li>
       </ul>
     </div>
-    <div :id="'post-'+prop.postInfo.articleId+'-mxLp-comment'" :class="['fun-area post-comment g-clear-both index show', { show: isClick }]">
-      <CommentComponents :isClick="isClick"/>
+    <div :id="'post-'+prop.postInfo.articleId+'-mxLp-comment'"
+         :class="['fun-area post-comment g-clear-both index', { show: isClick || isShowComment && commentArticleId === prop.postInfo.articleId  }]">
+      <CommentComponents :articleId="prop.postInfo.articleId" :comArticleId="comArticleId" :isClick="isClick"
+                         :isShowCom="isShowCom" :pyqCommentList="prop.pyqCommentList"/>
     </div>
   </aside>
 </template>
 
 <script lang="ts" setup>
-import {computed, nextTick, reactive, ref, inject} from 'vue';
+import {computed, inject, nextTick, onMounted, reactive, ref} from 'vue';
 import {timeUtils} from "@/store/TimeUtil";
 import {giveALike} from "@/api/likes";
 import useUniqueId from "@/hooks/useUniqueId";
@@ -49,8 +62,8 @@ import {deleteById} from "@/api/article";
 import {message} from "ant-design-vue";
 
 // 定义组件属性
-const prop = defineProps(['postInfo', 'index', 'likeList', 'initLikesList', 'ipAddress']);
-// watch(() => prop.likeList, (newVal) => {
+const prop = defineProps(['postInfo', 'index', 'likeList', 'initLikesList', 'ipAddress','pyqCommentList']);
+ // watch(() => prop.likeList, (newVal) => {
 //   // 监听likeList的变化，更新点赞状态
 //   console.log('likeList变化了', newVal);
 // })
@@ -172,6 +185,16 @@ const deleteInfo = (v) => {
     }
   })
 }
+
+const isShowComment = ref(false);
+const isShowCom = (value) => {
+  isShowComment.value = value;
+}
+const commentArticleId = ref(false);
+const comArticleId = (value) => {
+  commentArticleId.value = value;
+}
+
 </script>
 
 <style scoped>
