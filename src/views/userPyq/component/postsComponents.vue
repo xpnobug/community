@@ -83,6 +83,7 @@ const readMeList = () => {
   friendCircleList(page, userId).then(res => {
     friendPostList.value = res.data.data;
   })
+  getCommentList();
 }
 
 
@@ -90,6 +91,7 @@ const readAllList = () => {
   friendCircleList(page, "null").then(res => {
     friendPostList.value = res.data.data;
   })
+  getCommentList();
 }
 
 // 定义props
@@ -124,10 +126,12 @@ const handleComment = () => {
 
 // 评论数据
 const pyqCommentList = ref([]);
-commentList(page).then(res => {
-  pyqCommentList.value = res.data.data;
-});
-
+const getCommentList = () => {
+  commentList(page).then(res => {
+    pyqCommentList.value = res.data.data;
+  });
+}
+getCommentList();
 </script>
 
 <style scoped>
