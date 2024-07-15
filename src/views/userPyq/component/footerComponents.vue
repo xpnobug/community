@@ -9,7 +9,9 @@
 
 <script lang="ts" setup>
 import {friendCircleList} from "@/api/article.ts";
-import {getCurrentInstance, ref, onMounted} from "vue";
+import {onMounted, ref} from "vue";
+
+
 const userId = localStorage.getItem('userId');
 // 定义父组件事件
 const emit = defineEmits(['send']);
@@ -100,6 +102,20 @@ function autoHandleScroll() {
     autoParam.value.scrollTopBefore = scrollTop;
   }
 }
+
+// 防抖函数，避免滚动事件频繁触发
+function debounce(fn, delay) {
+  let timer = null;
+  return function () {
+    const context = this;
+    const args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(context, args), delay);
+  };
+}
+
+// 绑定滚动事件
+window.addEventListener('scroll', debounce(autoHandleScroll, 200));
 
 // 自动加载Ajax请求
 function autoAjaxRequest() {

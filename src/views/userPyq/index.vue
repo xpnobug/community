@@ -20,7 +20,7 @@
       <div id="banner-subinfo" class="g-txt-ellipsis g-user-select">遇见即是上上签.</div>
     </header>
     <PostsComponents :externalFriendPostList="externalFriendPostList"/>
-    <FooterComponents @send="receiveFromChild"/>
+<!--    <FooterComponents @send="receiveFromChild"/>-->
   </div>
   <AudioComponents/>
   <!--  <div id="other" data-containermaxwidth="550">-->
