@@ -26,7 +26,7 @@ const toUserInfo = (item: any) => {
       <div class="public">
         <div class="title">LT-REAI专题</div>
         <div class="contents contents-one">
-          <div class="right-content">
+          <div class="right-content" :style="{display: leftPost.length === 0 ? 'block' : ''}">
             <a-empty v-if="leftPost.length === 0" :description="null" />
             <div class="subject-matter-text" v-if="props.loadings" v-for="item in leftPost.slice(0,1)"  >
               <a class="link"  @click="toUserInfo(item)" style="line-height: 20px;">
@@ -309,6 +309,7 @@ a {
 }
 .box .public .contents .right-content{
   display: flex;
+  align-items: center;
 }
 /*设置手机端样式*/
 @media screen and (orientation: portrait) {
@@ -324,6 +325,7 @@ a {
   .box .public .contents-one .right-content {
     width: auto;
     flex-direction: column;
+    align-items: stretch;
   }
 
   .box .public .contents-one .right-content .subject-matter-text {

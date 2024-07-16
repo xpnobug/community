@@ -81,7 +81,6 @@ onBeforeMount(() => {
                                             fill-opacity="0" style="stroke-dasharray: 34.44, 287;"></path>
                                       </svg>
                                       <div class="xm-level" style="background: transparent;"><img
-
                                           src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS"
                                           style="width: 18px; height: 18px;"></div>
                                     </div>
@@ -1092,13 +1091,6 @@ p {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-}
-
-.user-status .user-status-text {
-  margin-top: 4px;
-  color: #3e3f5e;
-  font-size: 0.875rem;
-  font-weight: 500;
 }
 
 .text-long-ellipsis {

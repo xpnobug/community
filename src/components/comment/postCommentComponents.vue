@@ -134,3 +134,16 @@ function beforeData(val: any) {
   val.createTime = dayjs(val.createTime).fromNow()
 }
 </script>
+<style scoped>
+.u-comment {
+  /*透明色*/
+  color: var(--text_color_secondary);
+  background-color: var(--reaicc-meta-theme-post-color);
+}
+::v-deep(.reply-box){
+  background-color: var(--reaicc-meta-theme-post-color); ;
+}
+::v-deep(.comment-main .user-info .username .name){
+  color: var(--reaicc-fontcolor);
+}
+</style>

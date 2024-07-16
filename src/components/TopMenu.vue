@@ -19,10 +19,7 @@
     <div class="btn-list">
       <div class="right-btn">
         <!--        <el-button type="primary">搜索框</el-button>-->
-        <div class="search-btn">
-          <input data-v-4d901bbe="" id="search-main" type="text" autocomplete="off" name="search_main"
-                 placeholder="搜索用户或内容">
-        </div>
+        <SearchComponents/>
         <el-button v-if="sfLogin === false" style="margin-right:10px;" type="primary" @click="login">登录</el-button>
         <div v-else style="display: flex; ">
           <a-popover v-model:open="postpush"
@@ -56,6 +53,7 @@ import UserCaozuo from "@/components/Setting/UserCaozuo.vue";
 import {useUserInfo} from "@/hooks/useCached";
 import EditArticle from "@/components/Setting/EditArticle.vue";
 import BgColorChange02 from "@/components/bgColor/BgColorChange02.vue";
+import SearchComponents from "@/components/search/searchComponents.vue";
 
 const postpush = ref<boolean>(false);
 const visible = ref<boolean>(false);
@@ -148,9 +146,22 @@ const login = () => {
 </script>
 
 <style scoped>
+.u-search{
+  width: 100%;
+  margin-right: 10px;
+}
+::v-deep(.u-search .search){
+  background: none;
+  border: none;
+}
+::v-deep(.card-box){
+  margin-top: 10px;
+  background-color: var(--reaicc-meta-theme-post-color);
+}
+
 .menu-main {
-  position: fixed;
-  overflow: hidden;
+position: fixed;
+/*overflow: hidden;*/
   top: 0;
   width: 100%;
   z-index: 10;

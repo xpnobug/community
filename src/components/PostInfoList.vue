@@ -767,12 +767,7 @@ figure {
   font-weight: 400;
 }
 
-.user-status .user-status-text {
-  margin-top: 4px;
-  color: var(--reaicc-fontcolor);;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
+
 
 .user-status .user-status-text {
   font-size: 12px;

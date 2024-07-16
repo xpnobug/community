@@ -363,12 +363,6 @@ a {
   font-size: 12px;
 }
 
-.user-status .user-status-text {
-  margin-top: 4px;
-  color: var(--reaicc-fontcolor);
-  font-size: 0.875rem;
-  font-weight: 500;
-}
 
 .small, small {
   font-size: 80%;

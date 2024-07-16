@@ -7,7 +7,6 @@ import {timeUtils} from "@/store/TimeUtil";
 // preview.css相比style.css少了编辑器那部分样式
 import 'md-editor-v3/lib/preview.css';
 import Sudoku from "@/views/user/components/Sudoku.vue";
-import CommentComponents from "@/views/userPyq/component/commentComponents.vue";
 import PostCommentComponents from "@/components/comment/postCommentComponents.vue";
 
 
@@ -155,27 +154,25 @@ selectOne(ids).then(res => {
             <div class="user-status">
               <div class="xm-header user-avatar"
                    style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; margin-right: 8px;">
-                <div class="xm-avatar" style="padding: 6.4px;">
-<!--                  <img :src="postInfo.avatar"-->
-<!--                       alt="头像"-->
-<!--                       class=""-->
-
-<!--                       style="border-radius: 50%;">-->
-                  <a-avatar :size="{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80 }" :src="postInfo.avatar"></a-avatar>
+                <div class="xm-avatar" style="width: 30px; height: 30px; padding: 7.4px;">
+                  <img :src="postInfo.avatar"
+                       alt="头像"
+                       class=""
+                       style="border-radius: 50%;">
+                  <!--                  <a-avatar :size="{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80 }" :src="postInfo.avatar"></a-avatar>-->
                 </div>
                 <svg style="width: 44px; height: 44px;" viewBox="0 0 100 100">
                   <defs>
-                    <linearGradient id="svg79e8c30f-eae2-45fa-a496-08d0df0d3878" x1="0%" x2="100%"
-                                    y1="0%" y2="0%">
+                    <linearGradient id="svgb281230d-24a6-44f9-9b1c-017d8f8df235" x1="0%" x2="100%" y1="0%"
+                                    y2="0%">
                       <stop offset="0%"></stop>
                       <stop offset="100%"></stop>
                     </linearGradient>
                   </defs>
                   <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
                         stroke="#e9e9f0" stroke-width="8"></path>
-                  <path :style="[{strokeDasharray: postInfo.exp + ',287'}]"
-                        d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                        fill-opacity="0" stroke="url(#svg79e8c30f-eae2-45fa-a496-08d0df0d3878)"
+                  <path :style="{strokeDasharray: postInfo.exp +',287'}"
+                        d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0" stroke="url(#svgb281230d-24a6-44f9-9b1c-017d8f8df235)"
                         stroke-width="8"></path>
                 </svg>
                 <div class="xm-level" style="background: transparent;">
@@ -192,13 +189,10 @@ selectOne(ids).then(res => {
                 </p>
                 <p class="user-status-text small">技术总监</p>
               </div>
-              <div class="action-request-list">
-                <div class="action-request accept">
-                  <svg class="action-request-icon icon-add-friend">
-                    <use xlink:href="#svg-add-friend"></use>
-                  </svg>
-                </div>
-              </div>
+<!--              <div class="action-request-list">-->
+<!--                <div class="action-request accept" v-if="postInfo.isFollow === false" @click="addFollows(user)"> +</div>-->
+<!--                <div class="action-request accept" v-else> √ </div>-->
+<!--              </div>-->
             </div>
             <div class="container-text w-e-text">
               <MdPreview :codeFoldable="false" :editorId="id" :modelValue="postInfo.content"/>
@@ -337,6 +331,14 @@ a:active, a:hover {
 
 .about {
   display: none;
+}
+
+::v-deep(.md-editor-previewOnly) {
+  background-color: var(--reaicc-meta-theme-post-color);
+}
+
+::v-deep(.md-editor-previewOnly .md-editor-preview) {
+  color: var(--reaicc-fontcolor);
 }
 
 @media screen and (min-width: 1366px) {
@@ -665,7 +667,7 @@ hr {
   height: auto;
   font-size: 32px;
   font-weight: 500;
-  color: #333;
+  color: var(--reaicc-fontcolor);
   margin-bottom: 22px;
   word-break: break-all;
 }
@@ -1090,13 +1092,6 @@ p {
 .small {
   font-size: 80%;
   font-weight: 400;
-}
-
-.user-status .user-status-text {
-  margin-top: 4px;
-  color: #3e3f5e;
-  font-size: 0.875rem;
-  font-weight: 500;
 }
 
 .user-status .user-status-text {
@@ -1594,6 +1589,10 @@ textarea {
   cursor: pointer;
 }
 
+.postStyle {
+  background-color: var(--reaicc-meta-theme-post-color);
+}
+
 /*设置手机端样式*/
 @media screen and (orientation: portrait) {
   .post-container {
@@ -1619,7 +1618,7 @@ textarea {
   }
 
   .postStyle {
-    margin: 15px;
+    /*margin: 15px;*/
   }
 
   .post-content .content-container {

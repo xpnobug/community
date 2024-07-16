@@ -245,12 +245,13 @@ body {
   width: -webkit-fill-available;
   border-radius: 12px;
   background-color: var(--reaicc-meta-theme-post-color);
-  box-shadow: rgba(94, 92, 154, .06);
+  /*box-shadow: rgba(94, 92, 154, .06);*/
+  box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
   padding: 28px;
 }
 .box .public .contents .left-content {
   margin: 15px;
-  width: -webkit-fill-available;
+  /*width: -webkit-fill-available;*/
   border-radius: 12px;
   background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
@@ -265,4 +266,16 @@ body {
   display: block;
   color: var(--reaicc-fontcolor);
   line-height: 20px;
+}
+
+.user-status .user-status-text {
+  margin-top: 4px;
+  color: var(--reaicc-fontcolor);;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/*头像外框经验值color*/
+stop:nth-child(2) {
+  stop-color: #ff3370 !important;
 }
