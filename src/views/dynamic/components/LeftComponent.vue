@@ -168,7 +168,7 @@ const timeFromNow = (data) => {
             <p class="user-status-text small" v-if="tagId === '2'">
               {{ user.fansCount }} 粉丝
             </p>
-            <p data-v-2f920749="" class="user-status-text small" v-else>
+            <p class="user-status-text small" v-else>
               {{ timeFromNow(user.registrationTime) }}
             </p>
             <div class="action-request-list">

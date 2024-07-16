@@ -1,7 +1,14 @@
 <script lang="ts" setup>
-import {ref, watch,defineProps} from 'vue'
+import {computed, watch,defineProps} from 'vue'
 import {useRouter} from "vue-router";
+
 const props = defineProps(['posts','loadings'])
+const leftPost = computed(() => {
+  return props.posts.filter(item => item && item.publishPlatform === '七彩生活');
+});
+const rightPost = computed(() => {
+  return props.posts.filter(item => item && item.publishPlatform === '新鲜事');
+});
 watch(()=>props.loadings,(newValue,oldValue)=>{
 },{immediate:true,deep:true})
 
@@ -18,8 +25,9 @@ const toUserInfo = (item: any) => {
         <div class="contents contents-tow">
           <div class="right-content">
             <div class="subject-matter-text">
+              <a-empty v-if="leftPost.length === 0" :description="null" />
               <ul v-if="props.loadings" >
-                <li v-for="item in props.posts.slice(0,3)" :key="item.id">
+                <li v-for="item in leftPost.slice(0,3)" :key="item.id">
                   <div class="picture"><!---->
                     <a class="" @click="toUserInfo(item)" style="width: 100%; height: 100%; display: block;"><img
                         :src="item.coverImage"
@@ -38,7 +46,7 @@ const toUserInfo = (item: any) => {
             </div>
             <div class="subject-matter-text">
               <ul v-if="props.loadings" >
-                <li v-for="item in props.posts.slice(3,6)" :key="item.id">
+                <li v-for="item in leftPost.slice(3,6)" :key="item.id">
                   <div class="picture"><!---->
                     <a class="" @click="toUserInfo(item)" style="width: 100%; height: 100%; display: block;"><img
                         :src="item.coverImage"
@@ -61,8 +69,9 @@ const toUserInfo = (item: any) => {
             <div class="">
               <div class="identification">新鲜事</div>
               <div class="content-list">
+                <a-empty v-if="rightPost.length === 0" :description="null" />
                 <ul v-if="props.loadings" >
-                  <li v-for="(item,index) in props.posts" :key="item.articleId">
+                  <li v-for="(item,index) in rightPost" :key="item.articleId">
                     <div class="serial-no">{{ index+1 }}</div>
                     <div class="serial-no-content"><a class="" @click="toUserInfo(item)">{{ item.content }}</a>
                     </div>
@@ -105,14 +114,6 @@ const toUserInfo = (item: any) => {
   flex-direction: column;
 }
 
-.box .public .contents .right-content {
-  margin-right: 15px;
-  width: 848px;
-  border-radius: 12px;
-  background-color: var(--reaicc-meta-theme-post-color);
-  box-shadow: rgba(94, 92, 154, .06);
-  padding: 28px;
-}
 
 .box .public .contents-tow .right-content .subject-matter-text {
   margin-bottom: 15px;
@@ -121,7 +122,6 @@ const toUserInfo = (item: any) => {
 .box .public .contents-tow .right-content .subject-matter-text ul {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0;
 }
 
 dl, ol, ul {
@@ -130,9 +130,11 @@ dl, ol, ul {
 }
 
 .box .public .contents-tow .right-content .subject-matter-text ul li {
-  display: flex;
-  flex-direction: column;
-  /*width: 256px;*/
+  margin: 15px;
+  text-decoration: none;
+  /*去除小黑点*/
+  list-style: none;
+  width: 233px;
 }
 
 .box .public .contents-tow .right-content .subject-matter-text ul li .picture {
@@ -142,7 +144,7 @@ dl, ol, ul {
   border-radius: 8px;
   background-color: rgba(207, 208, 218, .2);
   background-size: 100% 100%;
-  margin-bottom: 16px;
+  margin: 15px;
 }
 
 .picture {
@@ -252,14 +254,6 @@ img {
 }
 
 /*左侧排行榜*/
-.box .public .contents .left-content {
-  width: 280px;
-  border-radius: 12px;
-  background-color: var(--reaicc-meta-theme-post-color);
-  box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
-  padding: 24px 28px;
-}
-
 .box .public .contents .left-content-public .identification {
   font-size: 16px;
   font-weight: 600;
@@ -306,15 +300,7 @@ img {
   margin-bottom: 0;
 }
 
-.box .public .contents .left-content-public .content-list ul li .serial-no-content a {
-  width: 232px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: block;
-  color: var(--reaicc-fontcolor);
-  line-height: 20px;
-}
+
 
 .box .public .contents .left-content-public .content-list ul :last-child {
   margin-bottom: 0;
@@ -339,15 +325,14 @@ img {
     flex-direction: column;
   }
 
-  .box .public .contents .right-content {
-    width: auto !important;
-    margin-right: 0 !important;
+  .box .public .contents-tow .right-content .subject-matter-text ul {
+    display: block;
+    margin: 15px;
   }
-
-  .box .public .contents-tow .right-content .subject-matter-text ul li .picture {
-    width: 90%;
-    height: 80px;
-  }
+  /*.box .public .contents-tow .right-content .subject-matter-text ul li .picture {*/
+  /*  width: 90%;*/
+  /*  height: 80px;*/
+  /*}*/
 
   .box .public .contents-tow .right-content .subject-matter-text ul li .picture-title a {
     -webkit-line-clamp: 2;
@@ -372,6 +357,7 @@ img {
   }
   .box .public .contents-tow .right-content .subject-matter-text ul li .picture-title{
     width: 100px;
+    text-align: center;
   }
 }
 </style>

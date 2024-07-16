@@ -176,7 +176,7 @@ const handleTag = (value: any) => {
             :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }"
         >
           <a-button @click="onLoadMore" v-if="postCount !== 0 ">加载更多...</a-button>
-          <div v-else disabled>没有更多数据了</div>
+          <a-empty v-else :description="null" />
         </div>
       </template>
       <PostInfoList :postInfo="postList"/>

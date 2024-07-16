@@ -1,14 +1,23 @@
 <script lang="ts" setup>
 //获取用户信息
-import {defineProps, watch} from "vue";
+import {defineProps, watch,computed} from "vue";
 import {useRouter} from "vue-router";
-import { useDefer } from "@/hooks/useDefer.js";
+import {useDefer} from "@/hooks/useDefer.js";
+import {timeUtils} from "@/store/TimeUtil";
+
 const defer = useDefer();
-const props = defineProps(['posts','loadings'])
+const props = defineProps(['posts', 'loadings'])
+const leftPost = computed(() => {
+  return props.posts.filter(item => item && item.publishPlatform === '运营知识库');
+});
+const rightPost = computed(() => {
+  return props.posts.filter(item => item && item.publishPlatform === '产品共创');
+});
+console.log(props.posts)
 //监听loadings.value，修改loadings
 
-watch(()=>props.loadings,(newValue,oldValue)=>{
-},{immediate:true,deep:true})
+watch(() => props.loadings, (newValue, oldValue) => {
+}, {immediate: true, deep: true})
 const router = useRouter();
 const toUserInfo = (item: any) => {
   router.push({path: '/post/' + item.articleId})
@@ -20,77 +29,80 @@ const toUserInfo = (item: any) => {
     <div class="box" style="margin-bottom: 16px;"><!----> <!---->
       <div class="public">
         <div class="title">运营知识库</div>
-        <div class="contents contents-three" style="min-height: 608px;">
+        <div class="contents contents-three" >
           <div class="right-content">
-            <div v-if="props.loadings" v-for="item in props.posts">
-              <div v-if="item.typeName === '运营知识库'">
-                <div v-for="info in item.articleList.slice(0, 5)" class="content-box">
-                  <a class="links" @click="toUserInfo(info)">
-                    <div class="pictures">
-                      <div class="class-ification">{{ info.tag }}</div>
-                      <img :src="info.coverImage" alt="" style="width: 100%; height: 100%; border-radius: 8px;">
-                    </div>
+            <a-empty v-if="leftPost.length === 0" :description="null" />
+            <div v-if="props.loadings">
+              <div v-for="info in leftPost.slice(0, 5)" class="content-box">
+                <a class="links" @click="toUserInfo(info)">
+                  <div class="pictures">
+                    <div class="class-ification">{{ info.tag }}</div>
+                    <img :src="info.coverImage" alt="" style="width: 100%; height: 100%; border-radius: 8px;">
+                  </div>
+                </a>
+                <div class="picture-box"
+                     style="display: flex; flex-direction: column; justify-content: space-between;">
+                  <a class="links" style="display: block;" @click="toUserInfo(info)">
+                    <div class="pictures-title" style="margin-bottom: 5px;">{{ info.title }}</div>
+                    <div class="picture-content">{{ info.content }}</div>
                   </a>
-                  <div class="picture-box"
-                       style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <a class="links" @click="toUserInfo(info)" style="display: block;">
-                      <div class="pictures-title" style="margin-bottom: 5px;">{{ info.title }}</div>
-                      <div class="picture-content">{{ info.content }}</div>
-                    </a>
-                    <a class="links" href="#" style="display: block;">
-                      <div class="author-information">
-                        <div class="information">
-                          <div class="head-portrait">
-                            <img :src="info.avatar" alt=""
-                                 style="width: 100%; height: 100%; border-radius: 50%;">
-                          </div>
-                          <div class="release-time">
-                            <span>{{ info.author }}</span>&nbsp;
-                            <span> {{ info.publishDate }} · 未知</span>
-                          </div>
+                  <a class="links" href="#" style="display: block;">
+                    <div class="author-information">
+                      <div class="information">
+                        <div class="head-portrait">
+                          <img :src="info.avatar" alt=""
+                               style="width: 100%; height: 100%; border-radius: 50%;">
                         </div>
-                        <div class="views">
-                          <span>{{ info.readCount }} 浏览</span>
-                          <span>{{ info.likeCount }} 点赞</span>
+                        <div class="release-time">
+                          <span>{{ info.author }}</span>&nbsp;
+                          <span>{{ timeUtils.convertTime(info.publishDate, true) }} · 未知</span>
                         </div>
                       </div>
-                    </a>
-                  </div>
+                      <div class="views">
+                        <span>{{ info.readCount }} 浏览</span>
+                        <span>{{ info.likeCount }} 点赞</span>
+                      </div>
+                    </div>
+                  </a>
                 </div>
               </div>
-
             </div>
             <div v-else v-for="item in 5">
-              <a-skeleton active avatar :paragraph="{ rows: 3 }" />
+              <a-skeleton :paragraph="{ rows: 3 }" active avatar/>
             </div>
           </div>
           <div class="left-content recommended-list">
             <div class="">
               <div class="recommended-title">产品共创</div>
-                <ul v-if="props.loadings" v-for="list in props.posts" class="recommended">
-                  <li v-for="item in list.articleList.slice(0,6)" v-if="list.typeName === '产品共创'" :key="item.id"
-                      class="recommended-li">
-                    <a class="link" @click="toUserInfo(item)">
-                      <div class="recommended-contents">{{ item.content }}</div>
-                    </a>
-                    <a class="" @click="toUserInfo(item)">
-                      <div class="recommended-author">
-                        <div class="author">
-                          <div class="head-portrait"><img
-                              :src="item.avatar"
-                              alt=""
-                              style="width: 100%; height: 100%; border-radius: 50%;">
-                          </div>
-                          <div class="author-name">{{ item.author }}</div>
+              <a-empty v-if="rightPost.length === 0" :description="null" />
+              <ul v-if="loadings" class="recommended">
+                <li v-for="item in rightPost.slice(0, 6)"
+                    :key="item.id"
+                    class="recommended-li">
+                  <a class="link" @click="toUserInfo(item)">
+                    <div class="recommended-contents">{{ item.content }}</div>
+                  </a>
+                  <a class="" @click="toUserInfo(item)">
+                    <div class="recommended-author">
+                      <div class="author">
+                        <div class="head-portrait">
+                          <img :src="item.avatar"
+                               alt=""
+                               style="width: 100%; height: 100%; border-radius: 50%;">
                         </div>
-                        <div class="release-times">{{ item.publishDate }}<span> · {{ item.place }}</span></div>
+                        <div class="author-name">{{ item.author }}</div>
                       </div>
-                    </a></li>
-
-                </ul>
-                <div v-else v-for="item in 5">
-                  <a-skeleton active />
-                </div>
+                      <div class="release-times">
+                        {{ timeUtils.convertTime(item.publishDate) }}
+                        <span> · {{ item.place == null ? '未知' : item.place }}</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+              <div v-for="item in 5" v-else>
+                <a-skeleton active/>
+              </div>
             </div>
           </div>
         </div> <!----></div>
@@ -113,18 +125,11 @@ const toUserInfo = (item: any) => {
 
 .box .public .contents {
   display: flex;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   /*align-items: center;*/
 }
 
-.box .public .contents .right-content {
-  margin-right: 15px;
-  width: 848px;
-  border-radius: 12px;
-  background-color: var(--reaicc-meta-theme-post-color);
-  box-shadow: rgba(94, 92, 154, .06);
-  padding: 28px;
-}
+
 
 .box .public .contents-three .right-content .content-box {
   display: flex;
@@ -271,14 +276,6 @@ svg:not(:root) {
 }
 
 /*左側列表*/
-.box .public .contents .left-content {
-  width: 320px;
-  border-radius: 12px;
-  background-color: var(--reaicc-meta-theme-post-color);
-  box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
-  padding: 24px 28px;
-}
-
 .box .public .contents-three .recommended-list .recommended-title {
   font-size: 16px;
   font-weight: 600;
@@ -323,6 +320,7 @@ dl, ol, ul {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 20px;
+  width: 260px;
 }
 
 .box .public .contents-three .recommended-list .recommended .recommended-li .recommended-author .author {
@@ -363,13 +361,10 @@ dl, ol, ul {
     flex-direction: column;
   }
 
-  .box .public .contents .right-content {
-    width: 375px;
-  }
 
   .box .public .contents .left-content {
-    width: 375px;
-    padding: 0px 27px;
+    /*width: 375px;*/
+    /*padding: 0px 27px;*/
   }
 
   .box .public .contents-three .right-content .content-box .pictures {

@@ -3,6 +3,7 @@
   font-style:normal;
   font-size:12px;
   src:local('Meslo LG S'),url(https://npm.elemecdn.com/hexo-tool-cc/font/AlimamaFangYuanTiVF-Thin.woff2) format('woff2');
+  font-display: swap;
 }
 body {
   font-family:Meslo LG;
@@ -236,4 +237,32 @@ body {
   fill: #adafca;
   width: 20px;
   height: 20px;
+}
+
+
+.box .public .contents .right-content {
+  margin: 15px;
+  width: -webkit-fill-available;
+  border-radius: 12px;
+  background-color: var(--reaicc-meta-theme-post-color);
+  box-shadow: rgba(94, 92, 154, .06);
+  padding: 28px;
+}
+.box .public .contents .left-content {
+  margin: 15px;
+  width: -webkit-fill-available;
+  border-radius: 12px;
+  background-color: var(--reaicc-meta-theme-post-color);
+  box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
+  padding: 24px 28px;
+}
+
+.box .public .contents .left-content-public .content-list ul li .serial-no-content a {
+  width: 232px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  color: var(--reaicc-fontcolor);
+  line-height: 20px;
 }

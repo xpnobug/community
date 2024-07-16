@@ -75,9 +75,10 @@ export function addComment(comment: CommentApi)  {
     return axios.post(`${BASE_URL}/add`, comment);
 }
 
-export function commentList(page: Page) {
+export function commentList(page: Page, articleId: string | number) {
     return axios.get(`${BASE_URL}/page`, {
         params: {
+            articleId: articleId,
             pageSize: page.pageSize,
             currentPage: page.currentPage,
         }

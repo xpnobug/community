@@ -17,6 +17,7 @@ export const useUserInfo = (uid?: number | ComputedRef<number | undefined> | Ref
                 console.log(user.data.data)
                 //存储用户信息 user.data.data转字符串
                 localStorage.setItem('userInfo', JSON.stringify(user.data.data));
+                localStorage.setItem('userId', user.data.data === null ? 'null' : user.data.data.userId.toString());
                 userGetInfo.value = user.data.data;
                 const emit = () => {
                     instance?.proxy?.$Bus.emit("userInfo", userGetInfo.value)

@@ -1,77 +1,18 @@
 <script lang="ts" setup>
-import {watch,defineProps} from "vue";
+import {watch,defineProps, computed} from "vue";
 import {useRouter} from "vue-router";
+
 //获取用户信息
 const props = defineProps(['posts', 'loadings'])
+const leftPost = computed(() => {
+  return props.posts.filter(item => item && item.publishPlatform === 'LT-REAI专题');
+});
+const rightPost = computed(() => {
+  return props.posts.filter(item => item && item.publishPlatform === '功能前瞻');
+});
 watch(() => props.loadings, (newValue, oldValue) => {
 }, {immediate: true, deep: true})
-// const ztList = ref([
-//   {
-//     id: 1,
-//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
-//     title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-//     tag: '帖子',
-//     content: 'LT-REAI开发日报：通用版4.1.1 后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）',
-//     author: 'LT-REAI小芋头'
-//   },
-//   {
-//     id: 2,
-//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
-//     title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-//     tag: '帖子',
-//     content: '1111111111111111111111111111111111111',
-//     author: 'LT-REAI小芋头'
-//   },
-//   {
-//     id: 3,
-//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
-//     title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-//     tag: '帖子',
-//     content: 'LT-REAI开发日报：通用版4.1.1 后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）',
-//     author: 'LT-REAI小芋头'
-//   },
-//   {
-//     id: 4,
-//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
-//     title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-//     tag: '帖子',
-//     content: 'LT-REAI开发日报：通用版4.1.1 后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）',
-//     author: 'LT-REAI小芋头'
-//   },
-//   {
-//     id: 5,
-//     cover: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg',
-//     title: 'LT-REAI|企微推送/消息开关/随机推荐等内容新增优化',
-//     tag: '帖子',
-//     content: 'LT-REAI开发日报：通用版4.1.1 后台关闭了消息订阅，前端依旧开启的问题修复完成（4.19/周五）',
-//     author: 'LT-REAI小芋头'
-//   },
-// ]);
-//
-// const serialList = ref([
-//   {
-//     id: '1',
-//     no: 1,
-//     content: '升职加薪好办法',
-//   },
-//   {
-//     id: '2',
-//     no: 2,
-//     content: '玩好抖音，你不能忽视的短视频内容套路化创作技巧！',
-//   }, {
-//     id: '3',
-//     no: 3,
-//     content: '这套版块图标有喜欢的可以自取',
-//   }, {
-//     id: '4',
-//     no: 4,
-//     content: '文案新人首先要做的事',
-//   }, {
-//     id: '5',
-//     no: 5,
-//     content: 'CC社区：“知识付费”解读（下）',
-//   }
-// ]);
+
 const router = useRouter();
 const toUserInfo = (item: any) => {
   router.push({path: '/post/' + item.articleId})
@@ -85,64 +26,61 @@ const toUserInfo = (item: any) => {
       <div class="public">
         <div class="title">LT-REAI专题</div>
         <div class="contents contents-one">
-          <div>
-            <div class="right-content">
-              <div class="subject-matter-text" v-if="props.loadings" v-for="item in props.posts.slice(0,1)"  >
-                <a class="link"  @click="toUserInfo(item)" style="line-height: 20px;">
-                  <div class="picture"><!---->
-                    <img :src="item.coverImage"
-                         alt=""
-                         style="width: 100%; height: 100%; border-radius: 8px;">
-                  </div>
-                  <div class="title">{{ item.title }}</div>
-                  <div class="title-content">
-                    <a class="link" href="#"><!--体验及咨询可V+小番茄--></a>
-                  </div>
-                </a>
-              </div>
-              <div class="subject-matter-text" v-else>
-                <a-skeleton active />
-              </div>
-              <div class="content-list">
-                <div class="" >
-                  <ul v-if="props.loadings">
-                    <li v-for="item in props.posts.slice(1,12)">
-                      <div class="explain" style="width: 34px;">{{ item.tag }}</div>
-                      <div class="explain-content">
-                        <a class=""  @click="toUserInfo(item)">
-                          {{ item.title }}
-                        </a></div>
-                      <div class="author"><a class="" href="#">{{ item.author }}</a>
-                      </div>
-                    </li>
-                  </ul>
-                  <div class="content-list" v-else v-for="item in 3">
-                    <a-skeleton active />
-                  </div>
+          <div class="right-content">
+            <a-empty v-if="leftPost.length === 0" :description="null" />
+            <div class="subject-matter-text" v-if="props.loadings" v-for="item in leftPost.slice(0,1)"  >
+              <a class="link"  @click="toUserInfo(item)" style="line-height: 20px;">
+                <div class="picture"><!---->
+                  <img :src="item.coverImage"
+                       alt=""
+                       style="width: 100%; height: 100%; border-radius: 8px;">
                 </div>
-              </div>
-
+                <div class="title">{{ item.title }}</div>
+                <div class="title-content">
+                  <a class="link" href="#"><!--体验及咨询可V+小番茄--></a>
+                </div>
+              </a>
             </div>
-          </div>
-
-          <div class="left-content left-content-public">
-            <div class="">
-              <div class="identification">功能前瞻</div>
-              <div class="content-list" v-if="props.loadings">
-                <ul>
-                  <li v-for="(item,index) in props.posts.slice(0,10)" :key="index">
-                    <div class="serial-no">{{ index+1 }}</div>
-                    <div class="serial-no-content">
+            <div class="subject-matter-text" v-else>
+              <a-skeleton active />
+            </div>
+            <div class="content-list">
+              <div class="" >
+                <ul v-if="props.loadings">
+                  <li v-for="item in leftPost.slice(1,12)">
+                    <div class="explain" style="width: 34px;">{{ item.tag }}</div>
+                    <div class="explain-content">
                       <a class=""  @click="toUserInfo(item)">
-                        {{ item.content }}
-                      </a>
+                        {{ item.title }}
+                      </a></div>
+                    <div class="author"><a class="" href="#">{{ item.author }}</a>
                     </div>
                   </li>
                 </ul>
+                <div class="content-list" v-else v-for="item in 3">
+                  <a-skeleton active />
+                </div>
               </div>
-              <div class="content-list" v-else v-for="item in 3">
-                <a-skeleton active />
-              </div>
+            </div>
+
+          </div>
+          <div class="left-content left-content-public">
+            <div class="identification">功能前瞻</div>
+            <a-empty v-if="rightPost.length === 0" :description="null" />
+            <div class="content-list" v-if="props.loadings">
+              <ul>
+                <li v-for="(item,index) in rightPost.slice(0,10)" :key="index">
+                  <div class="serial-no">{{ index+1 }}</div>
+                  <div class="serial-no-content">
+                    <a class=""  @click="toUserInfo(item)">
+                      {{ item.content }}
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="content-list" v-else v-for="item in 3">
+              <a-skeleton active />
             </div>
           </div>
         </div> <!----></div> <!----> <!----></div> <!----></div>
@@ -171,18 +109,8 @@ const toUserInfo = (item: any) => {
   justify-content: space-between;
 }
 
-.box .public .contents-one .right-content {
-  display: flex;
-}
 
-.box .public .contents .right-content {
-  margin-right: 15px;
-  /*width: 848px;*/
-  border-radius: 12px;
-  background-color: var(--reaicc-meta-theme-post-color);
-  box-shadow: rgba(94, 92, 154, .06);
-  padding: 28px;
-}
+
 
 .box .public .contents-one .right-content .subject-matter-text {
   width: 320px;
@@ -318,13 +246,6 @@ a {
 }
 
 /*左侧排行榜*/
-.box .public .contents .left-content {
-  width: 320px;
-  border-radius: 12px;
-  background-color: var(--reaicc-meta-theme-post-color);
-  box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
-  padding: 24px 28px;
-}
 
 .box .public .contents .left-content-public .identification {
   font-size: 16px;
@@ -372,15 +293,6 @@ a {
   margin-bottom: 0;
 }
 
-.box .public .contents .left-content-public .content-list ul li .serial-no-content a {
-  width: 232px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: block;
-  color: var(--reaicc-fontcolor);
-  line-height: 20px;
-}
 
 .box .public .contents .left-content-public .content-list ul :last-child {
   margin-bottom: 0;
@@ -395,7 +307,9 @@ a {
   opacity: .3;
   background: #337fff;
 }
-
+.box .public .contents .right-content{
+  display: flex;
+}
 /*设置手机端样式*/
 @media screen and (orientation: portrait) {
   .box .public .title{
@@ -404,9 +318,9 @@ a {
   .box .public .contents {
     flex-direction: column;
   }
-  .box .public .contents .right-content{
-    margin-right: 0 !important;
-  }
+  /*.box .public .contents .right-content{*/
+  /*  margin-right: 0 !important;*/
+  /*}*/
   .box .public .contents-one .right-content {
     width: auto;
     flex-direction: column;

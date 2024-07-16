@@ -3,10 +3,12 @@ import {selectOne} from "@/api/article";
 import {useRoute} from 'vue-router';
 import {inject, ref} from "vue";
 import {MdCatalog, MdPreview} from 'md-editor-v3';
+import {timeUtils} from "@/store/TimeUtil";
 // preview.css相比style.css少了编辑器那部分样式
 import 'md-editor-v3/lib/preview.css';
 import Sudoku from "@/views/user/components/Sudoku.vue";
 import CommentComponents from "@/views/userPyq/component/commentComponents.vue";
+import PostCommentComponents from "@/components/comment/postCommentComponents.vue";
 
 
 const id = 'preview-only';
@@ -127,7 +129,7 @@ selectOne(ids).then(res => {
         <div class="content-container">
           <div class="container-head">
             <div class="heads">
-              <div class="text">{{ postInfo.publishDate }} · 未知</div>
+              <div class="text">{{ timeUtils.convertTime(postInfo.publishDate,true) }} · 未知</div>
               <div class="widget-box-settings" style="display: flex; flex-flow: row;">
                 <div style="position: relative;">
                   <div>
@@ -206,7 +208,7 @@ selectOne(ids).then(res => {
           </div>
         </div>
         <div id="comment" style="transform: translateY(-80px);"></div>
-        <CommentComponents/>
+        <PostCommentComponents :articleId="postInfo.articleId"/>
       </div>
     </div>
   </div>
