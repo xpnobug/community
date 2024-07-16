@@ -4,18 +4,20 @@ import {defineProps, watch,computed} from "vue";
 import {useRouter} from "vue-router";
 import {useDefer} from "@/hooks/useDefer.js";
 import {timeUtils} from "@/store/TimeUtil";
+import {useDictionaryItem} from "@/api/dict";
 
 const defer = useDefer();
 const props = defineProps(['posts', 'loadings'])
 const leftPost = computed(() => {
-  return props.posts.filter(item => item && item.publishPlatform === '运营知识库');
+  return props.posts.filter(item => item && item.publishPlatform === 'yyzsk');
 });
 const rightPost = computed(() => {
   return props.posts.filter(item => item && item.publishPlatform === '产品共创');
 });
-console.log(props.posts)
-//监听loadings.value，修改loadings
 
+const sjName = useDictionaryItem("yyzsk");
+
+//监听loadings.value，修改loadings
 watch(() => props.loadings, (newValue, oldValue) => {
 }, {immediate: true, deep: true})
 const router = useRouter();
@@ -28,7 +30,7 @@ const toUserInfo = (item: any) => {
   <div><!----> <!---->
     <div class="box" style="margin-bottom: 16px;"><!----> <!---->
       <div class="public">
-        <div class="title">运营知识库</div>
+        <div class="title">{{ sjName }}</div>
         <div class="contents contents-three" >
           <div class="right-content">
             <a-empty v-if="leftPost.length === 0" :description="null" />

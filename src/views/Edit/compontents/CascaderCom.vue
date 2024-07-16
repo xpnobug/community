@@ -20,7 +20,7 @@ const options: CascaderProps['options'] = [
         label: 'banner',
       },
       {
-        value: '运营知识库',
+        value: 'yyzsk',
         label: '运营知识库',
       }, {
         value: '产品共创',

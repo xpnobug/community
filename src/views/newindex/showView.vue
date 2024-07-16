@@ -64,7 +64,7 @@ pageList().then((res) => {
 
   // 创建一个映射对象，将 typeName 映射到相应的列表
   const typeNameToListMap: { [key: string]: string } = {
-    '运营知识库': 'zskList',
+    'yyzsk': 'zskList',
     '产品共创': 'zskList',
     'banner': 'banner',
     'LT-REAI专题': 'ztList',
