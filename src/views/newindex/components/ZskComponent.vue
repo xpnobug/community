@@ -373,7 +373,7 @@ dl, ol, ul {
   }
 
   .box .public .contents-three .right-content .content-box .picture-box .pictures-title {
-    width: 249px;
+    width: 200px;
   }
 
   .box .public .contents-three .right-content .content-box .picture-box .author-information .views {
