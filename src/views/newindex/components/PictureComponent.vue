@@ -104,7 +104,7 @@ const toUserInfo = (item: any) => {
 
 /*右边图片*/
 .box .top .identification {
-  width: 320px;
+  width: 345px;
   opacity: 1;
   display: flex;
   flex-flow: column;

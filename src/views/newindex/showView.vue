@@ -96,7 +96,7 @@ pageList().then((res) => {
 
 <style scoped>
 .box-s {
-  width: 1184px;
+  width: 1210px;
   transition: .5s;
 }
 
