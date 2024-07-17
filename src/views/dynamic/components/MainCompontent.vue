@@ -44,7 +44,7 @@ const page = reactive<Page>({
 
 
 const store = inject('store');
-store.setLoading(true);
+// store.setLoading(true);
 const postList = ref<any[]>([]);
 const postCount = ref<number>(1);
 const showList = () => {

@@ -193,7 +193,7 @@ const timeFromNow = (data) => {
 <!--        <p class="post-option-text">分享</p>-->
 <!--      </div>-->
 <!--    </div>-->
-    <NavClickComponents/>
+<!--    <NavClickComponents/>-->
   </div>
 </template>
 

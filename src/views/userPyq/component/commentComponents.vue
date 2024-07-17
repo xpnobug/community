@@ -189,7 +189,7 @@ const submit = ({ content, parentId, files, finish }: SubmitParamApi) => {
 .u-comment {
   /*透明色*/
   color: var(--text_color_secondary);
-  background-color: var(--reaicc-meta-theme-post-color);
+  background-color: rgba(255, 255, 255, 0);
   padding: 0 !important;
   margin-top: 0 !important;
 }

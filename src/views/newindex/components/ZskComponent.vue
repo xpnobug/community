@@ -9,13 +9,14 @@ import {useDictionaryItem} from "@/api/dict";
 const defer = useDefer();
 const props = defineProps(['posts', 'loadings'])
 const leftPost = computed(() => {
-  return props.posts.filter(item => item && item.publishPlatform === 'yyzsk');
+  return props.posts.filter(item => item && item.publishPlatform === 'home-yyzsk');
 });
 const rightPost = computed(() => {
   return props.posts.filter(item => item && item.publishPlatform === '产品共创');
 });
 
-const sjName = useDictionaryItem("yyzsk");
+const sjName = useDictionaryItem("home-yyzsk");
+const productName = useDictionaryItem("home-product");
 
 //监听loadings.value，修改loadings
 watch(() => props.loadings, (newValue, oldValue) => {
@@ -75,7 +76,7 @@ const toUserInfo = (item: any) => {
           </div>
           <div class="left-content recommended-list">
             <div class="">
-              <div class="recommended-title">产品共创</div>
+              <div class="recommended-title">{{ productName }}</div>
               <a-empty v-if="rightPost.length === 0" :description="null" />
               <ul v-if="loadings" class="recommended">
                 <li v-for="item in rightPost.slice(0, 6)"
