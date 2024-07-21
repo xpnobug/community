@@ -1,16 +1,17 @@
 <script lang="ts" setup>
 import type {UnwrapRef} from 'vue';
 import {reactive, ref, toRaw} from "vue";
-import {account, emailAccount, phoneAccount, register} from "@/api/user";
+import {account, emailAccount, phoneAccount, register, socialAuth} from "@/api/user";
 import {message} from "ant-design-vue";
 import type {Rule} from 'ant-design-vue/es/form';
 import {createFromIconfontCN} from "@ant-design/icons-vue";
 import {capImage, emailCode, smsCode} from "@/api/captcha";
 import Verify from "@/components/verifition/Verify.vue";
+import BgColorChange02 from "@/components/bgColor/BgColorChange02.vue";
 
 // SVG 图标
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_4559alb1b0i.js',
+  scriptUrl: '//at.alicdn.com/t/c/font_1898478_yweqmtyzqoa.js',
 });
 
 // 表单状态接口
@@ -293,6 +294,11 @@ const upOnFinish = async (values: any) => {
   }
 };
 
+//第三方认证登录
+const thirdLogin = (type: string) => {
+  socialAuth(type).then(res => window.location.href = res.data.data.authorizeUrl)
+}
+
 // 页面元素状态
 const activeKey = ref('1');
 const loading = ref<boolean>(false);
@@ -313,6 +319,7 @@ const switchToSignIn = () => {
 </script>
 <template>
   <div :class="['container', { 'sign-up-mode': isSignUpMode }]">
+    <BgColorChange02/>
     <div>
       <Verify ref="verifyRef" :captcha-type="'blockPuzzle'" :mode="'pop'" @success="success"/>
       <div class="forms-container">
@@ -338,7 +345,7 @@ const switchToSignIn = () => {
                     <a-input-password v-model:value="formState.password" placeholder="密码"></a-input-password>
                   </div>
                   <div class="input-field" style="display: flex;justify-content: space-evenly;align-items: center;">
-                    <icon-font class="icon svg" style=" margin: 20px;" type="icon-mima"/>
+                    <icon-font class="icon svg" style=" margin: 20px;" type="icon-zhucedenglu-yanzhengma"/>
                     <a-input v-model:value="formState.captcha" placeholder="验证码" type="text"></a-input>
                     <div>
                       <img :src="captcha.img" @click="changeImg">
@@ -361,7 +368,7 @@ const switchToSignIn = () => {
                   </div>
 
                   <div class="input-field" style="display: flex;justify-content: space-evenly;align-items: center;">
-                    <icon-font class="icon svg" style=" margin: 20px;" type="icon-mima"/>
+                    <icon-font class="icon svg" style=" margin: 20px;" type="icon-zhucedenglu-yanzhengma"/>
                     <a-input v-model:value="phoneForm.captcha" placeholder="验证码" type="text"></a-input>
                     <a-space direction="vertical">
                       <a-space>
@@ -382,12 +389,12 @@ const switchToSignIn = () => {
                     @finish="onSubmitEmail">
                   <!--              <h2 class="title">登录</h2>-->
                   <div class="input-field">
-                    <icon-font class="icon svg" type="icon-yonghu"/>
+                    <icon-font class="icon svg" type="icon-youxiang"/>
                     <a-input v-model:value="emailForm.email" placeholder="请输入邮箱" type="text"></a-input>
                   </div>
 
                   <div class="input-field" style="display: flex;justify-content: space-evenly;align-items: center;">
-                    <icon-font class="icon svg" style=" margin: 20px;" type="icon-mima"/>
+                    <icon-font class="icon svg" style=" margin: 20px;" type="icon-zhucedenglu-yanzhengma"/>
                     <a-input v-model:value="emailForm.captcha" placeholder="验证码" type="text"></a-input>
                     <a-space direction="vertical">
                       <a-space>
@@ -403,17 +410,17 @@ const switchToSignIn = () => {
             </a-tabs>
             <p class="social-text" style="text-align: center">其他登录方式</p>
             <div class="social-media">
-              <a id="sign-in-wx" class="social-icon" href="#">
-                <i class="fab fa-weixin"></i>
+              <a id="sign-in-wx" class="social-icon" href="#" @click="thirdLogin('github')">
+                <icon-font class="icon svg" type="icon-github"/>
               </a>
-              <a class="social-icon" href="#">
-                <i class="fab fa-qq"></i>
+              <a class="social-icon" href="#" @click="thirdLogin('gitee')">
+                <icon-font class="icon svg" type="icon-gitee"/>
               </a>
-              <a class="social-icon" href="#">
-                <i class="fab fa-alipay"></i>
+              <a class="social-icon" href="#" @click="thirdLogin('weixin')">
+                <icon-font class="icon svg" type="icon-a-weixin2"/>
               </a>
-              <a class="social-icon" href="#">
-                <i class="fab fa-github"></i>
+              <a class="social-icon" href="#" @click="thirdLogin('qq')">
+                <icon-font class="icon svg" type="icon-a-QQ1"/>
               </a>
             </div>
           </div>
@@ -510,7 +517,7 @@ const switchToSignIn = () => {
 
 .container {
   position: relative;
-  /*width: 100%;*/
+  width: 100%;
   background-color: #fff;
   min-height: 100vh;
   overflow: hidden;
@@ -528,8 +535,8 @@ const switchToSignIn = () => {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  /*left: 75%;*/
-  left: 50%;
+  left: 75%;
+  /*left: 50%;*/
   width: 50%;
   transition: 1s 0.7s ease-in-out;
   display: grid;
@@ -671,7 +678,7 @@ form.sign-in-form {
   background-color: var(--reaicc-nav-bg);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
-  /*z-index: 6;*/
+  z-index: 6;
 }
 
 .image {
@@ -690,7 +697,7 @@ form.sign-in-form {
 }
 
 .left-panel {
-  display: none;
+  /*display: none;*/
   pointer-events: all;
   padding: 3rem 17% 2rem 12%;
 }

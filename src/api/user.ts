@@ -20,24 +20,33 @@ export interface emailInfo {
 }
 //账号登录
 export function account(user: userInfo)  {
-    return axios.post(`/auth/account`,user)
+    return axios.post(`/auth/account`, user)
 }
+
 //手机登录
-export function phoneAccount(phone: phoneInfo)  {
-    return axios.post(`/auth/phone`,phone)
+export function phoneAccount(phone: phoneInfo) {
+    return axios.post(`/auth/phone`, phone)
 }
+
 //邮箱登录
-export function emailAccount(email: emailInfo)  {
-    return axios.post(`/auth/email`,email)
+export function emailAccount(email: emailInfo) {
+    return axios.post(`/auth/email`, email)
 }
+
+//第三方登录
+export function socialAuth(source: any) {
+    return axios.get(`/oauth/` + source)
+}
+
 export function pageList(page: Page) {
-    return axios.get(`${BASE_URL}/pageList`,{
+    return axios.get(`${BASE_URL}/pageList`, {
         params: {
             pageSize: page.pageSize,
             currentPage: page.currentPage,
         }
     });
 }
+
 export function register(user: userInfo) {
     return axios.post(`${BASE_URL}/register`, user);
 }
