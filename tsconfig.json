@@ -16,6 +16,11 @@
     "skipLibCheck": true,
     "allowJs": true
   },
-  "include": ["src/**/*", "src/**/*.vue", "src/**/*.d.ts"],
+  "include": [
+    "src/**/*",
+    "src/**/*.vue",
+    "src/**/*.d.ts",
+    "node_modules/unplugin-auto-import/auto-imports.d.ts"
+  ],
   "exclude": ["node_modules"]
 }
