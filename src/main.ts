@@ -27,6 +27,7 @@ import store from './store/store.js';
 import showBool from '@/hooks/post.js';
 //
 import UndrawUi from 'undraw-ui'
+import pinia from '@/store'
 
 const app = createApp(App)
 const Mitt = mitt()
@@ -47,4 +48,5 @@ app.provide('showBool', showBool);
 app.use(ElementPlus);
 app.use(Antd);
 app.use(UndrawUi)
+app.use(pinia)
 app.mount('#app')

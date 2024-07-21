@@ -1,22 +1,21 @@
 <script lang="ts" setup>
 import {logout} from "@/api/user";
 import {message} from "ant-design-vue";
+import {useRouter} from "vue-router";
+import {useUserStore} from "@/store";
 //获取用户信息
 const props = defineProps(['user'])
-
+const router = useRouter()
+const userStore = useUserStore()
 //注销
-const userLogout = () => {
-  logout().then(res => {
-    if (res.status === 200) {
-      const key = 'updatable';
-      message.loading({ content: '注销中...', key });
-      setTimeout(() => {
-        message.success({ content: '注销成功!', key, duration: 2 });
-        // 登录成功后跳转到首页
-        window.location.href = '/login';
-      }, 1000);
-    }
-  })
+const userLogout = async () => {
+  await userStore.logout()
+  const key = 'updatable';
+  message.loading({ content: '注销中...', key });
+  setTimeout(() => {
+    message.success({ content: '注销成功!', key, duration: 2 });
+    router.replace('/login')
+  }, 1000);
 }
 </script>
 

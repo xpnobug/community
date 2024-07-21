@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 import type {UnwrapRef} from 'vue';
-import {reactive, ref, toRaw} from "vue";
-import {account, emailAccount, phoneAccount, register, socialAuth} from "@/api/user";
+import {onBeforeUnmount, onMounted, reactive, ref, toRaw} from "vue";
+import {register} from "@/api/user";
 import {message} from "ant-design-vue";
-import type {Rule} from 'ant-design-vue/es/form';
 import {createFromIconfontCN} from "@ant-design/icons-vue";
 import {capImage, emailCode, smsCode} from "@/api/captcha";
 import Verify from "@/components/verifition/Verify.vue";
 import BgColorChange02 from "@/components/bgColor/BgColorChange02.vue";
+import {useUserStore} from "@/store";
+import {useRouter} from "vue-router";
+import {socialAuth} from "@/api";
 
 // SVG 图标
 const IconFont = createFromIconfontCN({
@@ -20,6 +22,7 @@ interface FormState {
   password?: string;
   captcha?: string;
   uuid?: string;
+  expired?: boolean;
 }
 
 // 使用 reactive 创建响应式表单状态
@@ -28,6 +31,7 @@ const formState: UnwrapRef<FormState> = reactive({
   password: '',
   captcha: '',
   uuid: '',
+  expired: false
 });
 
 // 手机表单状态接口
@@ -53,38 +57,48 @@ const emailForm: UnwrapRef<EmailFormState> = reactive({
   email: '',
   captcha: ''
 });
-// 表单验证规则
-const rules: Record<string, Rule[]> = {
-  username: [
-    {required: true, message: '请输入您的用户名', trigger: 'change'},
-    {min: 3, max: 5, message: '长度应为3到5个字符', trigger: 'blur'}
-  ],
-  password: [
-    {required: true, message: '请输入您的密码', trigger: 'change'},
-  ],
-  captcha: [
-    {required: true, message: '请输入验证码', trigger: 'change'},
-  ],
-};
-
 
 // 表单引用
 const formRef = ref();
-
 const verifyRef = ref(null);
 
+// 验证码过期定时器
+let timer
+const startTimer = (expireTime: number) => {
+  if (timer) {
+    clearTimeout(timer)
+  }
+  const remainingTime = expireTime - Date.now()
+  if (remainingTime <= 0) {
+    formState.expired = true
+    return
+  }
+  timer = setTimeout(() => {
+    formState.expired = true
+  }, remainingTime)
+}
+// 组件销毁时清理定时器
+onBeforeUnmount(() => {
+  if (timer) {
+    clearTimeout(timer)
+  }
+})
 // 验证码图片
-const captcha = ref([]);
-
+const captchaImgBase64 = ref([]);
 // 更换验证码图片
 const changeImg = () => {
   capImage().then(res => {
-    captcha.value = res.data.data;
-    formState.uuid = res.data.data.uuid;
+    const {uuid, img, expireTime} = res.data.data
+    formState.uuid = uuid;
+    captchaImgBase64.value = img;
+    formState.expired = false;
+    startTimer(expireTime)
   });
 };
-changeImg(); // 初始化加载验证码
 
+onMounted(() => {
+  changeImg()
+})
 // 验证码倒计时
 const messageCodeVis = ref(false);
 let countdown = ref(0);
@@ -101,10 +115,8 @@ const startCountdown = () => {
 };
 
 // 发送验证码处理
-// 发送验证码处理
 const sendCode = (type) => {
   let value, reg, errorMsg;
-
   // 根据类型设置不同的值、正则表达式和错误消息
   if (type === 'phone') {
     // 如果类型是手机
@@ -120,17 +132,14 @@ const sendCode = (type) => {
     // 如果类型未知，显示错误消息
     return message.error('未知的类型');
   }
-
   // 检查值是否为空
   if (!value) {
     return message.error(type === 'phone' ? '请输入手机号码' : '请输入邮箱');
   }
-
   // 验证格式是否正确
   if (!reg.test(value)) {
     return message.error(errorMsg);
   }
-
   // 如果是邮箱且格式正确，调用 emailSend 函数发送验证码
   if (type === 'email') {
     emailSend();
@@ -165,70 +174,81 @@ const emailSend = () => {
   })
 }
 
-
+const userStore = useUserStore()
+const router = useRouter()
 // 通用登录处理函数
 const handleLogin = async (loginData: any, loginType: string) => {
   let res;
   if (loginType === 'account') {
-    res = await account(loginData);
+    res = await userStore.accountLogin(loginData);
   } else if (loginType === 'phone') {
-    res = await phoneAccount(loginData); // 使用实际的 API 调用替换
+    res = await userStore.phoneLogin(loginData); // 使用实际的 API 调用替换
   } else if (loginType === 'email') {
-    res = await emailAccount(loginData); // 使用实际的 API 调用替换
+    res = await userStore.emailLogin(loginData); // 使用实际的 API 调用替换
   }
-
-  if (res.status === 200) {
-    const key = 'updatable';
-    message.loading({content: '登录中...', key});
-    setTimeout(() => {
-      localStorage.setItem('token', res.data.data.tokenValue);
-      localStorage.setItem('userId', res.data.data.loginId);
-      message.success({content: '登录成功!', key, duration: 2});
-      window.location.href = '/';
-    }, 1000);
-  }
+  const {redirect, ...othersQuery} = router.currentRoute.value.query
+  const key = 'updatable';
+  message.loading({content: '登录中...', key});
+  setTimeout(() => {
+    // localStorage.setItem('token', res.data.data.token);
+    // localStorage.setItem('userId', res.data.data.loginId);
+    message.success({content: '登录成功!', key, duration: 2});
+    router.push({
+      path: (redirect as string) || '/',
+      query: {
+        ...othersQuery
+      }
+    })
+  }, 1000);
 };
 
+// 第三方登录授权
+const thirdLogin = async (source: string) => {
+  const { data } = await socialAuth(source)
+  window.location.href = data.data.authorizeUrl
+}
+
+
 // 提交表单
-const onSubmit = async () => {
-  try {
-    // 验证表单
-    await formRef.value.validate();
+  const onSubmit = async () => {
+    try {
+      // 验证表单
+      await formRef.value.validate();
 
-    // 检查用户名是否为空
-    if (!formState.username) {
-      return message.error('用户名不能为空');
+      // 检查用户名是否为空
+      if (!formState.username) {
+        return message.error('用户名不能为空');
+      }
+
+      // 检查密码是否为空
+      if (!formState.password) {
+        return message.error('密码不能为空');
+      }
+
+      // 检查验证码是否为空
+      if (!formState.captcha) {
+        return message.error('验证码不能为空');
+      }
+
+      // 检查UUID是否为空
+      if (!formState.uuid) {
+        return message.error('UUID不能为空');
+      }
+
+      // 构建登录数据
+      const loginData = {
+        username: formState.username, // 用户名
+        password: formState.password, // 密码
+        captcha: formState.captcha,   // 验证码
+        uuid: formState.uuid          // UUID
+      };
+
+      // 调用登录处理函数
+      await handleLogin(loginData, 'account');
+    } catch (error) {
+      // 如果表单验证失败，刷新验证码图片
+      changeImg();
     }
-
-    // 检查密码是否为空
-    if (!formState.password) {
-      return message.error('密码不能为空');
-    }
-
-    // 检查验证码是否为空
-    if (!formState.captcha) {
-      return message.error('验证码不能为空');
-    }
-
-    // 检查UUID是否为空
-    if (!formState.uuid) {
-      return message.error('UUID不能为空');
-    }
-
-    // 构建登录数据
-    const loginData = {
-      username: formState.username, // 用户名
-      password: formState.password, // 密码
-      captcha: formState.captcha,   // 验证码
-      uuid: formState.uuid          // UUID
-    };
-
-    // 调用登录处理函数
-    await handleLogin(loginData, 'account');
-  } catch (error) {
-    // 如果表单验证失败，刷新验证码图片
-    changeImg();
-  }
 };
 
 
@@ -294,11 +314,6 @@ const upOnFinish = async (values: any) => {
   }
 };
 
-//第三方认证登录
-const thirdLogin = (type: string) => {
-  socialAuth(type).then(res => window.location.href = res.data.data.authorizeUrl)
-}
-
 // 页面元素状态
 const activeKey = ref('1');
 const loading = ref<boolean>(false);
@@ -331,7 +346,6 @@ const switchToSignIn = () => {
                 <a-form
                     ref="formRef"
                     :model="formState"
-                    :rules="rules"
                     action="#"
                     class="sign-in-form"
                     @finish="onSubmit">
@@ -347,8 +361,11 @@ const switchToSignIn = () => {
                   <div class="input-field" style="display: flex;justify-content: space-evenly;align-items: center;">
                     <icon-font class="icon svg" style=" margin: 20px;" type="icon-zhucedenglu-yanzhengma"/>
                     <a-input v-model:value="formState.captcha" placeholder="验证码" type="text"></a-input>
-                    <div>
-                      <img :src="captcha.img" @click="changeImg">
+                    <div class="captcha-container" @click="changeImg">
+                      <img :src="captchaImgBase64" alt="验证码">
+                      <div v-if="formState.expired" class="overlay">
+                        <p>已过期，请刷新</p>
+                      </div>
                     </div>
                   </div>
                   <!--              <a-form-item :name="formName"></a-form-item>-->
@@ -429,7 +446,6 @@ const switchToSignIn = () => {
             <a-form
                 ref="formRef"
                 :model="formState"
-                :rules="rules"
                 action="#" class="sign-up-form" @finish="upOnFinish">
               <h2 class="title">注册</h2>
               <div class="input-field">
@@ -480,6 +496,34 @@ const switchToSignIn = () => {
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
 }
+
+.captcha-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.captcha-container {
+  position: relative;
+  display: inline-block;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #333c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay p {
+  font-size: 12px;
+  color: #fff;
+}
+
 
 .second-text {
   color: #e60707;
