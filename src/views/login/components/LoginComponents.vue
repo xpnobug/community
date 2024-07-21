@@ -1,230 +1,463 @@
 <script lang="ts" setup>
 import type {UnwrapRef} from 'vue';
-import {onMounted, reactive, ref, toRaw} from "vue";
-import {login, register} from "@/api/user";
+import {reactive, ref, toRaw} from "vue";
+import {account, emailAccount, phoneAccount, register} from "@/api/user";
 import {message} from "ant-design-vue";
 import type {Rule} from 'ant-design-vue/es/form';
 import {createFromIconfontCN} from "@ant-design/icons-vue";
-//svg图标
+import {capImage, emailCode, smsCode} from "@/api/captcha";
+import Verify from "@/components/verifition/Verify.vue";
+
+// SVG 图标
 const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/c/font_1898478_4559alb1b0i.js',
 });
 
+// 表单状态接口
 interface FormState {
-  username: string;
-  password: string;
-  email: string;
-  remember: boolean;
+  username?: string;
+  password?: string;
+  captcha?: string;
+  uuid?: string;
 }
 
+// 使用 reactive 创建响应式表单状态
 const formState: UnwrapRef<FormState> = reactive({
   username: '',
   password: '',
-  email: '',
-  remember: true
+  captcha: '',
+  uuid: '',
 });
 
+// 手机表单状态接口
+interface PhoneFormState {
+  phone?: string;
+  captcha?: string;
+}
 
+// 使用 reactive 创建响应式手机表单状态
+const phoneForm: UnwrapRef<PhoneFormState> = reactive({
+  phone: '',
+  captcha: ''
+});
+
+// 邮箱表单状态接口
+interface EmailFormState {
+  email?: string;
+  captcha?: string;
+}
+
+// 使用 reactive 创建响应式邮箱表单状态
+const emailForm: UnwrapRef<EmailFormState> = reactive({
+  email: '',
+  captcha: ''
+});
+// 表单验证规则
 const rules: Record<string, Rule[]> = {
   username: [
     {required: true, message: '请输入您的用户名', trigger: 'change'},
-    {min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur'}
+    {min: 3, max: 5, message: '长度应为3到5个字符', trigger: 'blur'}
   ],
   password: [
     {required: true, message: '请输入您的密码', trigger: 'change'},
   ],
-  email: [
-    {required: true,message: '请输入您的邮箱', trigger: 'change'},
-    {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
+  captcha: [
+    {required: true, message: '请输入验证码', trigger: 'change'},
   ],
 };
-const upOnFinish = async (values: any) => {
-  // 注册逻辑
-  const res = await register(formState);
-  if (res.status === 200) {
-    message.success("注册成功，请登录！")
-  } else {
-    message.error("注册失败，请检查账号和密码！")
-  }
-};
+
+
+// 表单引用
 const formRef = ref();
 
-const loginOnFinish = async (values: any) => {
-  const res = await login(formState);
-  // 登录逻辑
-  const key = 'updatable';
-  console.log(res)
+const verifyRef = ref(null);
+
+// 验证码图片
+const captcha = ref([]);
+
+// 更换验证码图片
+const changeImg = () => {
+  capImage().then(res => {
+    captcha.value = res.data.data;
+    formState.uuid = res.data.data.uuid;
+  });
+};
+changeImg(); // 初始化加载验证码
+
+// 验证码倒计时
+const messageCodeVis = ref(false);
+let countdown = ref(0);
+
+const startCountdown = () => {
+  const intervalId = setInterval(() => {
+    if (countdown.value > 0) {
+      countdown.value--;
+    } else {
+      clearInterval(intervalId);
+      messageCodeVis.value = false;
+    }
+  }, 1000);
+};
+
+// 发送验证码处理
+// 发送验证码处理
+const sendCode = (type) => {
+  let value, reg, errorMsg;
+
+  // 根据类型设置不同的值、正则表达式和错误消息
+  if (type === 'phone') {
+    // 如果类型是手机
+    value = phoneForm.phone;
+    reg = /^1[3456789]\d{9}$/; // 手机号码的正则表达式
+    errorMsg = '请输入正确的手机号码';
+  } else if (type === 'email') {
+    // 如果类型是邮箱
+    value = emailForm.email;
+    reg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 邮箱的正则表达式
+    errorMsg = '请输入正确的邮箱';
+  } else {
+    // 如果类型未知，显示错误消息
+    return message.error('未知的类型');
+  }
+
+  // 检查值是否为空
+  if (!value) {
+    return message.error(type === 'phone' ? '请输入手机号码' : '请输入邮箱');
+  }
+
+  // 验证格式是否正确
+  if (!reg.test(value)) {
+    return message.error(errorMsg);
+  }
+
+  // 如果是邮箱且格式正确，调用 emailSend 函数发送验证码
+  if (type === 'email') {
+    emailSend();
+  } else {
+    // 显示验证码组件
+    if (verifyRef.value) {
+      verifyRef.value.show();
+    }
+  }
+  // 开始倒计时
+  countdown.value = 60;
+};
+
+
+// 验证码成功处理
+const success = (v) => {
+  smsCode(phoneForm.phone, v.captchaVerification).then(res => {
+    if (res.status === 200) {
+      message.success('验证码发送成功');
+      messageCodeVis.value = true;
+      startCountdown();
+    }
+  });
+};
+const emailSend = () => {
+  emailCode(emailForm.email).then(res => {
+    if (res.status === 200) {
+      message.success('验证码发送成功');
+      messageCodeVis.value = true;
+      startCountdown();
+    }
+  })
+}
+
+
+// 通用登录处理函数
+const handleLogin = async (loginData: any, loginType: string) => {
+  let res;
+  if (loginType === 'account') {
+    res = await account(loginData);
+  } else if (loginType === 'phone') {
+    res = await phoneAccount(loginData); // 使用实际的 API 调用替换
+  } else if (loginType === 'email') {
+    res = await emailAccount(loginData); // 使用实际的 API 调用替换
+  }
+
   if (res.status === 200) {
+    const key = 'updatable';
     message.loading({content: '登录中...', key});
     setTimeout(() => {
-      // 将用户主键保存到localStorage
-      console.log(res.data.data)
       localStorage.setItem('token', res.data.data.tokenValue);
-      // 将用户主键保存到localStorage
       localStorage.setItem('userId', res.data.data.loginId);
       message.success({content: '登录成功!', key, duration: 2});
-      // 登录成功后跳转到首页
       window.location.href = '/';
     }, 1000);
   }
 };
 
-const formName = ref('username');
-const onSubmit = (val) => {
-  console.log(val)
-  formRef.value
-      .validate()
-      .then(() => {
-        if (formState.username === '') {
-          formName.value = 'username';
-        }
-        if (formState.password === '') {
-          formName.value = "password";
-        }
-        console.log('values', formState, toRaw(formState));
-      })
-      .catch(error => {
-        console.log('error', error);
-      });
+// 提交表单
+const onSubmit = async () => {
+  try {
+    // 验证表单
+    await formRef.value.validate();
+
+    // 检查用户名是否为空
+    if (!formState.username) {
+      return message.error('用户名不能为空');
+    }
+
+    // 检查密码是否为空
+    if (!formState.password) {
+      return message.error('密码不能为空');
+    }
+
+    // 检查验证码是否为空
+    if (!formState.captcha) {
+      return message.error('验证码不能为空');
+    }
+
+    // 检查UUID是否为空
+    if (!formState.uuid) {
+      return message.error('UUID不能为空');
+    }
+
+    // 构建登录数据
+    const loginData = {
+      username: formState.username, // 用户名
+      password: formState.password, // 密码
+      captcha: formState.captcha,   // 验证码
+      uuid: formState.uuid          // UUID
+    };
+
+    // 调用登录处理函数
+    await handleLogin(loginData, 'account');
+  } catch (error) {
+    // 如果表单验证失败，刷新验证码图片
+    changeImg();
+  }
 };
-const onSubmitZc = (val) => {
-  console.log(val)
-  formRef.value
-      .validate()
-      .then(() => {
-        if (formState.username === '') {
-          formName.value = 'username';
-        }
-        if (formState.password === '') {
-          formName.value = "password";
-        }
-        if (formState.email === '') {
-          formName.value = "email";
-        }
-        console.log('values', formState, toRaw(formState));
-      })
-      .catch(error => {
-        console.log('error', error);
-      });
+
+
+// 提交手机表单
+const onSubmitPhone = async () => {
+  try {
+    if (!phoneForm.phone) {
+      return message.error('请输入手机号码');
+    }
+    const reg = /^1[3456789]\d{9}$/;
+    if (!reg.test(phoneForm.phone)) {
+      return message.error('请输入正确的手机号码');
+    }
+    if (!phoneForm.phone || !phoneForm.captcha) {
+      return message.error('手机号码和验证码不能为空');
+    }
+    const loginData = {
+      phone: phoneForm.phone,
+      captcha: phoneForm.captcha
+    };
+    await handleLogin(loginData, 'phone');
+  } catch (error) {
+    console.error('验证错误', error);
+  }
+};
+// 提交邮箱表单
+const onSubmitEmail = async () => {
+  // 检查邮箱是否为空
+  if (!emailForm.email) {
+    return message.error('请输入邮箱');
+  }
+  // 定义邮箱的正则表达式
+  const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  // 验证邮箱格式是否正确
+  if (!emailReg.test(emailForm.email)) {
+    return message.error('请输入正确的邮箱');
+  }
+  // 检查邮箱和验证码是否为空
+  if (!emailForm.captcha) {
+    return message.error('验证码不能为空');
+  }
+  // 构建登录数据
+  const loginData = {
+    email: emailForm.email,
+    captcha: emailForm.captcha
+  };
+  // 调用登录处理函数
+  await handleLogin(loginData, 'email');
 };
 
-onMounted(() => {
-  const sign_in_btn = document.querySelector("#sign-in-btn");
-  const sign_up_btn = document.querySelector("#sign-up-btn");
-  const container = document.querySelector(".container");
 
-  sign_up_btn.addEventListener("click", () => {
-    container.classList.add("sign-up-mode");
-  });
+// 提交注册表单
+const upOnFinish = async (values: any) => {
+  try {
+    const res = await register(toRaw(formState));
+    if (res.status === 200) {
+      message.success("注册成功，请登录！");
+    } else {
+      message.error("注册失败，请检查账号和密码！");
+    }
+  } catch (error) {
+    message.error("注册失败，请检查账号和密码！");
+  }
+};
 
-  sign_in_btn.addEventListener("click", () => {
-    container.classList.remove("sign-up-mode");
-  });
-})
+// 页面元素状态
+const activeKey = ref('1');
+const loading = ref<boolean>(false);
+
+// 响应式状态，用于控制显示登录还是注册内容
+const isSignUpMode = ref(false);
+const showSignInContent = ref(true);
+// 切换到注册模式
+const switchToSignUp = () => {
+  isSignUpMode.value = true;
+};
+
+// 切换到登录模式
+const switchToSignIn = () => {
+  isSignUpMode.value = false;
+};
 
 </script>
 <template>
-  <div class="container">
-    <div class="forms-container">
-      <div class="signin-signup">
-        <a-form
-            ref="formRef"
-            :model="formState"
-            :rules="rules"
-            action="#"
-            class="sign-in-form" @finish="loginOnFinish">
-          <h2 class="title">登录</h2>
-          <div class="input-field">
-            <icon-font class="icon svg" type="icon-yonghu"/>
-            <a-input v-model:value="formState.username" placeholder="用户名" type="text"></a-input>
+  <div :class="['container', { 'sign-up-mode': isSignUpMode }]">
+    <div>
+      <Verify ref="verifyRef" :captcha-type="'blockPuzzle'" :mode="'pop'" @success="success"/>
+      <div class="forms-container">
+        <transition name="fade">
+          <!--  登录    -->
+          <div v-if="!isSignUpMode" class="signin-signup">
+            <a-tabs v-model:activeKey="activeKey" centered>
+              <a-tab-pane key="1" tab="账号登录">
+                <a-form
+                    ref="formRef"
+                    :model="formState"
+                    :rules="rules"
+                    action="#"
+                    class="sign-in-form"
+                    @finish="onSubmit">
+                  <!--              <h2 class="title">登录</h2>-->
+                  <div class="input-field">
+                    <icon-font class="icon svg" type="icon-yonghu"/>
+                    <a-input v-model:value="formState.username" placeholder="用户名" type="text"></a-input>
+                  </div>
+                  <div class="input-field">
+                    <icon-font class="icon svg" type="icon-mima"/>
+                    <a-input-password v-model:value="formState.password" placeholder="密码"></a-input-password>
+                  </div>
+                  <div class="input-field" style="display: flex;justify-content: space-evenly;align-items: center;">
+                    <icon-font class="icon svg" style=" margin: 20px;" type="icon-mima"/>
+                    <a-input v-model:value="formState.captcha" placeholder="验证码" type="text"></a-input>
+                    <div>
+                      <img :src="captcha.img" @click="changeImg">
+                    </div>
+                  </div>
+                  <!--              <a-form-item :name="formName"></a-form-item>-->
+                  <input class="btn solid" type="submit" value="立即登录"/>
+                </a-form>
+              </a-tab-pane>
+              <a-tab-pane key="2" force-render tab="手机登录">
+                <a-form
+                    :model="phoneForm"
+                    action="#"
+                    class="sign-in-form"
+                    @finish="onSubmitPhone">
+                  <!--              <h2 class="title">登录</h2>-->
+                  <div class="input-field">
+                    <icon-font class="icon svg" type="icon-yonghu"/>
+                    <a-input v-model:value="phoneForm.phone" placeholder="请输入手机号" type="text"></a-input>
+                  </div>
+
+                  <div class="input-field" style="display: flex;justify-content: space-evenly;align-items: center;">
+                    <icon-font class="icon svg" style=" margin: 20px;" type="icon-mima"/>
+                    <a-input v-model:value="phoneForm.captcha" placeholder="验证码" type="text"></a-input>
+                    <a-space direction="vertical">
+                      <a-space>
+                        <div v-if="messageCodeVis" class="second-text">{{ countdown }}秒后重新获取</div>
+                        <a-button v-else :loading="loading" type="text" @click="() => sendCode('phone')">获取验证码</a-button>
+                      </a-space>
+                    </a-space>
+                  </div>
+                  <!--              <a-form-item :name="formName"></a-form-item>-->
+                  <input class="btn solid" type="submit" value="立即登录"/>
+                </a-form>
+              </a-tab-pane>
+              <a-tab-pane key="3" force-render tab="邮箱登录">
+                <a-form
+                    :model="emailForm"
+                    action="#"
+                    class="sign-in-form"
+                    @finish="onSubmitEmail">
+                  <!--              <h2 class="title">登录</h2>-->
+                  <div class="input-field">
+                    <icon-font class="icon svg" type="icon-yonghu"/>
+                    <a-input v-model:value="emailForm.email" placeholder="请输入邮箱" type="text"></a-input>
+                  </div>
+
+                  <div class="input-field" style="display: flex;justify-content: space-evenly;align-items: center;">
+                    <icon-font class="icon svg" style=" margin: 20px;" type="icon-mima"/>
+                    <a-input v-model:value="emailForm.captcha" placeholder="验证码" type="text"></a-input>
+                    <a-space direction="vertical">
+                      <a-space>
+                        <div v-if="messageCodeVis" class="second-text">{{ countdown }}秒后重新获取</div>
+                        <a-button v-else :loading="loading" type="text" @click="() => sendCode('email')">获取验证码</a-button>
+                      </a-space>
+                    </a-space>
+                  </div>
+                  <!--              <a-form-item :name="formName"></a-form-item>-->
+                  <input class="btn solid" type="submit" value="立即登录"/>
+                </a-form>
+              </a-tab-pane>
+            </a-tabs>
+            <p class="social-text" style="text-align: center">其他登录方式</p>
+            <div class="social-media">
+              <a id="sign-in-wx" class="social-icon" href="#">
+                <i class="fab fa-weixin"></i>
+              </a>
+              <a class="social-icon" href="#">
+                <i class="fab fa-qq"></i>
+              </a>
+              <a class="social-icon" href="#">
+                <i class="fab fa-alipay"></i>
+              </a>
+              <a class="social-icon" href="#">
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
           </div>
-          <div class="input-field">
-            <icon-font class="icon svg" type="icon-mima"/>
-            <a-input-password v-model:value="formState.password" placeholder="密码"></a-input-password>
+          <!--  注册   -->
+          <div v-else class="signin-signup">
+            <a-form
+                ref="formRef"
+                :model="formState"
+                :rules="rules"
+                action="#" class="sign-up-form" @finish="upOnFinish">
+              <h2 class="title">注册</h2>
+              <div class="input-field">
+                <icon-font class="icon svg" type="icon-yonghu"/>
+                <a-input v-model:value="formState.username" placeholder="用户名" type="text"></a-input>
+              </div>
+              <div class="input-field">
+                <icon-font class="icon svg" type="icon-youxiang"/>
+                <a-input v-model:value="formState.email" placeholder="邮箱"></a-input>
+              </div>
+              <div class="input-field">
+                <icon-font class="icon svg" type="icon-mima"/>
+                <a-input-password v-model:value="formState.password" placeholder="密码"></a-input-password>
+              </div>
+              <!--          <a-form-item :name="formName"></a-form-item>-->
+              <input class="btn" type="submit" value="注 册"/>
+            </a-form>
           </div>
-          <a-form-item :name="formName"></a-form-item>
-          <input class="btn solid" type="submit" value="登 录" @click="onSubmit"/>
-          <!--          <p class="social-text">或者通过以下平台登录</p>-->
-          <!--          <div class="social-media">-->
-          <!--            <a class="social-icon" href="#">-->
-          <!--              <i class="fab fa-weixin"></i>-->
-          <!--            </a>-->
-          <!--            <a class="social-icon" href="#">-->
-          <!--              <i class="fab fa-qq"></i>-->
-          <!--            </a>-->
-          <!--            <a class="social-icon" href="#">-->
-          <!--              <i class="fab fa-alipay"></i>-->
-          <!--            </a>-->
-          <!--            <a class="social-icon" href="#">-->
-          <!--              <i class="fab fa-github"></i>-->
-          <!--            </a>-->
-          <!--          </div>-->
-        </a-form>
-        <a-form
-            ref="formRef"
-            :model="formState"
-            :rules="rules"
-            action="#" class="sign-up-form" @finish="upOnFinish">
-          <h2 class="title">注册</h2>
-          <div class="input-field">
-            <icon-font class="icon svg" type="icon-yonghu"/>
-            <a-input v-model:value="formState.username" placeholder="用户名" type="text"></a-input>
-          </div>
-          <div class="input-field">
-            <icon-font class="icon svg" type="icon-youxiang"/>
-            <a-input v-model:value="formState.email" placeholder="邮箱"></a-input>
-          </div>
-          <div class="input-field">
-            <icon-font class="icon svg" type="icon-mima"/>
-            <a-input-password v-model:value="formState.password" placeholder="密码"></a-input-password>
-          </div>
-          <a-form-item :name="formName"></a-form-item>
-          <input class="btn" type="submit" value="注 册" @click="onSubmitZc"/>
-          <!--          <p class="social-text">或者通过以下平台注册</p>-->
-          <!--          <div class="social-media">-->
-          <!--            <a class="social-icon" href="#">-->
-          <!--              <i class="fab fa-weixin"></i>-->
-          <!--            </a>-->
-          <!--            <a class="social-icon" href="#">-->
-          <!--              <i class="fab fa-qq"></i>-->
-          <!--            </a>-->
-          <!--            <a class="social-icon" href="#">-->
-          <!--              <i class="fab fa-alipay"></i>-->
-          <!--            </a>-->
-          <!--            <a class="social-icon" href="#">-->
-          <!--              <i class="fab fa-github"></i>-->
-          <!--            </a>-->
-          <!--          </div>-->
-        </a-form>
+        </transition>
       </div>
-    </div>
-
-    <div class="panels-container">
-      <div class="panel left-panel">
-        <div class="content">
-          <!--          <h3>新用户?</h3>-->
-          <p>
-
-          </p>
-          没有账号？
-          <button id="sign-up-btn" class="btn transparent">
-            注册
-          </button>
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            没有账号？
+            <button class="btn transparent" @click="switchToSignUp">注册</button>
+          </div>
+          <img alt="" class="image" src="@assets/img/log.svg"/>
         </div>
-        <img alt="" class="image" src="@assets/img/log.svg"/>
-      </div>
-      <div class="panel right-panel">
-        <div class="content">
-          <!--          <h3>已经是我们自己人了吗?</h3>-->
-          <p>
-
-          </p>
-          已有帐号？ 点此登录
-          <button id="sign-in-btn" class="btn transparent">
-            登 录
-          </button>
+        <div class="panel right-panel">
+          <div class="content">
+            已有帐号？ 点此登录
+            <button class="btn transparent" @click="switchToSignIn">登 录</button>
+          </div>
+          <img alt="" class="image" src="@assets/img/register.svg"/>
         </div>
-        <img alt="" class="image" src="@assets/img/register.svg"/>
       </div>
     </div>
   </div>
@@ -232,6 +465,21 @@ onMounted(() => {
 
 
 <style scoped>
+/* 过渡效果 */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.1s ease-in-out;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+
+.second-text {
+  color: #e60707;
+  font-size: 12px;
+  width: max-content;
+}
+
 :deep(.ant-input) {
   background-color: #f0f0f0;
   box-shadow: none;
@@ -280,7 +528,8 @@ onMounted(() => {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  left: 75%;
+  /*left: 75%;*/
+  left: 50%;
   width: 50%;
   transition: 1s 0.7s ease-in-out;
   display: grid;
@@ -321,7 +570,7 @@ form.sign-in-form {
   background-color: #f0f0f0;
   margin: 10px 0;
   height: 55px;
-  border-radius: 55px;
+  border-radius: 10px;
   display: grid;
   grid-template-columns: 15% 85%;
   padding: 0 0.4rem;
@@ -387,7 +636,7 @@ form.sign-in-form {
   border: none;
   outline: none;
   height: 49px;
-  border-radius: 49px;
+  border-radius: 10px;
   color: #fff;
   text-transform: uppercase;
   font-weight: 600;
@@ -418,10 +667,11 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
+  /*background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);*/
+  background-color: var(--reaicc-nav-bg);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
-  z-index: 6;
+  /*z-index: 6;*/
 }
 
 .image {
@@ -440,6 +690,7 @@ form.sign-in-form {
 }
 
 .left-panel {
+  display: none;
   pointer-events: all;
   padding: 3rem 17% 2rem 12%;
 }
@@ -528,7 +779,7 @@ form.sign-in-form {
 
   .signin-signup {
     width: 100%;
-    top: 95%;
+    top: 80%;
     transform: translate(-50%, -100%);
     transition: 1s 0.8s ease-in-out;
   }
@@ -619,7 +870,7 @@ form.sign-in-form {
   }
 
   .container.sign-up-mode .signin-signup {
-    top: 5%;
+    top: 20%;
     transform: translate(-50%, 0);
   }
 }
