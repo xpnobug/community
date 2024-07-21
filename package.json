@@ -13,6 +13,7 @@
     "@ant-design-vue/pro-layout": "^3.2.5",
     "@ant-design/icons-vue": "^7.0.1",
     "ant-design-vue": "^4.2.1",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.11",
     "element-plus": "^2.7.1",
     "md-editor-v3": "^4.15.0",
