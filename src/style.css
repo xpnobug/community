@@ -159,6 +159,7 @@ body {
   --reaicc-leftnav-bg: #fff;
   --reaicc-menu-active-color: #1d1e22;
   --reaicc-post-line-bg: #eaeaf5;
+  --reaicc-login-bg: #eaeaf5;
 
   /*newchat*/
   --app-background: #eaebf5;
@@ -218,6 +219,7 @@ body {
   --reaicc-leftnav-bg: #1d1e22;
   --reaicc-menu-active-color: #fff;
   --reaicc-post-line-bg: #3e3f5e;
+  --reaicc-login-bg: #565387;
 
   /*newchat*/
   --app-background: #262a42;

@@ -333,12 +333,20 @@ const switchToSignIn = () => {
 };
 const route = useRoute()
 const source = route.query.source as string
-console.log(source)
+
+const toHome = () => {
+  const { redirect, ...othersQuery } = router.currentRoute.value.query
+  router.push({
+    path: (redirect as string) || '/',
+    query: {
+      ...othersQuery
+    }
+  })
+}
 </script>
 <template>
   <SocialIndex v-if="source !== undefined"/>
   <div :class="['container', { 'sign-up-mode': isSignUpMode }]">
-    <BgColorChange02/>
     <div>
       <Verify ref="verifyRef" :captcha-type="'blockPuzzle'" :mode="'pop'" @success="success"/>
       <div class="forms-container">
@@ -472,9 +480,26 @@ console.log(source)
       </div>
       <div class="panels-container">
         <div class="panel left-panel">
-          <div class="content">
-            没有账号？
-            <button class="btn transparent" @click="switchToSignUp">注册</button>
+          <div class="content" style="display: flex;justify-content: center;width: 100%; ">
+            <div style="width: 50px; ">
+              <a-tooltip title="去首页" color="#87d068">
+                <button class="mode-switch" @click="toHome">
+                  <svg stroke="#5c67ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                       style="width: 24px;"
+                       version="1.1" viewBox="0 0 1024 1024" width="200" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M779.6224 923.2896H250.4704a147.2 147.2 0 0 1-147.0464-147.0464V444.5696a172.0832 172.0832 0 0 1 57.7536-128.5632l178.6368-158.72a269.1584 269.1584 0 0 1 362.0864 3.2768l169.3184 155.8016A172.288 172.288 0 0 1 926.72 443.0336v333.2096a147.2512 147.2512 0 0 1-147.0976 147.0464zM519.0656 150.6304a208.0256 208.0256 0 0 0-138.24 52.7872l-178.5856 158.72a110.4896 110.4896 0 0 0-37.376 82.432v331.6736a85.7088 85.7088 0 0 0 85.6064 85.6064h529.152A85.76 85.76 0 0 0 865.28 776.2432V443.0336a110.6432 110.6432 0 0 0-35.84-81.2544l-168.96-155.8528a208.1792 208.1792 0 0 0-141.4144-55.296z"
+                        fill="#5c67ff" p-id="9182"></path>
+                    <path
+                        d="M508.16 735.1296a149.76 149.76 0 1 1 149.76-149.76 149.9136 149.9136 0 0 1-149.76 149.76z m0-238.08a88.32 88.32 0 1 0 88.32 88.32 88.4224 88.4224 0 0 0-88.32-88.32z"
+                        fill="#5c67ff" p-id="9183"></path>
+                  </svg>
+                </button>
+              </a-tooltip>
+            </div>
+            <BgColorChange02/>
+            <!--            没有账号？-->
+            <!--            <button class="btn transparent" @click="switchToSignUp">注册</button>-->
           </div>
           <img alt="" class="image" src="@assets/img/log.svg"/>
         </div>
@@ -492,6 +517,29 @@ console.log(source)
 
 
 <style scoped>
+::v-deep(.ant-tabs-tab-btn){
+  color: var(--reaicc-fontcolor);
+}
+
+.mode-switch {
+  /*z-index: 1;*/
+  /*position: absolute;*/
+  /*top: 20px;*/
+  /*left: 36px;*/
+  /*background-color: var(--chat-background);*/
+  border: none;
+  color: #ddd;
+  outline: none;
+  cursor: pointer;
+  box-shadow: var(--navigation-box-shadow);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  transform-origin: center;
+}
 /* 过渡效果 */
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.1s ease-in-out;
@@ -564,9 +612,10 @@ console.log(source)
 }
 
 .container {
+  transition: 1.8s ease-in-out;
   position: relative;
   width: 100%;
-  background-color: #fff;
+  background-color: var(--reaicc-login-bg);
   min-height: 100vh;
   overflow: hidden;
 }
@@ -674,7 +723,7 @@ form.sign-in-form {
   margin: 0 0.45rem;
   color: #333;
   border-radius: 50%;
-  border: 1px solid #333;
+  border: 1px solid var(--reaicc-fontcolor);
   text-decoration: none;
   font-size: 1.1rem;
   transition: 0.3s;
@@ -944,7 +993,7 @@ form.sign-in-form {
   }
 
   .container {
-    padding: 1.5rem;
+    /*padding: 1.5rem;*/
   }
 
   .container:before {
