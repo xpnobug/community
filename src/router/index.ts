@@ -26,11 +26,11 @@ export default createRouter({
             component: home,
             redirect: 'index', //重定向到 /site/mysite
             children: [
-                {
-                    path: '/social/callback',
-                    component: () => import('@/views/login/social/index.vue'),
-                    meta: { hidden: true }
-                },
+                // {
+                //     path: '/social/callback',
+                //     component: () => import('@/views/login/social/socialIndex.vue'),
+                //     meta: { hidden: true }
+                // },
                 {
                     path: '/index',
                     name: 'new_index',

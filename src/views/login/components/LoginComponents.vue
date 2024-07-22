@@ -8,8 +8,9 @@ import {capImage, emailCode, smsCode} from "@/api/captcha";
 import Verify from "@/components/verifition/Verify.vue";
 import BgColorChange02 from "@/components/bgColor/BgColorChange02.vue";
 import {useUserStore} from "@/store";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {socialAuth} from "@/api";
+import SocialIndex from "@/views/login/social/socialIndex.vue";
 
 // SVG 图标
 const IconFont = createFromIconfontCN({
@@ -330,9 +331,12 @@ const switchToSignUp = () => {
 const switchToSignIn = () => {
   isSignUpMode.value = false;
 };
-
+const route = useRoute()
+const source = route.query.source as string
+console.log(source)
 </script>
 <template>
+  <SocialIndex v-if="source !== undefined"/>
   <div :class="['container', { 'sign-up-mode': isSignUpMode }]">
     <BgColorChange02/>
     <div>
