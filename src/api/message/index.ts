@@ -16,7 +16,9 @@ export function deleteMessage(ids: string | Array<string>) {
 }
 
 /** @desc 标记已读 */
-export function readMessage(ids?: string | Array<string>) {
+// List<String> ids
+
+export function readMessage(ids: string | Array<string>) {
   return axios.patch(`${BASE_URL}/read`, ids)
 }
 

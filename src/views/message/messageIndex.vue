@@ -37,7 +37,7 @@
         <div class="simplebar-scrollbar simplebar-visible" style="height: 0px; display: none;"></div>
       </div>
     </div>
-    <a class="dropdown-box-button secondary" style="cursor: pointer;">查看全部消息</a>
+    <a class="dropdown-box-button secondary" style="cursor: pointer;" @click="readAll">查看全部消息</a>
   </div>
 </template>
 
@@ -69,7 +69,7 @@ const getMessageData = async () => {
 }
 // 全部已读
 const readAll = async () => {
-  await readMessage()
+  await readMessage(userId)
   await getMessageData()
   emit('readall-success')
 }
@@ -136,7 +136,7 @@ onMounted(() => {
 }
 
 .dropdown-box-list {
-  height: 250px;
+  height: 300px;
   overflow-y: auto;
 }
 

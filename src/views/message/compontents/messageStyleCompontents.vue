@@ -36,7 +36,17 @@ const props = defineProps<{  messageList }>();
 .body{
   display: flex;
   justify-content: center;
+  overflow-y: scroll;
+  height: 250px;
+  -ms-overflow-style: none;  /* 适用于IE和Edge */
+  scrollbar-width: none; /* 适用于Firefox */
 }
+
+/* 隐藏滚动条 */
+.body::-webkit-scrollbar {
+  display: none; /* 适用于WebKit浏览器（如Chrome、Safari） */
+}
+
 /*.container {*/
 /*  position: relative;*/
 /*  top: -8rem;*/

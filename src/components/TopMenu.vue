@@ -24,8 +24,12 @@
         <div v-else style="display: flex; ">
           <a-popover
               v-model:open="postpush"
-              :getPopupContainer="(triggerNode) => triggerNode.parentNode" trigger="focus">
-            <a-button type="text" style="margin-right:10px;">发布</a-button>
+              :getPopupContainer="(triggerNode) => triggerNode.parentNode" trigger="click">
+            <a-badge style="margin-right:10px;">
+              <a-avatar shape="square" size="large" style="font-size: 12px">
+                发布
+              </a-avatar>
+            </a-badge>
             <template #content>
               <EditArticle/>
             </template>
@@ -34,7 +38,11 @@
 
           <a-popover v-model:open="visible" :getPopupContainer="(triggerNode) => triggerNode.parentNode"
                      trigger="click">
-            <a-button type="text" style="margin-right:10px;">设置</a-button>
+            <a-badge style="margin-right:10px;">
+              <a-avatar shape="square" size="large" style="font-size: 12px">
+                设置
+              </a-avatar>
+            </a-badge>
             <template #content>
               <UserCaozuo :user="userInfo"/>
             </template>
@@ -43,9 +51,11 @@
 
           <a-popover v-model:open="message"
                      :getPopupContainer="(triggerNode) => triggerNode.parentNode" trigger="click">
-            <a-button style="margin-right:10px;" type="text">
-              <icon-font class="icon svg" type="icon-xiaoxi"/>
-            </a-button>
+            <a-badge :dot="show" style="margin-right:10px;">
+              <a-avatar shape="square" size="large">
+                <icon-font class="icon svg" type="icon-xiaoxi"/>
+              </a-avatar>
+            </a-badge>
             <template #content>
               <MessageIndex @readall-success="getMessageCount"/>
             </template>
@@ -78,7 +88,7 @@ const IconFont = createFromIconfontCN({
 const postpush = ref<boolean>(false);
 const message = ref<boolean>(false);
 const visible = ref<boolean>(false);
-
+const show = ref<boolean>(false);
 //导航菜单动态加载
 const menuItems = ref([
   {id: "1", label: '首页', url: '/index', expanded: false},
@@ -188,7 +198,12 @@ const initWebSocket = (token: string) => {
 // 查询未读消息数量
 const getMessageCount = async () => {
   const {data} = await getUnreadMessageCount()
-  unreadMessageCount.value = data.total
+  unreadMessageCount.value = data.data.total
+  if (data.data.total > 0) {
+    show.value = true;
+  }else {
+    show.value = false;
+  }
   const token = getToken()
   if (token) {
     initWebSocket(token)
