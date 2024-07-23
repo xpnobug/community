@@ -159,7 +159,7 @@ onBeforeUnmount(() => {
 const unreadMessageCount = ref(0)
 // 初始化 WebSocket
 const initWebSocket = (token: string) => {
-  socket = new WebSocket(`ws://127.0.0.1:8070/websocket?token=${token}`)
+  socket = new WebSocket(`wss://api.reaicc.com/websocket?token=${token}`)
   socket.onopen = () => {
     console.log('WebSocket connection opened')
   }
