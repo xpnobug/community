@@ -21,7 +21,9 @@
           <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
             <div class="simplebar-content-wrapper" style="height: 100%; overflow: hidden;">
               <div class="simplebar-content"  style="padding: 0px;">
-                <SystemCompontents :messageList="messageList" />
+<!--                <SystemCompontents v-if="messageList.length !== 0" :messageList="messageList" />-->
+                <MessageStyleCompontents v-if="loading" :messageList="messageList"/>
+                <a-empty v-else description="暂无数据" />
               </div>
             </div>
           </div>
@@ -43,6 +45,7 @@
 import {ref, reactive, onMounted} from "vue";
 import {listMessage, MessageResp, readMessage} from "@/api";
 import SystemCompontents from "@/views/message/compontents/systemCompontents.vue";
+import MessageStyleCompontents from "@/views/message/compontents/messageStyleCompontents.vue";
 const emit = defineEmits<{
   (e: 'readall-success'): void
 }>()
@@ -50,13 +53,18 @@ const emit = defineEmits<{
 const messageList = ref<MessageResp[]>()
 const loading = ref(false)
 // 查询消息数据
+const userId = localStorage.getItem('userId');
 const getMessageData = async () => {
   try {
     loading.value = true
-    const { data } = await listMessage(false)
+    const { data } = await listMessage(false,userId)
     messageList.value = data.data
+    if(messageList.value?.length > 0){
+      loading.value = true
+    }else {
+      loading.value = false
+    }
   } finally {
-    loading.value = false
   }
 }
 // 全部已读
@@ -76,7 +84,7 @@ onMounted(() => {
   width: 320px;
   /*padding-bottom: 60px;*/
   border-radius: 10px;
-  background-color: #fff;
+  background-color:#f8f8f8;
   box-shadow: 3px 5px 40px 0 rgba(94, 92, 154, 0.06);
   /*position: relative;*/
 }
@@ -120,7 +128,7 @@ onMounted(() => {
   display: flex;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 28px 28px 20px;
+  padding: 15px 15px 15px;
 }
 
 .dropdown-box-header  {

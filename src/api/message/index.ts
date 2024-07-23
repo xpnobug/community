@@ -1,14 +1,12 @@
 import type * as System from '@/api/type'
 import axios from "@/request/axios";
-import {MessageQuery} from "@/api/type";
-import * as Auth from "@/api/auth/type";
 
 const BASE_URL = '/message'
 
 /** @desc 查询消息列表 */
-export function listMessage(isRead: boolean) {
-  return axios.get<System.MessageResp>(`${BASE_URL}`,{
-    params: {isRead}
+export function listMessage(isRead: boolean, userId: string) {
+  return axios.get<System.MessageResp>(`${BASE_URL}`, {
+    params: {isRead,userId}
   })
 }
 

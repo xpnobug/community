@@ -25,25 +25,29 @@
           <a-popover
               v-model:open="postpush"
               :getPopupContainer="(triggerNode) => triggerNode.parentNode" trigger="focus">
-            <a-button type="primary" style="margin-right:10px;">发布</a-button>
+            <a-button type="text" style="margin-right:10px;">发布</a-button>
             <template #content>
               <EditArticle/>
             </template>
           </a-popover>
 
-          <a-popover v-model:open="message"
-                     :getPopupContainer="(triggerNode) => triggerNode.parentNode" trigger="click">
-            <a-button style="margin-right:10px;" type="primary">消息</a-button>
-            <template #content>
-              <MessageIndex @readall-success="getMessageCount"/>
-            </template>
-          </a-popover>
 
           <a-popover v-model:open="visible" :getPopupContainer="(triggerNode) => triggerNode.parentNode"
                      trigger="click">
-            <a-button type="primary" style="margin-right:10px;">设置</a-button>
+            <a-button type="text" style="margin-right:10px;">设置</a-button>
             <template #content>
               <UserCaozuo :user="userInfo"/>
+            </template>
+          </a-popover>
+
+
+          <a-popover v-model:open="message"
+                     :getPopupContainer="(triggerNode) => triggerNode.parentNode" trigger="click">
+            <a-button style="margin-right:10px;" type="text">
+              <icon-font class="icon svg" type="icon-xiaoxi"/>
+            </a-button>
+            <template #content>
+              <MessageIndex @readall-success="getMessageCount"/>
             </template>
           </a-popover>
         </div>
@@ -66,7 +70,11 @@ import SearchComponents from "@/components/search/searchComponents.vue";
 import MessageIndex from "@/views/message/messageIndex.vue";
 import {getToken} from "@/utils/auth";
 import {getUnreadMessageCount} from "@/api";
-
+import {createFromIconfontCN} from "@ant-design/icons-vue";
+// SVG 图标
+const IconFont = createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/c/font_1898478_6kwgvtuqt0b.js',
+});
 const postpush = ref<boolean>(false);
 const message = ref<boolean>(false);
 const visible = ref<boolean>(false);
