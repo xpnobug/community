@@ -8,7 +8,7 @@ import { useDefer } from "@/hooks/useDefer.js";
 const defer = useDefer();
 //svg图标
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_yweqmtyzqoa.js',
+  scriptUrl: '//at.alicdn.com/t/c/font_1898478_6kwgvtuqt0b.js',
 });
 
 const tagList = ref([

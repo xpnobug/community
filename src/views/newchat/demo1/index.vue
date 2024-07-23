@@ -237,7 +237,8 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue';
-import {message} from "ant-design-vue"; // 导入 Vue 3 的组合式 API
+import {message} from "ant-design-vue";
+import {getToken} from "@/utils/auth"; // 导入 Vue 3 的组合式 API
 
 const isRightSideExpanded = ref(true); // 定义一个响应式变量，表示右侧栏是否展开
 const toggleRightSide = () => {
@@ -276,10 +277,11 @@ const scrollToBottom = () => {
     }
   });
 };
-
+const token = getToken()
 // 组件挂载时执行的逻辑
 onMounted(() => {
-  socket = new WebSocket('wss://api.reaicc.com/websocket'); // 替换为你的 WebSocket URL
+  socket = new WebSocket('ws://127.0.0.1:8070/websocket?token='+token); // 替换为你的 WebSocket URL
+  // socket = new WebSocket('wss://api.reaicc.com/websocket'); // 替换为你的 WebSocket URL
 
   // WebSocket 连接打开时的回调
   socket.onopen = () => {

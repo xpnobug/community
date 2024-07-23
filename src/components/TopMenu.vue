@@ -22,15 +22,25 @@
         <SearchComponents/>
         <el-button v-if="sfLogin === false" style="margin-right:10px;" type="primary" @click="login">登录</el-button>
         <div v-else style="display: flex; ">
-          <a-popover v-model:open="postpush"
-                     trigger="focus">
+          <a-popover
+              v-model:open="postpush"
+              :getPopupContainer="(triggerNode) => triggerNode.parentNode" trigger="focus">
             <a-button type="primary" style="margin-right:10px;">发布</a-button>
             <template #content>
               <EditArticle/>
             </template>
           </a-popover>
 
-          <a-popover v-model:open="visible" trigger="click">
+          <a-popover v-model:open="message"
+                     :getPopupContainer="(triggerNode) => triggerNode.parentNode" trigger="click">
+            <a-button style="margin-right:10px;" type="primary">消息</a-button>
+            <template #content>
+              <MessageIndex @readall-success="getMessageCount"/>
+            </template>
+          </a-popover>
+
+          <a-popover v-model:open="visible" :getPopupContainer="(triggerNode) => triggerNode.parentNode"
+                     trigger="click">
             <a-button type="primary" style="margin-right:10px;">设置</a-button>
             <template #content>
               <UserCaozuo :user="userInfo"/>
@@ -45,8 +55,7 @@
 </template>
 
 <script lang="ts" setup>
-import {getCurrentInstance, onMounted, reactive, ref, watchEffect} from 'vue'
-import BgColorChange from "@/components/bgColor/BgColorChange.vue";
+import {getCurrentInstance, onBeforeUnmount, onMounted, reactive, ref, watchEffect} from 'vue'
 import {useRouter} from "vue-router";
 import {isLogin} from "@/api/user";
 import UserCaozuo from "@/components/Setting/UserCaozuo.vue";
@@ -54,15 +63,19 @@ import {useUserInfo} from "@/hooks/useCached";
 import EditArticle from "@/components/Setting/EditArticle.vue";
 import BgColorChange02 from "@/components/bgColor/BgColorChange02.vue";
 import SearchComponents from "@/components/search/searchComponents.vue";
+import MessageIndex from "@/views/message/messageIndex.vue";
+import {getToken} from "@/utils/auth";
+import {getUnreadMessageCount} from "@/api";
 
 const postpush = ref<boolean>(false);
+const message = ref<boolean>(false);
 const visible = ref<boolean>(false);
 
 //导航菜单动态加载
 const menuItems = ref([
-  { id: "1", label: '首页', url: '/index', expanded: false },
-  { id: "2", label: '社区', url: '/dynamic', expanded: false},
-  { id: "3", label: '版块', url: '/pages/aboutus', expanded: false },
+  {id: "1", label: '首页', url: '/index', expanded: false},
+  {id: "2", label: '社区', url: '/dynamic', expanded: false},
+  {id: "3", label: '版块', url: '/pages/aboutus', expanded: false},
   // { id: "5", label: '频道', url: '/pages/aboutus', expanded: false },
 ]);
 const router = useRouter();
@@ -105,15 +118,7 @@ const updatePMView = () => {
   }
   emit();
 }
-//页面渲染前
-onMounted(() => {
-      updatePMView() // 初始化
-      // 增加window监听
-      window.addEventListener('resize', () => {
-        screenWidth.screenWidth = window?.innerWidth
-      })
-    }
-)
+
 watchEffect(() => {
   if (screenWidth.screenWidth >= 768) {
     if (pmView.value)
@@ -141,8 +146,57 @@ const updateMenuDJ = () => {
 
 const login = () => {
   //跳转页面
-  router.push({ path: '/login'})
+  router.push({path: '/login'})
 }
+
+let socket: WebSocket
+onBeforeUnmount(() => {
+  if (socket) {
+    socket.close()
+  }
+})
+
+const unreadMessageCount = ref(0)
+// 初始化 WebSocket
+const initWebSocket = (token: string) => {
+  socket = new WebSocket(`ws://127.0.0.1:8070/websocket?token=${token}`)
+  socket.onopen = () => {
+    console.log('WebSocket connection opened')
+  }
+
+  socket.onmessage = (event) => {
+    unreadMessageCount.value = Number.parseInt(event.data)
+  }
+
+  socket.onerror = () => {
+    // console.error('WebSocket error:', error)
+  }
+
+  socket.onclose = () => {
+    // console.log('WebSocket connection closed')
+  }
+}
+
+// 查询未读消息数量
+const getMessageCount = async () => {
+  const {data} = await getUnreadMessageCount()
+  unreadMessageCount.value = data.total
+  const token = getToken()
+  if (token) {
+    initWebSocket(token)
+  }
+}
+
+//页面渲染前
+onMounted(() => {
+      getMessageCount()
+      updatePMView() // 初始化
+      // 增加window监听
+      window.addEventListener('resize', () => {
+        screenWidth.screenWidth = window?.innerWidth
+      })
+    }
+)
 </script>
 
 <style scoped>

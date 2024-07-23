@@ -14,7 +14,7 @@ import SocialIndex from "@/views/login/social/socialIndex.vue";
 
 // SVG 图标
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_yweqmtyzqoa.js',
+  scriptUrl: '//at.alicdn.com/t/c/font_1898478_6kwgvtuqt0b.js',
 });
 
 // 表单状态接口
