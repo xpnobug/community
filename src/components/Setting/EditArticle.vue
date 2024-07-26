@@ -1,27 +1,34 @@
 <template>
-  <div data-v-4d901bbe="" class="class-fication class-fications snipcss-kwgzs" style="opacity: 1; transition: all 0.5s ease 0s; margin: 10px;">
-    <div data-v-4d901bbe="" class="class-fication-title snipcss0-1-1-2">
-      <div data-v-4d901bbe="" class="class-fication-type snipcss0-2-2-3">选择发布类型</div>
-      <div data-v-4d901bbe="" class="class-fication-drafts snipcss0-2-2-4">草稿箱（<span data-v-4d901bbe="" class="snipcss0-3-4-5">0</span>）</div>
+  <div class="class-fication class-fications"
+       style="opacity: 1; transition: all 0.5s ease 0s; margin: 10px;">
+    <div class="class-fication-title">
+      <div class="class-fication-type">选择发布类型</div>
+      <div class="class-fication-drafts">草稿箱（<span>0</span>）</div>
     </div>
-    <ul data-v-4d901bbe="" class="class-fication-box snipcss0-1-1-6">
-      <li data-v-4d901bbe="" class="snipcss0-2-6-7" @click="pushPost('dt')">
-        <div data-v-4d901bbe="" class="top snipcss0-3-7-8"><svg data-v-4d901bbe="" class="option-item-icon icon-status snipcss0-4-8-9">
-          <use data-v-4d901bbe="" xlink:href="#svg-status" class="snipcss0-5-9-10"></use>
-        </svg></div>
-        <div data-v-4d901bbe="" class="bottom snipcss0-3-7-11">动态</div>
+    <ul class="class-fication-box">
+      <li @click="pushPost('dt')">
+        <div class="top">
+          <svg class="option-item-icon icon-status">
+            <use xlink:href="#svg-status"></use>
+          </svg>
+        </div>
+        <div class="bottom">动态</div>
       </li>
-      <li data-v-4d901bbe="" class="snipcss0-2-6-12" @click="pushPost('tz')">
-        <div data-v-4d901bbe="" class="top snipcss0-3-12-13"><svg data-v-4d901bbe="" class="option-item-icon icon-blog-posts snipcss0-4-13-14">
-          <use data-v-4d901bbe="" xlink:href="#svg-blog-posts" class="snipcss0-5-14-15"></use>
-        </svg></div>
-        <div data-v-4d901bbe="" class="bottom snipcss0-3-12-16"> 帖子 </div>
+      <li @click="pushPost('tz')">
+        <div class="top">
+          <svg class="option-item-icon icon-blog-posts">
+            <use xlink:href="#svg-blog-posts"></use>
+          </svg>
+        </div>
+        <div class="bottom"> 帖子</div>
       </li>
-      <li data-v-4d901bbe="" class="snipcss0-2-6-17" @click="pushPost('video')">
-        <div data-v-4d901bbe="" class="top snipcss0-3-17-18"><svg data-v-4d901bbe="" class="option-item-icon icon-videos snipcss0-4-18-19">
-          <use data-v-4d901bbe="" xlink:href="#svg-videos" class="snipcss0-5-19-20"></use>
-        </svg></div>
-        <div data-v-4d901bbe="" class="bottom snipcss0-3-17-21" >视频</div>
+      <li @click="pushPost('video')">
+        <div class="top">
+          <svg class="option-item-icon icon-videos">
+            <use xlink:href="#svg-videos"></use>
+          </svg>
+        </div>
+        <div class="bottom">视频</div>
       </li>
     </ul>
   </div>
@@ -52,11 +59,11 @@ const router = useRouter();
   background-color: #337fff;
 }
 
-[data-v-4d901bbe]:selection {
+:selection {
   background-color: #337fff;
 }
 
-.class-fication-title[data-v-4d901bbe]  {
+.class-fication-title {
   margin-top: -10px;
   display: flex;
   justify-content: space-between;
@@ -80,23 +87,23 @@ ul {
   margin-bottom: 1em;
 }
 
-.class-fication-box[data-v-4d901bbe]  {
+.class-fication-box {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 0;
 }
 
-.class-fication-title .class-fication-type[data-v-4d901bbe]  {
+.class-fication-title .class-fication-type {
   color: #d4d4d4;
 }
 
-.class-fication-title .class-fication-drafts[data-v-4d901bbe]  {
+.class-fication-title .class-fication-drafts {
   color: #3e3f5e;
   cursor: pointer;
 }
 
-.class-fication-box li[data-v-4d901bbe]  {
+.class-fication-box li {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -104,11 +111,11 @@ ul {
   margin-right: 24px;
 }
 
-.class-fication-box li[data-v-4d901bbe]:last-child  {
+.class-fication-box li:last-child {
   margin-right: 0;
 }
 
-.class-fication-box li .top[data-v-4d901bbe]  {
+.class-fication-box li .top {
   display: flex;
   width: 48px;
   height: 48px;
@@ -118,25 +125,25 @@ ul {
   opacity: .85;
 }
 
-.class-fication-box li:first-child .top[data-v-4d901bbe]  {
-  background: rgba(80,139,254,.1);
+.class-fication-box li:first-child .top {
+  background: rgba(80, 139, 254, .1);
 }
 
-.class-fication-box li .bottom[data-v-4d901bbe]  {
+.class-fication-box li .bottom {
   white-space: nowrap;
   margin-top: 18px;
   font-size: 14px;
-  color: rgba(0,0,0,.88);
+  color: rgba(0, 0, 0, .88);
   text-align: center;
   line-height: 1;
 }
 
-.class-fication-box li:nth-child(2) .top[data-v-4d901bbe]  {
-  background: rgba(250,173,20,.1);
+.class-fication-box li:nth-child(2) .top {
+  background: rgba(250, 173, 20, .1);
 }
 
-.class-fication-box li:nth-child(3) .top[data-v-4d901bbe]  {
-  background: rgba(255,77,79,.1);
+.class-fication-box li:nth-child(3) .top {
+  background: rgba(255, 77, 79, .1);
 }
 
 svg {
@@ -157,13 +164,13 @@ svg:not(:root) {
   overflow: hidden;
 }
 
-.class-fication-box li .top .option-item-icon[data-v-4d901bbe]  {
+.class-fication-box li .top .option-item-icon {
   width: 20px;
   height: 20px;
   fill: #fff;
 }
 
-.class-fication-box li:first-child .top .option-item-icon[data-v-4d901bbe]  {
+.class-fication-box li:first-child .top .option-item-icon {
   fill: #31a0ff;
 }
 
@@ -173,7 +180,7 @@ svg:not(:root) {
   height: 20px;
 }
 
-.class-fication-box li:nth-child(2) .top .option-item-icon[data-v-4d901bbe]  {
+.class-fication-box li:nth-child(2) .top .option-item-icon {
   fill: #ff9a02;
 }
 
@@ -183,7 +190,7 @@ svg:not(:root) {
   height: 20px;
 }
 
-.class-fication-box li:nth-child(3) .top .option-item-icon[data-v-4d901bbe]  {
+.class-fication-box li:nth-child(3) .top .option-item-icon {
   fill: #fd434f;
 }
 </style>

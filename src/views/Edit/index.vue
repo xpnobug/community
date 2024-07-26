@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import Upload from "./compontents/upload.vue";
-import {getCurrentInstance, reactive, ref, watch} from "vue";
+import {getCurrentInstance, reactive, ref, watch,watchEffect} from "vue";
 import {add} from "@/api/article";
 import {message} from "ant-design-vue";
 import CascaderCom from "@/views/Edit/compontents/CascaderCom.vue";
@@ -9,10 +9,15 @@ import {MdEditor} from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import {useRoute, useRouter} from "vue-router";
 
+// 创建响应式对象 state
 const state = reactive({
   text: '',
-  theme: ''
+  theme: localStorage.getItem("theme") === 'dark' ? 'dark' : 'light'
 });
+
+// 监听 localStorage 的变化，并更新 state.theme 中的值
+watch(() => localStorage.getItem("theme"), (newTheme) => state.theme = newTheme);
+
 const instance = getCurrentInstance()
 
 interface FormState {
@@ -108,6 +113,10 @@ watch(() => route.params.type, (newVal, oldVal) => {
 const router = useRouter();
 const userId = localStorage.getItem('userId');
 const addPost = () => {
+  if (formState.content === "") {
+    message.error("内容不能为空");
+    return
+  }
   formState.userId = userId;
   formState.tag = type.value;
   add(formState).then(res => {
@@ -131,7 +140,7 @@ const onFinishFailed = (errorInfo: any) => {
 <template>
   <div class="contenter">
     <div id="release-box" class="contenter-box">
-      <div>
+      <div style="margin: 15px;">
         <div class="contenter">
           <div class="ant-spin-nested-loading">
             <div class="ant-spin-container">
@@ -170,45 +179,46 @@ const onFinishFailed = (errorInfo: any) => {
 
                   <div class="set-up">
                     <div class="more-set-box" style="padding-bottom: 0px;" v-if="type === 'tz'">
-                      <div class="more-item new-release">
-                        <div class="title">
-                          <div class="set-icon">
-                            <svg class="section-menu-item-icon icon-group choose-icon" style="fill: rgb(51, 127, 255);">
-                              <use xlink:href="#svg-photos"></use>
-                            </svg>
-                          </div>
-                          <div> 封面 <p class="explain">推荐尺寸大于等于785*440，jpeg格式，支持大图封面形式</p>
-                          </div>
-                        </div>
-                        <div class="select-forum-btn ant-select ant-select-enabled" tabindex="0">
-                          <div aria-autocomplete="list" aria-controls="46b3fb0d-c021-4f3d-a6da-2288b4614049"
-                               aria-haspopup="true" class="ant-select-selection ant-select-selection--single"
-                               role="combobox">
-                            <div class="ant-select-selection__rendered">
-                              <div class="ant-select-selection-selected-value" style="display: block; opacity: 1;"
-                                   title="大封面">大封面
-                              </div>
-                            </div>
-                            <span class="ant-select-arrow" style="user-select: none;" unselectable="on"><i
-                                aria-label="icon: down" class="anticon anticon-down ant-select-arrow-icon"><svg
-                                aria-hidden="true" class="" data-icon="down" fill="currentColor" focusable="false"
-                                height="1em" viewBox="64 64 896 896" width="1em">
-                                                                    <path
-                                                                        d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
-                                                                </svg></i></span>
-                          </div>
-                        </div>
-                      </div>
+                      <!--                      <div class="more-item new-release">-->
+                      <!--                        <div class="title">-->
+                      <!--                          <div class="set-icon">-->
+                      <!--                            <svg class="section-menu-item-icon icon-group choose-icon" style="fill: rgb(51, 127, 255);">-->
+                      <!--                              <use xlink:href="#svg-photos"></use>-->
+                      <!--                            </svg>-->
+                      <!--                          </div>-->
+                      <!--                          <div> 封面 <p class="explain">推荐尺寸大于等于785*440，jpeg格式，支持大图封面形式</p>-->
+                      <!--                          </div>-->
+                      <!--                        </div>-->
+                      <!--                        <div class="select-forum-btn ant-select ant-select-enabled" tabindex="0">-->
+                      <!--                          <div aria-autocomplete="list" aria-controls="46b3fb0d-c021-4f3d-a6da-2288b4614049"-->
+                      <!--                               aria-haspopup="true" class="ant-select-selection ant-select-selection&#45;&#45;single"-->
+                      <!--                               role="combobox">-->
+                      <!--                            <div class="ant-select-selection__rendered">-->
+                      <!--                              <div class="ant-select-selection-selected-value" style="display: block; opacity: 1;"-->
+                      <!--                                   title="大封面">大封面-->
+                      <!--                              </div>-->
+                      <!--                            </div>-->
+                      <!--                            <span class="ant-select-arrow" style="user-select: none;" unselectable="on"><i-->
+                      <!--                                aria-label="icon: down" class="anticon anticon-down ant-select-arrow-icon"><svg-->
+                      <!--                                aria-hidden="true" class="" data-icon="down" fill="currentColor" focusable="false"-->
+                      <!--                                height="1em" viewBox="64 64 896 896" width="1em">-->
+                      <!--                                                                    <path-->
+                      <!--                                                                        d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>-->
+                      <!--                                                                </svg></i></span>-->
+                      <!--                          </div>-->
+                      <!--                        </div>-->
+                      <!--                      </div>-->
+                      <div>封面</div>
                       <upload :handleClick="parentClick"/>
                     </div>
                     <div class="more-set-box" style="padding-bottom: 0px;" v-if="type !== 'dt'">
                       <div class="more-item new-release">
                         <div class="title">
-                          <div class="set-icon">
-                            <svg class="section-menu-item-icon icon-group choose-icon" style="fill: rgb(51, 127, 255);">
-                              <use xlink:href="#svg-group"></use>
-                            </svg>
-                          </div>
+                          <!--                          <div class="set-icon">-->
+                          <!--                            <svg class="section-menu-item-icon icon-group choose-icon" style="fill: rgb(51, 127, 255);">-->
+                          <!--                              <use xlink:href="#svg-group"></use>-->
+                          <!--                            </svg>-->
+                          <!--                          </div>-->
                           <div> 发布版块 <p class="explain">选择内容发布的目标版块，支持选择版块和分类</p>
                           </div>
                         </div>
@@ -219,11 +229,11 @@ const onFinishFailed = (errorInfo: any) => {
                     <div class="more-set-box" style="padding-bottom: 0px;" v-if="type !== 'dt'">
                       <div class="more-item new-release">
                         <div class="title">
-                          <div class="set-icon">
-                            <svg class="quick-post-footer-action-icon icon-tags" style="fill: rgb(51, 127, 255);">
-                              <use xlink:href="#svg-tags"></use>
-                            </svg>
-                          </div>
+                          <!--                          <div class="set-icon">-->
+                          <!--                            <svg class="quick-post-footer-action-icon icon-tags" style="fill: rgb(51, 127, 255);">-->
+                          <!--                              <use xlink:href="#svg-tags"></use>-->
+                          <!--                            </svg>-->
+                          <!--                          </div>-->
                           <div> 话题 <p class="explain">选择或创建一个话题</p>
                           </div>
                         </div>
@@ -234,8 +244,9 @@ const onFinishFailed = (errorInfo: any) => {
                     <div class="more-set-box" style="padding-bottom: 0px;" v-if="type !== 'dt'">
                       <div class="more-item new-release">
                         <div class="title">
-                          <div class="set-icon"><span class="iconfont icon-mention at-btn"
-                                                      style="color: rgb(51, 127, 255);"></span></div>
+<!--                          <div class="set-icon">-->
+<!--                            <span class="iconfont icon-mention at-btn"-->
+<!--                                                      style="color: rgb(51, 127, 255);"></span></div>-->
                           <div> @好友 <p class="explain">选择你关注的好友</p>
                           </div>
                         </div>
@@ -245,11 +256,11 @@ const onFinishFailed = (errorInfo: any) => {
                     <div class="more-set-box" style="padding-bottom: 0px;" v-if="type !== 'dt'">
                       <div class="more-item new-release">
                         <div class="title">
-                          <div class="set-icon">
-                            <svg class="quick-post-footer-action-icon icon-tags" style="fill: rgb(51, 127, 255);">
-                              <use xlink:href="#svg-paperclip"></use>
-                            </svg>
-                          </div>
+<!--                          <div class="set-icon">-->
+<!--                            <svg class="quick-post-footer-action-icon icon-tags" style="fill: rgb(51, 127, 255);">-->
+<!--                              <use xlink:href="#svg-paperclip"></use>-->
+<!--                            </svg>-->
+<!--                          </div>-->
                           <div> 附件 <p class="explain">请选择一个附件</p>
                           </div>
                         </div>
@@ -464,13 +475,9 @@ const onFinishFailed = (errorInfo: any) => {
   transition: opacity .4s ease-in-out, visibility .4s ease-in-out;
 }
 
-.contenter-box {
-  background-color: #f8f8f8;
-}
 
 .contenter-box {
   width: 100%;
-  margin: 0 auto;
   overflow: visible;
   position: relative;
 }
@@ -594,9 +601,11 @@ p {
 }
 
 .contenter {
-  background-color:var(--reaicc-meta-theme-post-color);
+  width: 1000px;
+  background-color: var(--reaicc-meta-theme-post-color);
   overflow: hidden;
   position: relative;
+  box-shadow: 0 0 40px #5e5c9a0f;
 }
 
 :selection {
@@ -631,29 +640,38 @@ p {
 
 
 .contenter .content {
-  width: 90%;
+  /*width: 90%;*/
   border-radius: 10px;
   background: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px rgba(94, 92, 154, .04);
-  margin: 25px auto 0;
-  padding-top: 30px;
+  /*margin: 25px auto 0;*/
+  /*padding-top: 30px;*/
   padding-bottom: 56px;
   position: relative;
 }
 /*设置手机端样式*/
 @media screen and (orientation: portrait) {
+  .contenter {
+    width: 100%;
+  }
+
   .contenter .content {
     width: 100%;
   }
+
+  .contenter .content .content-item {
+    padding: 0 !important;
+  }
+
+
+  .more-set-box {
+    border-radius: 12px;
+    background: var(--reaicc-meta-theme-post-color);
+    padding: 0 !important;
+  }
 }
 
-.contenter .content .content-item {
-  padding: 32px 64px;
-}
 
-.contenter .content .content-item.thread {
-  margin-top: 67px;
-}
 
 .header-contenter-footer {
   height: 56px;
@@ -682,7 +700,7 @@ p {
 .more-set-box {
   border-radius: 12px;
   background: var(--reaicc-meta-theme-post-color);
-  padding: 30px;
+  padding: 60px;
 }
 
 :selection {
@@ -729,6 +747,10 @@ p {
   /*flex-wrap: wrap;*/
   margin-right: -5px;
   margin-left: -5px;
+}
+
+.contenter .content .content-item {
+  padding: 32px 64px;
 }
 
 .contenter .content .content-item.thread .form-post-title {
@@ -1887,7 +1909,7 @@ textarea {
 
 .form-textarea textarea {
   font-size: 0.875rem;
-  padding: 26px 28px 0;
+  /*padding: 26px 28px 0;*/
 }
 
 .contenter .content .content-item #quick-post-text {

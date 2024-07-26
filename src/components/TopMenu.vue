@@ -61,7 +61,6 @@
             </template>
           </a-popover>
         </div>
-<!--        <BgColorChange/>-->
         <BgColorChange02/>
       </div>
     </div>
