@@ -22,14 +22,10 @@ jobs:
         with:
           node-version: 18.12
           cache: 'npm'
-          cache-dependency-path: ./pnpm-lock.yaml
-
-      - name: 安装pnpm
-        run: npm install -g pnpm
 
       # 装依赖
       - name: 安装依赖
-        run: pnpm i --frozen-lockfile
+        run: pnpm i
 
       # 打包
       - name: 打包
