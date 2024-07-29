@@ -7,10 +7,12 @@
         list-type="picture-card"
         @preview="handlePreview"
         @change="uploadChange"
+        :headers="headers"
     >
       <div v-if="fileList.length < 9">
 <!--        <plus-outlined />-->
-        <div style=" font-size: 50px;"> + </div>
+        <div> + </div>
+        <div> 上传图片 </div>
       </div>
     </a-upload>
 
@@ -20,7 +22,7 @@
 import { ref,defineProps } from 'vue';
 import type { UploadProps } from 'ant-design-vue';
 import {message} from "ant-design-vue";
-
+import {uploadFile} from "@/api/upload";
 function getBase64(file: File) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -30,6 +32,7 @@ function getBase64(file: File) {
     reader.onerror = error => reject(error);
   });
 }
+const headers = {'Authorization': `Bearer ${localStorage.getItem('token')}`}
 
 const previewVisible = ref(false);
 const previewImage = ref('');

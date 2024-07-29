@@ -209,7 +209,7 @@ const onFinishFailed = (errorInfo: any) => {
                       <!--                        </div>-->
                       <!--                      </div>-->
                       <div>封面</div>
-                      <upload :handleClick="parentClick"/>
+                      <//at.alicdn.com/t/c/font_1898478_6kwgvtuqt0b.js:handleClick="parentClick"/>
                     </div>
                     <div class="more-set-box" style="padding-bottom: 0px;" v-if="type !== 'dt'">
                       <div class="more-item new-release">

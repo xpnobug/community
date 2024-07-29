@@ -7,6 +7,8 @@ import User from "../views/user/index.vue";
 import Login from "@/views/login/components/LoginComponents.vue";
 import Friends from "@/views/userPyq/index.vue";
 import Chat from "@/views/newchat/demo1/index.vue";
+import Channels from "@/views/channelbk/index.vue";
+
 
 /**
  * vue-router历史模式的问题： vue3中历史模式默认改为了HTML5模式：createWebHistory()
@@ -65,6 +67,11 @@ export default createRouter({
                     path: '/chat',
                     name: 'chat',
                     component: Chat,
+                },
+                {
+                    path: '/channels',
+                    name: 'channels',
+                    component: Channels,
                 },
 
                 {
