@@ -5,7 +5,7 @@
         <ul class="menu-ul">
           <!--      logo-->
           <div class="logo">
-            <img src="https://alist.reaicc.com/nas/image/png/2024-05/1/b0e02980-01dd-4700-b2aa-b16b4d8491a3.png" alt="">
+            <img src="../../public/logo.svg" alt="">
           </div>
           <li @click="updateMenuDJ">
 <!--            <el-icon>-->
