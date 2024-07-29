@@ -12,37 +12,26 @@ jobs:
   build: # 任务的job_id，具体名称自定义，这里build代表打包
     runs-on: ubuntu-latest # runs-on字段指定运行所需要的虚拟机环境。注意：这个是必填字段
     steps:
-      - uses: actions/checkout@v3
+      # 1、检出源码
+      - name: Checkout
+        uses: actions/checkout@master
 
-      # 安装node
-      - name: 安装node.js
+      # 2、安装 PNPM
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+      # 3、安装 Node 环境
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.12
-          cache: 'npm'
-      #缓存依赖
-      - name: 缓存依赖
-        uses: actions/checkout@v3
-        env:
-          cache-name: cache-node-modules
-        with:
-          # 需要缓存的文件的路径
-          path: ./node_modules
-          # 对缓存的文件指定的唯一标识
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./package.json') }}
-          # 用于没有再找目标key的缓存的backup选项
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      # 装依赖
-      - name: 安装pnpm
-        run: npm install -g pnpm
+          node-version: 18
+          cache: pnpm
+          cache-dependency-path: ./pnpm-lock.yaml
 
       # 装依赖
       - name: 安装依赖
-        run: pnpm install
+        run: pnpm i --frozen-lockfile
 
       # 打包
       - name: 打包
