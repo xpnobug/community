@@ -22,7 +22,6 @@ jobs:
         with:
           node-version: 18.12
           cache: 'pnpm'
-          cache-dependency-path: ./pnpm-lock.yaml
 
       # 装依赖
       - name: 安装依赖
