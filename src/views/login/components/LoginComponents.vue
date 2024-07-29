@@ -883,7 +883,7 @@ form.sign-in-form {
 
   .signin-signup {
     width: 100%;
-    top: 80%;
+    top: 85%;
     transform: translate(-50%, -100%);
     transition: 1s 0.8s ease-in-out;
   }
