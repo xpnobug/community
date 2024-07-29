@@ -1,11 +1,18 @@
-
 <script lang="ts" setup>
 import Sudoku from "@/views/user/components/Sudoku.vue";
-import { defineProps } from 'vue';
-import NavClickComponents from "@/components/csszujian/NavClickComponents.vue";
-const props = defineProps(['postInfo']);
+import {defineProps, ref, onMounted, onBeforeUnmount} from 'vue';
+import {isLogin} from '@/utils/auth'
+import {deleteById} from "@/api/article";
+import {message} from "ant-design-vue";
 
-const timeFromNow = (data) => {
+const userId = localStorage.getItem('userId');
+
+const props = defineProps<{
+  postInfo: any[];
+  showList: () => void;
+}>();
+
+const timeFromNow = (data: any) => {
   // data 转换为时间戳
   const date = new Date(data);
   const currentDate = new Date();
@@ -24,7 +31,7 @@ const timeFromNow = (data) => {
       return '昨天';
     }
     //如果时间大于七天，返回具体日期2024-01-01 00:00:00 格式
-    if (days > 7){
+    if (days > 7) {
       //Fri May 17 2024 00:14:21 GMT+0800 (中国标准时间) 转2024-01-01 00:14:21
       return date.toLocaleDateString().replace(/\//g, '-') + ' ' + date.toTimeString().substr(0, 8);
     }
@@ -54,24 +61,70 @@ const timeFromNow = (data) => {
   // 如果时间差小于或等于阈值（例如10秒），则返回“刚刚”
   return '刚刚';
 };
+
+const settingState = ref("");
+const handleClick = (val: any) => {
+  console.log(val)
+  settingState.value = val;
+};
+const handleOutsideClick = (event: any) => {
+  // 如果点击的元素在特定的区域之外，则将 settingState 设置为 false
+  if (!event.target.closest('.post-settings-wrap')) {
+    settingState.value = "";
+  }
+};
+
+const handelDel = (item: any) => {
+  deleteById(item).then((res) => {
+    if (res.status === 200) {
+      message.success("删除成功");
+      props.showList();
+    } else {
+      message.error("删除失败")
+    }
+  })
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleOutsideClick);
+});
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleOutsideClick);
+});
 </script>
 
 
 <template>
-  <div class="widget-box no-padding content" v-for="item in props.postInfo" style="margin-bottom: 15px">
+  <div class="widget-box no-padding content" v-for="item in props.postInfo"
+       style="margin-bottom: 15px">
     <div class="widget-box-settings" style="z-index: 100;">
-      <div class="post-settings-wrap" style="display: none;">
+      <div class="post-settings-wrap">
         <div style="position: relative;">
-          <div>
-            <div class="post-settings widget-box-post-settings-dropdown-trigger">
-              <svg class="post-settings-icon icon-more-dots">
-                <use xlink:href="#svg-more-dots"></use>
-              </svg>
+          <div :class="{ active: item.articleId === settingState}">
+            <div class="post-settings widget-box-post-settings-dropdown-trigger"
+                 @click="handleClick(item.articleId)">
+              。。。
             </div>
           </div>
           <div
-              style="position: absolute; z-index: 9999; top: 44px; right: -6px; opacity: 0; visibility: hidden; transform: translate(0px, -40px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
-            <div class="simple-dropdown">
+              style="position: absolute; z-index: 9999; top: 44px; right: -6px; opacity: 0; visibility: hidden; transform: translate(0px, -40px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;"
+              :style="{opacity: item.articleId === settingState ? 1 : 0, visibility: item.articleId === settingState ? 'visible' : 'hidden', transform: item.articleId === settingState ? 'translate(0px, 0px)' : 'translate(0px, -40px)'}">
+            <div class="simple-dropdown" v-if="isLogin() && userId === item.userId">
+              <p class="simple-dropdown-link"> 置顶 </p>
+              <p class="simple-dropdown-link">
+                <a-popconfirm
+                    cancel-text="No"
+                    ok-text="Yes"
+                    title="确定删除?"
+                    @confirm="handelDel(item.articleId)"
+                >
+                  删除
+                </a-popconfirm>
+              </p>
+              <p class="simple-dropdown-link"> 修改 </p>
+            </div>
+
+            <div class="simple-dropdown" v-else>
               <p class="simple-dropdown-link"> 收藏 </p>
               <p class="simple-dropdown-link"> 举报 </p>
             </div>
@@ -83,56 +136,69 @@ const timeFromNow = (data) => {
     <div class="widget-box-status">
       <div class="widget-box-status-content">
         <div class="user-status" style="position: relative;">
-          <div class="xm-header user-avatar" style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
-            <div class="xm-avatar" style="width: 44px; height: 44px; padding: 6.4px;"><img :src=item.avatar alt="头像" class="" style="border-radius: 50%;"></div>
+          <div class="xm-header user-avatar"
+               style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
+            <div class="xm-avatar" style="width: 44px; height: 44px; padding: 6.4px;"><img
+                :src=item.avatar alt="头像" class="" style="border-radius: 50%;"></div>
             <svg style="width: 44px; height: 44px;" viewBox="0 0 100 100">
               <defs>
-                <linearGradient id="svg23138011-be37-4e64-bd28-75c13aa9289a" x1="0%" x2="100%" y1="0%" y2="0%">
+                <linearGradient id="svg23138011-be37-4e64-bd28-75c13aa9289a" x1="0%" x2="100%"
+                                y1="0%" y2="0%">
                   <stop offset="0%"></stop>
                   <stop offset="100%"></stop>
                 </linearGradient>
               </defs>
-              <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0" stroke="#e9e9f0"
+              <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
+                    stroke="#e9e9f0"
                     stroke-width="8"></path>
               <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"
-                    fill-opacity="0" stroke="url(#svg23138011-be37-4e64-bd28-75c13aa9289a)" stroke-width="8"
+                    fill-opacity="0" stroke="url(#svg23138011-be37-4e64-bd28-75c13aa9289a)"
+                    stroke-width="8"
                     :style="{strokeDasharray: item.exp +',287'}"></path>
             </svg>
             <div v-if="item.exp >= 0  " class="xm-level"
                  style="box-sizing: content-box; font-size: 10px; width: 15px; height: 15px; border: 2px solid rgb(255, 255, 255);">
               <span style="display: block;">{{ item.level }}</span>
             </div>
-            <div v-if="item.exp >= 10 && item.exp < 100" class="xm-level" style="background: transparent;">
+            <div v-if="item.exp >= 10 && item.exp < 100" class="xm-level"
+                 style="background: transparent;">
               <img
                   src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS"
                   style="width: 18px; height: 18px;">
             </div>
           </div>
-          <p class="user-status-title medium"><span class="bold" style="cursor: pointer; color: rgb(251, 91, 90);">
-            {{item.author }}
+          <p class="user-status-title medium"><span class="bold"
+                                                    style="cursor: pointer; color: rgb(251, 91, 90);">
+            {{ item.author }}
           </span></p>
-          <p class="user-status-text small">{{ timeFromNow(item.publishDate) }} <span> · 未知</span></p>
-          <div class="cad" style="right: 0px;"></div>
+          <p class="user-status-text small">{{ timeFromNow(item.publishDate) }} <span> · 未知</span>
+          </p>
+          <div class="cad" style="right: 0px;">
+            <!--            <span>置顶</span>-->
+          </div>
           <p></p>
         </div>
       </div>
       <div v-if="item.tag !== 'dt'" class="post-preview medium" style="margin: 16px 28px 0px;">
         <a :href="/post/+item.articleId" class="post-preview-link">
-          <figure :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}"
-                  class="post-preview-image post-preview-info"
-                  style="margin: 0px auto !important;  border-image: initial; border-top-left-radius: 12px; border-top-right-radius: 12px; box-shadow: none; cursor: pointer;">
+          <figure
+              :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}"
+              class="post-preview-image post-preview-info"
+              style="margin: 0px auto !important;  border-image: initial; border-top-left-radius: 12px; border-top-right-radius: 12px; box-shadow: none; cursor: pointer;">
             <img :src=item.coverImage alt="图片" style="display: none;">
           </figure>
         </a>
         <div class="post-preview-info with-cover" style="margin-top: 0px;">
           <p></p>
-          <p class="post-preview-title text-long-ellipsis ellipsis" style="display: inline-block; width: 100%;">
+          <p class="post-preview-title text-long-ellipsis ellipsis"
+             style="display: inline-block; width: 100%;">
             {{ item.title }}
           </p>
           <p class="post-preview-text ellipsis ellipsis-content-cover">{{ item.content }}</p>
           <div>
             <a :href="/post/+item.articleId" class="post-preview-link">
-              <svg style="width: 16px; height: 16px; margin: -2px 5px 0px 0px; fill: rgb(51, 127, 255);">
+              <svg
+                  style="width: 16px; height: 16px; margin: -2px 5px 0px 0px; fill: rgb(51, 127, 255);">
                 <use xlink:href="#svg-md-open"></use>
               </svg>
               查看全文
@@ -141,12 +207,14 @@ const timeFromNow = (data) => {
         </div>
       </div>
       <div v-if="item.tag === 'dt'" class="post-preview medium" style="margin: 16px 28px 0px;">
-        <p class="widget-box-status-text feed-summary" style="margin-top: 0px;"> {{item.content}} </p>
+        <p class="widget-box-status-text feed-summary" style="margin-top: 0px;">
+          {{ item.content }} </p>
         <Sudoku :imgList="item.imgList"/>
       </div>
       <div class="widget-box-status-content">
         <div class="tag-list">
-          <div class="topic-forum-box"><a class="tag-item secondary" style="margin-top: 16px;">产品共创</a></div>
+          <div class="topic-forum-box"><a class="tag-item secondary"
+                                          style="margin-top: 16px;">产品共创</a></div>
           <div class="to-detail" style="margin-top: 16px; flex-grow: 1; text-align: right;">
             <a :href="/post/+item.articleId"
                class="to-detail"
@@ -157,7 +225,9 @@ const timeFromNow = (data) => {
           <div class="content-action">
             <div class="meta-line">
               <div class="meta-line-list reaction-item-list">
-                <div class="reaction-item"><img alt="reaction-like" class="reaction-image" src="https://pc.opensns.cn/img/reaction/like.png"></div>
+                <div class="reaction-item"><img alt="reaction-like" class="reaction-image"
+                                                src="https://pc.opensns.cn/img/reaction/like.png">
+                </div>
               </div>
               <div style="margin-left: 5px;"></div>
               <p class="meta-line-text" style="margin-left: 5px;"> {{ item.likeCount }} 人点赞 </p>
@@ -171,29 +241,29 @@ const timeFromNow = (data) => {
         </div>
       </div>
     </div>
-<!--    <div class="post-options">-->
-<!--      <div class="post-option-wrap">-->
-<!--        <div class="post-option">-->
-<!--          <svg class="post-option-icon icon-thumbs-up">-->
-<!--            <use xlink:href="#svg-thumbs-up"></use>-->
-<!--          </svg>-->
-<!--          <p class="post-option-text">点赞</p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="post-option">-->
-<!--        <svg class="post-option-icon icon-comment">-->
-<!--          <use xlink:href="#svg-comment"></use>-->
-<!--        </svg>-->
-<!--        <p class="post-option-text">0 评论</p>-->
-<!--      </div>-->
-<!--      <div class="post-option">-->
-<!--        <svg class="post-option-icon icon-share">-->
-<!--          <use xlink:href="#svg-share"></use>-->
-<!--        </svg>-->
-<!--        <p class="post-option-text">分享</p>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <NavClickComponents/>-->
+    <!--    <div class="post-options">-->
+    <!--      <div class="post-option-wrap">-->
+    <!--        <div class="post-option">-->
+    <!--          <svg class="post-option-icon icon-thumbs-up">-->
+    <!--            <use xlink:href="#svg-thumbs-up"></use>-->
+    <!--          </svg>-->
+    <!--          <p class="post-option-text">点赞</p>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="post-option">-->
+    <!--        <svg class="post-option-icon icon-comment">-->
+    <!--          <use xlink:href="#svg-comment"></use>-->
+    <!--        </svg>-->
+    <!--        <p class="post-option-text">0 评论</p>-->
+    <!--      </div>-->
+    <!--      <div class="post-option">-->
+    <!--        <svg class="post-option-icon icon-share">-->
+    <!--          <use xlink:href="#svg-share"></use>-->
+    <!--        </svg>-->
+    <!--        <p class="post-option-text">分享</p>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <NavClickComponents/>-->
   </div>
 </template>
 
@@ -202,13 +272,14 @@ const timeFromNow = (data) => {
   .post-preview.medium .post-preview-info {
     height: 180px !important;
   }
+
   .content:nth-child(odd) {
-    transform: translateX(0%)!important;
+    transform: translateX(0%) !important;
   }
 
   /* 偶数盒子 */
   .content:nth-child(even) {
-    transform: translateX(-0%)!important;
+    transform: translateX(-0%) !important;
   }
 }
 
@@ -685,7 +756,7 @@ figure {
   padding: 28px;
   margin: -48px auto 0;
   border-radius: 12px;
-  background-color:var(--reaicc-meta-theme-post-color);
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 3px 5px 40px 0 rgba(94, 92, 154, 0.1);
 }
 
@@ -766,7 +837,6 @@ figure {
   font-size: 80%;
   font-weight: 400;
 }
-
 
 
 .user-status .user-status-text {
@@ -1238,6 +1308,10 @@ a:active, a:hover {
   font-weight: 700;
   cursor: pointer;
   transition: color .2s ease-in-out, padding-left .2s ease-in-out;
+}
+
+.simple-dropdown .simple-dropdown-link:hover {
+  color: #0a84ff;
 }
 
 .xm-avatar img {

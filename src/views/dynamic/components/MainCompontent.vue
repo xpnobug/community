@@ -53,14 +53,12 @@ const showList = () => {
     page.maxPage = res.data.maxPage;
     page.minPage = res.data.minPage;
     page.pageSize = res.data.pageSize;
-    //.slice((page.currentPage - 1) * page.pageSize, page.currentPage * page.pageSize)
     postList.value = res.data.data;
     initLoading.value = false;
     store.setLoading(false);
   })
 }
 showList();
-
 const current = ref(1);
 const initLoading = ref(true);
 const loading = ref(false);
@@ -187,10 +185,10 @@ function scrollCategoryBarToRight() {
             <a-empty v-else :description="null" />
           </div>
         </template>
-        <PostInfoList :postInfo="postList"/>
+        <PostInfoList :postInfo="postList" :showList="showList"/>
       </a-list>
       <div :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }">
-        <a-spin tip="Loading..."  v-show="loading === true"/>
+        <a-spin tip="Loading..."  v-show="loading"/>
       </div>
 
       <!--      <div class="widget-box no-padding post-card content" video-height="0"-->

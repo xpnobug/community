@@ -62,7 +62,7 @@ const toUserInfo = (item: any) => {
   justify-content: space-between;
   color: #fff;
   align-content: space-between;
-  height: 416px;
+  height: 360px;
   margin-bottom: 16px;
   position: relative;
 }
@@ -116,7 +116,7 @@ const toUserInfo = (item: any) => {
   position: relative;
   border-radius: 12px;
   width: 100%;
-  height: 200px;
+  height: 170px;
   background-size: 100% 100%;
   background-color: rgba(207, 208, 218, .2);
   overflow: hidden;

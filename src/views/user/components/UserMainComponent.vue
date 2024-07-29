@@ -179,7 +179,7 @@ const handleTag = (value: any) => {
           <a-empty v-else :description="null" />
         </div>
       </template>
-      <PostInfoList :postInfo="postList"/>
+      <PostInfoList :postInfo="postList" :showList="showList"/>
     </a-list>
     <div :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }">
       <a-spin tip="Loading..."  v-show="loading === true"/>

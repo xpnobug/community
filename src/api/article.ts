@@ -83,10 +83,9 @@ interface idList  {
 }
 
 export function deleteById(idList: string) {
-    return axios.delete(`${BASE_URL}/delete`, {
-        data: idList,
-        headers: {
-            'Content-Type': 'application/json' // 明确指定内容类型为 JSON
+    return axios.delete(`${BASE_URL}/delete`,{
+        params: {
+            idList: idList,
         }
     })
 }
