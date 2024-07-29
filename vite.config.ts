@@ -42,10 +42,12 @@ export default defineConfig({
     // })
   ],
   server: {
+    // 服务启动时是否自动打开浏览器
+    open: true,
     proxy: {
       '/api': {
-        target: 'http://182.92.201.19:8070',
-        // target: 'http://127.0.0.1:8070',
+        // target: 'http://182.92.201.19:8070',
+        target: 'http://127.0.0.1:8070',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
@@ -56,7 +58,7 @@ export default defineConfig({
       //   rewrite: (path) => path.replace(/^\/music/, ''),
       // },
     },
-    port: 5174
+    port: 5173
   },
   resolve: {
     alias: {
@@ -70,27 +72,28 @@ export default defineConfig({
       "@plugins": path.resolve(__dirname, "src/plugins"),
     },
   },
+  // 构建
   build: {
-    outDir: "dist",
-    assetsDir: "assets", //指定静态资源存放路径
-    minify: 'terser', // 使用Terser压缩JavaScript
+    chunkSizeWarningLimit: 2000, // 消除打包大小超过500kb警告
+    outDir: 'dist', // 指定打包路径，默认为项目根目录下的dist目录
+    minify: 'terser', // Vite 2.6.x 以上需要配置 minify："terser"，terserOptions才能生效
     terserOptions: {
-      // 生产环境移除console
       compress: {
-        drop_console: true,
-        drop_debugger: true,
+        keep_infinity: true, // 防止 Infinity 被压缩成 1/0，这可能会导致 Chrome 上的性能问题
+        drop_console: true, // 生产环境去除 console
+        drop_debugger: true // 生产环境去除 debugger
       },
+      format: {
+        comments: false // 删除注释
+      }
     },
-    // 浏览器兼容性配置
-    target: 'esnext',
-    // 产物拆包配置
+    // 静态资源打包到dist下的不同目录
     rollupOptions: {
       output: {
-        // 控制 chunk 的生成和命名
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
-        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
+        chunkFileNames: 'static/js/[name]-[hash].js',
+        entryFileNames: 'static/js/[name]-[hash].js',
+        assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
       }
     }
-  },
+  }
 })
