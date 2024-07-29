@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.12
-          cache: 'pnpm'
+          cache: 'npm'
 
       # 装依赖
       - name: 安装依赖
