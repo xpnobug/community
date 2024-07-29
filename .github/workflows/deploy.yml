@@ -14,19 +14,14 @@ jobs:
     steps:
       # 1、检出源码
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
-      # 2、安装 PNPM
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
-      # 3、安装 Node 环境
-      - name: Setup Node
+      # 安装node
+      - name: 安装node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
-          cache: pnpm
+          node-version: 18.12
+          cache: 'pnpm'
           cache-dependency-path: ./pnpm-lock.yaml
 
       # 装依赖
