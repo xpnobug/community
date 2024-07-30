@@ -220,7 +220,7 @@ html {
 
 .table .table-row  {
   display: table-row;
-  background-color: #fff;
+  background-color: var(--reaicc-meta-theme-post-color);
   height: 100px;
 }
 
@@ -466,7 +466,7 @@ img {
   max-width: 150px;
   font-size: 18px;
   font-weight: 600;
-  color: rgba(0,0,0,.85);
+  color: var(--reaicc-fontcolor);
   line-height: 25px;
 }
 
@@ -487,7 +487,7 @@ img {
 
 .circle-summary {
   font-size: 14px;
-  color: rgba(0,0,0,.85);
+  color: var(--reaicc-fontcolor);
   line-height: 20px;
 }
 

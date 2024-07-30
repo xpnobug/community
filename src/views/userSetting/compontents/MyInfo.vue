@@ -411,7 +411,7 @@ h2 {
 
 .user-preview {
   border-radius: 12px;
-  background-color: #fff;
+  background-color:var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
   cursor: pointer;
 }

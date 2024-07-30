@@ -303,7 +303,7 @@ const delFollows = (item: any) => {
 
 .user-preview {
   border-radius: 12px;
-  background-color: #fff;
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
   cursor: pointer;
 }
@@ -549,7 +549,7 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6, a, p {
-  color: #3e3f5e;
+  color: var(--reaicc-fontcolor);
   font-family: "Rajdhani", sans-serif;
   line-height: 1em;
 }
@@ -565,7 +565,7 @@ h1, h2, h3, h4, h5, h6, p, ol, ul, figure, .table, .form-row {
 .user-short-description-text {
   height: 12px;
   font-size: 12px;
-  color: #3e3f5e;
+  color: var(--reaicc-fontcolor);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

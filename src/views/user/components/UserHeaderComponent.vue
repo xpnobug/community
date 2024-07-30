@@ -168,7 +168,7 @@ const addFollows = (item: any) => {
 
 .profile-header {
   border-radius: 12px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: rgba(94, 92, 154, 0.06) 0px 0px 40px 0px;
 }
 
@@ -385,7 +385,7 @@ p {
 }
 
 p {
-  color: rgb(62, 63, 94);
+  color: var(--reaicc-fontcolor);
   font-family: Rajdhani, sans-serif;
   line-height: 1em;
 }
@@ -407,7 +407,7 @@ p {
   display: inline-block;
   height: 48px;
   border-radius: 10px;
-  background-color: rgb(62, 63, 94);
+  background-color: var(--reaicc-fontcolor);
   color: rgb(255, 255, 255);
   font-size: 0.875rem;
   font-weight: 700;

@@ -214,7 +214,7 @@ p {
 }
 
 p {
-  color: rgb(62, 63, 94);
+  color: var(--reaicc-fontcolor);
   font-family: Rajdhani, sans-serif;
   line-height: 1em;
 }
@@ -288,7 +288,7 @@ a {
 }
 
 a {
-  color: rgb(62, 63, 94);
+  color: var(--reaicc-fontcolor);
   font-family: Rajdhani, sans-serif;
   line-height: 1em;
 }
@@ -385,7 +385,7 @@ svg:not(:root) {
 }
 
 .user-status .user-status-title  {
-  color: rgb(62, 63, 94);
+  color: var(--reaicc-fontcolor);
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.42857em;
@@ -486,7 +486,7 @@ p a  {
 }
 
 .user-status .user-status-title .bold  {
-  color: rgb(62, 63, 94);
+  color: var(--reaicc-fontcolor);
   font-weight: 600;
   -webkit-font-smoothing: antialiased;
 }
@@ -735,7 +735,7 @@ figure > img  {
 .xm-tooltip-text {
   padding: 0px 12px;
   border-radius: 200px;
-  background-color: rgb(62, 63, 94);
+  background-color: var(--reaicc-fontcolor);
   color: rgb(255, 255, 255);
   font-size: 0.75rem;
   font-weight: 700;

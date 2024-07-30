@@ -1528,7 +1528,7 @@ ul {
 
 .header-contenter-footer .header-contenter .header-contenter-left .more-settings > .set {
   font-size: 14px;
-  color: rgba(0, 0, 0, .85);
+  color: var(--reaicc-fontcolor);
   margin-right: 9px;
 }
 

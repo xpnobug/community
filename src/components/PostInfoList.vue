@@ -419,7 +419,7 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fcfcfd;
+  background: var(--reaicc-meta-theme-post-color);
   z-index: 100;
   cursor: pointer;
 }

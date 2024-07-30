@@ -95,11 +95,10 @@ const handleTag = (value:any) => {
   justify-content: space-between;
   -ms-flex-align: center;
   align-items: center;
-  height: 96px;
   padding: 0 28px;
   border-radius: 12px;
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
-  background-color: #fff;
+  background-color: var(--reaicc-meta-theme-post-color);
 }
 
 
@@ -525,7 +524,7 @@ img, svg {
     margin: 25px;
   }
 
-  .user-preview[data-v-a2cc93aa] {
+  .user-preview{
     margin-bottom: 16px;
   }
 }

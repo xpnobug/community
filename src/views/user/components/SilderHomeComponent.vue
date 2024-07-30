@@ -114,7 +114,7 @@ a {
 }
 
 a {
-  color: rgb(62, 63, 94);
+  color: var(--reaicc-fontcolor);
   font-family: Rajdhani, sans-serif;
   line-height: 1em;
 }
@@ -215,7 +215,7 @@ p {
 }
 
 p {
-  color: rgb(62, 63, 94);
+  color: var(--reaicc-fontcolor);
   font-family: Rajdhani, sans-serif;
   line-height: 1em;
 }
@@ -235,7 +235,7 @@ p {
 
 .section-menu .section-menu-item .section-menu-item-text {
   width: 100%;
-  color: rgb(62, 63, 94);
+  color: var(--reaicc-fontcolor);
   font-size: 0.875rem;
   font-weight: 700;
   text-align: center;
@@ -258,7 +258,7 @@ p {
 }
 
 .section-menu .section-menu-item.active .section-menu-item-text {
-  color: rgb(62, 63, 94);
+  color: var(--reaicc-fontcolor);
 }
 
 .section-menu .section-menu-item .section-menu-item-text {
@@ -282,7 +282,7 @@ p {
 }
 
 .section-menu .section-menu-item.active .section-menu-item-text {
-  color: rgb(62, 63, 94);
+  color: var(--reaicc-fontcolor);
 }
 
 .section-menu .section-menu-item.active .section-menu-item-text {

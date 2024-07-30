@@ -409,7 +409,7 @@ const handleTag = (value: any) => {
   flex-wrap: nowrap;
   width: 100%;
   border-radius: 12px;
-  background: #fcfcfd;
+  background:var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
   padding: 0 40px;
   position: relative;
@@ -476,7 +476,7 @@ const handleTag = (value: any) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fcfcfd;
+  background: var(--reaicc-meta-theme-post-color);
   z-index: 100;
   cursor: pointer;
 }
