@@ -4,6 +4,7 @@ import {defineProps, ref, onMounted, onBeforeUnmount} from 'vue';
 import {isLogin} from '@/utils/auth'
 import {deleteById} from "@/api/article";
 import {message} from "ant-design-vue";
+import {useRouter} from "vue-router";
 
 const userId = localStorage.getItem('userId');
 
@@ -83,6 +84,10 @@ const handelDel = (item: any) => {
       message.error("删除失败")
     }
   })
+}
+const router = useRouter();
+const toPostInfo = (item: any) => {
+  router.push({path: '/post/' + item.articleId})
 }
 
 onMounted(() => {
@@ -180,7 +185,7 @@ onBeforeUnmount(() => {
         </div>
       </div>
       <div v-if="item.tag !== 'dt'" class="post-preview medium" style="margin: 16px 28px 0px;">
-        <a :href="/post/+item.articleId" class="post-preview-link">
+        <a @click="toPostInfo(item)" class="post-preview-link">
           <figure
               :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}"
               class="post-preview-image post-preview-info"
@@ -190,13 +195,13 @@ onBeforeUnmount(() => {
         </a>
         <div class="post-preview-info with-cover" style="margin-top: 0px;">
           <p></p>
-          <p class="post-preview-title text-long-ellipsis ellipsis"
+          <p @click="toPostInfo(item)" class="post-preview-title text-long-ellipsis ellipsis"
              style="display: inline-block; width: 100%;">
             {{ item.title }}
           </p>
           <p class="post-preview-text ellipsis ellipsis-content-cover">{{ item.content }}</p>
           <div>
-            <a :href="/post/+item.articleId" class="post-preview-link">
+            <a @click="toPostInfo(item)" class="post-preview-link">
               <svg
                   style="width: 16px; height: 16px; margin: -2px 5px 0px 0px; fill: rgb(51, 127, 255);">
                 <use xlink:href="#svg-md-open"></use>
@@ -216,7 +221,7 @@ onBeforeUnmount(() => {
           <div class="topic-forum-box"><a class="tag-item secondary"
                                           style="margin-top: 16px;">产品共创</a></div>
           <div class="to-detail" style="margin-top: 16px; flex-grow: 1; text-align: right;">
-            <a :href="/post/+item.articleId"
+            <a @click="toPostInfo(item)"
                class="to-detail"
             >查看详情</a>
           </div>
