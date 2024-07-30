@@ -305,7 +305,7 @@ figure > img {
   width: 140px;
   padding: 10px 0px;
   border-radius: 12px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: rgba(94, 92, 154, 0.12) 0px 0px 40px 0px;
 }
 
