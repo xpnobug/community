@@ -34,9 +34,10 @@ service.interceptors.response.use(
       // 如果响应状态码是200，则直接返回响应
       if (response.status === 200) {
         if (response.data.code === 401) {
-          message.error(response.data.message);
+          // message.error(response.data.message);
           localStorage.removeItem('token');
           localStorage.removeItem('userInfo');
+          localStorage.setItem("userId",'null');
         } else if (response.data.code === 403) {
           message.error('没有权限');
         }
