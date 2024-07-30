@@ -2,7 +2,7 @@
   <a-cascader v-model:value="value" :change="handleChange(value)" :options="options" placeholder="请选择"/>
 </template>
 <script lang="ts" setup>
-import {ref,defineProps} from 'vue';
+import {ref, defineProps, inject, watch} from 'vue';
 import type {CascaderProps} from 'ant-design-vue';
 
 const props = defineProps({
@@ -61,6 +61,12 @@ const value = ref<string[]>([]);
 const handleChange = (value: string[]) => {
   props.handleClick(value[1])
 }
-
+const option = inject('optionForm');
+// 监听 option 的变化
+watch(option, (newValue) => {
+  if (newValue) {
+    value.value = ['首页', newValue];
+  }
+}, { immediate: true });
 </script>
 

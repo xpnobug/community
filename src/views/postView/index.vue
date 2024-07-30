@@ -16,11 +16,13 @@ const scrollElement = document.documentElement;
 
 //获取地址栏中id
 const route = useRoute();
-const ids = route.params.id;
+// const ids = route.params.articleId;
+const articleId = route.query.articleId;
+
 const postInfo = ref([]);
 const store = inject('store');
 store.setLoading(true);
-selectOne(ids).then(res => {
+selectOne(articleId).then(res => {
   postInfo.value = res.data.data
   console.log(postInfo.value)
   store.setLoading(false);
@@ -38,9 +40,11 @@ selectOne(ids).then(res => {
               class="ant-breadcrumb-link"><a class="link nuxt-link-active"
                                              href="/">社区</a></span><span
               class="ant-breadcrumb-separator">/</span></span><span class=""><span
-              class="ant-breadcrumb-link"><a class="link" href="/forum?id=7"> 运营干货 </a></span><span
+              class="ant-breadcrumb-link"><a class="link"
+                                             href="/forum?id=7"> 运营干货 </a></span><span
               class="ant-breadcrumb-separator">/</span></span><span class=""><span
-              class="ant-breadcrumb-link">正文</span><span class="ant-breadcrumb-separator">/</span></span></div>
+              class="ant-breadcrumb-link">正文</span><span class="ant-breadcrumb-separator">/</span></span>
+          </div>
         </div>
       </div>
       <div class="oprate">
@@ -73,51 +77,51 @@ selectOne(ids).then(res => {
       <a href="#comment" style="display: none;"></a>
       <div class="about">
         <div class="about-container">
-<!--          <div class="forum-container about-container-box" style="height: 315px;">-->
-<!--            <figure class="forum-container-background user-preview-cover"-->
-<!--                    style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5d5771c92ac3d1625714373?imageMogr2/crop/568x140/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);">-->
-<!--              <img alt="图片"-->
-<!--                   src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5d5771c92ac3d1625714373?imageMogr2/crop/568x140/gravity/center"-->
-<!--                   style="display: none;"></figure>-->
-<!--            <a class="" href="/forum?id=7">-->
-<!--              <div class="xm-header user-avatar forum-container-head user-short-description-avatar"-->
-<!--                   style="width: 90px; height: 90px; border: 9px solid rgb(255, 255, 255); cursor: pointer; border-radius: 12px;">-->
-<!--                <div class="xm-avatar" style="padding: 11px;"><img alt="头像"-->
-<!--                                                                   class="img-full"-->
-<!--                                                                   src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5e058460bc75d1625714318?imageMogr2/crop/196x196/gravity/center"-->
-<!--                                                                   style="border-radius: 12px;">-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </a> <a class="" href="/forum?id=7">-->
-<!--            <div class="forum-container-title" style="cursor: pointer;"><span-->
-<!--            >运营干货</span></div>-->
-<!--          </a>-->
-<!--            <div class="forum-container-describe"> 社群运营经验交流</div>-->
-<!--            <a class="" href="/forum?id=7">-->
-<!--              <div class="forum-container-msg user-stats">-->
-<!--                <div class="user-stat">-->
-<!--                  <p class="user-stat-title">506</p>-->
-<!--                  <p class="user-stat-text">内容</p>-->
-<!--                </div>-->
-<!--                <div class="user-stat">-->
-<!--                  <p class="user-stat-title">397</p>-->
-<!--                  <p class="user-stat-text">成员</p>-->
-<!--                </div>-->
-<!--                <div class="user-stat">-->
-<!--                  <p class="user-stat-title">7</p>-->
-<!--                  <p class="user-stat-text">精华</p>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </a>-->
-<!--            <hr style="margin-bottom: 12px;">-->
-<!--            <div class="forum-container-button user-preview-actions">-->
-<!--              <p class="button btn">-->
-<!--                <svg class="icon button-icon icon-join-group">-->
-<!--                  <use xlink:href="#svg-join-group"></use>-->
-<!--                </svg>-->
-<!--                <span class="text"> &nbsp;加入版块 </span></p>-->
-<!--            </div>-->
-<!--          </div>-->
+          <!--          <div class="forum-container about-container-box" style="height: 315px;">-->
+          <!--            <figure class="forum-container-background user-preview-cover"-->
+          <!--                    style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5d5771c92ac3d1625714373?imageMogr2/crop/568x140/gravity/center&quot;) center center / cover no-repeat rgb(255, 255, 255);">-->
+          <!--              <img alt="图片"-->
+          <!--                   src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5d5771c92ac3d1625714373?imageMogr2/crop/568x140/gravity/center"-->
+          <!--                   style="display: none;"></figure>-->
+          <!--            <a class="" href="/forum?id=7">-->
+          <!--              <div class="xm-header user-avatar forum-container-head user-short-description-avatar"-->
+          <!--                   style="width: 90px; height: 90px; border: 9px solid rgb(255, 255, 255); cursor: pointer; border-radius: 12px;">-->
+          <!--                <div class="xm-avatar" style="padding: 11px;"><img alt="头像"-->
+          <!--                                                                   class="img-full"-->
+          <!--                                                                   src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5e058460bc75d1625714318?imageMogr2/crop/196x196/gravity/center"-->
+          <!--                                                                   style="border-radius: 12px;">-->
+          <!--                </div>-->
+          <!--              </div>-->
+          <!--            </a> <a class="" href="/forum?id=7">-->
+          <!--            <div class="forum-container-title" style="cursor: pointer;"><span-->
+          <!--            >运营干货</span></div>-->
+          <!--          </a>-->
+          <!--            <div class="forum-container-describe"> 社群运营经验交流</div>-->
+          <!--            <a class="" href="/forum?id=7">-->
+          <!--              <div class="forum-container-msg user-stats">-->
+          <!--                <div class="user-stat">-->
+          <!--                  <p class="user-stat-title">506</p>-->
+          <!--                  <p class="user-stat-text">内容</p>-->
+          <!--                </div>-->
+          <!--                <div class="user-stat">-->
+          <!--                  <p class="user-stat-title">397</p>-->
+          <!--                  <p class="user-stat-text">成员</p>-->
+          <!--                </div>-->
+          <!--                <div class="user-stat">-->
+          <!--                  <p class="user-stat-title">7</p>-->
+          <!--                  <p class="user-stat-text">精华</p>-->
+          <!--                </div>-->
+          <!--              </div>-->
+          <!--            </a>-->
+          <!--            <hr style="margin-bottom: 12px;">-->
+          <!--            <div class="forum-container-button user-preview-actions">-->
+          <!--              <p class="button btn">-->
+          <!--                <svg class="icon button-icon icon-join-group">-->
+          <!--                  <use xlink:href="#svg-join-group"></use>-->
+          <!--                </svg>-->
+          <!--                <span class="text"> &nbsp;加入版块 </span></p>-->
+          <!--            </div>-->
+          <!--          </div>-->
           <MdCatalog :editorId="id" :scrollElement="scrollElement"/>
         </div>
       </div>
@@ -128,7 +132,7 @@ selectOne(ids).then(res => {
         <div class="content-container">
           <div class="container-head">
             <div class="heads">
-              <div class="text">{{ timeUtils.convertTime(postInfo.publishDate,true) }} · 未知</div>
+              <div class="text">{{ timeUtils.convertTime(postInfo.publishDate, true) }} · 未知</div>
               <div class="widget-box-settings" style="display: flex; flex-flow: row;">
                 <div style="position: relative;">
                   <div>
@@ -163,7 +167,8 @@ selectOne(ids).then(res => {
                 </div>
                 <svg style="width: 44px; height: 44px;" viewBox="0 0 100 100">
                   <defs>
-                    <linearGradient id="svgb281230d-24a6-44f9-9b1c-017d8f8df235" x1="0%" x2="100%" y1="0%"
+                    <linearGradient id="svgb281230d-24a6-44f9-9b1c-017d8f8df235" x1="0%" x2="100%"
+                                    y1="0%"
                                     y2="0%">
                       <stop offset="0%"></stop>
                       <stop offset="100%"></stop>
@@ -172,7 +177,8 @@ selectOne(ids).then(res => {
                   <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
                         stroke="#e9e9f0" stroke-width="8"></path>
                   <path :style="{strokeDasharray: postInfo.exp +',287'}"
-                        d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0" stroke="url(#svgb281230d-24a6-44f9-9b1c-017d8f8df235)"
+                        d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
+                        stroke="url(#svgb281230d-24a6-44f9-9b1c-017d8f8df235)"
                         stroke-width="8"></path>
                 </svg>
                 <div class="xm-level" style="background: transparent;">
@@ -185,14 +191,16 @@ selectOne(ids).then(res => {
                 <p class="user-status-title medium" style="width: 100%;">
                   <span class="bold"
                         href="profile-timeline.html"
-                        style="cursor: pointer; color: rgb(251, 91, 90);"> {{ postInfo.author }} </span>
+                        style="cursor: pointer; color: rgb(251, 91, 90);"> {{
+                      postInfo.author
+                    }} </span>
                 </p>
                 <p class="user-status-text small">技术总监</p>
               </div>
-<!--              <div class="action-request-list">-->
-<!--                <div class="action-request accept" v-if="postInfo.isFollow === false" @click="addFollows(user)"> +</div>-->
-<!--                <div class="action-request accept" v-else> √ </div>-->
-<!--              </div>-->
+              <!--              <div class="action-request-list">-->
+              <!--                <div class="action-request accept" v-if="postInfo.isFollow === false" @click="addFollows(user)"> +</div>-->
+              <!--                <div class="action-request accept" v-else> √ </div>-->
+              <!--              </div>-->
             </div>
             <div class="container-text w-e-text">
               <MdPreview :codeFoldable="false" :editorId="id" :modelValue="postInfo.content"/>
@@ -1332,7 +1340,7 @@ input:not([type="range"]) {
   width: 140px;
   padding: 10px 0;
   border-radius: 12px;
-  background-color:var(--reaicc-meta-theme-post-color);
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.12);
 }
 

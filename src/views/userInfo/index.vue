@@ -930,7 +930,7 @@ h2 {
 .widget-box {
   padding: 32px 28px;
   border-radius: 12px;
-  background-color: #fff;
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
   position: relative;
 }

@@ -19,10 +19,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref,defineProps } from 'vue';
+import { ref,defineProps, inject, onMounted } from 'vue';
 import type { UploadProps } from 'ant-design-vue';
 import {message} from "ant-design-vue";
-import {uploadFile} from "@/api/upload";
 function getBase64(file: File) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -38,7 +37,17 @@ const previewVisible = ref(false);
 const previewImage = ref('');
 const previewTitle = ref('');
 
+const props = defineProps({
+  handleClick: {
+    type: Function
+  },
+  imgLists: {
+    type: Function
+  }
+});
+// 初始化 fileList
 const fileList = ref<UploadProps['fileList']>([]);
+
 
 const handleCancel = () => {
   previewVisible.value = false;
@@ -54,14 +63,6 @@ const handlePreview = async (file: UploadProps['fileList'][number]) => {
 };
 
 
-const props = defineProps({
-  handleClick: {
-    type: Function
-  },
-  imgLists: {
-    type: Function
-  }
-})
 const list = ref<UploadProps['fileList']>([])
 function uploadChange({file}: { event?: ProgressEvent }) {
   const res = (file as XMLHttpRequest).response
@@ -77,7 +78,14 @@ function uploadChange({file}: { event?: ProgressEvent }) {
   }
   return file
 }
-
+const imgData = inject('imgFile');
+onMounted(() => {
+  if (imgData) {
+    fileList.value = [{ url: imgData }];
+  } else {
+    console.error("Injection 'imgFile' not found.");
+  }
+});
 
 </script>
 <style scoped>

@@ -85,12 +85,12 @@ export default createRouter({
                     component: () => import('@/views/userSetting/index.vue')
                 },
                 {
-                    path: '/release/:type',
+                    path: '/release',
                     name: 'release',
                     component: () => import('@/views/Edit/index.vue')
                 },
                 {
-                    path: '/post/:id',
+                    path: '/post',
                     name: 'post',
                     component: () => import('@/views/postView/index.vue')
                 },

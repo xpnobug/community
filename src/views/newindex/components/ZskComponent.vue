@@ -22,8 +22,8 @@ const productName = useDictionaryItem("home-product");
 watch(() => props.loadings, (newValue, oldValue) => {
 }, {immediate: true, deep: true})
 const router = useRouter();
-const toUserInfo = (item: any) => {
-  router.push({path: '/post/' + item.articleId})
+const toPostInfo = (item: any) => {
+  router.push({path: '/post', query: {articleId: item.articleId}})
 }
 </script>
 
@@ -37,7 +37,7 @@ const toUserInfo = (item: any) => {
             <a-empty v-if="leftPost.length === 0" :description="null" />
             <div v-if="props.loadings">
               <div v-for="info in leftPost.slice(0, 5)" class="content-box">
-                <a class="links" @click="toUserInfo(info)">
+                <a class="links" @click="toPostInfo(info)">
                   <div class="pictures">
                     <div class="class-ification">{{ info.tag }}</div>
                     <img :src="info.coverImage" alt="" style="width: 100%; height: 100%; border-radius: 8px;">
@@ -45,7 +45,7 @@ const toUserInfo = (item: any) => {
                 </a>
                 <div class="picture-box"
                      style="display: flex; flex-direction: column; justify-content: space-between;">
-                  <a class="links" style="display: block;" @click="toUserInfo(info)">
+                  <a class="links" style="display: block;" @click="toPostInfo(info)">
                     <div class="pictures-title" style="margin-bottom: 5px;">{{ info.title }}</div>
                     <div class="picture-content">{{ info.content }}</div>
                   </a>
@@ -82,10 +82,10 @@ const toUserInfo = (item: any) => {
                 <li v-for="item in rightPost.slice(0, 6)"
                     :key="item.id"
                     class="recommended-li">
-                  <a class="link" @click="toUserInfo(item)">
+                  <a class="link" @click="toPostInfo(item)">
                     <div class="recommended-contents">{{ item.content }}</div>
                   </a>
-                  <a class="" @click="toUserInfo(item)">
+                  <a class="" @click="toPostInfo(item)">
                     <div class="recommended-author">
                       <div class="author">
                         <div class="head-portrait">

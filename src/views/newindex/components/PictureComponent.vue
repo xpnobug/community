@@ -1,53 +1,31 @@
 <script setup lang="ts">
 import {ref, defineProps } from 'vue';
 const props = defineProps(['posts'])
-import type { SkeletonButtonProps, SkeletonAvatarProps } from 'ant-design-vue';
 import {useRouter} from "vue-router";
 
-const bannerList = ref([
-  {
-    id: "1",
-    image1: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/50ef8c69-f823-4414-be5d-25e581867902.jpg',
-    image2: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/f5cb6c26-f3bf-47f4-a6d0-c35c771f2c7a.jpg',
-    image3: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/e1d93718-3f0c-4994-984c-4359fa342cb5.jpg',
-    content1: '2023年LT-REAI团队年终总结',
-    content2: 'LT-REAIPC端功能『门户DIY』重磅更新，暨2.5.0测试版更新通告',
-    content3: '重要通知，需在2024年3月底前完成！附上微信小程序和APP的完整备案流程！',
-    state: true
-  }, {
-    id: "1",
-    image1: 'https://alist.reaicc.com/nas/image/jpeg/2024-04/1/50ef8c69-f823-4414-be5d-25e581867902.jpg',
-    image2: '',
-    image3: '',
-    content1: '',
-    content2: '',
-    content3: '',
-    state: 'true'
-  }
-]);
 const router = useRouter();
-const toUserInfo = (item: any) => {
-  router.push({path: '/post/' + item.articleId})
+const toPostInfo = (item: any) => {
+  router.push({path: '/post', query: {articleId: item.articleId}})
 }
 </script>
 <template>
   <div class="box" style="margin-bottom: 17px;">
     <div class="top" v-for="item in props.posts.slice(0,1)" :key="item.id">
 <!--      <a-skeleton-image active :shape="avatarShape" />-->
-      <div class="banner" @click="toUserInfo(item)"
+      <div class="banner" @click="toPostInfo(item)"
            :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}">
         <div class="content">
           <span>{{ item.title }}</span>
         </div>
       </div>
       <div class="identification"  v-for="item in props.posts.slice(1,2)" :key="item.id">
-        <div class="bg-picture" @click="toUserInfo(item)"
+        <div class="bg-picture" @click="toPostInfo(item)"
              :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}">
 
           <div class="content"><span>{{ item.title }}</span>
           </div>
         </div>
-        <div class="bg-picture" @click="toUserInfo(item)"  v-for="item in props.posts.slice(2,3)" :key="item.id"
+        <div class="bg-picture" @click="toPostInfo(item)"  v-for="item in props.posts.slice(2,3)" :key="item.id"
              :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}">
           <div class="content"><span>{{ item.title }}</span></div>
         </div>

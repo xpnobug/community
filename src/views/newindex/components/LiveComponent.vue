@@ -13,8 +13,8 @@ watch(()=>props.loadings,(newValue,oldValue)=>{
 },{immediate:true,deep:true})
 
 const router = useRouter();
-const toUserInfo = (item: any) => {
-  router.push({path: '/post/' + item.articleId})
+const toPostInfo = (item: any) => {
+  router.push({path: '/post', query: {articleId: item.articleId}})
 }
 </script>
 <template>
@@ -29,13 +29,13 @@ const toUserInfo = (item: any) => {
               <ul v-if="props.loadings" >
                 <li v-for="item in leftPost.slice(0,3)" :key="item.id">
                   <div class="picture"><!---->
-                    <a class="" @click="toUserInfo(item)" style="width: 100%; height: 100%; display: block;"><img
+                    <a class="" @click="toPostInfo(item)" style="width: 100%; height: 100%; display: block;"><img
                         :src="item.coverImage"
                         alt=""
                         style="width: 100%; height: 100%; border-radius: 8px;">
                     </a>
                   </div>
-                  <div class="picture-title"><a class="" @click="toUserInfo(item)">
+                  <div class="picture-title"><a class="" @click="toPostInfo(item)">
                     {{ item.title }}
                   </a></div>
                 </li>
@@ -48,13 +48,13 @@ const toUserInfo = (item: any) => {
               <ul v-if="props.loadings" >
                 <li v-for="item in leftPost.slice(3,6)" :key="item.id">
                   <div class="picture"><!---->
-                    <a class="" @click="toUserInfo(item)" style="width: 100%; height: 100%; display: block;"><img
+                    <a class="" @click="toPostInfo(item)" style="width: 100%; height: 100%; display: block;"><img
                         :src="item.coverImage"
                         alt=""
                         style="width: 100%; height: 100%; border-radius: 8px;">
                     </a>
                   </div>
-                  <div class="picture-title"><a class="" @click="toUserInfo(item)">
+                  <div class="picture-title"><a class="" @click="toPostInfo(item)">
                     {{ item.title }}
                   </a></div>
                 </li>
@@ -73,7 +73,7 @@ const toUserInfo = (item: any) => {
                 <ul v-if="props.loadings" >
                   <li v-for="(item,index) in rightPost" :key="item.articleId">
                     <div class="serial-no">{{ index+1 }}</div>
-                    <div class="serial-no-content"><a class="" @click="toUserInfo(item)">{{ item.content }}</a>
+                    <div class="serial-no-content"><a class="" @click="toPostInfo(item)">{{ item.content }}</a>
                     </div>
                   </li>
                 </ul>

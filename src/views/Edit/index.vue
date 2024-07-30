@@ -1,10 +1,9 @@
 <script lang="ts" setup>
 import Upload from "./compontents/upload.vue";
-import {getCurrentInstance, reactive, ref, watch, watchEffect} from "vue";
-import {add} from "@/api/article";
+import {getCurrentInstance, onMounted, provide, reactive, ref, watch} from "vue";
+import {add, selectOne} from "@/api/article";
 import {message} from "ant-design-vue";
 import CascaderCom from "@/views/Edit/compontents/CascaderCom.vue";
-
 import {MdEditor} from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import {useRoute, useRouter} from "vue-router";
@@ -87,6 +86,36 @@ const formState = reactive<FormState>({
   avatar: "",
   imgList: [],
 });
+//获取地址栏中id
+const route = useRoute();
+const type = ref();
+type.value = route.query.type;
+//监听type 是否变化
+watch(() => route.query.type, (newVal, oldVal) => {
+  type.value = newVal;
+})
+
+//如果地址栏参数为articleId
+const imgs = ref('');
+const optionValue = ref('');
+// 提前提供一个默认值
+provide('imgFile', imgs);
+provide('optionForm', optionValue);
+const fetchData = async () => {
+  try {
+    if (route.query.articleId) {
+      const res = await selectOne(route.query.articleId);
+      const data = res.data.data;
+      imgs.value = data.coverImage;
+      optionValue.value = data.publishPlatform;
+      Object.assign(formState, data);
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+fetchData();
+
 
 //接收子组件传递的数据
 const parentClick = (value) => {
@@ -99,15 +128,6 @@ const imgLists = (value) => {
 const cascaderChange = (value) => {
   formState.publishPlatform = value;
 }
-
-//获取地址栏中id
-const route = useRoute();
-const type = ref();
-type.value = route.params.type;
-//监听type 是否变化
-watch(() => route.params.type, (newVal, oldVal) => {
-  type.value = newVal;
-})
 
 //获取登录人信息
 const router = useRouter();
@@ -140,6 +160,7 @@ const onFinish = (values: any) => {
 const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo);
 };
+
 </script>
 
 <template>

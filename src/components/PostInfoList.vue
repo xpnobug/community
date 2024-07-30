@@ -75,6 +75,7 @@ const handleOutsideClick = (event: any) => {
   }
 };
 
+//刪除
 const handelDel = (item: any) => {
   deleteById(item).then((res) => {
     if (res.status === 200) {
@@ -85,9 +86,15 @@ const handelDel = (item: any) => {
     }
   })
 }
+//修改
+const handelEdit = (item: any) => {
+  //跳转到修改页面
+  router.push({path: '/release/', query: {articleId: item.articleId, type: item.tag}})
+}
+
 const router = useRouter();
 const toPostInfo = (item: any) => {
-  router.push({path: '/post/' + item.articleId})
+  router.push({path: '/post', query: {articleId: item.articleId}})
 }
 
 onMounted(() => {
@@ -126,7 +133,7 @@ onBeforeUnmount(() => {
                   删除
                 </a-popconfirm>
               </p>
-              <p class="simple-dropdown-link"> 修改 </p>
+              <p class="simple-dropdown-link" @click="handelEdit(item)"> 修改 </p>
             </div>
 
             <div class="simple-dropdown" v-else>

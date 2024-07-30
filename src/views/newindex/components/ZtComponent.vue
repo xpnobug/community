@@ -14,8 +14,8 @@ watch(() => props.loadings, (newValue, oldValue) => {
 }, {immediate: true, deep: true})
 
 const router = useRouter();
-const toUserInfo = (item: any) => {
-  router.push({path: '/post/' + item.articleId})
+const toPostInfo = (item: any) => {
+  router.push({path: '/post', query: {articleId: item.articleId}})
 }
 </script>
 
@@ -29,7 +29,7 @@ const toUserInfo = (item: any) => {
           <div class="right-content" :style="{display: leftPost.length === 0 ? 'block' : ''}">
             <a-empty v-if="leftPost.length === 0" :description="null" />
             <div class="subject-matter-text" v-if="props.loadings" v-for="item in leftPost.slice(0,1)"  >
-              <a class="link"  @click="toUserInfo(item)" style="line-height: 20px;">
+              <a class="link"  @click="toPostInfo(item)" style="line-height: 20px;">
                 <div class="picture"><!---->
                   <img :src="item.coverImage"
                        alt=""
@@ -50,7 +50,7 @@ const toUserInfo = (item: any) => {
                   <li v-for="item in leftPost.slice(1,12)">
                     <div class="explain" style="width: 34px;">{{ item.tag }}</div>
                     <div class="explain-content">
-                      <a class=""  @click="toUserInfo(item)">
+                      <a class=""  @click="toPostInfo(item)">
                         {{ item.title }}
                       </a></div>
                     <div class="author"><a class="" href="#">{{ item.author }}</a>
@@ -72,7 +72,7 @@ const toUserInfo = (item: any) => {
                 <li v-for="(item,index) in rightPost.slice(0,10)" :key="index">
                   <div class="serial-no">{{ index+1 }}</div>
                   <div class="serial-no-content">
-                    <a class=""  @click="toUserInfo(item)">
+                    <a class=""  @click="toPostInfo(item)">
                       {{ item.content }}
                     </a>
                   </div>

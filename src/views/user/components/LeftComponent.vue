@@ -199,14 +199,14 @@ getFollowList();
 .widget-box {
   padding: 32px 28px;
   border-radius: 12px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--reaicc-meta-theme-post-color);
   box-shadow: rgba(94, 92, 154, 0.06) 0px 0px 40px 0px;
   position: relative;
 }
 
 .widget-box .widget-box-content  {
   margin-top: 36px;
-  color: #1a1a1a;
+  color: var(--reaicc-fontcolor);
 }
 
 p {

@@ -394,7 +394,7 @@ p {
 
 .widget-box .widget-box-content {
   margin-top: 36px;
-  color: #1a1a1a;
+  color: var(--reaicc-fontcolor);
 }
 
 .filters {

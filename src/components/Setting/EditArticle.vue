@@ -38,10 +38,10 @@
 import {useRouter} from "vue-router";
 
 const router = useRouter();
- const pushPost = (val) => {
-   //跳转页面 path: '/post/:id',
-   router.push({ path: '/release/'+ val })
- }
+const pushPost = (val: any) => {
+  //跳转页面 path: '/post/:id',
+  router.push({path: '/release/', query: { type: val } })
+}
 </script>
 
 <style scoped>
