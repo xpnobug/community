@@ -29,7 +29,7 @@
   </a-form>
 </template>
 <script lang="ts" setup>
-import {inject, reactive, ref} from 'vue';
+import {inject, provide, reactive, ref} from 'vue';
 import Upload from "@/views/Edit/compontents/upload.vue";
 import {add} from "@/api/article";
 import {message} from "ant-design-vue";
@@ -187,6 +187,7 @@ const formState = reactive<FormState>({
 const imgLists = (value) => {
   formState.imgList = value;
 }
+provide('imgFile',null);
 
 const musicInfo = (value) => {
   musicFormState.songImg = value.songImg;
