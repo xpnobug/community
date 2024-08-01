@@ -80,7 +80,7 @@ const isLike = computed(() => {
 const displayNames = computed(() => {
   return prop.likeList
       .filter(item => item.articleId === prop.postInfo.articleId && item.userId !== null)
-      .map(item => item.userName);
+      .map(item => item.nickName);
 });
 
 // 计算点赞的访客数量

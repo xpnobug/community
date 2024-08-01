@@ -93,7 +93,7 @@
             </div>
             <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);"><a class="bold"
                                                                                                 style="color: rgb(251, 91, 90);">{{
-                item.username
+                item.nickName
               }}</a></p>
             <p class="user-status-text small text-long-ellipsis">{{ item.statistics.fansCount }} 粉丝</p>
             <div class="action-request-list">

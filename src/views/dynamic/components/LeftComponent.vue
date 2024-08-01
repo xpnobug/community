@@ -163,7 +163,7 @@ const timeFromNow = (data) => {
                    style="box-sizing: content-box; font-size: 10.8px; width: 18px; height: 18px; border: 1px solid rgb(255, 255, 255);">
                 <span style="display: block;">{{ user.level }}</span></div> <!----></div>
             <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);">
-              <a class="bold" href="#" style="color: rgb(251, 91, 90);">{{ user.username }}</a>
+              <a class="bold" href="#" style="color: rgb(251, 91, 90);">{{ user.nickName }}</a>
             </p>
             <p class="user-status-text small" v-if="tagId === '2'">
               {{ user.fansCount }} 粉丝

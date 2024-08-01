@@ -69,7 +69,7 @@ const tjBanKList = ref([
                   alt="头像" class="" style="border-radius: 8px;"></div>
             </div>
             <p class="user-status-title text-long-ellipsis">
-              <a href="#" class="bold">{{ item.userName }}</a></p>
+              <a href="#" class="bold">{{ item.nickName }}</a></p>
             <p class="user-status-text small" v-if="tagId === '2'">
               {{ item.small }} 成员
             </p>

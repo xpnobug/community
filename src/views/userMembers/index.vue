@@ -21,10 +21,10 @@ const page = reactive<Page>({
   maxPage: 10,
   minPage: 1,
 });
-const userList = ref([]);
-pageList(page).then(res => {
-  userList.value = res.data.data;
-})
+// const userList = ref([]);
+// pageList(page).then(res => {
+//   userList.value = res.data.data;
+// })
 </script>
 
 <template>
@@ -36,8 +36,8 @@ pageList(page).then(res => {
         <p class="section-banner-title"></p>
         <p class="section-banner-text"></p>
       </div>
-      <UserSearchComponent :userList="userList"/>
-      <UserListComponent :userList="userList"/>
+      <UserSearchComponent />
+      <UserListComponent />
 <!--      <div class="section-pager-bar" data-v-a0c93e92="">-->
 <!--        <ul aria-disabled="false" aria-label="Pagination" class="pagination b-pagination" data-v-418cb67c="" data-v-a0c93e92=""-->
 <!--            role="menubar" style="margin-bottom: 0px;">-->

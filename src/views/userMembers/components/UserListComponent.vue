@@ -188,7 +188,7 @@ const delFollows = (item: any) => {
             <p class="user-short-description-title text-long-ellipsis"
                @click="toUserInfo(item)"
                :style="{color: item.color}">
-              {{ item.username }}
+              {{ item.nickName }}
             </p>
             <p class="user-short-description-text">
 

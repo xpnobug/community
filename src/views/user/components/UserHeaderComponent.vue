@@ -99,7 +99,7 @@ const addFollows = (item: any) => {
               style="width:35px;height:35px;"></div>
         </div>
         <div class="reaicss0-3-13-24">
-          <p class="user-short-description-title reaicss0-4-24-25">{{ users.username }}</p>
+          <p class="user-short-description-title reaicss0-4-24-25">{{ users.nickName }}</p>
           <p class="user-short-description-text reaicss0-4-24-26">
           </p>
         </div>

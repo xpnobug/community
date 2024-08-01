@@ -55,7 +55,7 @@
             </div>
             <p  @click="toUserInfo(userInfo)" v-show="djValueSet === false" class="user-short-description-title navigation-widget-close"
             >
-              <a href="JavaScript:;" style="color:;"> {{ userInfo.username }} </a>
+              <a href="JavaScript:;" style="color:;"> {{ userInfo.nickName }} </a>
             </p>
             <p class="user-short-description-text navigation-widget-close">
               <a
