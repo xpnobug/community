@@ -26,3 +26,15 @@ export function channelList(page: Page, isOfficial: number) {
 export function addChannel(channel: ChannelsResponse) {
     return axios.post(`${BASE_URL}/add`, channel);
 }
+
+export function joinChannel(channel: ChannelsResponse) {
+    return axios.post(`${BASE_URL}/join`, channel);
+}
+
+export function quitChannel(channelId: number) {
+    return axios.delete(`${BASE_URL}/quit`, {
+        params: {
+            id: channelId
+        }
+    });
+}

@@ -38,8 +38,9 @@
             <div class="user-avatar-list medium reverse centered" :class="{'small-user-stats': viewIdValueSet === '3'}" style="margin-top: 34px;">
               <AvatarGroup :userList="item.userList"/>
             </div>
-            <div class="user-preview-actions">
-              <p class="button secondary">加入版块</p>
+            <div class="user-preview-actions" @click="handleJoin(item)">
+              <p class="button secondary" v-if="!item.isJoin">加入版块</p>
+              <p class="button secondary" v-else>退出版块</p>
             </div>
           </div>
         </div>
@@ -53,7 +54,9 @@
 <script setup lang="ts">
 import {getCurrentInstance, ref, onBeforeMount} from "vue";
 import AvatarGroup from "@/views/channelbk/userChannel/avatarGroup.vue";
-const props = defineProps(['userChannelList'])
+import {joinChannel, quitChannel} from "@/api/channels";
+import {message} from "ant-design-vue";
+const props = defineProps(['userChannelList','getUserChannelData'])
 
 const viewIdValueSet = ref('1');
 const tagIdValueSet = ref('1');
@@ -105,6 +108,24 @@ const addWh = (width: any, height: any) => {
   addWidth.value = wnum;
   addHeight.value = hnum;
   console.log(addWidth.value, addHeight.value)
+}
+
+const handleJoin = async (item: any) => {
+  if (!item.isJoin) {
+    await joinChannel(item).then(res =>{
+      if (res.status === 200) {
+        message.success("加入成功");
+        props.getUserChannelData();
+      }
+    })
+  }else {
+    await quitChannel(item.id).then(res =>{
+      if (res.status === 200) {
+        message.success("退出成功");
+        props.getUserChannelData();
+      }
+    })
+  }
 }
 
 

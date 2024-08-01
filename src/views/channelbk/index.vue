@@ -9,18 +9,21 @@
           <SaveChannelCompontents :get-offica-data="getOfficaData"/>
         </a-space>
       </div>
-      <OfficalChannelIndex  v-if="officalList.length > 0" :officalList="officalList"/>
+      <OfficalChannelIndex v-if="officalList.length > 0" :officalList="officalList"/>
       <a-empty v-else/>
       <div class="section-header">
         <div class="section-header-info">
           <h2 class="section-title">用户版块</h2>
         </div>
         <a-space wrap>
-          <SaveUserChannel :getUserChannelData="getUserChannelData" />
+          <SaveUserChannel :getUserChannelData="getUserChannelData"/>
         </a-space>
       </div>
       <UserSearchComponent/>
-      <UserChannelsIndex v-if="userChannelList.length > 0" :userChannelList="userChannelList"/>
+      <UserChannelsIndex
+          :getUserChannelData="getUserChannelData"
+          v-if="userChannelList.length > 0"
+          :userChannelList="userChannelList"/>
       <a-empty v-else/>
     </div>
   </div>
@@ -36,18 +39,19 @@ import page from "@/api/base";
 import {ref, onMounted} from "vue";
 import SaveUserChannel from "@/views/channelbk/functions/saveUserChannel.vue";
 
-
 // 获取官方版块数据
 const officalList = ref([]);
 const userChannelList = ref([]);
 const getOfficaData = async () => {
-  const { data } = await channelList(page,1)
+  const {data} = await channelList(page, 1)
   officalList.value = data.data;
 }
 const getUserChannelData = async () => {
-  const { data } = await channelList(page,2)
+  const {data} = await channelList(page, 2)
   userChannelList.value = data.data;
 }
+// const emit = defineEmits(['getUserChannelData']);
+
 onMounted(() => {
   getOfficaData();
   getUserChannelData();
@@ -68,7 +72,7 @@ onMounted(() => {
   justify-content: space-between;
 }
 
-.section-header  {
+.section-header {
   margin-top: 60px;
 }
 
