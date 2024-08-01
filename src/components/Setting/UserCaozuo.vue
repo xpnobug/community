@@ -13,6 +13,9 @@ const userLogout = async () => {
   const key = 'updatable';
   message.loading({ content: '注销中...', key });
   setTimeout(() => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userInfo');
+    localStorage.setItem("userId",'null');
     message.success({ content: '注销成功!', key, duration: 2 });
     router.replace('/login')
   }, 1000);
@@ -50,7 +53,7 @@ const userLogout = async () => {
         </div>
         <div
             style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: bolder;"><span
-        > {{ props.user.username }} </span></div>
+        > {{ props.user.nickName }} </span></div>
         <p class="text-long-ellipsis"
            style="font-size: 0.85rem; margin-top: 4px; word-break: break-all;"></p>
       </div>

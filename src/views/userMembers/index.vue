@@ -30,16 +30,16 @@ const page = reactive<Page>({
 <template>
   <div class="content-grid"
        style="width: 100%; transition: transform 0.4s ease-in-out 0s;">
-    <div data-v-a0c93e92="" style="margin: 10px;">
-      <div class="section-banner" data-v-a0c93e92=""
+    <div style="margin: 10px;">
+      <div class="section-banner"
            style="background: url(https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/aedadfd944b6b44687f68d45eca091af.png?imageMogr2/crop/2368x320/gravity/center) center center / cover no-repeat; cursor: default;">
         <p class="section-banner-title"></p>
         <p class="section-banner-text"></p>
       </div>
       <UserSearchComponent />
       <UserListComponent />
-<!--      <div class="section-pager-bar" data-v-a0c93e92="">-->
-<!--        <ul aria-disabled="false" aria-label="Pagination" class="pagination b-pagination" data-v-418cb67c="" data-v-a0c93e92=""-->
+<!--      <div class="section-pager-bar">-->
+<!--        <ul aria-disabled="false" aria-label="Pagination" class="pagination b-pagination" data-v-418cb67c=""-->
 <!--            role="menubar" style="margin-bottom: 0px;">-->
 <!--          <li aria-hidden="true" class="page-item disabled" role="presentation"><span aria-disabled="true"-->
 <!--                                                                                      aria-label="Go to first page"-->
