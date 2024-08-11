@@ -19,7 +19,7 @@ console.log('menu', menu)
 
 <!--  <LeftMenu/>-->
   <LeftMenuItem v-if="defer"/>
-  <FooterView v-if="defer"/>
+<!--  <FooterView v-if="defer"/>-->
   <DtCaiDan v-if="defer"/>
 <!--  <ChatComponents/>-->
 <!--  <LunBoCompentes/>-->

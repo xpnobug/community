@@ -280,8 +280,8 @@ const scrollToBottom = () => {
 const token = getToken()
 // 组件挂载时执行的逻辑
 onMounted(() => {
-  socket = new WebSocket('ws://127.0.0.1:8070/websocket?token='+token); // 替换为你的 WebSocket URL
-  // socket = new WebSocket('wss://api.reaicc.com/websocket'); // 替换为你的 WebSocket URL
+  // socket = new WebSocket('ws://localhost:8070/websockets'); // 替换为你的 WebSocket URL
+  socket = new WebSocket('wss://api.reaicc.com/websocket');
 
   // WebSocket 连接打开时的回调
   socket.onopen = () => {

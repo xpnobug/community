@@ -7,8 +7,7 @@
 }
 body {
   font-family:Meslo LG;
-  /*background:#fff;*/
-  /*color:#000;*/
+  height: 100%;
   font-size:var(--global-font-size);
   line-height:1.15;
   background-color: var(--global-bg);
@@ -280,4 +279,8 @@ body {
 /*头像外框经验值color*/
 stop:nth-child(2) {
   stop-color: #ff3370 !important;
+}
+.content-grid {
+  max-width: 1184px;
+  /* padding: 54px 0 32px; */
 }

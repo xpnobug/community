@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import './style.css'
 // 引入全局 CSS 文件
 import '@/assets/pink/css/banner.css';
@@ -22,19 +22,57 @@ import Antd from 'ant-design-vue';
 import mitt from "mitt"
 import App from './App.vue'
 import route from "./router"
-import { Button, message } from 'ant-design-vue';
+import {Button, message} from 'ant-design-vue';
 import store from './store/store.js';
 import showBool from '@/hooks/post.js';
 //
 import UndrawUi from 'undraw-ui'
 import pinia from '@/store'
+import {i18n} from '@/hooks/live/use-i18n';
+import ArcoVue, { Card, Modal } from '@arco-design/web-vue'
+import ArcoVueIcon from '@arco-design/web-vue/es/icon';
+import '@arco-design/web-vue/dist/arco.css';
+import {
+  // component
+  NButton,
+  NDialogProvider,
+  NModal,
+  NIcon,
+  NSlider,
+  NPopover,
+  NInputGroupLabel,
+  NInputNumber,
+  NInputGroup,
+  NSpace,
+  NInput,
+  NSelect,
+  NCheckbox,
+  NCheckboxGroup,
+  NDatePicker,
+  NUpload,
+  NUploadDragger,
+  NCard,
+  NColorPicker, NDropdown,NTabs, NTabPane,
+  create,
+} from 'naive-ui'
 
+const naive = create({
+  components: [NButton, NDialogProvider, NModal, NIcon, NSlider, NPopover, NInputGroupLabel, NInputNumber, NInputGroup, NSpace, NInput,
+    NSelect,
+    NCheckbox,
+    NCheckboxGroup,
+    NDatePicker,
+    NUpload,
+    NUploadDragger,
+    NCard,
+    NColorPicker,NDropdown,NTabs, NTabPane]
+})
 const app = createApp(App)
 const Mitt = mitt()
-declare module 'vue'{
-    export interface ComponentCustomProperties{
-        $Bus: typeof Mitt
-    }
+declare module 'vue' {
+  export interface ComponentCustomProperties {
+    $Bus: typeof Mitt
+  }
 }
 
 /* 会自动注册 Button 下的子组件, 例如 Button.Group */
@@ -48,5 +86,13 @@ app.provide('showBool', showBool);
 app.use(ElementPlus);
 app.use(Antd);
 app.use(UndrawUi)
+app.use(naive)
 app.use(pinia)
+app.use(i18n)
+
+app.use(ArcoVueIcon);
+app.use(ArcoVue, {
+  // 用于改变使用组件时的前缀名称
+  componentPrefix: 'arco'
+});
 app.mount('#app')

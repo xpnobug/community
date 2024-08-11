@@ -143,7 +143,7 @@ body {
   flex-direction: column;
   width: 100%;
   border-radius: 12px;
-  //background: var(--reaicc-meta-theme-post-color);
+  background: var(--reaicc-meta-theme-post-color);
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
   padding: 0 40px;
   position: relative;

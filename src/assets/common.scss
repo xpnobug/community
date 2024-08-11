@@ -1,0 +1,133 @@
+// common.scss放的是一些通用样式,可以全局引入,没用到的就不会被编译
+// 使用: .header{border: 1px;@extend %ltr;}
+// 编译结果: .header {direction: ltr;} .header {border: 1px;}
+// 使用占位符选择器没有顺序要求,先定义再使用或者先使用再定义都行
+
+@use 'sass:math';
+
+// 10px字体
+%font10px {
+  font-size: 12px;
+  transform: scale(math.div(10, 12));
+  transform-origin: 0 0;
+}
+
+// 8px字体
+%font8px {
+  font-size: 12px;
+  transform: scale(math.div(8, 12));
+  transform-origin: 0 0;
+}
+
+// contain背景图
+%containBg {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+// cover背景图
+%coverBg {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+// flex的垂直居中+左右靠边
+%flexBetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// flex的水平垂直居中
+%flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// 半透明遮罩层
+%maskBg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+}
+
+// 置灰
+%grayscale {
+  filter: grayscale(100%);
+}
+
+// 单行省略号
+// 父元素使用flex: 1时，里面的子元素省略号不显示，就在父元素再加上width:0或者overflow: hidden;即可解决
+%singleEllipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 多行省略号在mixin里面
+
+// 长文本折行
+%long-text {
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+// 解决图片缩小模糊问题
+%imgBlur {
+  -ms-interpolation-mode: nearest-neighbor;
+
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+// ltr
+%ltr {
+  direction: ltr;
+}
+
+// rtl
+%rtl {
+  direction: rtl;
+}
+
+// 隐藏滚动条:https://developer.mozilla.org/zh-CN/docs/Web/CSS/::-webkit-scrollbar
+%hideScrollbar {
+  // 整个滚动条
+  &::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    border-radius: 0px;
+    background: rgba(0, 0, 0, 0);
+    display: none;
+  }
+
+  // 滚动条轨道
+  &::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background: rgba(0, 0, 0, 0);
+    box-shadow: rgba(0, 0, 0, 0);
+  }
+
+  // 滚动条上的滚动滑块
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background: transparent;
+  }
+}
+
+// float清除浮动，在浮动的元素的父元素添加这个class：https://developer.mozilla.org/zh-CN/docs/Web/CSS/clear
+%clearfix {
+  &:after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+}

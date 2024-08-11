@@ -12,7 +12,7 @@ export function listMessage(isRead: boolean, userId: string) {
 
 /** @desc 删除消息 */
 export function deleteMessage(ids: string | Array<string>) {
-  return axios.delete(`${BASE_URL}/${ids}`)
+  return axios.del(`${BASE_URL}/${ids}`)
 }
 
 /** @desc 标记已读 */

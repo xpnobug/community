@@ -1,35 +1,55 @@
+import type {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios'
 import axios from 'axios';
 import {message} from 'ant-design-vue';
+import {setToken} from "@/utils/localStorage/user";
+import {getToken} from '@/utils/auth'
 
-const service = axios.create({
-  // baseURL: import.meta.env.VITE_GLOB_API_URL,
-  baseURL: "/api",
+interface ICodeMessage {
+  [propName: number]: string
+}
+
+const StatusCodeMessage: ICodeMessage = {
+  200: '服务器成功返回请求的数据',
+  201: '新建或修改数据成功。',
+  202: '一个请求已经进入后台排队（异步任务）',
+  204: '删除数据成功',
+  400: '请求错误(400)',
+  401: '未授权，请重新登录(401)',
+  403: '拒绝访问(403)',
+  404: '请求出错(404)',
+  408: '请求超时(408)',
+  500: '服务器错误(500)',
+  501: '服务未实现(501)',
+  502: '网络错误(502)',
+  503: '服务不可用(503)',
+  504: '网络超时(504)'
+}
+
+const http: AxiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_API_PREFIX ?? import.meta.env.VITE_API_BASE_URL,
+  timeout: 30 * 1000
 })
 
-service.interceptors.request.use(
-    (config) => {
-      // 尝试从localStorage中获取token
-      const token = localStorage.getItem('token');
-      // console.log('token:', token)
-      // 如果token存在，则将其添加到请求头中
+// 请求拦截器
+http.interceptors.request.use(
+    (config: AxiosRequestConfig) => {
+      // NProgress.start() // 进度条
+      const token = getToken()
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        if (!config.headers) {
+          config.headers = {}
+        }
+        setToken(token);
+        config.headers.Authorization = `Bearer ${token}`
       }
-      // 返回修改后的配置对象
-      return config;
+      return config
     },
     (error) => {
-      // 对请求错误做些什么
-      // 这里可以根据需要添加额外的错误处理逻辑
-      // 例如，显示一个网络错误的消息，或者记录日志
-      console.error('Request Error:', error); // 示例：在控制台打印错误信息
-
-      // 返回一个被拒绝的Promise
-      return Promise.reject(error);
+      return Promise.reject(error)
     }
-);
+)
 
-service.interceptors.response.use(
+http.interceptors.response.use(
     (response) => {
       // 如果响应状态码是200，则直接返回响应
       if (response.status === 200) {
@@ -37,7 +57,7 @@ service.interceptors.response.use(
           // message.error(response.data.message);
           localStorage.removeItem('token');
           localStorage.removeItem('userInfo');
-          localStorage.setItem("userId",'null');
+          localStorage.setItem("userId", 'null');
         } else if (response.data.code === 403) {
           message.error('没有权限');
         }
@@ -76,4 +96,24 @@ service.interceptors.response.use(
     }
 );
 
-export default service
+const request = <T = unknown>(config: AxiosRequestConfig): Promise<ApiRes<T>> => {
+  return new Promise((resolve, reject) => {
+    http
+    .request<T>(config)
+    .then((res: AxiosResponse) => resolve(res.data))
+    .catch((err: { msg: string }) => reject(err))
+  })
+}
+const requestNative = <T = unknown>(config: AxiosRequestConfig): Promise<AxiosResponse> => {
+  return new Promise((resolve, reject) => {
+    http
+    .request<T>(config)
+    .then((res: AxiosResponse) => resolve(res))
+    .catch((err: { msg: string }) => reject(err))
+  })
+}
+
+export default http;
+export { request, requestNative};
+
+

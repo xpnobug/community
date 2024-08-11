@@ -7,4 +7,6 @@ export const menuItems = ref([
     {id: "4", label: '朋友圈', url: '/friends',icon:'iconfont icon-a-pengyouquan1', expanded: false},
     {id: "5", label: '频道', url: '/channels',icon:'iconfont icon-liebiao', expanded: false},
     {id: "6", label: 'chat', url: '/chat',icon:'iconfont icon-liebiao', expanded: false},
+    {id: "7", label: '直播', url: '/live',icon:'iconfont icon-liebiao', expanded: false},
+    {id: "8", label: 'genera', url: '/tool/generator',icon:'iconfont icon-liebiao', expanded: false},
 ]);

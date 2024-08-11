@@ -14,12 +14,23 @@ import {
   socialLogin as socialLoginApi
 } from '@/api'
 import { clearToken, getToken, setToken } from '@/utils/auth'
+import {IUser} from "@/api/live/types/IUser";
+import {IAuth, IRole} from "@/api/live/interface";
+import cache from "@/utils/cache";
+import {fetchMyWallet} from "@/api/live/wallet";
+import {fetchUserInfo} from "@/api/live/user";
 // import { resetHasRouteFlag } from '@/router/permission'
 // import getAvatar from '@/utils/avatar'
+type UserRootState = {
+  userLiveInfo?: IUser;
+  token?: string | null;
+  roles?: IRole[];
+  auths?: IAuth[];
+};
 
 const storeSetup = () => {
   const userInfo = reactive<UserInfo>({
-    id: '',
+    userId: '',
     username: '',
     nickname: '',
     gender: 0,
@@ -31,10 +42,12 @@ const storeSetup = () => {
     registrationDate: '',
     deptName: '',
     roles: [],
-    permissions: []
+    permissions: [],
   })
+
   const name = computed(() => userInfo.nickname)
   const avatar = computed(() => userInfo.avatar)
+  const userId = computed(() => userInfo.userId)
 
   const token = ref(getToken() || '')
   const pwdExpiredShow = ref<boolean>(true)
@@ -90,6 +103,7 @@ const storeSetup = () => {
     try {
       await logoutApi()
       await logoutCallBack()
+      localStorage.removeItem("billd_live___token");
       return true
     } catch (error) {
       return false
@@ -97,17 +111,20 @@ const storeSetup = () => {
   }
 
   // 获取用户信息
-  // const getInfo = async () => {
-  //   const res = await getUserInfoApi()
-  //   Object.assign(userInfo, res.data)
-  //   userInfo.avatar = getAvatar(res.data.avatar, res.data.gender)
-  //   if (res.data.roles && res.data.roles.length) {
-  //     roles.value = res.data.roles
-  //     permissions.value = res.data.permissions
-  //   }
-  // }
+  const getInfo = async () => {
+    const res = await getUserInfoApi()
+    Object.assign(userInfo, res.data.data)
+    // userInfo.avatar = getAvatar(res.data.avatar, res.data.gender)
+    userInfo.avatar = res.data.data.avatar
+    userInfo.userId = res.data.data.userId;
+    if (res.data.roles && res.data.roles.length) {
+      roles.value = res.data.roles
+      permissions.value = res.data.permissions
+    }
+  }
 
   return {
+    userId,
     userInfo,
     name,
     avatar,
@@ -121,11 +138,12 @@ const storeSetup = () => {
     socialLogin,
     logout,
     logoutCallBack,
-    // getInfo,
+    getInfo,
     resetToken
   }
 }
 
 export const useUserStore = defineStore('user', storeSetup, {
-  persist: { paths: ['token', 'roles', 'permissions', 'pwdExpiredShow'], storage: localStorage }
+  persist: { paths: ['token', 'roles', 'permissions', 'pwdExpiredShow','userInfo'], storage: localStorage }
 })
+
