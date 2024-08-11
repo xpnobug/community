@@ -15,7 +15,6 @@
     "@ant-design/icons-vue": "^7.0.1",
     "@ffmpeg/ffmpeg": "^0.12.10",
     "@ffmpeg/util": "^0.12.1",
-    "@nut-tree/nut-js": "^4.0.0",
     "@nut-tree/shared": "^4.0.0",
     "@vicons/ionicons5": "^0.12.0",
     "@vueuse/core": "^10.11.0",
