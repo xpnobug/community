@@ -267,7 +267,7 @@ const {
 onMounted(() => {
   handleSlideList(); // 处理滑动列表
   getLiveRoomList(); // 获取直播房间列表
-  getBg(); // 获取背景
+  // getBg(); // 获取背景
   videoWrapRef.value = videoWrapTmpRef.value; // 设置视频包装引用
 });
 

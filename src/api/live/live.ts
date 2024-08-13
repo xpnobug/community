@@ -6,8 +6,10 @@ export function fetchLiveList(params : any) {
     params,
   });
 }
-export function fetchLiveRoomOnlineUser(params : any) {
-  return axios.get('/live/live_room_online_user', {
-    params,
+export function fetchLiveRoomOnlineUser(liveRoomId : any) {
+  return axios.get('/live/liveRoomOnlineUser',{
+    params: {
+      liveRoomId: liveRoomId
+    }
   });
 }

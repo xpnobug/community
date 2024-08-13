@@ -546,9 +546,9 @@ onUnmounted(() => {
   clearInterval(loopGetLiveUserTimer.value);
 });
 
-function handleSendGetLiveUser(liveRoomId: number) {
+function handleSendGetLiveUser(liveRoomId: string) {
   async function main() {
-    const res = await fetchLiveRoomOnlineUser({live_room_id: liveRoomId});
+    const res = await fetchLiveRoomOnlineUser(liveRoomId);
     if (res.data.code === 200) {
       liveUserList.value = res.data.data;
     }

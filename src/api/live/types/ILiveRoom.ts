@@ -146,7 +146,7 @@ export enum LiveRoomTipTouristLoginEnum {
 }
 
 export interface ILiveRoom {
-  id?: number;
+  id?: string;
   /** 直播间名称 */
   name?: string;
   /** 直播间简介 */

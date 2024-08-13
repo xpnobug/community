@@ -14,7 +14,6 @@ export const useUserInfo = (uid?: number | ComputedRef<number | undefined> | Ref
     tokenInfo().then(res => {
         if (res.status === 200) {
             userInfo(res.data.data.loginId).then(user => {
-                console.log(user.data.data)
                 //存储用户信息 user.data.data转字符串
                 localStorage.setItem('userInfo', JSON.stringify(user.data.data));
                 localStorage.setItem('userId', user.data.data === null ? 'null' : user.data.data.userId.toString());

@@ -173,7 +173,7 @@ export function usePush() {
             await handleCreateUserLiveRoom();
           } else {
             roomName.value = liveRoomInfo.value?.name || '';
-            roomId.value = `${liveRoomInfo.value?.id || ''}`;
+            roomId.value = liveRoomInfo.value?.id || '';
             connectWs();
           }
         }
@@ -182,13 +182,13 @@ export function usePush() {
   );
 
   // 检查对象是否为空的辅助函数
-  function isEmptyObject(obj: object): boolean {
-    return Object.keys(obj).length === 0 && obj.constructor === Object;
+  function isEmptyObject(obj: any): boolean {
+    return obj && typeof obj === 'object' && Object.keys(obj).length === 0 && obj.constructor === Object;
   }
 
   async function handleUserHasLiveRoom() {
     const res = await fetchUserHasLiveRoom(userId);
-    if (res.status === 200 && !isEmptyObject(res.data.data)) {
+    if (res.status === 200 && !isEmptyObject(res.data.data) && res.data.data != null) {
       liveRoomInfo.value = res.data.data.live_room;
       router.push({
         query: {...route.query, roomId: liveRoomInfo.value?.id},

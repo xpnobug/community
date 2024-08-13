@@ -55,7 +55,7 @@ export interface IWsMessage {
   content?: string;
   origin_content?: string;
   redbag_send_id?: number;
-  live_room_id?: number;
+  live_room_id?: string;
   user_id?: number;
   ip?: string;
   msg_is_file?: WsMessageMsgIsFileEnum;

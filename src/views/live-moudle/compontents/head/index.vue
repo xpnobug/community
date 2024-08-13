@@ -2,74 +2,81 @@
   <header class="head-wrap">
     <div class="head">
       <div class="left">
-<!--        <div-->
-<!--          class="logo-wrap"-->
-<!--          @click="router.push('/')"-->
-<!--        >-->
-<!--          <div class="logo"></div>-->
-<!--        </div>-->
+        <!--        <div-->
+        <!--          class="logo-wrap"-->
+        <!--          @click="router.push('/')"-->
+        <!--        >-->
+        <!--          <div class="logo"></div>-->
+        <!--        </div>-->
 
-<!--        <div class="nav">-->
-<!--          <a-->
-<!--            class="item"-->
-<!--            :class="{-->
-<!--              active: router.currentRoute.value.path === '/',-->
-<!--            }"-->
-<!--            href="/"-->
-<!--            @click.prevent="router.push('/')"-->
-<!--          >-->
-<!--            {{ t('layout.home') }}-->
-<!--          </a>-->
+        <!--        <div class="nav">-->
+        <!--          <a-->
+        <!--            class="item"-->
+        <!--            :class="{-->
+        <!--              active: router.currentRoute.value.path === '/',-->
+        <!--            }"-->
+        <!--            href="/"-->
+        <!--            @click.prevent="router.push('/')"-->
+        <!--          >-->
+        <!--            {{ t('layout.home') }}-->
+        <!--          </a>-->
 
-<!--          <a-->
-<!--            class="item"-->
-<!--            :class="{-->
-<!--              active: router.currentRoute.value.name === routerName.area,-->
-<!--            }"-->
-<!--            @click.prevent="router.push({ name: routerName.area })"-->
-<!--          >-->
-<!--            {{ t('layout.area') }}-->
-<!--          </a>-->
+        <!--          <a-->
+        <!--            class="item"-->
+        <!--            :class="{-->
+        <!--              active: router.currentRoute.value.name === routerName.area,-->
+        <!--            }"-->
+        <!--            @click.prevent="router.push({ name: routerName.area })"-->
+        <!--          >-->
+        <!--            {{ t('layout.area') }}-->
+        <!--          </a>-->
 
-<!--          <a-->
-<!--            class="item"-->
-<!--            :href="COMMON_URL.admin"-->
-<!--            @click.prevent="openToTarget(COMMON_URL.admin)"-->
-<!--            v-if="!isMobile()"-->
-<!--          >-->
-<!--            {{ t('layout.liveAdmin') }}-->
-<!--          </a>-->
+        <!--          <a-->
+        <!--            class="item"-->
+        <!--            :href="COMMON_URL.admin"-->
+        <!--            @click.prevent="openToTarget(COMMON_URL.admin)"-->
+        <!--            v-if="!isMobile()"-->
+        <!--          >-->
+        <!--            {{ t('layout.liveAdmin') }}-->
+        <!--          </a>-->
 
-<!--        </div>-->
+        <!--        </div>-->
       </div>
 
       <div class="right">
-        <a
-          class="signin"
-          @click="handleSignin"
-          v-if="!isMobile()"
-        >
-          {{ t('layout.signin') }}
-          <div
-            class="red-dot"
-            v-if="appStore.showSigninRedDot"
-          ></div>
-        </a>
+        <!--        <a-->
+        <!--          class="signin"-->
+        <!--          @click="handleSignin"-->
+        <!--          v-if="!isMobile()"-->
+        <!--        >-->
+        <!--          {{ t('layout.signin') }}-->
+        <!--          <div-->
+        <!--            class="red-dot"-->
+        <!--            v-if="appStore.showSigninRedDot"-->
+        <!--          ></div>-->
+        <!--        </a>-->
 
-
         <a
-          class="videoTools"
-          :class="{
+            class="videoTools"
+            :class="{
             active: router.currentRoute.value.name === routerName.videoTools,
           }"
-          href="/videoTools"
-          @click.prevent="router.push({ name: routerName.videoTools })"
-          v-if="!isMobile()"
+            href="/videoTools"
+            @click.prevent="router.push({ name: routerName.videoTools })"
+            v-if="!isMobile()"
         >
           {{ t('layout.videoTools') }}
           <div class="badge">
             <div class="txt">beta</div>
           </div>
+        </a>
+
+        <a class="videoTools"
+           :class="{active: router.currentRoute.value.name === routerName.profile}"
+           @click.prevent="router.push({name: routerName.profile, params: { userId: userStore.userInfo?.userId}})"
+           v-if="loginTip"
+        >
+          {{ t('layout.profile') }}
         </a>
 
         <Dropdown class="start-live">
@@ -79,66 +86,66 @@
           <template #list>
             <div class="list">
               <a
-                class="item"
-                @click.prevent="handleStartLive(LiveRoomTypeEnum.srs)"
+                  class="item"
+                  @click.prevent="handleStartLive(LiveRoomTypeEnum.srs)"
               >
                 <div class="txt">{{ t('layout.srsLive') }}</div>
               </a>
               <a
-                class="item"
-                @click.prevent="
+                  class="item"
+                  @click.prevent="
                   handleStartLive(LiveRoomTypeEnum.forward_bilibili)
                 "
               >
                 <div class="txt">{{ t('layout.forwardBilibili') }}</div>
               </a>
               <a
-                class="item"
-                @click.prevent="handleStartLive(LiveRoomTypeEnum.forward_huya)"
+                  class="item"
+                  @click.prevent="handleStartLive(LiveRoomTypeEnum.forward_huya)"
               >
                 <div class="txt">{{ t('layout.forwardHuya') }}</div>
               </a>
               <a
-                class="item"
-                @click.prevent="handleStartLive(LiveRoomTypeEnum.forward_all)"
+                  class="item"
+                  @click.prevent="handleStartLive(LiveRoomTypeEnum.forward_all)"
               >
                 <div class="txt">{{ t('layout.forwardAll') }}</div>
               </a>
               <a
-                class="item"
-                @click.prevent="handleStartLive(LiveRoomTypeEnum.wertc_live)"
+                  class="item"
+                  @click.prevent="handleStartLive(LiveRoomTypeEnum.wertc_live)"
               >
                 <div class="txt">{{ t('layout.webrtcLive') }}</div>
               </a>
               <a
-                class="item"
-                @click.prevent="
+                  class="item"
+                  @click.prevent="
                   handleStartLive(LiveRoomTypeEnum.wertc_meeting_one)
                 "
               >
                 <div class="txt">{{ t('layout.webrtcMeeting') }}</div>
               </a>
               <a
-                class="item"
-                @click.prevent="handleStartLive(LiveRoomTypeEnum.msr)"
+                  class="item"
+                  @click.prevent="handleStartLive(LiveRoomTypeEnum.msr)"
               >
                 <div class="txt">{{ t('layout.msrLive') }}</div>
               </a>
               <a
-                class="item"
-                @click.prevent="handleStartLive(LiveRoomTypeEnum.pk)"
+                  class="item"
+                  @click.prevent="handleStartLive(LiveRoomTypeEnum.pk)"
               >
                 <div class="txt">{{ t('layout.pkLive') }}</div>
               </a>
               <a
-                class="item"
-                @click.prevent="handleStartLive(LiveRoomTypeEnum.tencent_css)"
+                  class="item"
+                  @click.prevent="handleStartLive(LiveRoomTypeEnum.tencent_css)"
               >
                 <div class="txt">{{ t('layout.tencentCssLive') }}</div>
               </a>
               <a
-                class="item"
-                @click.prevent="
+                  class="item"
+                  @click.prevent="
                   handleStartLive(LiveRoomTypeEnum.tencent_css_pk)
                 "
               >
@@ -146,8 +153,8 @@
               </a>
               <div class="tip">
                 <div
-                  class="tip-txt"
-                  @click="handleWebsiteJump"
+                    class="tip-txt"
+                    @click="handleWebsiteJump"
                 >
                   有什么区别？
                 </div>
@@ -156,52 +163,9 @@
           </template>
         </Dropdown>
 
-        <div
-          v-if="!userStore.token"
-          class="qqlogin"
-          @click="appStore.showLoginModal = true"
-        >
-          <div class="btn">{{ t('layout.login') }}</div>
-        </div>
-
         <Dropdown
-          v-else
-          class="qqlogin"
-        >
-          <template #btn>
-            <div
-              class="btn"
-              :style="{ backgroundImage: `url(${userStore.avatar})` }"
-            ></div>
-          </template>
-          <template #list>
-            <div class="list">
-              <a
-                class="item"
-                @click.prevent="
-                  router.push({
-                    name: routerName.profile,
-                    params: {
-                      userId: userStore.userId,
-                    },
-                  })
-                "
-              >
-                <div class="txt">{{ t('layout.profile') }}</div>
-              </a>
-              <a
-                class="item"
-                @click.prevent="handleLogout"
-              >
-                <div class="txt">{{ t('layout.logout') }}</div>
-              </a>
-            </div>
-          </template>
-        </Dropdown>
-
-        <Dropdown
-          class="switch-lang"
-          v-if="!isMobile()"
+            class="switch-lang"
+            v-if="!isMobile()"
         >
           <template #btn>
             <div class="btn">
@@ -212,11 +176,11 @@
           <template #list>
             <div class="list">
               <a
-                class="item"
-                v-for="(item, index) in localeMap"
-                :key="index"
-                :class="{ active: item === localeMap[locale] }"
-                @click="locale = index"
+                  class="item"
+                  v-for="(item, index) in localeMap"
+                  :key="index"
+                  :class="{ active: item === localeMap[locale] }"
+                  @click="locale = index"
               >
                 <div class="txt">{{ item }}</div>
               </a>
@@ -229,25 +193,25 @@
 </template>
 
 <script lang="ts" setup>
-import { isMobile, openToTarget, windowReload } from 'billd-utils';
-import { onMounted, ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
+import {isMobile, openToTarget, windowReload} from 'billd-utils';
+import {onMounted, ref, watch} from 'vue';
+import {useI18n} from 'vue-i18n';
+import {useRouter} from 'vue-router';
 
-import { fetchCreateSignin, fetchTodayIsSignin } from '@/api/live/signin';
+import {fetchCreateSignin, fetchTodayIsSignin} from '@/api/live/signin';
 import Dropdown from "@/views/live-moudle/compontents/Dropdown/index.vue"
 import VPIconChevronDown from '@/views/live-moudle/compontents/icons/VPIconChevronDown.vue';
-// import VPIconExternalLink from '@/views/live-moudle/compontents/icons/VPIconExternalLink.vue';
-import { COMMON_URL, DEFAULT_AUTH_INFO } from '@/constant';
-import { handleTip } from '@/hooks/live/use-common';
-import { loginTip } from '@/hooks/live/use-login';
-import { routerName } from '@/router';
-import { useAppStore } from '@/store/app';
-import { useUserStore } from '@/store/modules/user';
-import { LiveRoomTypeEnum } from '@/api/live/types/ILiveRoom';
+
+import {DEFAULT_AUTH_INFO} from '@/constant';
+import {handleTip} from '@/hooks/live/use-common';
+import {loginTip} from '@/hooks/live/use-login';
+import {routerName} from '@/router';
+import {useAppStore} from '@/store/app';
+import {useUserStore} from '@/store/modules/user';
+import {LiveRoomTypeEnum} from '@/api/live/types/ILiveRoom';
 import {message} from "ant-design-vue";
 
-const { t, locale } = useI18n();
+const {t, locale} = useI18n();
 const router = useRouter();
 const userStore = useUserStore();
 const appStore = useAppStore();
@@ -354,15 +318,15 @@ const plugins = ref([
 ]);
 userStore.getInfo();
 watch(
-  () => userStore.userInfo?.id,
-  (newval) => {
-    if (newval) {
-      initSigninStatus();
+    () => userStore.userInfo?.id,
+    (newval) => {
+      if (newval) {
+        initSigninStatus();
+      }
+    },
+    {
+      immediate: true,
     }
-  },
-  {
-    immediate: true,
-  }
 );
 
 async function handleSignin() {
@@ -408,22 +372,22 @@ onMounted(() => {
 });
 
 function handleStartLive(key: LiveRoomTypeEnum) {
-  console.log("keyyyyyyyyy",key)
+  console.log("keyyyyyyyyy", key)
   if (!loginTip()) {
     return;
   }
   if ([
-      LiveRoomTypeEnum.msr,
-      LiveRoomTypeEnum.tencent_css,
-      LiveRoomTypeEnum.tencent_css_pk,
-      LiveRoomTypeEnum.forward_all,
-      LiveRoomTypeEnum.forward_bilibili,
-      LiveRoomTypeEnum.forward_huya,
-    ].includes(key)) {
+    LiveRoomTypeEnum.msr,
+    LiveRoomTypeEnum.tencent_css,
+    LiveRoomTypeEnum.tencent_css_pk,
+    LiveRoomTypeEnum.forward_all,
+    LiveRoomTypeEnum.forward_bilibili,
+    LiveRoomTypeEnum.forward_huya,
+  ].includes(key)) {
     if (
-      !userStore.userInfo?.auths?.find(
-        (v) => v.auth_value === DEFAULT_AUTH_INFO.LIVE_PULL_SVIP.auth_value
-      )
+        !userStore.userInfo?.auths?.find(
+            (v) => v.auth_value === DEFAULT_AUTH_INFO.LIVE_PULL_SVIP.auth_value
+        )
     ) {
       message.info('权限不足，请更换其他开播方式');
       return;
@@ -431,7 +395,7 @@ function handleStartLive(key: LiveRoomTypeEnum) {
   }
   const url = router.resolve({
     name: routerName.push,
-    query: { liveType: key },
+    query: {liveType: key},
   });
   openToTarget(url.href);
 }
@@ -463,12 +427,14 @@ function handleWebsiteJump() {
     height: $layout-head-h;
     //box-shadow: inset 0 -1px #f1f2f3 !important;
     font-size: 15px;
+
     .icon {
       margin-left: 5px;
       width: 13px;
 
       fill: currentColor;
     }
+
     .list {
       padding: 10px 0;
       width: 150px;
@@ -481,9 +447,11 @@ function handleWebsiteJump() {
         color: black;
         text-decoration: none;
         cursor: pointer;
+
         &:hover {
           color: $theme-color-gold;
         }
+
         .icon {
           margin-left: 5px;
           width: 13px;
@@ -493,6 +461,7 @@ function handleWebsiteJump() {
         }
       }
     }
+
     .badge {
       position: absolute;
       top: -10px;
@@ -502,12 +471,14 @@ function handleWebsiteJump() {
       background-color: red;
       color: white;
       line-height: 1;
+
       .txt {
         transform-origin: top !important;
 
         @include minFont(10);
       }
     }
+
     .red-dot {
       position: absolute;
       top: -5px;
@@ -517,15 +488,18 @@ function handleWebsiteJump() {
       border-radius: 50%;
       background-color: red;
     }
+
     .hr {
       width: 100%;
       height: 1px;
       background-color: #e7e7e7;
     }
+
     .left {
       display: flex;
       align-items: center;
       height: 100%;
+
       .logo-wrap {
         display: flex;
         align-items: center;
@@ -544,6 +518,7 @@ function handleWebsiteJump() {
         display: flex;
         align-items: center;
         height: 100%;
+
         .item {
           position: relative;
           display: flex;
@@ -567,12 +542,14 @@ function handleWebsiteJump() {
               transform: translateY(-100%);
             }
           }
+
           &:hover {
             color: $theme-color-gold;
           }
         }
       }
     }
+
     .download,
     .doc,
     .about,
@@ -580,15 +557,18 @@ function handleWebsiteJump() {
       &:hover {
         color: $theme-color-gold;
       }
+
       .btn {
         display: flex;
         align-items: center;
+
         .icon {
           margin-left: 5px;
           width: 13px;
 
           fill: currentColor;
         }
+
         &:hover {
           color: $theme-color-gold;
         }
@@ -606,9 +586,11 @@ function handleWebsiteJump() {
           color: black;
           text-decoration: none;
           cursor: pointer;
+
           &:hover {
             color: $theme-color-gold;
           }
+
           .icon {
             margin-left: 5px;
             width: 13px;
@@ -624,6 +606,7 @@ function handleWebsiteJump() {
       display: flex;
       align-items: center;
       height: 100%;
+
       .doc,
       .about,
       .ecosystem {
@@ -662,6 +645,7 @@ function handleWebsiteJump() {
         color: var(--reaicc-fontcolor);
         text-decoration: none;
         cursor: pointer;
+
         &:hover {
           color: $theme-color-gold;
         }
@@ -675,6 +659,7 @@ function handleWebsiteJump() {
 
       .start-live {
         margin-right: 20px;
+
         .btn {
           padding: 5px 15px;
           border-radius: 6px;
@@ -683,6 +668,7 @@ function handleWebsiteJump() {
           font-size: 13px;
           cursor: pointer;
         }
+
         .list {
           position: relative;
           padding: 10px 0;
@@ -698,24 +684,28 @@ function handleWebsiteJump() {
             &:hover {
               color: $theme-color-gold;
             }
+
             &.disabled {
               color: initial !important;
               opacity: 0.5;
               cursor: not-allowed;
             }
           }
+
           .tip {
             display: flex;
             justify-content: flex-end;
             padding-right: 6px;
             color: rgba(60, 60, 60, 0.7);
             font-size: 12px;
+
             .tip-txt {
               cursor: pointer;
             }
           }
         }
       }
+
       .qqlogin {
         margin-right: 20px;
 
@@ -727,12 +717,13 @@ function handleWebsiteJump() {
           width: 35px;
           height: 35px;
           border-radius: 50%;
-          background-color: papayawhip;
+          background-color: var(--reaicc-nav-bg);
           font-size: 12px;
           cursor: pointer;
 
           @extend %containBg;
         }
+
         .list {
           padding: 10px 0;
           width: 90px;
@@ -742,16 +733,19 @@ function handleWebsiteJump() {
             display: flex;
             padding: 0 15px;
             cursor: pointer;
+
             &:hover {
               color: $theme-color-gold;
             }
           }
         }
       }
+
       .switch-lang {
         .btn {
           display: flex;
           align-items: center;
+
           .icon {
             margin-left: 5px;
             width: 13px;
@@ -759,6 +753,7 @@ function handleWebsiteJump() {
             fill: currentColor;
           }
         }
+
         .list {
           padding: 10px 0;
           width: 80px;
@@ -774,6 +769,7 @@ function handleWebsiteJump() {
             &.active {
               color: $theme-color-gold;
             }
+
             &.disabled {
               color: initial !important;
               opacity: 0.5;

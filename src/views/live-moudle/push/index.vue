@@ -872,7 +872,7 @@ onMounted(() => {
   initUserMedia();
   initCanvas();
   handleCache();
-  handleSendGetLiveUser(Number(roomId.value));
+  handleSendGetLiveUser(roomId.value);
 });
 
 onUnmounted(() => {
@@ -896,9 +896,10 @@ onUnmounted(() => {
   clearInterval(loopGetLiveUserTimer.value);
 });
 
-function handleSendGetLiveUser(liveRoomId: number) {
+function handleSendGetLiveUser(liveRoomId: string) {
+  console.log(liveRoomId,"liveRoomId");
   async function main() {
-    const res = await fetchLiveRoomOnlineUser({live_room_id: liveRoomId});
+    const res = await fetchLiveRoomOnlineUser(liveRoomId);
     if (res.data.code === 200) {
       liveUserList.value = res.data.data;
     }
@@ -2601,7 +2602,7 @@ function handleStartMedia(item: { type: MediaTypeEnum; txt: string }) {
       justify-content: space-between;
       padding: 15px;
       border-radius: 0 0 6px 6px;
-      background-color: papayawhip;
+      background-color: var(--reaicc-meta-theme-post-color);
 
       .info {
         display: flex;
@@ -2640,15 +2641,18 @@ function handleStartMedia(item: { type: MediaTypeEnum; txt: string }) {
 
               .item {
                 padding-right: 10px;
+                color: var(--reaicc-fontcolor);
               }
             }
 
             .other {
               .item {
                 margin-right: 10px;
+                color: var(--reaicc-fontcolor);
 
                 &.share {
                   cursor: pointer;
+                  color: var(--reaicc-fontcolor);
                 }
               }
             }
@@ -2716,7 +2720,7 @@ function handleStartMedia(item: { type: MediaTypeEnum; txt: string }) {
       width: 100%;
       height: 290px;
       border-radius: 6px;
-      background-color: papayawhip;
+      background-color: var(--reaicc-meta-theme-post-color);
 
       .title {
         text-align: initial;
@@ -2786,7 +2790,7 @@ function handleStartMedia(item: { type: MediaTypeEnum; txt: string }) {
       padding: 10px 10px 0px;
       width: 100%;
       border-radius: 6px;
-      background-color: papayawhip;
+      background-color: var(--reaicc-meta-theme-post-color);
       text-align: initial;
 
       .title {

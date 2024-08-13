@@ -67,53 +67,6 @@ export const QINIU_RESOURCE = {
   },
 };
 
-export const COMMON_URL = {
-  apifox: `https://apifox.com/apidoc/shared-c7556b54-17b2-494e-a039-572d83f103ed/`,
-  admin: `https://live-admin.${prodDomain}`,
-  bilibiliCollectiondetail: `https://space.bilibili.com/381307133/channel/collectiondetail?sid=1458070&ctype=0`,
-  payCoursesArticle: `https://www.${prodDomain}/article/151`,
-  desk: `https://desk.${prodDomain}`,
-  download: {
-    live: {
-      flutter: {
-        android: `${QINIU_RESOURCE.url}/billd-live/download/billd-live-v0.0.4.apk`,
-        github: 'https://github.com/galaxy-s10/billd-live-flutter',
-      },
-      reactNative: {
-        android: '',
-        github: 'https://github.com/galaxy-s10/billd-live-react-native',
-      },
-      kotlin: {
-        android: '',
-        github: 'https://github.com/galaxy-s10/billd-live-kotlin',
-      },
-      electron: {
-        github: 'https://github.com/galaxy-s10/billd-live-electron',
-        windows: ``,
-        macOS: ``,
-      },
-    },
-    desk: {
-      electron: {
-        windows: `${QINIU_RESOURCE.url}/billd-desk-electron/download/billd-desk-win-latest.exe`,
-        macOS: `${QINIU_RESOURCE.url}/billd-desk-electron/download/billd-desk-mac-latest.dmg`,
-        github: 'https://github.com/galaxy-s10/billd-desk-electron',
-      },
-      flutter: {
-        ios: ``,
-        android: ``,
-        github: 'https://github.com/galaxy-s10/billd-desk-flutter',
-      },
-    },
-  },
-  release: {
-    flutter: 'https://github.com/galaxy-s10/billd-live-flutter',
-    kotlin: 'https://github.com/galaxy-s10/billd-live-kotlin',
-    reactNative: 'https://github.com/galaxy-s10/billd-live-react-native',
-    electron: 'https://github.com/galaxy-s10/billd-live-electron',
-    desk: 'https://github.com/galaxy-s10/billd-desk',
-  },
-};
 
 export const DEFAULT_AUTH_INFO = {
   ALL_AUTH: {
@@ -171,7 +124,7 @@ export const COOKIE_KEY = {
   thirdLoginInfo: 'thirdLoginInfo',
 };
 
-export const lsKeyPrefix = 'billd_live___';
+export const lsKeyPrefix = 'live_';
 
 // 全局的localStorage的key
 export const lsKey = {

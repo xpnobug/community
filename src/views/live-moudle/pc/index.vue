@@ -53,7 +53,7 @@ const themeOverrides: GlobalThemeOverrides = {
 };
 
 onMounted(() => {
-  initSettings();
+  // initSettings();
   checkUpdate({
     htmlUrl: getHostnameUrl(),
   });

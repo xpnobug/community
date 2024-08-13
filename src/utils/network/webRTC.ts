@@ -486,11 +486,12 @@ export class WebRTCClass {
             //   urls: 'stun:stun.l.google.com:19302',
             // },
             {
-              urls: `turn:hk.${prodDomain}`,
+              urls: `turn:srs-pull.${prodDomain}`,
               username: 'hss',
               credential: '123456',
             },
           ];
+      console.log('iceServers', iceServers);
       this.peerConnection = new RTCPeerConnection({
         iceServers,
       });

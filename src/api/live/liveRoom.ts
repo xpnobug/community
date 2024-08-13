@@ -19,5 +19,5 @@ export function fetchUpdateLiveRoomKey() {
 }
 
 export function fetchFindLiveRoom(roomId: string) {
-  return axios.get<ILiveRoom>(`/live_room/find/${roomId}`);
+  return axios.get<ILiveRoom>(`/live/findLiveRoom/${roomId}`);
 }

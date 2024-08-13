@@ -242,48 +242,49 @@ const router = createRouter({
   ],
   history: createWebHistory(),
 });
-router.beforeEach((to, from, next) => {
-  if (to.name === routerName.oauth) {
-    return next();
-  }
-  if (Object.keys(commonRouterName).includes(to.name as string)) {
-    // 跳转通用路由
-    return next();
-  } else if (isMobile() && !isIPad()) {
-    if (!Object.keys(mobileRouterName).includes(to.name as string)) {
-      // 当前移动端，但是跳转了非移动端路由
-      console.log('当前移动端，但是跳转了非移动端路由', to, from);
-      if (to.name === routerName.pull) {
-        return next({
-          name: mobileRouterName.h5Room,
-          params: {roomId: to.params.roomId},
-          query: {...to.query},
-        });
-      } else {
-        return next({
-          name: mobileRouterName.h5,
-        });
-      }
-    } else {
-      return next();
-    }
-  } else {
-    if (Object.keys(mobileRouterName).includes(to.name as string)) {
-      // 当前非移动端，但是跳转了移动端路由
-      console.log('当前非移动端，但是跳转了移动端路由');
-      if (to.name === mobileRouterName.h5Room) {
-        // 有可能是原生webrtc或srs-webrtc
-        return next({
-          name: routerName.home,
-        });
-      } else {
-        return next({
-          name: routerName.home,
-        });
-      }
-    }
-    return next();
-  }
-});
+
+// router.beforeEach((to, from, next) => {
+//   if (to.name === routerName.oauth) {
+//     return next();
+//   }
+//   if (Object.keys(commonRouterName).includes(to.name as string)) {
+//     // 跳转通用路由
+//     return next();
+//   } else if (isMobile() && !isIPad()) {
+//     if (!Object.keys(mobileRouterName).includes(to.name as string)) {
+//       // 当前移动端，但是跳转了非移动端路由
+//       console.log('当前移动端，但是跳转了非移动端路由', to, from);
+//       if (to.name === routerName.pull) {
+//         return next({
+//           name: mobileRouterName.h5Room,
+//           params: {roomId: to.params.roomId},
+//           query: {...to.query},
+//         });
+//       } else {
+//         return next({
+//           name: mobileRouterName.h5,
+//         });
+//       }
+//     } else {
+//       return next();
+//     }
+//   } else {
+//     if (Object.keys(mobileRouterName).includes(to.name as string)) {
+//       // 当前非移动端，但是跳转了移动端路由
+//       console.log('当前非移动端，但是跳转了移动端路由');
+//       if (to.name === mobileRouterName.h5Room) {
+//         // 有可能是原生webrtc或srs-webrtc
+//         return next({
+//           name: routerName.home,
+//         });
+//       } else {
+//         return next({
+//           name: routerName.home,
+//         });
+//       }
+//     }
+//     return next();
+//   }
+// });
 
 export default router;

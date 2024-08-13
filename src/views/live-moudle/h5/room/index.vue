@@ -369,9 +369,10 @@ async function handleHistoryMsg() {
   }
 }
 
-function handleSendGetLiveUser(liveRoomId: number) {
+function handleSendGetLiveUser(liveRoomId: string) {
   async function main() {
-    const res = await fetchLiveRoomOnlineUser({ live_room_id: liveRoomId });
+    const res = await fetchLiveRoomOnlineUser(liveRoomId);
+    console.log(res,"liveRoomId");
     if (res.data.code === 200) {
       liveUserList.value = res.data.data;
     }
@@ -430,7 +431,7 @@ async function getLiveRoomInfo() {
   try {
     videoLoading.value = true;
     const res = await fetchFindLiveRoom(roomId.value);
-    if (res.data.code === 200) {
+    if (res.status === 200) {
       appStore.setLiveRoomInfo(res.data.data);
       if (res.data.data.type === LiveRoomTypeEnum.wertc_live) {
         autoplayVal.value = true;

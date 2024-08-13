@@ -32,9 +32,9 @@ $w-300: 300px;
 $w-250: 250px;
 $w-200: 200px;
 
-$theme-color-gold: #ffd700;
+$theme-color-gold: var(--reaicc-nav-bg);
 // $theme-color-papayawhip: white;
-$theme-color-papayawhip: papayawhip;
+$theme-color-papayawhip: var(--reaicc-nav-bg);
 $header-height: 60px;
 
 // 自定义滚动条:https://developer.mozilla.org/zh-CN/docs/Web/CSS/::-webkit-scrollbar
