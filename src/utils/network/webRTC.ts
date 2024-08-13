@@ -307,7 +307,7 @@ export class WebRTCClass {
             candidate: event.candidate,
             sender: this.sender,
             receiver: this.receiver,
-            liveRoomId: this.roomId,
+            live_room_id: this.roomId,
           },
         });
       } else {

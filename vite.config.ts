@@ -1,12 +1,11 @@
 import {defineConfig, loadEnv} from 'vite'
-import vue from '@vitejs/plugin-vue'
+// import vue from '@vitejs/plugin-vue'
 import path from "path";
 import viteCompression from 'vite-plugin-compression'
-// mock插件提供的方法
-import {viteMockServe} from 'vite-plugin-mock'
 // import seoPrerender from 'vite-plugin-seo-prerender'
 import Components from 'unplugin-vue-components/vite'
 import {UndrawUiResolver} from 'undraw-ui/es/resolvers'
+import createVitePlugins from './config/plugins'
 
 const routes = [
   {path: '/'},
@@ -18,19 +17,44 @@ function getPrerenderRoutes() {
   return routes.map(route => route.path)
 }
 
-export default defineConfig(({mode}) => {
+export default defineConfig(({command,mode}) => {
   // 加载环境变量
   const env = loadEnv(mode, process.cwd());
   return {
-    plugins: [vue(),
-      viteMockServe({
-        mockPath: './mock/',
-        localEnabled: true,
-        injectCode: `
-          import { setupProdMockServer } from '../mock/live/index'
-          setupProdMockServer()
-          `
-      }),
+    server: {
+      // 服务启动时是否自动打开浏览器
+      open: true,
+      proxy: {
+        '/api': {
+          // target: 'http://182.92.201.19:8070',
+          target: env.VITE_API_BASE_URL, // 使用 import.meta.env 获取环境变量
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+        // '/music': {
+        //   // target: 'http://182.92.201.19:8070',
+        //   target: 'https://api-mu.reaicc.com',
+        //   changeOrigin: true,
+        //   rewrite: (path) => path.replace(/^\/music/, ''),
+        // },
+      },
+      port: 5173
+    },
+    resolve: {
+      alias: {
+        // 如果报错__dirname找不到，需要安装node,执行npm install @types/node --save-dev
+        "@": path.resolve(__dirname, "src"),
+        "@assets": path.resolve(__dirname, "src/assets"),
+        "@components": path.resolve(__dirname, "src/components"),
+        "@images": path.resolve(__dirname, "src/assets/images"),
+        "@views": path.resolve(__dirname, "src/views"),
+        "@store": path.resolve(__dirname, "src/store"),
+        "@plugins": path.resolve(__dirname, "src/plugins"),
+        "@locales": path.resolve(__dirname, "src/hooks/locales"),
+        'script': path.resolve(__dirname, 'script')
+      },
+    },
+    plugins: [ createVitePlugins(env, command === 'build'),
       Components({
         // 配置自动导入 Undraw UI 组件库的解析器
         resolvers: [UndrawUiResolver],
@@ -76,39 +100,6 @@ export default defineConfig(({mode}) => {
         `
         }
       }
-    },
-    server: {
-      // 服务启动时是否自动打开浏览器
-      open: true,
-      proxy: {
-        '/api': {
-          // target: 'http://182.92.201.19:8070',
-          target: env.VITE_API_BASE_URL, // 使用 import.meta.env 获取环境变量
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
-        },
-        // '/music': {
-        //   // target: 'http://182.92.201.19:8070',
-        //   target: 'https://api-mu.reaicc.com',
-        //   changeOrigin: true,
-        //   rewrite: (path) => path.replace(/^\/music/, ''),
-        // },
-      },
-      port: 5173
-    },
-    resolve: {
-      alias: {
-        // 如果报错__dirname找不到，需要安装node,执行npm install @types/node --save-dev
-        "@": path.resolve(__dirname, "src"),
-        "@assets": path.resolve(__dirname, "src/assets"),
-        "@components": path.resolve(__dirname, "src/components"),
-        "@images": path.resolve(__dirname, "src/assets/images"),
-        "@views": path.resolve(__dirname, "src/views"),
-        "@store": path.resolve(__dirname, "src/store"),
-        "@plugins": path.resolve(__dirname, "src/plugins"),
-        "@locales": path.resolve(__dirname, "src/hooks/locales"),
-        'script': path.resolve(__dirname, 'script')
-      },
     },
     // 构建
     build: {

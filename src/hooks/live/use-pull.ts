@@ -446,7 +446,7 @@ export function usePull(roomId: string) {
       socket_id: '',
       msg: danmuStr.value,
       msgType: danmuMsgType.value,
-      live_room_id: Number(roomId),
+      live_room_id: roomId,
       msgIsFile: msgIsFile.value,
       send_msg_time: +new Date(),
       user_agent: navigator.userAgent,

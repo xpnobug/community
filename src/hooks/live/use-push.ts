@@ -183,7 +183,7 @@ export function usePush() {
 
   async function handleUserHasLiveRoom() {
     const res = await fetchUserHasLiveRoom(userId);
-    if (res.status === 200 && res.data.data.live_room) {
+    if (res.status === 200 && res.data.data !== null) {
       liveRoomInfo.value = res.data.data.live_room;
       router.push({
         query: {...route.query, roomId: liveRoomInfo.value?.id},
@@ -301,7 +301,7 @@ export function usePush() {
         requestId: getRandomString(8),
         msgType: WsMsgTypeEnum.msrBlob,
         data: {
-          liveRoomId: roomId.value,
+          live_room_id: roomId.value,
           blob: data.blob,
           blob_id: data.blobId,
           delay: data.delay,
@@ -358,7 +358,7 @@ export function usePush() {
         socket_id: '',
         msg: danmuStr.value,
         msgType: DanmuMsgTypeEnum.danmu,
-        liveRoomId: roomId.value,
+        live_room_id: roomId.value,
         msgIsFile: msgIsFile.value,
         send_msg_time: +new Date(),
         user_agent: navigator.userAgent,

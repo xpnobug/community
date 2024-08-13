@@ -204,9 +204,9 @@ const getMessageCount = async () => {
     show.value = false;
   }
   const token = getToken()
-  if (token) {
-    initWebSocket(token)
-  }
+  // if (token) {
+  //   initWebSocket(token)
+  // }
 }
 
 //页面渲染前

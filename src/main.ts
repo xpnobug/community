@@ -1,4 +1,5 @@
 import {createApp} from 'vue'
+import 'webrtc-adapter';
 import './style.css'
 // 引入全局 CSS 文件
 import '@/assets/pink/css/banner.css';

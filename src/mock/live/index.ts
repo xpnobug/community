@@ -1,5 +1,5 @@
 import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer'
-import login from '../live/live.mock';
+import login from './live.mock';
 const modules = {
   login
   // 其他模块...
