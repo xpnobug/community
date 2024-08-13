@@ -181,9 +181,14 @@ export function usePush() {
       {immediate: true}
   );
 
+  // 检查对象是否为空的辅助函数
+  function isEmptyObject(obj: object): boolean {
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
+  }
+
   async function handleUserHasLiveRoom() {
     const res = await fetchUserHasLiveRoom(userId);
-    if (res.status === 200 && res.data.data !== null) {
+    if (res.status === 200 && !isEmptyObject(res.data.data)) {
       liveRoomInfo.value = res.data.data.live_room;
       router.push({
         query: {...route.query, roomId: liveRoomInfo.value?.id},
