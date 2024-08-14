@@ -130,7 +130,7 @@
                 </span>
               </div>
             </div>
-            <div class="bottom">
+            <div v-if="menuPmView" class="bottom">
               <div class="rtc-config">
                 <div class="item-list">
                   <div class="item">
@@ -201,6 +201,77 @@
                 结束直播
               </n-button>
             </div>
+          </div>
+          <div v-if="!menuPmView" class="bottom">
+            <div class="rtc-config">
+              <div class="item-list">
+                <div class="item">
+                  <div class="txt">码率：</div>
+                  <div class="down small">
+                    <n-select
+                        v-model:value="currentMaxBitrate"
+                        :options="maxBitrate"
+                        size="small"
+                    />
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="txt">帧率：</div>
+                  <div class="down small">
+                    <n-select
+                        v-model:value="currentMaxFramerate"
+                        :options="maxFramerate"
+                        size="small"
+                    />
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="txt">分辨率：</div>
+                  <div class="down big">
+                    <n-select
+                        v-model:value="currentResolutionRatio"
+                        :options="resolutionRatio"
+                        size="small"
+                    />
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="txt">视频内容：</div>
+                  <div class="down small">
+                    <n-select
+                        v-model:value="currentVideoContentHint"
+                        :options="videoContentHint"
+                        size="small"
+                    />
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="txt">音频内容：</div>
+                  <div class="down big">
+                    <n-select
+                        v-model:value="currentAudioContentHint"
+                        :options="audioContentHint"
+                        size="small"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="rtc-network"></div>
+            </div>
+            <n-button
+                v-if="!roomLiving"
+                type="primary"
+                @click="handleStartLive"
+            >
+              开始直播
+            </n-button>
+            <n-button
+                v-else
+                type="error"
+                @click="handleEndLive"
+            >
+              结束直播
+            </n-button>
           </div>
         </div>
       </div>
@@ -451,7 +522,17 @@ import {
 import {AVRecorder} from '@webav/av-recorder';
 import {copyToClipBoard, getRandomString} from 'billd-utils';
 import {fabric} from 'fabric';
-import {computed, markRaw, onMounted, onUnmounted, Raw, reactive, ref, watch,} from 'vue';
+import {
+  computed,
+  getCurrentInstance,
+  markRaw,
+  onMounted,
+  onUnmounted,
+  Raw,
+  reactive,
+  ref,
+  watch,
+} from 'vue';
 import {useRoute} from 'vue-router';
 
 import {fetchLiveRoomOnlineUser} from '@/api/live/live';
@@ -576,6 +657,16 @@ const recordVideoTimer = ref();
 const recordVideoTime = ref('00:00:00');
 let avRecorder: AVRecorder | null = null;
 const loopGetLiveUserTimer = ref();
+
+const menuPmView = ref(true);
+const instance = getCurrentInstance()
+//屏幕大小钮监听事件 true :pc false:mobile
+instance?.proxy?.$Bus.on("pmView", (param) => {
+  menuPmView.value = param;
+})
+watch(() => menuPmView.value, () => {
+  console.log(menuPmView.value)
+})
 
 const rtcRtt = computed(() => {
   const arr: any[] = [];
@@ -858,7 +949,7 @@ watch(
     () => roomId.value,
     (newval) => {
       if (newval) {
-        handleHistoryMsg();
+        // handleHistoryMsg();
       }
     }
 );
@@ -2709,7 +2800,7 @@ function handleStartMedia(item: { type: MediaTypeEnum; txt: string }) {
     margin-left: 10px;
     width: $w-300;
     border-radius: 6px;
-    background-color: white;
+    //background-color: white;
     color: #9499a0;
 
     .resource-card {
@@ -2914,7 +3005,7 @@ function handleStartMedia(item: { type: MediaTypeEnum; txt: string }) {
           padding: 4px;
           width: 70px;
           border-radius: 4px;
-          background-color: $theme-color-gold;
+          background-color: var(--reaicc-nav-bg);
           color: white;
           text-align: center;
           font-size: 12px;
@@ -2959,5 +3050,51 @@ function handleStartMedia(item: { type: MediaTypeEnum; txt: string }) {
       width: $w-300;
     }
   }
+}
+@media screen and (orientation: portrait) {
+  .push-wrap{
+    flex-direction: column;
+    align-items: center;
+    margin: 15px;
+    width: auto;
+  }
+  .push-wrap .left{
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .push-wrap .left .room-control .info .avatar{
+    display: none;
+  }
+  .push-wrap .left .room-control .info{
+    flex-direction: column;
+  }
+  .push-wrap .left .room-control .info .detail .top .name{
+    flex-wrap: wrap;
+  }
+  .push-wrap .left .room-control .info .detail .top{
+    flex-wrap: wrap;
+  }
+  .push-wrap .left .room-control .info .detail .bottom .rtc-config .item-list{
+    flex-wrap: wrap;
+  }
+  .push-wrap .left .room-control .info .detail .bottom{
+    flex-wrap: wrap;
+  }
+  .push-wrap .left .room-control .info .detail .bottom .rtc-config .item-list .item{
+    margin: 5px;
+  }
+  .other{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+  }
+  .push-wrap .right{
+    width: 100%;
+    margin-left: 0;
+  }
+  .danmu-card{
+    display: none;
+  }
+
 }
 </style>

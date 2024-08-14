@@ -238,7 +238,7 @@ function getPayStatus(outTradeNo: string) {
     font-size: 14px;
     .link {
       cursor: pointer;
-      color: $theme-color-gold;
+      color: var(--reaicc-nav-bg);
     }
   }
 }

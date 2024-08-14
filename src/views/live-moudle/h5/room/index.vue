@@ -320,7 +320,7 @@ onMounted(() => {
   });
   getLiveRoomInfo();
   handleSendGetLiveUser(roomId.value);
-  handleHistoryMsg();
+  // handleHistoryMsg();
 });
 
 async function handleHistoryMsg() {
@@ -545,7 +545,7 @@ function startPull() {
       border: 2px solid rgba($color: papayawhip, $alpha: 0.5);
       border-radius: 6px;
       background-color: rgba(0, 0, 0, 0.3);
-      color: $theme-color-gold;
+      color: var(--reaicc-nav-bg);
       font-size: 14px;
       cursor: pointer;
       transform: translate(-50%, -50%);

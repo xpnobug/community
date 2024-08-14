@@ -74,7 +74,7 @@
         <a class="videoTools"
            :class="{active: router.currentRoute.value.name === routerName.profile}"
            @click.prevent="router.push({name: routerName.profile, params: { userId: userStore.userInfo?.userId}})"
-           v-if="loginTip"
+           v-show="isLogin()"
         >
           {{ t('layout.profile') }}
         </a>
@@ -204,7 +204,7 @@ import VPIconChevronDown from '@/views/live-moudle/compontents/icons/VPIconChevr
 
 import {DEFAULT_AUTH_INFO} from '@/constant';
 import {handleTip} from '@/hooks/live/use-common';
-import {loginTip} from '@/hooks/live/use-login';
+import {loginTip,isLogin} from '@/hooks/live/use-login';
 import {routerName} from '@/router';
 import {useAppStore} from '@/store/app';
 import {useUserStore} from '@/store/modules/user';
@@ -372,7 +372,6 @@ onMounted(() => {
 });
 
 function handleStartLive(key: LiveRoomTypeEnum) {
-  console.log("keyyyyyyyyy", key)
   if (!loginTip()) {
     return;
   }
@@ -449,7 +448,7 @@ function handleWebsiteJump() {
         cursor: pointer;
 
         &:hover {
-          color: $theme-color-gold;
+          color: var(--reaicc-nav-bg);
         }
 
         .icon {
@@ -536,7 +535,7 @@ function handleWebsiteJump() {
               width: 5px;
               height: 5px;
               border-radius: 50%;
-              background-color: $theme-color-gold;
+              background-color: var(--reaicc-nav-bg);
               content: '';
               transition: all 0.1s ease;
               transform: translateY(-100%);
@@ -544,7 +543,7 @@ function handleWebsiteJump() {
           }
 
           &:hover {
-            color: $theme-color-gold;
+            color: var(--reaicc-nav-bg);
           }
         }
       }
@@ -555,7 +554,7 @@ function handleWebsiteJump() {
     .about,
     .ecosystem {
       &:hover {
-        color: $theme-color-gold;
+        color: var(--reaicc-nav-bg);
       }
 
       .btn {
@@ -570,7 +569,7 @@ function handleWebsiteJump() {
         }
 
         &:hover {
-          color: $theme-color-gold;
+          color: var(--reaicc-nav-bg);
         }
       }
 
@@ -588,7 +587,7 @@ function handleWebsiteJump() {
           cursor: pointer;
 
           &:hover {
-            color: $theme-color-gold;
+            color: var(--reaicc-nav-bg);
           }
 
           .icon {
@@ -647,7 +646,7 @@ function handleWebsiteJump() {
         cursor: pointer;
 
         &:hover {
-          color: $theme-color-gold;
+          color: var(--reaicc-nav-bg);
         }
       }
 
@@ -663,7 +662,7 @@ function handleWebsiteJump() {
         .btn {
           padding: 5px 15px;
           border-radius: 6px;
-          background-color: $theme-color-gold;
+          background-color: var(--reaicc-nav-bg);
           color: white;
           font-size: 13px;
           cursor: pointer;
@@ -682,7 +681,7 @@ function handleWebsiteJump() {
             cursor: pointer;
 
             &:hover {
-              color: $theme-color-gold;
+              color: var(--reaicc-nav-bg);
             }
 
             &.disabled {
@@ -735,7 +734,7 @@ function handleWebsiteJump() {
             cursor: pointer;
 
             &:hover {
-              color: $theme-color-gold;
+              color: var(--reaicc-nav-bg);
             }
           }
         }
@@ -767,7 +766,7 @@ function handleWebsiteJump() {
 
             &:hover,
             &.active {
-              color: $theme-color-gold;
+              color: var(--reaicc-nav-bg);
             }
 
             &.disabled {

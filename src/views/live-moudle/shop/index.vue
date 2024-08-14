@@ -150,7 +150,7 @@ function startPay(item: IGoods) {
       margin-right: 20px;
       cursor: pointer;
       &.active {
-        color: $theme-color-gold;
+        color: var(--reaicc-nav-bg);
         font-size: 16px;
 
         &::after {
@@ -160,7 +160,7 @@ function startPay(item: IGoods) {
           width: 20px;
           height: 2px;
           border-radius: 10px;
-          background-color: $theme-color-gold;
+          background-color: var(--reaicc-nav-bg);
           content: '';
           transform: translateX(-50%);
         }
@@ -219,7 +219,7 @@ function startPay(item: IGoods) {
           display: flex;
           align-items: center;
           .price {
-            color: $theme-color-gold;
+            color: var(--reaicc-nav-bg);
             font-size: 22px;
           }
           .original-price {

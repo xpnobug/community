@@ -208,20 +208,18 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'; // 引入 Vue 的 onMounted 和 ref 方法
-import { useI18n } from 'vue-i18n'; // 引入 vue-i18n 用于国际化
-import { useRoute, useRouter } from 'vue-router'; // 引入 Vue Router 的相关方法
-import Slider from "@/views/live-moudle/compontents/Slider/index.vue"; // 引入滑动组件
+import {onMounted, ref} from 'vue'; // 引入 Vue 的 onMounted 和 ref 方法
+import {useI18n} from 'vue-i18n'; // 引入 vue-i18n 用于国际化
+import {useRoute, useRouter} from 'vue-router'; // 引入 Vue Router 的相关方法
 import VideoControls from "@/views/live-moudle/compontents/VideoControls/index.vue"; // 引入视频控制组件
 import PullAuthTip from '@/views/live-moudle/compontents/PullAuthTip/index.vue'; // 引入权限提示组件
-
-import { fetchLiveList } from '@/api/live/live'; // 引入获取直播列表的 API 方法
-import { fetchFindLiveConfigByKey } from '@/api/live/liveConfig'; // 引入获取直播配置的 API 方法
-import { sliderList } from '@/constant'; // 引入常量中的滑动列表
-import { usePull } from '@/hooks/live/use-pull'; // 引入自定义的 hook 方法
-import { ILive, LiveLineEnum } from '@/api/live/interface'; // 引入直播相关的接口和枚举
-import { routerName } from '@/router'; // 引入路由名称
-import { useAppStore } from '@/store/app'; // 引入应用状态管理
+import {fetchLiveList} from '@/api/live/live'; // 引入获取直播列表的 API 方法
+import {fetchFindLiveConfigByKey} from '@/api/live/liveConfig'; // 引入获取直播配置的 API 方法
+import {sliderList} from '@/constant'; // 引入常量中的滑动列表
+import {usePull} from '@/hooks/live/use-pull'; // 引入自定义的 hook 方法
+import {ILive, LiveLineEnum} from '@/api/live/interface'; // 引入直播相关的接口和枚举
+import {routerName} from '@/router'; // 引入路由名称
+import {useAppStore} from '@/store/app'; // 引入应用状态管理
 import {
   LiveRoomIsShowEnum,
   LiveRoomPullIsShouldAuthEnum,
@@ -252,7 +250,7 @@ const remoteVideoRef = ref<HTMLDivElement>(); // 远程视频引用
 const docW = document.documentElement.clientWidth; // 文档宽度
 
 // 国际化
-const { t } = useI18n();
+const {t} = useI18n();
 // 获取视频相关的 ref 和方法
 const {
   videoWrapRef, // 视频包装引用
@@ -359,7 +357,7 @@ async function getLiveRoomList() {
 function joinRoom(data: { roomId: number }) {
   router.push({
     name: routerName.pull, // 路由名称
-    params: { roomId: data.roomId }, // 路由参数
+    params: {roomId: data.roomId}, // 路由参数
   });
 }
 </script>
@@ -505,12 +503,12 @@ function joinRoom(data: { roomId: number }) {
             border: 2px solid rgba($color: $theme-color-gold, $alpha: 0.5);
             border-radius: 6px;
             background-color: rgba(0, 0, 0, 0.3);
-            color: $theme-color-gold;
+            color: var(--reaicc-nav-bg);
             font-size: 16px;
             cursor: pointer;
 
             &:hover {
-              background-color: $theme-color-gold;
+              background-color: var(--reaicc-nav-bg);
               color: white;
             }
           }
@@ -580,7 +578,7 @@ function joinRoom(data: { roomId: number }) {
               bottom: 0;
               left: 0;
               z-index: 3;
-              border: 2px solid $theme-color-gold;
+              border: 2px solid var(--reaicc-nav-bg);
               border-radius: 4px;
             }
 
@@ -590,7 +588,7 @@ function joinRoom(data: { roomId: number }) {
               left: 0;
               display: inline-block;
               border: 5px solid transparent;
-              border-right-color: $theme-color-gold;
+              border-right-color: var(--reaicc-nav-bg);
               transform: translate(-100%, -50%);
             }
 
@@ -740,7 +738,7 @@ function joinRoom(data: { roomId: number }) {
         height: calc($w-900 / $video-ratio);
 
         .left {
-          width: $w-900;
+          width: $w-100;
 
           :deep(canvas) {
             max-width: $w-900;
@@ -761,6 +759,31 @@ function joinRoom(data: { roomId: number }) {
     .area-container {
       width: $w-1150;
     }
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .home-wrap .play-container .container {
+    margin: 15px;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .home-wrap .play-container .container .left {
+    height: 220px;
+  }
+  .home-wrap .play-container .container .right {
+    margin-top: 15px;
+    height: 330px;
+  }
+  .home-wrap .play-container .container .right .list{
+    margin: 15px;
+  }
+  .home-wrap .play-container .container .right .list .item{
+    width: 100%;
+  }
+  .area-container {
+    width: 100% !important;
+    margin: 15px !important;
   }
 }
 </style>

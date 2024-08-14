@@ -108,7 +108,7 @@ export default defineComponent({
         font-size: 14px;
       }
       &.next {
-        background: $theme-color-gold;
+        background: var(--reaicc-nav-bg);
         color: white;
         font-weight: 700;
         font-size: 16px;

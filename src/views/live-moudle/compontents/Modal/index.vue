@@ -93,7 +93,7 @@ const emits = defineEmits(['close']);
         width: 280px;
         height: 44px;
         border-radius: 100px;
-        background: $theme-color-gold;
+        background: var(--reaicc-nav-bg);
         color: white;
         text-align: center;
         font-weight: 600;

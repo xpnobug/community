@@ -379,7 +379,7 @@ function changeLiveLine(item: LiveLineEnum) {
         .iten {
           padding: 6px 10px;
           &.active {
-            color: $theme-color-gold;
+            color: var(--reaicc-nav-bg);
           }
           &:not(:last-child) {
             margin-bottom: 4px;

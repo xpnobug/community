@@ -79,33 +79,33 @@
             <div class="item">666点赞</div>
             <div class="item">当前在线:{{ liveUserList.length }}人</div>
           </div>
-          <div class="bottom">
-            <n-popover
-                placement="bottom"
-                trigger="hover"
-            >
-              <template #trigger>
-                <div class="tag">礼物成就</div>
-              </template>
-              <div class="popover-list">
-                <template v-if="giftGroupList.length">
-                  <div
-                      v-for="(item, index) in giftGroupList"
-                      :key="index"
-                      class="item"
-                  >
-                    <div
-                        :style="{ backgroundImage: `url(${item.goods?.cover})` }"
-                        class="ico"
-                    ></div>
-                    <div class="nums">x{{ item.nums }}</div>
-                  </div>
-                </template>
-                <span v-else>{{ t('common.nonedata') }}</span>
-              </div>
-            </n-popover>
-            <div class="tag">人气榜</div>
-          </div>
+<!--          <div class="bottom">-->
+<!--            <n-popover-->
+<!--                placement="bottom"-->
+<!--                trigger="hover"-->
+<!--            >-->
+<!--              <template #trigger>-->
+<!--                <div class="tag">礼物成就</div>-->
+<!--              </template>-->
+<!--              <div class="popover-list">-->
+<!--                <template v-if="giftGroupList.length">-->
+<!--                  <div-->
+<!--                      v-for="(item, index) in giftGroupList"-->
+<!--                      :key="index"-->
+<!--                      class="item"-->
+<!--                  >-->
+<!--                    <div-->
+<!--                        :style="{ backgroundImage: `url(${item.goods?.cover})` }"-->
+<!--                        class="ico"-->
+<!--                    ></div>-->
+<!--                    <div class="nums">x{{ item.nums }}</div>-->
+<!--                  </div>-->
+<!--                </template>-->
+<!--                <span v-else>{{ t('common.nonedata') }}</span>-->
+<!--              </div>-->
+<!--            </n-popover>-->
+<!--            <div class="tag">人气榜</div>-->
+<!--          </div>-->
         </div>
       </div>
       <div
@@ -165,16 +165,16 @@
           <div class="name">{{ item.name }}</div>
           <div class="price">￥{{ formatMoney(item.price) }}</div>
         </div>
-        <div
-            class="item"
-            @click="handleRecharge"
-        >
-          <div class="ico wallet"></div>
-          <div class="name">
-            余额:{{ formatMoney(userStore.userInfo?.wallet?.balance) }}元
-          </div>
-          <div class="price">立即充值</div>
-        </div>
+<!--        <div-->
+<!--            class="item"-->
+<!--            @click="handleRecharge"-->
+<!--        >-->
+<!--          <div class="ico wallet"></div>-->
+<!--          <div class="name">-->
+<!--            余额:{{ formatMoney(userStore.userInfo?.wallet?.balance) }}元-->
+<!--          </div>-->
+<!--          <div class="price">立即充值</div>-->
+<!--        </div>-->
       </div>
     </div>
     <div class="right">
@@ -953,7 +953,7 @@ function handleScrollTop() {
     width: $w-900;
     height: 740px;
     border-radius: 6px;
-    background-color: $theme-color-papayawhip;
+    background-color: var(--reaicc-meta-theme-post-color);;
     color: #61666d;
     vertical-align: top;
 
@@ -992,14 +992,14 @@ function handleScrollTop() {
               margin-left: 10px;
               height: 20px;
               border-radius: 12px;
-              background-color: $theme-color-gold;
+              background-color: var(--reaicc-nav-bg);
               font-size: 12px;
 
               .f-left {
                 display: flex;
                 align-items: center;
                 padding: 0 10px;
-                color: white;
+                color: var(--reaicc-fontcolor);
                 cursor: pointer;
               }
 
@@ -1009,7 +1009,7 @@ function handleScrollTop() {
                 padding: 0 10px;
                 height: 100%;
                 border-radius: 0 12px 12px 0;
-                background-color: #e3e5e7;
+                background-color: var(--reaicc-fontcolor);
               }
             }
 
@@ -1017,15 +1017,17 @@ function handleScrollTop() {
             .loss {
               margin-right: 10px;
               font-size: 14px;
+              color: var(--reaicc-fontcolor);
             }
           }
 
           .bottom {
             font-size: 14px;
+            color: var(--reaicc-fontcolor);
 
             .area {
               margin-left: 10px;
-              color: #9499a0;
+              color: var(--reaicc-fontcolor);
               cursor: pointer;
             }
           }
@@ -1044,6 +1046,7 @@ function handleScrollTop() {
 
           .item {
             margin-right: 10px;
+            color: var(--reaicc-fontcolor);
           }
         }
 
@@ -1055,8 +1058,8 @@ function handleScrollTop() {
             margin-right: 10px;
             padding: 4px 10px;
             border-radius: 10px;
-            background-color: $theme-color-gold;
-            color: white;
+            background-color: var(--reaicc-nav-bg);
+            color: var(--reaicc-fontcolor);
             text-align: center;
             line-height: 1;
             cursor: pointer;
@@ -1114,7 +1117,7 @@ function handleScrollTop() {
         top: 50%;
         left: 50%;
         z-index: 20;
-        color: white;
+        color: var(--reaicc-fontcolor);
         font-size: 28px;
         transform: translate(-50%, -50%);
       }
@@ -1186,7 +1189,7 @@ function handleScrollTop() {
         }
 
         .name {
-          color: #18191c;
+          color: var(--reaicc-fontcolor);
           font-size: 12px;
         }
 
@@ -1205,7 +1208,7 @@ function handleScrollTop() {
     width: $w-250;
     height: 740px;
     border-radius: 6px;
-    background-color: $theme-color-papayawhip;
+    background-color: var(--reaicc-meta-theme-post-color);;
     color: #9499a0;
 
     .rank-wrap {
@@ -1247,7 +1250,7 @@ function handleScrollTop() {
             }
 
             .username {
-              color: black;
+              color: var(--reaicc-fontcolor);
             }
           }
         }
@@ -1273,13 +1276,13 @@ function handleScrollTop() {
         font-size: 13px;
 
         .reward {
-          color: $theme-color-gold;
+          color: var(--reaicc-nav-bg);
           font-weight: bold;
         }
 
         .name,
         .time {
-          color: #9499a0;
+          color: var(--reaicc-fontcolor);
 
           &.system {
             color: red;
@@ -1295,7 +1298,7 @@ function handleScrollTop() {
             .item {
               &:hover {
                 &.operator {
-                  color: $theme-color-gold;
+                  color: var(--reaicc-nav-bg);
                   cursor: pointer;
                 }
               }
@@ -1425,7 +1428,7 @@ function handleScrollTop() {
         width: 70px;
         height: 24px;
         border-radius: 4px;
-        background-color: $theme-color-gold;
+        background-color: var(--reaicc-nav-bg);
         color: white;
         text-align: center;
         font-size: 12px;
@@ -1473,11 +1476,11 @@ function handleScrollTop() {
 
         .item {
           .name {
-            color: white;
+            color: var(--reaicc-fontcolor);
           }
 
           .price {
-            color: black;
+            color: var(--reaicc-fontcolor);
           }
         }
       }
@@ -1523,4 +1526,37 @@ function handleScrollTop() {
     }
   }
 }
+@media screen and (orientation: portrait) {
+  .pull-wrap{
+    width: auto;
+    margin: 15px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pull-wrap .left{
+    width: 100%;
+    height: 430px;
+    margin-bottom: 15px;
+  }
+  .pull-wrap .left .head{
+    height: 150px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pull-wrap .right{
+    width: 100%;
+    height: 300px;
+  }
+  .pull-wrap .left .gift-list{
+    display: none;
+  }
+  ::v-deep(.video-controls-wrap .right .item){
+    font-size: 10px;
+  }
+  .detail .top .name{
+    color: var(--reaicc-fontcolor);
+  }
+}
+
 </style>

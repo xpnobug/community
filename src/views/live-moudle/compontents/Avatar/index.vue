@@ -65,7 +65,7 @@ withDefaults(
       left: 0;
       width: var(--width);
       height: var(--width);
-      border: 1px solid $theme-color-gold;
+      border: 1px solid var(--reaicc-nav-bg);
       border-radius: 50%;
       animation: scaleCycle 1.5s linear infinite;
       &.cycle-1 {

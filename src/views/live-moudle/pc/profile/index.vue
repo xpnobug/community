@@ -272,7 +272,7 @@ async function handleUpdateKey() {
   position: relative;
   padding: 10px;
   .link {
-    color: $theme-color-gold;
+    color: var(--reaicc-nav-bg);
     text-decoration: none;
     cursor: pointer;
   }

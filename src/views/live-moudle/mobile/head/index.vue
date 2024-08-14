@@ -154,7 +154,7 @@ function changeRoute(item: AppRootState['navList'][0]) {
           bottom: 0;
           width: 100%;
           height: 4px;
-          background-color: $theme-color-gold;
+          background-color: var(--reaicc-nav-bg);
           content: '';
         }
       }

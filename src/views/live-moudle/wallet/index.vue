@@ -111,7 +111,7 @@ async function getPayList() {
   .title {
     text-align: center;
     .val {
-      color: $theme-color-gold;
+      color: var(--reaicc-nav-bg);
     }
   }
   .list {

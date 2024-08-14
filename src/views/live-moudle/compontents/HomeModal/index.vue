@@ -40,7 +40,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .link {
-  color: $theme-color-gold;
+  color: var(--reaicc-nav-bg);
   text-decoration: none;
   font-weight: 500;
   cursor: pointer;

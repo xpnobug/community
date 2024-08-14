@@ -211,7 +211,7 @@ onUnmounted(() => {
           bottom: 0;
           width: 100%;
           height: 4px;
-          background-color: $theme-color-gold;
+          background-color: var(--reaicc-nav-bg);
           content: '';
         }
       }
@@ -269,7 +269,7 @@ onUnmounted(() => {
               padding: 0 10px;
               height: 20px;
               border-radius: 8px 0 10px;
-              background-color: $theme-color-gold;
+              background-color: var(--reaicc-nav-bg);
               color: white;
               text-align: center;
               font-size: 12px;

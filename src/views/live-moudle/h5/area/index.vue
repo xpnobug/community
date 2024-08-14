@@ -128,7 +128,7 @@ async function getData() {
           z-index: 10;
           padding: 0 6px;
           border-radius: 8px 0 10px;
-          background-color: $theme-color-gold;
+          background-color: var(--reaicc-nav-bg);
           color: white;
           text-align: center;
           font-size: 12px;

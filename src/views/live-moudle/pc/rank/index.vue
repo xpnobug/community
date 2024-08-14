@@ -433,7 +433,7 @@ onMounted(() => {
       margin: 0 10px;
       height: 40px;
       border-radius: 10px;
-      background-color: $theme-color-gold;
+      background-color: var(--reaicc-nav-bg);
       color: white;
       text-align: center;
       font-weight: bold;
@@ -455,9 +455,9 @@ onMounted(() => {
       margin: 0 auto;
       padding: 2px 5px;
       width: 40px;
-      border: 1px solid $theme-color-gold;
+      border: 1px solid var(--reaicc-nav-bg);
       border-radius: 10px;
-      color: $theme-color-gold;
+      color: var(--reaicc-nav-bg);
       text-align: center;
       font-size: 12px;
       line-height: 1.2;

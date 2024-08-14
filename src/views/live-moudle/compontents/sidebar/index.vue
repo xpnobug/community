@@ -50,7 +50,7 @@ const { t } = useI18n();
   border-radius: 20px 0 0 20px;
   background-color: white;
   box-shadow: 0 0 20px 1px rgba($theme-color-gold, 0.15);
-  color: $theme-color-gold;
+  color: var(--reaicc-nav-bg);
   text-align: center;
   transform: translateY(-50%);
   .item {

@@ -31,3 +31,10 @@ export function commentAuthTip() {
   return true;
 }
 
+export function isLogin(show = false) {
+  const token = getToken();
+  if (!token) {
+    return false;
+  }
+  return true;
+}
