@@ -81,13 +81,8 @@ export default defineConfig(({command,mode}) => {
             name: 'vue',
             var: 'Vue',
             path: `https://unpkg.com/vue@3.4.21/dist/vue.global.js`,
+          },
 
-          },
-          {
-            name: 'vue-router',
-            var: 'VueRouter',
-            path: `https://unpkg.com/vue-router@4.3.2`,
-          },
           {
             name: 'element-plus',
             var: 'ElementPlus',
