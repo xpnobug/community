@@ -56,9 +56,9 @@ const themeOverrides: GlobalThemeOverrides = {
 
 onMounted(() => {
   // initSettings();
-  checkUpdate({
-    htmlUrl: getHostnameUrl(),
-  });
+  // checkUpdate({
+  //   htmlUrl: getHostnameUrl(),
+  // });
   handleUpdate();
   cacheStore.setMuted(true);
   cacheStore.setVolume(0);
