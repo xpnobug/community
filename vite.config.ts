@@ -76,14 +76,7 @@ export default defineConfig(({command,mode}) => {
       }),
       importToCDN({
         // prodUrl: 'https://cdn.jsdelivr.net/npm/{name}@{version}/{path}',
-        modules: [
-          {
-            name: 'element-plus',
-            var: 'ElementPlus',
-            path: 'https://unpkg.com/element-plus@2.7.1/dist/index.full.js',
-            // css: 'https://unpkg.com/element-plus@2.3.3/dist/index.css'
-          },
-        ],
+        modules: [],
       }),
 
       // seoPrerender({
