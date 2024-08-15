@@ -6,7 +6,7 @@ import viteCompression from 'vite-plugin-compression'
 import Components from 'unplugin-vue-components/vite'
 import {UndrawUiResolver} from 'undraw-ui/es/resolvers'
 import createVitePlugins from './config/plugins'
-import { Plugin as importToCDN } from "vite-plugin-cdn-import";
+// import { Plugin as importToCDN } from "vite-plugin-cdn-import";
 
 const routes = [
   {path: '/'},
@@ -74,11 +74,6 @@ export default defineConfig(({command,mode}) => {
         algorithm: 'gzip', // 压缩算法，这里使用 gzip
         ext: '.gz' // 压缩后的文件扩展名
       }),
-      importToCDN({
-        // prodUrl: 'https://cdn.jsdelivr.net/npm/{name}@{version}/{path}',
-        modules: [],
-      }),
-
       // seoPrerender({
       //   //include：需要预渲染的页面路径列表，支持通配符匹配。
       //   // staticDir: 静态文件目录，默认为 “dist”，表示从这个目录中读取静态资源。
