@@ -23,6 +23,7 @@
     "ant-design-vue": "^4.2.1",
     "axios": "^1.2.1",
     "billd-utils": "^0.0.22",
+    "billd-scss": "^0.0.8",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.11",
     "element-plus": "^2.7.1",

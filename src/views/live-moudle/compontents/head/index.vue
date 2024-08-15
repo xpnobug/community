@@ -91,7 +91,7 @@
               >
                 <div class="txt">{{ t('layout.srsLive') }}</div>
               </a>
-              <a
+<!--              <a
                   class="item"
                   @click.prevent="
                   handleStartLive(LiveRoomTypeEnum.forward_bilibili)
@@ -158,7 +158,7 @@
                 >
                   有什么区别？
                 </div>
-              </div>
+              </div>-->
             </div>
           </template>
         </Dropdown>
