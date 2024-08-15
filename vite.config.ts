@@ -1,12 +1,10 @@
 import {defineConfig, loadEnv} from 'vite'
-// import vue from '@vitejs/plugin-vue'
 import path from "path";
 import viteCompression from 'vite-plugin-compression'
 // import seoPrerender from 'vite-plugin-seo-prerender'
 import Components from 'unplugin-vue-components/vite'
 import {UndrawUiResolver} from 'undraw-ui/es/resolvers'
 import createVitePlugins from './config/plugins'
-// import { Plugin as importToCDN } from "vite-plugin-cdn-import";
 
 const routes = [
   {path: '/'},
