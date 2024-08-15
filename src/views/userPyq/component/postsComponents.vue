@@ -74,7 +74,7 @@
 <script lang="ts" setup>
 import {postActionProcessing} from "@/hooks/post.ts";
 import {friendCircleList} from "@/api/article";
-import {defineProps, onMounted, provide, ref, watch} from "vue";
+import { onMounted, provide, ref, watch} from "vue";
 import LikeComponents from "@/views/userPyq/component/likeComponents.vue";
 import {getLikesList} from "@/api/likes";
 import fetchIpAddress from "@/api/useIp";

@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import {defineOptions, h, reactive, ref} from 'vue'
+import { h, reactive, ref} from 'vue'
 import GenConfigDrawer from './GenConfigDrawer.vue'
 import GenPreviewModal from './GenPreviewModal.vue'
 import {generate, listGenerator} from '@/api'

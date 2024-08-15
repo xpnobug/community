@@ -27,7 +27,7 @@
 </template>
 <script lang="ts" setup>
 import {postActionProcessing} from "@/hooks/post.ts";
-import {ref, defineProps} from "vue";
+import {ref} from "vue";
 // 使用 defineProps 一次定义所有的 props
 // 定义 props 并指定 musicList 的类型为 Array
 const props = defineProps({

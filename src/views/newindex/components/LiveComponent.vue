@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {computed, watch,defineProps} from 'vue'
+import {computed, watch} from 'vue'
 import {useRouter} from "vue-router";
 
 const props = defineProps(['posts','loadings'])

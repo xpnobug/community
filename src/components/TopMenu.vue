@@ -10,7 +10,7 @@
         <ul class="menu-ul">
           <!--      logo-->
           <div class="logo" v-if="!isMobile()">
-            <img src="../../public/logo.svg" alt="">
+            <img src="/logo.svg" alt="">
           </div>
 
           <li v-for="item in menuItems" :index="item.id" :key="item.id"  @click="handleMenuItemClick(item)" v-show="pmView" ><a href="#">{{ item.label }}</a></li>

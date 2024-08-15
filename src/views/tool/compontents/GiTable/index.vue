@@ -89,7 +89,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, nextTick, defineEmits, defineOptions, defineProps, useAttrs, useSlots } from 'vue'
+import { ref, computed, watch, useAttrs, useSlots } from 'vue'
 import type { DropdownInstance, TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { VueDraggable } from 'vue-draggable-plus'
 import IconTableSize from "@/views/tool/compontents/icons/IconTableSize.vue";

@@ -32,7 +32,7 @@
   <a-pagination v-model:current="current" @change="onChange" :total="page.count" />
 </template>
 <script lang="ts" setup>
-import {defineProps, onMounted, reactive, ref} from 'vue';
+import {reactive, ref} from 'vue';
 import type { TableColumnsType } from 'ant-design-vue';
 import {deleteById, listByUserId} from "@/api/article";
 import {message} from "ant-design-vue";

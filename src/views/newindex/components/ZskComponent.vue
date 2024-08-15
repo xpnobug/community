@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 //获取用户信息
-import {defineProps, watch,computed} from "vue";
+import {watch,computed} from "vue";
 import {useRouter} from "vue-router";
 import {useDefer} from "@/hooks/useDefer.js";
 import {timeUtils} from "@/store/TimeUtil";

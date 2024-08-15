@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {watch,defineProps, computed} from "vue";
+import {watch, computed} from "vue";
 import {useRouter} from "vue-router";
 
 //获取用户信息

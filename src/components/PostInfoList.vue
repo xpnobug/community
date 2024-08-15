@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import Sudoku from "@/views/user/components/Sudoku.vue";
-import {defineProps, ref, onMounted, onBeforeUnmount} from 'vue';
+import {ref, onMounted, onBeforeUnmount} from 'vue';
 import {isLogin} from '@/utils/auth'
 import {deleteById} from "@/api/article";
 import {message} from "ant-design-vue";

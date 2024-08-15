@@ -17,7 +17,7 @@ import emoji from '@/assets/emoji';
 import {CommentApi, ConfigApi, SubmitParamApi} from 'undraw-ui';
 import {dayjs} from '@/plugins/day';
 import {addComment, commentList} from "@/api/comment";
-import {reactive, ref, watch,defineProps} from "vue";
+import {reactive, ref, watch} from "vue";
 import page from "@/api/base";
 import {message} from "ant-design-vue";
 

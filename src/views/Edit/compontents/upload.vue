@@ -19,7 +19,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref,defineProps, inject, onMounted } from 'vue';
+import { ref, inject, onMounted } from 'vue';
 import type { UploadProps } from 'ant-design-vue';
 import {message} from "ant-design-vue";
 function getBase64(file: File) {

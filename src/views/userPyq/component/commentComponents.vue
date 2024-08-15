@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import {reactive, watch, defineProps, ref} from 'vue';
+import {reactive, watch, ref} from 'vue';
 import emoji from '@/assets/emoji';
 import { CommentApi, ConfigApi, isArray, isObject, SubmitParamApi, UToast } from 'undraw-ui';
 import { dayjs } from '@/plugins/day';

@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineExpose, defineProps, ref, withDefaults } from 'vue'
+import { computed, ref } from 'vue'
 import CodeMirror from 'vue-codemirror6'
 import { javascript } from '@codemirror/lang-javascript'
 import { vue } from '@codemirror/lang-vue'

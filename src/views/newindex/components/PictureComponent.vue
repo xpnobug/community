@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {ref, defineProps } from 'vue';
 const props = defineProps(['posts'])
 import {useRouter} from "vue-router";
 

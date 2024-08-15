@@ -2,7 +2,7 @@
   <a-cascader v-model:value="value" :change="handleChange(value)" :options="options" placeholder="请选择"/>
 </template>
 <script lang="ts" setup>
-import {ref, defineProps, inject, watch} from 'vue';
+import {ref, inject, watch} from 'vue';
 import type {CascaderProps} from 'ant-design-vue';
 
 const props = defineProps({
