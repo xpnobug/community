@@ -6,6 +6,7 @@ import viteCompression from 'vite-plugin-compression'
 import Components from 'unplugin-vue-components/vite'
 import {UndrawUiResolver} from 'undraw-ui/es/resolvers'
 import createVitePlugins from './config/plugins'
+import { Plugin as importToCDN } from "vite-plugin-cdn-import";
 
 const routes = [
   {path: '/'},
@@ -68,11 +69,34 @@ export default defineConfig(({command,mode}) => {
       viteCompression({
         verbose: false, // 启用日志输出，可以设置为 false 关闭
         disable: false, // 是否禁用压缩，默认为 false，即启用压缩
-        deleteOriginFile: false, // 是否删除源文件，默认为 false，即不删除
+        deleteOriginFile: true, // 是否删除源文件，默认为 false，即不删除
         threshold: 5120, // 压缩前最小文件大小，单位为字节，小于该值的文件不会被压缩
         algorithm: 'gzip', // 压缩算法，这里使用 gzip
         ext: '.gz' // 压缩后的文件扩展名
       }),
+      importToCDN({
+        // prodUrl: 'https://cdn.jsdelivr.net/npm/{name}@{version}/{path}',
+        modules: [
+          {
+            name: 'vue',
+            var: 'Vue',
+            path: `https://unpkg.com/vue@3.4.21/dist/vue.global.js`,
+
+          },
+          {
+            name: 'vue-router',
+            var: 'VueRouter',
+            path: `https://unpkg.com/vue-router@4.3.2`,
+          },
+          {
+            name: 'element-plus',
+            var: 'ElementPlus',
+            path: 'https://unpkg.com/element-plus@2.7.1/dist/index.full.js',
+            // css: 'https://unpkg.com/element-plus@2.3.3/dist/index.css'
+          },
+        ],
+      }),
+
       // seoPrerender({
       //   //include：需要预渲染的页面路径列表，支持通配符匹配。
       //   // staticDir: 静态文件目录，默认为 “dist”，表示从这个目录中读取静态资源。
