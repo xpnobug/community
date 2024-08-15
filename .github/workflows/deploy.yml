@@ -1,53 +1,53 @@
 name: main
+
 # 触发workflow的条件
 on:
   push:
-    # 只有master分支发生push事件时，才会触发workflow
-    branches: [master]
+    branches: [master]  # 只有 master 分支发生 push 事件时才会触发 workflow
   pull_request:
-    branches: [master]
+    branches: [master]  # 只有 master 分支的 pull request 事件才会触发 workflow
 
-# jobs表示执行的一项或多项任务
 jobs:
-  build: # 任务的job_id，具体名称自定义，这里build代表打包
-    runs-on: ubuntu-latest # runs-on字段指定运行所需要的虚拟机环境。注意：这个是必填字段
+  build:
+    runs-on: ubuntu-latest  # 运行环境为最新的 Ubuntu 虚拟机
     steps:
-      # 1、检出源码
+      # 1. 检出代码
       - name: Checkout
         uses: actions/checkout@v3
 
-      # 安装node
-      - name: 安装node.js
+      # 2. 安装 Node.js
+      - name: 安装 Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18.12
-          cache: 'npm'
+          node-version: 18.12  # 指定 Node.js 版本
+          cache: 'npm'  # 使用 npm 缓存
 
-      - name: 安装pnpm
-        run: npm install -g pnpm
+      # 3. 安装 pnpm
+      - name: 安装 pnpm
+        run: npm install -g pnpm  # 全局安装 pnpm
 
-      # 装依赖
+      # 4. 安装项目依赖
       - name: 安装依赖
-        run: pnpm i
+        run: pnpm i  # 使用 pnpm 安装依赖
 
-      # 打包
-      - name: 打包
-        run: pnpm run build
+      # 5. 构建项目
+      - name: 打包项目
+        run: pnpm run build  # 执行构建命令
 
-      - name: Install sshpass
-        run: sudo apt-get install -y sshpass
-      # 上传打包资源
-      - name: 上传打包资源
+      # 6. 压缩构建后的文件
+      - name: 压缩构建文件
+        run: tar -czf dist.tar.gz ./dist  # 将 dist 目录压缩为 dist.tar.gz
+
+      # 7. 上传压缩文件到服务器
+      - name: 上传压缩文件
         run: |
-          sshpass -p ${{ secrets.DEPLOY_PASSWORD }} scp -o StrictHostKeyChecking=no -r ./dist/* root@182.92.201.19:/www/wwwroot/community/
+          sshpass -p ${{ secrets.DEPLOY_PASSWORD }} scp -o StrictHostKeyChecking=no dist.tar.gz root@182.92.201.19:/www/wwwroot/community/
         env:
-          REMOTE_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+          REMOTE_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}  # 从 secrets 中获取服务器密码
 
-        # uses: appleboy/ssh-action@v0.1.10
-        # with:
-        #     host: ${{ secrets.DEPLOY_SERVER_HOST }} # 服务器ip地址 ; 需要去仓库的 settings/secrets/actions 去创建
-        #     username: "root" # 服务器用户名称；需要去仓库的 settings/secrets/actions 去创建
-        #     password: ${{ secrets.DEPLOY_PASSWORD }} # 服务器密码；需要去仓库的 settings/secrets/actions 去创建
-        #     port: ${{ secrets.DEPLOY_SERVER_PORT }} # 服务器端口，默认22；需要去仓库的 settings/secrets/actions 去创建
-        #     script: |
-        #        sshpass -p ${{ secrets.DEPLOY_PASSWORD }} scp /dist/* root@8.140.45.252:/www/wwwroot/pan.reaicc.com
+      # 8. 在服务器上解压文件并删除压缩包
+      - name: 解压文件并清理
+        run: |
+          sshpass -p ${{ secrets.DEPLOY_PASSWORD }} ssh -o StrictHostKeyChecking=no root@182.92.201.19 "tar -xzf /www/wwwroot/community/dist.tar.gz -C /www/wwwroot/community/ && rm /www/wwwroot/community/dist.tar.gz"
+        env:
+          REMOTE_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}  # 从 secrets 中获取服务器密码

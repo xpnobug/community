@@ -1,97 +1,11 @@
-<template>
-  <div class="shell" @mouseleave="leave" @mousemove="inmove">
-    <div class="is-showCard">
-      <div v-if="isLogin !== false" :style="djValueSet === false ?'width: 300px':'padding-left: 10px;'"
-           class="simplebar-content snipcss-WosQN">
-        <figure v-show="djValueSet === false"
-                :style="{background: 'url('+userInfo.userCover+') center center / cover no-repeat rgb(255, 255, 255)'}"
-                class="navigation-widget-cover">
-          <img
-              :src="userInfo.userCover"
-              alt="图片"
-              style="display: none;"></figure>
-        <div class="user-short-description" style="">
-          <div :style="djValueSet === false ?
-          'width:110px;height:110px;border:11px solid #fff;cursor:pointer;border-radius:50%;display:block;margin-left:-70px;':
-          'width: 55px; height: 55px; top:30px; margin-left:-33px;'"
-               class="xm-header user-avatar user-short-description-avatar navigation-widget-close"
-          >
-            <div @click="toUserInfo(userInfo)" :style="djValueSet === false ? 'padding:13px':'padding:8px'" class="xm-avatar">
-              <!--                <img-->
-              <!--                    :src="userInfo.avatar" alt="头像"-->
-              <!--                    class=""-->
-              <!--                    style="border-radius: 50%;">-->
-<!--              sm: 32, md: 40, lg: 64, xl: 80, xxl: 85-->
-              <a-avatar :size="djValueSet === false ? { lg: 85,xxl: 86 } : { lg: 40,xxl: 40 }" :src="userInfo.avatar"></a-avatar>
-            </div>
-            <svg :style="djValueSet === false ? 'width:110px;height:110px;':'width:55px;height:55px;'"
-                 viewBox="0 0 100 100">
-              <defs>
-                <linearGradient id="svg84fab083-c425-4697-a768-90ba4d0b4d59" x1="0%" x2="100%"
-                                y1="0%"
-                                y2="0%">
-                  <stop offset="0%"></stop>
-                  <stop offset="100%"></stop>
-                </linearGradient>
-              </defs>
-              <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
-                    stroke="#e9e9f0" stroke-width="8"></path>
-              <path :style="[{strokeDasharray: userInfo.exp + ',287'}]"
-                    d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
-                    stroke="url(#svg84fab083-c425-4697-a768-90ba4d0b4d59)" stroke-width="8"></path>
-            </svg>
-            <div :style="djValueSet === false ? 'box-sizing:content-box;font-size:16.5px;width:27.5px;height:27.5px;border:3px solid #fff;':
-                 'width:20.5px;height:20.5px'"
-                 class="xm-level"
-            ><span
-                style="display:block">{{ userInfo.level }}</span></div>
-          </div>
-          <p  @click="toUserInfo(userInfo)" v-show="djValueSet === false" class="user-short-description-title navigation-widget-close"
-          >
-            <a href="JavaScript:;" style="color:;"> {{ userInfo.nickName }} </a>
-          </p>
-          <p class="user-short-description-text navigation-widget-close">
-            <a
-                href="JavaScript:;">
-            </a></p>
-        </div>
-        <div v-show="djValueSet === false" class="user-stats" style="">
-          <div class="user-stat">
-            <p class="user-stat-title">{{ statistics.publishArticleCount }}</p>
-            <p class="user-stat-text">帖子</p>
-          </div>
-          <div class="user-stat">
-            <p class="user-stat-title">{{ statistics.followCount }}</p>
-            <p class="user-stat-text">关注</p>
-          </div>
-          <div class="user-stat">
-            <p class="user-stat-title">{{ statistics.fansCount }}</p>
-            <p class="user-stat-text">粉丝</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <a href="#" :class="djId === item.id ? 'box active':'box'"
-       v-for="item in menuItems"
-       @click="handleMenuItemClick(item)"
-       v-if="defer"
-    >
-      <i :class="item.icon"></i>
-      <span>{{ item.label }}</span>
-    </a>
-  </div>
-  <div class="right-content-style">
-    <RouterView/>
-  </div>
-</template>
-
 <script setup lang="ts">
 import {getCurrentInstance, ref} from "vue";
 import {useRouter} from "vue-router";
 import {getStatisticsById} from "@/api/statistics";
 import {useDefer} from "@/hooks/useDefer.js";
+import {isLogin} from '@/utils/auth'
+import {useUserStore} from "@/store";
 
-import {menuItems} from "@/hooks/useMenu";
 //定义变量
 const menuPmView = ref();
 const djValueSet = ref(true);
@@ -99,13 +13,9 @@ const instance = getCurrentInstance()
 const router = useRouter();
 const defer = useDefer();
 
-//点击按钮监听事件
-const leave = () => {
-  djValueSet.value = true;
-}
-const inmove = () => {
-  djValueSet.value = false;
-}
+instance?.proxy?.$Bus.on("djValue", (param) => {
+  djValueSet.value = param;
+})
 //屏幕大小钮监听事件 true :pc false:mobile
 instance?.proxy?.$Bus.on("pmView", (param) => {
   menuPmView.value = param;
@@ -113,27 +23,13 @@ instance?.proxy?.$Bus.on("pmView", (param) => {
 //获取登录人信息
 const userInfo = ref({});
 const statistics = ref({});
-instance?.proxy?.$Bus.on("userInfo", (param: any) => {
-  if (param !== null){
-    getStatisticsById(param.userId).then(res => {
-      statistics.value = res.data.data;
-    });
-    userInfo.value = param;
-  }else {
-    console.error("用户信息获取失败")
-  }
-})
-const isLogin = ref(false);
-instance?.proxy?.$Bus.on("isLogins", (param: any) => {
-  isLogin.value = param;
-})
+const userStore = useUserStore();
+userInfo.value = userStore.userInfo;
+console.log(userInfo.value)
+getStatisticsById(localStorage.getItem("userId")).then(res => {
+  statistics.value = res.data.data;
+});
 
-const djId = ref('0');
-const handleMenuItemClick = (item: any) => {
-  djId.value = item.id; // 使用菜单项的name属性作为路由名称
-  router.push({path: item.url})
-  // console.log(routeName, item.url)
-};
 
 const toUserInfo = (item: any) => {
   router.push({path: '/user/' + item.userId})
@@ -141,22 +37,79 @@ const toUserInfo = (item: any) => {
 
 </script>
 
+<template>
+  <!-- 用户信息 -->
+  <div class="is-showCard">
+    <div  v-show="isLogin()" class="simplebar-content">
+      <figure
+              :style="{background: 'url('+userInfo.userCover+') center center / cover no-repeat rgb(255, 255, 255)'}"
+              class="navigation-widget-cover">
+        <img
+            :src="userInfo.userCover"
+            alt="图片"
+            style="display: none;"></figure>
+      <div class="user-short-description" style="">
+        <div :style="djValueSet?
+          'width:110px;height:110px;border:11px solid #fff;cursor:pointer;border-radius:50%;display:block;margin-left:-70px;':
+          'width: 55px; height: 55px; top:30px; margin-left:-33px;'"
+             class="xm-header user-avatar user-short-description-avatar navigation-widget-close"
+        >
+          <div @click="toUserInfo(userInfo)" :style="djValueSet ? 'padding:13px':'padding:8px'" class="xm-avatar">
+            <!--                <img-->
+            <!--                    :src="userInfo.avatar" alt="头像"-->
+            <!--                    class=""-->
+            <!--                    style="border-radius: 50%;">-->
+            <!--              sm: 32, md: 40, lg: 64, xl: 80, xxl: 85-->
+            <a-avatar :size="djValueSet ? { lg: 85,xxl: 86 } : { lg: 40,xxl: 40 }" :src="userInfo.avatar"></a-avatar>
+          </div>
+          <svg :style="djValueSet ? 'width:110px;height:110px;':'width:55px;height:55px;'"
+               viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="svg84fab083-c425-4697-a768-90ba4d0b4d59" x1="0%" x2="100%"
+                              y1="0%"
+                              y2="0%">
+                <stop offset="0%"></stop>
+                <stop offset="100%"></stop>
+              </linearGradient>
+            </defs>
+            <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
+                  stroke="#e9e9f0" stroke-width="8"></path>
+            <path :style="[{strokeDasharray: userInfo.exp + ',287'}]"
+                  d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" fill-opacity="0"
+                  stroke="url(#svg84fab083-c425-4697-a768-90ba4d0b4d59)" stroke-width="8"></path>
+          </svg>
+          <div :style="djValueSet ? 'box-sizing:content-box;font-size:16.5px;width:27.5px;height:27.5px;border:3px solid #fff;':
+                 'width:20.5px;height:20.5px'"
+               class="xm-level"
+          ><span
+              style="display:block">{{ userInfo.level }}</span></div>
+        </div>
+        <p  @click="toUserInfo(userInfo)"  class="user-short-description-title navigation-widget-close"
+        >
+          <a href="JavaScript:;" style="color:red;"> {{ userInfo.nickName }} </a>
+        </p>
+      </div>
+      <div v-show="djValueSet" class="user-stats" style="">
+        <div class="user-stat">
+          <p class="user-stat-title">{{ statistics.publishArticleCount }}</p>
+          <p class="user-stat-text">帖子</p>
+        </div>
+        <div class="user-stat">
+          <p class="user-stat-title">{{ statistics.followCount }}</p>
+          <p class="user-stat-text">关注</p>
+        </div>
+        <div class="user-stat">
+          <p class="user-stat-title">{{ statistics.fansCount }}</p>
+          <p class="user-stat-text">粉丝</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <style scoped>
 
-* {
-  padding: 0;
-  margin: 0;
-  text-decoration: none;
-}
-
-body {
-  background-color: rgb(209, 213, 219);
-  display: flex;
-  justify-content: space-evenly;
-  height: 100vh;
-  align-items: center;
-}
-
+/*-----------------*/
 .simplebar-content:before, .simplebar-content:after {
   content: ' ';
   display: table;
@@ -220,10 +173,9 @@ figure {
   -ms-flex-pack: center;
   justify-content: center;
 }
-
 .user-stats {
   margin-top: 20px;
-  margin-bottom: 10px;
+/*  margin-bottom: 10px;*/
 }
 
 ul {
@@ -545,26 +497,5 @@ a:active, a:hover {
 }
 .shell:nth-child(3) .box{
   color: rgb(140, 120, 240);
-}
-
-.right-content-style {
-  padding-top: 70px;
-  width: 100%;
-  /*height: 100%;*/
-  background-color: var(--global-bg);
-  display: flex;
-  justify-content: center;
-}
-
-/*设置手机端样式*/
-@media screen and (orientation: portrait) {
-  .shell {
-    display: none;
-  }
-  .right-content-style {
-    width: 100%;
-    background-color: var(--global-bg);
-    display: block;
-  }
 }
 </style>

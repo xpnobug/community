@@ -1,18 +1,25 @@
 @font-face {
-  font-family:'Meslo LG';
-  font-style:normal;
-  font-size:12px;
-  src:local('Meslo LG S'),url(https://npm.elemecdn.com/hexo-tool-cc/font/AlimamaFangYuanTiVF-Thin.woff2) format('woff2');
+  font-family: 'Meslo LG';
+  font-style: normal;
+  font-size: 12px;
+  src: local('Meslo LG S'), url(https://npm.elemecdn.com/hexo-tool-cc/font/AlimamaFangYuanTiVF-Thin.woff2) format('woff2');
   font-display: swap;
 }
+
 body {
-  font-family:Meslo LG;
+  font-family: Meslo LG;
   height: 100%;
-  font-size:var(--global-font-size);
-  line-height:1.15;
+  font-size: var(--global-font-size);
+  line-height: 1.15;
   background-color: var(--global-bg);
 }
 
+/* 适用于所有现代浏览器 */
+html, body {
+  overflow: -moz-scrollbars-none; /* 适用于 Firefox */
+  -ms-overflow-style: none; /* 适用于 Internet Explorer 和 Edge */
+  scrollbar-width: none; /* 适用于 Firefox */
+}
 
 :root {
   width: 100%;
@@ -31,8 +38,8 @@ body {
   --global-font-size: 16px;
   --global-bg: #fff;
   --font-color: #4c4948;
-  --hr-border: rgba(161,172,247,0.137);
-  --hr-before-color: rgba(123,139,244,0.137);
+  --hr-border: rgba(161, 172, 247, 0.137);
+  --hr-before-color: rgba(123, 139, 244, 0.137);
   --search-bg: #f6f8fa;
   --search-input-color: #4c4948;
   --search-result-title: #4c4948;
@@ -48,17 +55,17 @@ body {
   --btn-hover-color: #ff7242;
   --btn-color: #fff;
   --btn-bg: var(--reaicc-main);
-  --text-bg-hover: rgba(66,90,239,0.7);
+  --text-bg-hover: rgba(66, 90, 239, 0.7);
   --light-grey: #eee;
   --dark-grey: #cacaca;
   --white: #fff;
   --text-highlight-color: #1f2d3d;
   --blockquote-color: #6a737d;
-  --blockquote-bg: rgba(66,90,239,0.1);
+  --blockquote-bg: rgba(66, 90, 239, 0.1);
   --reward-pop: #f5f5f5;
   --toc-link-color: #666261;
-  --card-box-shadow: 0 3px 8px 6px rgba(7,17,27,0.05);
-  --card-hover-box-shadow: 0 3px 8px 6px rgba(7,17,27,0.09);
+  --card-box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.05);
+  --card-hover-box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.09);
   --pseudo-hover: #ff7242;
   --headline-presudo: var(--reaicc-fontcolor);
   --scrollbar-color: var(--reaicc-scrollbar);
@@ -66,16 +73,16 @@ body {
   --reaicc-deep-purple: #405589;
   --reaicc-meta-theme-color: #f7f9fe;
   --reaicc-bar-background: var(--reaicc-main);
-  --reaicc-theme-op: rgba(66,89,239,0.137);
-  --reaicc-card-bg-none: rgba(255,255,255,0);
+  --reaicc-theme-op: rgba(66, 89, 239, 0.137);
+  --reaicc-card-bg-none: rgba(255, 255, 255, 0);
   --reaicc-main-op-deep: var(--reaicc-theme-op-deep) !important;
-  --reaicc-gray-op: rgba(153,153,153,0.169);
+  --reaicc-gray-op: rgba(153, 153, 153, 0.169);
   --reaicc-theme-top: var(--reaicc-theme);
   --reaicc-white: #fff;
-  --reaicc-white-op: rgba(255,255,255,0.2);
+  --reaicc-white-op: rgba(255, 255, 255, 0.2);
   --reaicc-black: #000;
-  --reaicc-black-op: rgba(0,0,0,0.2);
-  --reaicc-none: rgba(0,0,0,0);
+  --reaicc-black-op: rgba(0, 0, 0, 0.2);
+  --reaicc-none: rgba(0, 0, 0, 0);
   --reaicc-gray: #999;
   --reaicc-yellow: #ffc93e;
   --reaicc-orange: #e38100;
@@ -87,14 +94,14 @@ body {
   --reaicc-main-op: var(--reaicc-theme-op);
   --reaicc-shadow-theme: 0 8px 12px -3px var(--reaicc-theme-op);
   --reaicc-shadow-main: 0 8px 12px -3px var(--reaicc-main-op);
-  --reaicc-shadow-blue: 0 8px 12px -3px rgba(40,109,234,0.2);
-  --reaicc-shadow-white: 0 8px 12px -3px rgba(255,255,255,0.2);
-  --reaicc-shadow-black: 0 0 12px 4px rgba(0,0,0,0.05);
-  --reaicc-shadow-yellow: 0px 38px 77px -26px rgba(255,201,62,0.12);
-  --reaicc-shadow-red: 0 8px 12px -3px rgba(238,125,121,0.212);
-  --reaicc-shadow-green: 0 8px 12px -3px rgba(135,238,121,0.212);
-  --reaicc-shadow-border: 0 8px 16px -4px rgba(44,45,48,0.047);
-  --reaicc-shadow-blackdeep: 0 2px 16px -3px rgba(0,0,0,0.15);
+  --reaicc-shadow-blue: 0 8px 12px -3px rgba(40, 109, 234, 0.2);
+  --reaicc-shadow-white: 0 8px 12px -3px rgba(255, 255, 255, 0.2);
+  --reaicc-shadow-black: 0 0 12px 4px rgba(0, 0, 0, 0.05);
+  --reaicc-shadow-yellow: 0px 38px 77px -26px rgba(255, 201, 62, 0.12);
+  --reaicc-shadow-red: 0 8px 12px -3px rgba(238, 125, 121, 0.212);
+  --reaicc-shadow-green: 0 8px 12px -3px rgba(135, 238, 121, 0.212);
+  --reaicc-shadow-border: 0 8px 16px -4px rgba(44, 45, 48, 0.047);
+  --reaicc-shadow-blackdeep: 0 2px 16px -3px rgba(0, 0, 0, 0.15);
   --reaicc-logo-color: linear-gradient(215deg, #4584ff 0%, #cf0db9 100%);
   --reaicc-code-stress: var(--reaicc-main);
   --style-border: 1px solid var(--reaicc-card-border);
@@ -106,52 +113,53 @@ body {
   --style-border-none: 1px solid transparent;
   --style-border-deep-ash: 1px solid #d0d7de;
   --style-border-hover-always: 1px solid var(--reaicc-main);
-  --reaicc-main-none: rgba(184,184,184,0) !important;
+  --reaicc-main-none: rgba(184, 184, 184, 0) !important;
   --reaicc-wihite-font: #fff;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
 }
 
 @media (prefers-color-scheme: light) {
 }
+
 [data-theme="light"] {
   --reaicc-meta-theme-post-color: #fff;
   --reaicc-meta-theme-color: #f7f9fe;
-  --reaicc-theme-op-deep: rgba(66,89,239,0.867);
+  --reaicc-theme-op-deep: rgba(66, 89, 239, 0.867);
   --global-bg: #f8f8f8;
   --reaicc-theme: #425aef;
   --reaicc-theme-deep: #1856fb;
-  --reaicc-theme-op: rgba(66,89,239,0.137);
+  --reaicc-theme-op: rgba(66, 89, 239, 0.137);
   --reaicc-blue: #5ca1ff;
-  --reaicc-blue-tint: rgba(92,161,255,0.1);
+  --reaicc-blue-tint: rgba(92, 161, 255, 0.1);
   --reaicc-red: #d8213c;
   --reaicc-pink: #ff7c7c;
   --reaicc-green: #57bd6a;
   --reaicc-fontcolor: #363636;
   --reaicc-background: #f7f9fe;
   --reaicc-reverse: #000;
-  --reaicc-maskbg: rgba(255,255,255,0.6);
-  --reaicc-maskbgdeep: rgba(255,255,255,0.85);
-  --reaicc-scrollbar: rgba(60,60,67,0.4);
+  --reaicc-maskbg: rgba(255, 255, 255, 0.6);
+  --reaicc-maskbgdeep: rgba(255, 255, 255, 0.85);
+  --reaicc-scrollbar: rgba(60, 60, 67, 0.4);
   --reaicc-hovertext: var(--reaicc-theme);
   --reaicc-ahoverbg: #f7f7fa;
   --reaicc-lighttext: var(--reaicc-main);
-  --reaicc-secondtext: rgba(60,60,67,0.8);
-  --reaicc-scrollbar: rgba(60,60,67,0.4);
+  --reaicc-secondtext: rgba(60, 60, 67, 0.8);
+  --reaicc-scrollbar: rgba(60, 60, 67, 0.4);
   --reaicc-card-btn-bg: #edf0f7;
   --reaicc-post-blockquote-bg: #fafcff;
   --reaicc-post-tabs-bg: #f2f5f8;
   --reaicc-secondbg: #f7f7f9;
-  --reaicc-shadow-nav: 0 5px 12px -5px rgba(102,68,68,0.05);
+  --reaicc-shadow-nav: 0 5px 12px -5px rgba(102, 68, 68, 0.05);
   --reaicc-card-bg: #fff;
-  --reaicc-shadow-lightblack: 0 5px 12px -5px rgba(102,68,68,0);
-  --reaicc-shadow-light2black: 0 5px 12px -5px rgba(102,68,68,0);
+  --reaicc-shadow-lightblack: 0 5px 12px -5px rgba(102, 68, 68, 0);
+  --reaicc-shadow-light2black: 0 5px 12px -5px rgba(102, 68, 68, 0);
   --reaicc-card-border: #e3e8f7;
-  --reaicc-shadow-lightblack: 0 5px 12px -5px rgba(102,68,68,0);
-  --reaicc-shadow-light2black: 0 5px 12px -5px rgba(102,68,68,0);
+  --reaicc-shadow-lightblack: 0 5px 12px -5px rgba(102, 68, 68, 0);
+  --reaicc-shadow-light2black: 0 5px 12px -5px rgba(102, 68, 68, 0);
   --reaicc-wihite-font: #fff;
 
   --reaicc-nav-bg: #5c67ff;
@@ -172,20 +180,145 @@ body {
   --message-text: #2c303a;
   --placeholder-text: #a2a4bc;
   --button-bg: #fff;
+
+  /*  left nav*/
+  --4h-m_A: light;
+  --Zpa-KA: #00c4cc;
+  --eGVbng: #8b3dff;
+  --M5_pvA: #7731d8;
+  --boKKWg: #612dae;
+  --oqurdw: rgba(64, 87, 109, .07);
+  --d1p99w: #fff;
+  --17LfHw: rgba(36, 49, 61, .4);
+  --EgWgfg: rgba(13, 18, 22, 0);
+  --X3--Zg: rgba(64, 87, 109, .07);
+  --xfy86Q: rgba(57, 76, 96, .15);
+  --p53f_Q: rgba(13, 18, 22, 0);
+  --REcY5g: #0d1216;
+  --XajtPQ: rgba(36, 49, 61, .4);
+  --FVk7Ew: rgba(165, 112, 255, .15);
+  --2-zmYA: rgba(165, 112, 255, .15);
+  --ySYdsQ: rgba(165, 112, 255, .2);
+  --aMXh3A: rgba(64, 87, 109, .07);
+  --_RN1Dg: #612dae;
+  --8fGzbw: rgba(36, 49, 61, .4);
+  --ob8tTA: rgba(13, 18, 22, 0);
+  --MghLXQ: rgba(64, 87, 109, .07);
+  --3R4u8w: rgba(57, 76, 96, .15);
+  --TwiLcg: rgba(13, 18, 22, 0);
+  --QeQ0Dw: #0d1216;
+  --TZOI7A: rgba(36, 49, 61, .4);
+  --SZMkXA: rgba(165, 112, 255, .15);
+  --1zesEA: rgba(165, 112, 255, .15);
+  --AMxRgw: rgba(165, 112, 255, .2);
+  --BZ60Jw: rgba(64, 87, 109, .07);
+  --8Ex5gA: #612dae;
+  --spIP2A: rgba(36, 49, 61, .4);
+  --KtXlRg: rgba(17, 23, 29, .6);
+  --QADODw: rgba(13, 18, 22, .7);
+  --kTBxcw: rgba(13, 18, 22, .86);
+  --HxK_kw: rgba(17, 23, 29, .6);
+  --6u-yJQ: #fff;
+  --J0YKvA: hsla(0, 0%, 100%, .7);
+  --yrvb-A: rgba(57, 76, 96, .15);
+  --nwNs8w: rgba(43, 59, 74, .3);
+  ---tf09g: rgba(57, 76, 96, .15);
+  --x0GzuQ: rgba(57, 76, 96, .15);
+  --VfoYEg: #fff;
+  --nbAwww: hsla(0, 0%, 100%, .5);
+  --Shm3YQ: rgba(64, 87, 109, .07);
+  --z7Xq7A: rgba(57, 76, 96, .15);
+  --m9sa8w: rgba(53, 71, 90, .2);
+  --aj4L_w: rgba(64, 87, 109, .07);
+  --pj2xMA: #0d1216;
+  --3YOFOw: rgba(36, 49, 61, .4);
+  --c23L8g: #8b3dff;
+  --scq9vQ: #e7dbff;
+  --feCw5g: #fff;
+  --FMoRFg: #0d1216;
+  --7psRVw: #008009;
+  --QVtuYg: #36a137;
+  --71VQUQ: #096d11;
+  --Lf8mkA: rgba(64, 87, 109, .07);
+  --Ii7YFw: #c3eac4;
+  --W6KtsA: #fff;
+  --WCLNrQ: #0d1216;
+  --Unijpw: rgba(36, 49, 61, .4);
+  --DXueYw: #1a62ff;
+  --3KQj6A: #3d8bff;
+  --Czi__Q: #1855d8;
+  ---vsWXQ: rgba(64, 87, 109, .07);
+  --pYULlw: #cce1ff;
+  --MjnIDA: #fff;
+  --v7HVIg: #0d1216;
+  --vD3B3g: rgba(36, 49, 61, .4);
+  --23ZOVQ: #ad5a00;
+  --VbVKHg: #d17600;
+  --zvQOHA: #944f05;
+  --21KaLA: rgba(64, 87, 109, .07);
+  --ydZUSA: #ffd9ad;
+  --5uESMg: #fff;
+  --OQ2gpA: #0d1216;
+  --87SmIg: rgba(36, 49, 61, .4);
+  --jTT_jQ: #db142c;
+  --2hPbag: #fd4958;
+  --nRrzRQ: #b61629;
+  ---Xfh1Q: rgba(64, 87, 109, .07);
+  --1MO0IQ: #ffd6d8;
+  --eLjurg: #fff;
+  --fs4QpA: #0d1216;
+  ---Evg2A: rgba(36, 49, 61, .4);
+  --Tp54Vw: #ebecf0;
+  --pf_JRQ: rgba(235, 236, 240, .7);
+  --ys5XGg: rgba(235, 236, 240, 0);
+  --dVucJw: #f6f7f8;
+  --u6VULg: rgba(246, 247, 248, .7);
+  --cm5OeQ: rgba(246, 247, 248, 0);
+  --C-q6Ig: #fff;
+  --Pj6GZQ: hsla(0, 0%, 100%, .7);
+  --r6MHXQ: hsla(0, 0%, 100%, 0);
+  --4RaSjg: #fff;
+  --F6F2NQ: hsla(0, 0%, 100%, .7);
+  --389KIw: hsla(0, 0%, 100%, 0);
+  --VNXpSw: #0d1216;
+  --5F8MFw: rgba(13, 18, 22, .86);
+  --JEAqPw: rgba(13, 18, 22, .7);
+  --3V_biw: rgba(17, 23, 29, .6);
+  --P69qRQ: #008009;
+  --fg0S1Q: #1a62ff;
+  --MRX9rw: #ad5a00;
+  --bk41Zw: #db142c;
+  --kTTJvw: #b61629;
+  --llP47A: #db142c;
+  ---8UyGw: #8b3dff;
+  ---1ShxA: #7731d8;
+  --FFgy5g: #8b3dff;
+  --Zya5eQ: rgba(53, 71, 90, .2);
+  --9_Lxmw: rgba(28, 39, 48, .5);
+  --xAYPzA: #8b3dff;
+  --VjFOWQ: rgba(57, 76, 96, .15);
+  --nOtbOg: #db142c;
+  --OuCkCQ: rgba(57, 76, 96, .15);
+  ---UopgA: rgba(28, 39, 48, .5);
+  --620Maw: var(--Zya5eQ);
+  --TBPmDQ: var(--xAYPzA);
+  --UzSy6g: var(--VjFOWQ);
+  --olfr3Q: rgba(28, 39, 48, .5)
 }
 
 @media (prefers-color-scheme: dark) {
 }
+
 [data-theme="dark"] {
   --reaicc-meta-theme-post-color: #1d1e22;
   --reaicc-meta-theme-color: #000;
   --reaicc-blue: #5ca1ff;
-  --reaicc-blue-tint: rgba(92,161,255,0.1);
-  --reaicc-theme-op-deep: rgba(0,132,255,0.867);
+  --reaicc-blue-tint: rgba(92, 161, 255, 0.1);
+  --reaicc-theme-op-deep: rgba(0, 132, 255, 0.867);
   --global-bg: #18171d;
   --reaicc-theme: #f2b94b;
   --reaicc-theme-deep: #0076e5;
-  --reaicc-theme-op: rgba(242,185,75,0.137);
+  --reaicc-theme-op: rgba(242, 185, 75, 0.137);
   --reaicc-blue: #0084ff;
   --reaicc-red: #ff3842;
   --reaicc-pink: #ff7c7c;
@@ -193,25 +326,25 @@ body {
   --reaicc-fontcolor: #f7f7fa;
   --reaicc-background: #18171d;
   --reaicc-reverse: #fff;
-  --reaicc-maskbg: rgba(0,0,0,0.6);
-  --reaicc-maskbgdeep: rgba(0,0,0,0.85);
+  --reaicc-maskbg: rgba(0, 0, 0, 0.6);
+  --reaicc-maskbgdeep: rgba(0, 0, 0, 0.85);
   --reaicc-hovertext: #0a84ff;
   --reaicc-ahoverbg: #fff;
-  --reaicc-scrollbar: rgba(200,200,223,0.4);
+  --reaicc-scrollbar: rgba(200, 200, 223, 0.4);
   --reaicc-lighttext: #f2b94b;
   --reaicc-secondtext: #a1a2b8;
-  --reaicc-scrollbar: rgba(200,200,223,0.4);
+  --reaicc-scrollbar: rgba(200, 200, 223, 0.4);
   --reaicc-card-btn-bg: #30343f;
   --reaicc-post-blockquote-bg: #000;
   --reaicc-post-tabs-bg: #121212;
   --reaicc-secondbg: #21232a;
-  --reaicc-shadow-nav: 0 5px 20px 0px rgba(28,28,28,0.4);
+  --reaicc-shadow-nav: 0 5px 20px 0px rgba(28, 28, 28, 0.4);
   --reaicc-card-bg: #1d1e22;
-  --reaicc-shadow-lightblack: 0 5px 12px -5px rgba(102,68,68,0);
-  --reaicc-shadow-light2black: 0 5px 12px -5px rgba(102,68,68,0);
+  --reaicc-shadow-lightblack: 0 5px 12px -5px rgba(102, 68, 68, 0);
+  --reaicc-shadow-light2black: 0 5px 12px -5px rgba(102, 68, 68, 0);
   --reaicc-card-border: #42444a;
-  --reaicc-shadow-lightblack: 0 5px 12px -5px rgba(102,68,68,0);
-  --reaicc-shadow-light2black: 0 5px 12px -5px rgba(102,68,68,0);
+  --reaicc-shadow-lightblack: 0 5px 12px -5px rgba(102, 68, 68, 0);
+  --reaicc-shadow-light2black: 0 5px 12px -5px rgba(102, 68, 68, 0);
   --reaicc-wihite-font: #f6f6f6;
   /*----*/
   --reaicc-nav-bg: #1d1e22;
@@ -225,13 +358,137 @@ body {
   --navigation-box-shadow: 0px 0px 8px 0px #282b33;
   --chat-background: #3c3f56;
   --message-bg: #2c3046;
-  --message-text: rgba(255,255,255,0.8);
+  --message-text: rgba(255, 255, 255, 0.8);
   --placeholder-text: #fff;
   --navigation-bg: #3c3f56;
   --button-bg: #3c3f56;
   --main-color: #6f74ff;
   --message-bg-2: #6f74ff;
   --link-color: #c0c1c5;
+
+  /*  left nav*/
+  --4h-m_A: dark;
+  --Zpa-KA: #00c4cc;
+  --eGVbng: #8b3dff;
+  --M5_pvA: #7731d8;
+  --boKKWg: #612dae;
+  --oqurdw: hsla(0, 0%, 100%, .07);
+  --d1p99w: #fff;
+  --17LfHw: hsla(0, 0%, 100%, .4);
+  --EgWgfg: hsla(0, 0%, 100%, 0);
+  --X3--Zg: hsla(0, 0%, 100%, .07);
+  --xfy86Q: hsla(0, 0%, 100%, .15);
+  --p53f_Q: hsla(0, 0%, 100%, 0);
+  --REcY5g: #fff;
+  --XajtPQ: hsla(0, 0%, 100%, .4);
+  --FVk7Ew: rgba(165, 112, 255, .3);
+  --2-zmYA: rgba(165, 112, 255, .3);
+  --ySYdsQ: rgba(165, 112, 255, .2);
+  --aMXh3A: hsla(0, 0%, 100%, .15);
+  --_RN1Dg: #fff;
+  --8fGzbw: hsla(0, 0%, 100%, .4);
+  --ob8tTA: hsla(0, 0%, 100%, 0);
+  --MghLXQ: hsla(0, 0%, 100%, .07);
+  --3R4u8w: hsla(0, 0%, 100%, .15);
+  --TwiLcg: hsla(0, 0%, 100%, 0);
+  --QeQ0Dw: #fff;
+  --TZOI7A: hsla(0, 0%, 100%, .4);
+  --SZMkXA: rgba(165, 112, 255, .3);
+  --1zesEA: rgba(165, 112, 255, .3);
+  --AMxRgw: rgba(165, 112, 255, .2);
+  --BZ60Jw: hsla(0, 0%, 100%, .15);
+  --8Ex5gA: #fff;
+  --spIP2A: hsla(0, 0%, 100%, .4);
+  --KtXlRg: rgba(17, 23, 29, .6);
+  --QADODw: rgba(13, 18, 22, .7);
+  --kTBxcw: rgba(13, 18, 22, .86);
+  --HxK_kw: rgba(17, 23, 29, .6);
+  --6u-yJQ: #fff;
+  --J0YKvA: hsla(0, 0%, 100%, .4);
+  --yrvb-A: hsla(0, 0%, 100%, .15);
+  --nwNs8w: hsla(0, 0%, 100%, .3);
+  ---tf09g: hsla(0, 0%, 100%, .15);
+  --x0GzuQ: hsla(0, 0%, 100%, .15);
+  --VfoYEg: #fff;
+  --nbAwww: hsla(0, 0%, 100%, .4);
+  --Shm3YQ: hsla(0, 0%, 100%, .07);
+  --z7Xq7A: hsla(0, 0%, 100%, .15);
+  --m9sa8w: hsla(0, 0%, 100%, .2);
+  --aj4L_w: hsla(0, 0%, 100%, .07);
+  --pj2xMA: #fff;
+  --3YOFOw: hsla(0, 0%, 100%, .4);
+  --c23L8g: #8b3dff;
+  --scq9vQ: #4a2e7f;
+  --feCw5g: #fff;
+  --FMoRFg: #fff;
+  --7psRVw: #008009;
+  --QVtuYg: #36a137;
+  --71VQUQ: #096d11;
+  --Lf8mkA: hsla(0, 0%, 100%, .07);
+  --Ii7YFw: #16461a;
+  --W6KtsA: #fff;
+  --WCLNrQ: #fff;
+  --Unijpw: hsla(0, 0%, 100%, .4);
+  --DXueYw: #1a62ff;
+  --3KQj6A: #3d8bff;
+  --Czi__Q: #1855d8;
+  ---vsWXQ: hsla(0, 0%, 100%, .07);
+  --pYULlw: #1d3b7c;
+  --MjnIDA: #fff;
+  --v7HVIg: #fff;
+  --vD3B3g: hsla(0, 0%, 100%, .4);
+  --23ZOVQ: #ad5a00;
+  --VbVKHg: #d17600;
+  --zvQOHA: #944f05;
+  --21KaLA: hsla(0, 0%, 100%, .07);
+  --ydZUSA: #563715;
+  --5uESMg: #fff;
+  --OQ2gpA: #fff;
+  --87SmIg: hsla(0, 0%, 100%, .4);
+  --jTT_jQ: #db142c;
+  --2hPbag: #fd4958;
+  --nRrzRQ: #b61629;
+  ---Xfh1Q: hsla(0, 0%, 100%, .07);
+  --1MO0IQ: #721d27;
+  --eLjurg: #fff;
+  --fs4QpA: #fff;
+  ---Evg2A: hsla(0, 0%, 100%, .4);
+  --Tp54Vw: #0d1216;
+  --pf_JRQ: rgba(13, 18, 22, .7);
+  --ys5XGg: rgba(13, 18, 22, 0);
+  --dVucJw: #18191b;
+  --u6VULg: rgba(24, 25, 27, .7);
+  --cm5OeQ: rgba(24, 25, 27, 0);
+  --C-q6Ig: #18191b;
+  --Pj6GZQ: rgba(24, 25, 27, .7);
+  --r6MHXQ: rgba(24, 25, 27, 0);
+  --4RaSjg: #252627;
+  --F6F2NQ: rgba(37, 38, 39, .7);
+  --389KIw: rgba(37, 38, 39, 0);
+  --VNXpSw: hsla(0, 0%, 100%, .9);
+  --5F8MFw: hsla(0, 0%, 100%, .8);
+  --JEAqPw: hsla(0, 0%, 100%, .7);
+  --3V_biw: hsla(0, 0%, 100%, .5);
+  --P69qRQ: #61bd62;
+  --fg0S1Q: #6ba9ff;
+  --MRX9rw: #ec9909;
+  --bk41Zw: #fd4958;
+  --kTTJvw: #ff8088;
+  --llP47A: #fd4958;
+  ---8UyGw: #a570ff;
+  ---1ShxA: #bc97fc;
+  --FFgy5g: #a570ff;
+  --Zya5eQ: hsla(0, 0%, 100%, .2);
+  --9_Lxmw: hsla(0, 0%, 100%, .5);
+  --xAYPzA: #a570ff;
+  --VjFOWQ: hsla(0, 0%, 100%, .15);
+  --nOtbOg: #fd4958;
+  --OuCkCQ: hsla(0, 0%, 100%, .15);
+  ---UopgA: hsla(0, 0%, 100%, .4);
+  --620Maw: var(--Zya5eQ);
+  --TBPmDQ: var(--xAYPzA);
+  --UzSy6g: var(--VjFOWQ);
+  --olfr3Q: rgba(28, 39, 48, .5)
 }
 
 .icon-comment, .icon-thumbs-up, .icon-friend, .icon-info, .icon-group, .icon-marketplace, .icon-add-friend, .icon-remove-friend, .icon-delete, .icon-send-message, .icon-settings, .icon-cross-thin, .icon-newsfeed, .icon-overview, .icon-members, .icon-badges, .icon-quests, .icon-streams, .icon-events, .icon-events-monthly, .icon-events-weekly, .icon-events-daily, .icon-pin, .icon-ticket, .icon-forums, .icon-profile, .icon-timeline, .icon-photos, .icon-videos, .icon-blog-posts, .icon-forum, .icon-store, .icon-share, .icon-pinned, .icon-status, .icon-big-grid-view, .icon-small-grid-view, .icon-list-grid-view, .icon-poll, .icon-camera, .icon-gif, .icon-tags, .icon-trophy, .icon-return, .icon-clock, .icon-earnings, .icon-wallet, .icon-item, .icon-revenue {
@@ -250,6 +507,7 @@ body {
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
   padding: 28px;
 }
+
 .box .public .contents .left-content {
   margin: 15px;
   /*width: -webkit-fill-available;*/
@@ -280,7 +538,14 @@ body {
 stop:nth-child(2) {
   stop-color: #ff3370 !important;
 }
+
 .content-grid {
-  max-width: 1184px;
-  /* padding: 54px 0 32px; */
+  /*max-width: 1184px;*/
+  display: flex;
+  justify-content: center;
+  padding-top: 32px;
+}
+.content-grid .content-view{
+  margin: 10px;
+  width: 1156px;
 }

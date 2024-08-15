@@ -28,9 +28,8 @@ const page = reactive<Page>({
 </script>
 
 <template>
-  <div class="content-grid"
-       style="width: 100%; transition: transform 0.4s ease-in-out 0s;">
-    <div style="margin: 10px;">
+  <div class="content-grid">
+    <div class="content-view" style="margin: 10px; width: 1556px;">
       <div class="section-banner"
            style="background: url(https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/aedadfd944b6b44687f68d45eca091af.png?imageMogr2/crop/2368x320/gravity/center) center center / cover no-repeat; cursor: default;">
         <p class="section-banner-title"></p>
@@ -106,10 +105,6 @@ const page = reactive<Page>({
 }
 
 
-.content-grid {
-  max-width: 1184px;
-  /*padding: 54px 0 32px;*/
-}
 .section-banner {
   min-height: 160px;
   /*padding: 52px 60px 0 200px;*/

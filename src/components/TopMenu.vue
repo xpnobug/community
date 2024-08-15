@@ -1,17 +1,18 @@
 <template>
   <div class="menu-main">
+    <div @click="updateMenuDJ">
+      <button class="_1QoxDw Qkd66A tYI0Vw o4TrkA cclg9A YPTJew lsXp_w cwOZMg zQlusQ uRvRjQ _3AH3gw _1QhF8A snipcss-rF2B7" type="button" aria-label="主菜单"><span class="TcNIhA"><span aria-hidden="true" class="NA_Img dkWypw"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" fill-rule="evenodd" d="M5.75 5.25h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 0 1 0-1.5zm0 6h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 1 1 0-1.5zm0 6h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 1 1 0-1.5z"></path>
+            </svg></span></span></button>
+    </div>
     <div class="menu-list">
       <nav style="flex-grow: 1;">
         <ul class="menu-ul">
           <!--      logo-->
-          <div class="logo">
+          <div class="logo" v-if="!isMobile()">
             <img src="../../public/logo.svg" alt="">
           </div>
-          <li @click="updateMenuDJ">
-<!--            <el-icon>-->
-<!--              <icon-menu/>-->
-<!--            </el-icon>-->
-          </li>
+
           <li v-for="item in menuItems" :index="item.id" :key="item.id"  @click="handleMenuItemClick(item)" v-show="pmView" ><a href="#">{{ item.label }}</a></li>
         </ul>
       </nav>
@@ -22,7 +23,7 @@
         <SearchComponents/>
         <el-button v-if="sfLogin === false" style="margin-right:10px;" type="primary" @click="login">登录</el-button>
         <div v-else style="display: flex; ">
-          <a-popover
+          <a-popover v-if="!isMobile()"
               v-model:open="postpush"
               :getPopupContainer="(triggerNode) => triggerNode.parentNode" trigger="click">
             <a-badge style="margin-right:10px;">
@@ -36,7 +37,7 @@
           </a-popover>
 
 
-          <a-popover v-model:open="visible" :getPopupContainer="(triggerNode) => triggerNode.parentNode"
+          <a-popover v-if="!isMobile()" v-model:open="visible" :getPopupContainer="(triggerNode) => triggerNode.parentNode"
                      trigger="click">
             <a-badge style="margin-right:10px;">
               <a-avatar shape="square" size="large" style="font-size: 12px">
@@ -80,6 +81,7 @@ import MessageIndex from "@/views/message/messageIndex.vue";
 import {getToken} from "@/utils/auth";
 import {getUnreadMessageCount} from "@/api";
 import {createFromIconfontCN} from "@ant-design/icons-vue";
+import {isMobile} from "@/utils";
 // SVG 图标
 const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/c/font_1898478_6kwgvtuqt0b.js',
@@ -158,7 +160,7 @@ const updateMenuDJ = () => {
     instance?.proxy?.$Bus.emit("djValue", djValue.value)
   }
   emit();
-  console.log(djValue.value);
+  // console.log(djValue.value);
 }
 
 const login = () => {
@@ -236,11 +238,12 @@ onMounted(() => {
 }
 
 .menu-main {
-position: fixed;
-/*overflow: hidden;*/
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+  position: sticky;
   top: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 5;
 }
 
 .menu-main {
@@ -316,9 +319,6 @@ input[type="text"], input[type="password"] {
   .menu-main {
     display: flex;
     height: 54px;
-    /*justify-content: space-between;*/
-    /*align-items: center;*/
-    /*padding: 0 20px;*/
   }
 
   .menu-ul {
@@ -328,6 +328,150 @@ input[type="text"], input[type="password"] {
     margin-right: 0;
     list-style: none;
   }
+}
+
+
+/*----button--------*/
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  outline: 0;
+}
+
+.tYI0Vw {
+  word-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: always;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  text-size-adjust: none;
+  font-family: Canva Sans,Noto Sans Variable,Noto Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;
+  font-variation-settings: "opsz" 0;
+  font-weight: 400;
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.tYI0Vw {
+  font-size: calc(var(--wQwVGw, .1rem)*14);
+  line-height: calc(var(--wQwVGw, .1rem)*22);
+}
+
+.tYI0Vw {
+  font-weight: 600;
+}
+
+.Qkd66A {
+  --vRM1SA: transparent;
+  --GoqvEg: transparent;
+  --mjBh2A: var(--vRM1SA);
+  --D3X_-g: var(--vRM1SA);
+  --l6Y1Zg: var(--vRM1SA);
+  --1Scd5Q: var(--GoqvEg);
+  --KSrVXA: var(--D3X_-g);
+  --cFdXew: var(--GoqvEg);
+  --HlSkDQ: var(--mjBh2A);
+  --GxPE8Q: var(--KSrVXA);
+  --_LQA6w: var(--l6Y1Zg);
+  --2UdU2w: var(--1Scd5Q);
+  --_eU_MA: 0px;
+  ---JoBUw: transparent;
+  --2G1rlQ: var(---JoBUw);
+  --jH0mCg: var(---JoBUw);
+  --WbaFJQ: var(--2G1rlQ);
+  align-items: center;
+  background-color: var(--vRM1SA);
+  border: var(--_eU_MA) solid var(---JoBUw);
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: var(--GoqvEg);
+  cursor: pointer;
+  display: inline-flex;
+  height: 40px;
+  max-width: 100%;
+  min-width: 80px;
+  vertical-align: middle;
+}
+
+.YPTJew {
+  --vRM1SA: var(--ob8tTA);
+  --GoqvEg: var(--QeQ0Dw);
+  --mjBh2A: var(--MghLXQ);
+  --D3X_-g: var(--3R4u8w);
+  --l6Y1Zg: var(--TwiLcg);
+  --1Scd5Q: var(--TZOI7A);
+  --KSrVXA: var(--SZMkXA);
+  --cFdXew: var(--8Ex5gA);
+  --HlSkDQ: var(--1zesEA);
+  --GxPE8Q: var(--AMxRgw);
+  --_LQA6w: var(--BZ60Jw);
+  --2UdU2w: var(--spIP2A);
+}
+
+.o4TrkA {
+  outline: none;
+}
+
+.cclg9A {
+  min-width: unset;
+}
+
+.lsXp_w {
+  height: 40px;
+  padding: 0 calc(16px - var(--_eU_MA));
+}
+
+._3AH3gw {
+  width: 40px;
+}
+
+.cwOZMg {
+  justify-content: center;
+}
+
+.uRvRjQ.Qkd66A {
+  transition: background-color .1s linear,border-color .1s linear,color .1s linear;
+}
+
+.Qkd66A.zQlusQ:hover {
+  background-color: var(--mjBh2A);
+}
+
+.TcNIhA {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+.uRvRjQ > .TcNIhA:not(._1oCVHg)  {
+  transition: opacity .15s ease-in-out;
+}
+
+.dkWypw {
+  align-items: center;
+  box-sizing: border-box;
+  display: inline-flex;
+}
+
+.NA_Img {
+  height: 24px;
+  width: 24px;
+}
+
+.dkWypw:before {
+  content: "\00200B";
+  line-height: 1;
+  width: 0;
+}
+
+.dkWypw > svg  {
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 </style>

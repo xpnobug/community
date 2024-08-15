@@ -282,16 +282,16 @@ body[data-type="friends"] p  {
     object-position: 50% 50%;
 }
 
-html {
-    color: var(--text_color_primary) !important;
-    background-color: var(--background_color_page);
-    overflow-x: hidden;
-    overflow-y: scroll;
-    -webkit-user-select: none;
-    /* Safari */
-    user-select: none;
-    cursor: default;
-}
+/*html {*/
+/*    color: var(--text_color_primary) !important;*/
+/*    background-color: var(--background_color_page);*/
+/*    overflow-x: hidden;*/
+/*    overflow-y: scroll;*/
+/*    -webkit-user-select: none;*/
+/*    !* Safari *!*/
+/*    user-select: none;*/
+/*    cursor: default;*/
+/*}*/
 
 html.fullscreen {
     overflow: hidden;

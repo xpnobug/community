@@ -37,6 +37,7 @@ const storeSetup = () => {
     email: '',
     phone: '',
     avatar: '',
+    userCover:'',
     pwdResetTime: '',
     pwdExpired: false,
     registrationDate: '',
@@ -117,6 +118,8 @@ const storeSetup = () => {
     // userInfo.avatar = getAvatar(res.data.avatar, res.data.gender)
     userInfo.avatar = res.data.data.avatar
     userInfo.userId = res.data.data.userId;
+    userInfo.nickname = res.data.data.nickname;
+    userInfo.userCover = res.data.data.userCover;
     if (res.data.roles && res.data.roles.length) {
       roles.value = res.data.roles
       permissions.value = res.data.permissions

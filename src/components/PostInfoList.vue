@@ -295,24 +295,24 @@ onBeforeUnmount(() => {
   }
 }
 
-.content {
-  /* 添加过度效果 */
+/*.content {
+  !* 添加过度效果 *!
   transition: transform 0.4s ease;
 }
 
-/* 奇数盒子 */
+!* 奇数盒子 *!
 .content:nth-child(odd) {
   transform: translateX(110%);
 }
 
-/* 偶数盒子 */
+!* 偶数盒子 *!
 .content:nth-child(even) {
   transform: translateX(-110%);
 }
 
 .content.content-center {
   transform: translateX(0);
-}
+}*/
 
 /* 或者，如果 .content 确实是它的父元素的第一个 .content 子元素，
    那么也可以使用 :first-of-type 来选择它 */

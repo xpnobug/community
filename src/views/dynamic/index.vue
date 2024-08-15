@@ -1,6 +1,6 @@
 <template>
   <div class="content-grid">
-    <div>
+    <div class="content-view">
       <div class="section-banner"
            style="background: url(https://alist.reaicc.com/nas/image/jpeg/2024-04/1/084059cc-5f23-45eb-b1b8-789c74d6a908.jpg) center center / cover no-repeat; cursor: pointer;">
         <p class="section-banner-title"></p>
@@ -46,7 +46,7 @@ export default {
 }
 
 .content-grid {
-  max-width: 1184px;
+  /*max-width: 1184px;*/
   /*padding: 54px 0 32px;*/
   /*padding-top: 84px;*/
   transition: transform 0.4s ease-in-out 0s;

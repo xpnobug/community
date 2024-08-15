@@ -59,12 +59,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.content-grid {
-  max-width: 1184px;
-  /* padding: 54px 0 32px; */
-}
-
-
 .section-header {
   display: -ms-flexbox;
   display: flex;

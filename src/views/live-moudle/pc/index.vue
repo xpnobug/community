@@ -1,15 +1,17 @@
 <template>
-  <n-config-provider :theme-overrides="themeOverrides">
-    <n-dialog-provider>
-      <HeadCpt />
-      <HomeModal
-          :show="showModal"
-          :content="modalContent"
-      ></HomeModal>
-      <HomeIndex />
-<!--      <SidebarCpt />-->
-    </n-dialog-provider>
-  </n-config-provider>
+  <div class="content-grid">
+    <n-config-provider :theme-overrides="themeOverrides">
+      <n-dialog-provider>
+        <HeadCpt />
+        <HomeModal
+            :show="showModal"
+            :content="modalContent"
+        ></HomeModal>
+        <HomeIndex />
+        <!--      <SidebarCpt />-->
+      </n-dialog-provider>
+    </n-config-provider>
+  </div>
 </template>
 
 <script lang="ts">

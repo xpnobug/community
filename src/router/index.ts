@@ -10,9 +10,9 @@ import Friends from "@/views/userPyq/index.vue";
 import Chat from "@/views/newchat/demo1/index.vue";
 import Channels from "@/views/channelbk/index.vue";
 import Live from "@/views/live-moudle/pc/index.vue";
-import MobileLayout from "@/views/live-moudle/mobile/index.vue"
-
-import {isIPad, isMobile} from "billd-utils";
+import GeneralCode from "@/views/tool/generator/index.vue";
+import {useUserStore} from "@/store";
+import {message} from "ant-design-vue";
 
 /**
  * vue-router历史模式的问题： vue3中历史模式默认改为了HTML5模式：createWebHistory()
@@ -124,6 +124,11 @@ const defaultRoutes: RouteRecordRaw[] = [
         name: 'channels',
         component: Channels,
       },
+      {
+        path: '/tool/generator',
+        name: 'generator',
+        component: GeneralCode,
+      },
 
       {
         path: '/task',
@@ -186,49 +191,45 @@ const defaultRoutes: RouteRecordRaw[] = [
         path: '/push',
         component: () => import('@/views/live-moudle/push/index.vue'),
       },
-      {
-        path: '/tool/generator',
-        name: 'generator',
-        component: () => import('@/views/tool/generator/index.vue'),
-      }
+
     ]
   },
-  {
-    path: '/h5',
-    component: MobileLayout,
-    children: [
-      {
-        name: mobileRouterName.h5,
-        path: '',
-        component: () => import('@/views/live-moudle/h5/index.vue'),
-      },
-      {
-        name: mobileRouterName.h5Area,
-        path: 'area/:id',
-        component: () => import('@/views/live-moudle/h5/area/index.vue'),
-      },
-      {
-        name: mobileRouterName.h5Rank,
-        path: 'rank',
-        component: () => import('@/views/live-moudle/h5/rank/index.vue'),
-      },
-      {
-        name: mobileRouterName.h5Profile,
-        path: 'profile',
-        component: () => import('@/views/live-moudle/h5/profile/index.vue'),
-      },
-    ],
-  },
-  {
-    name: mobileRouterName.h5Room,
-    path: '/h5/:roomId',
-    component: () => import('@/views/live-moudle/h5/room/index.vue'),
-  },
-  // {
-  //   name: routerName.oauth,
-  //   path: '/oauth',
-  //   component: () => import('@/views/oauth/index.vue'),
-  // },
+  /*  {
+      path: '/h5',
+      component: MobileLayout,
+      children: [
+        {
+          name: mobileRouterName.h5,
+          path: '',
+          component: () => import('@/views/live-moudle/h5/index.vue'),
+        },
+        {
+          name: mobileRouterName.h5Area,
+          path: 'area/:id',
+          component: () => import('@/views/live-moudle/h5/area/index.vue'),
+        },
+        {
+          name: mobileRouterName.h5Rank,
+          path: 'rank',
+          component: () => import('@/views/live-moudle/h5/rank/index.vue'),
+        },
+        {
+          name: mobileRouterName.h5Profile,
+          path: 'profile',
+          component: () => import('@/views/live-moudle/h5/profile/index.vue'),
+        },
+      ],
+    },
+    {
+      name: mobileRouterName.h5Room,
+      path: '/h5/:roomId',
+      component: () => import('@/views/live-moudle/h5/room/index.vue'),
+    },
+    // {
+    //   name: routerName.oauth,
+    //   path: '/oauth',
+    //   component: () => import('@/views/oauth/index.vue'),
+    // },*/
 ];
 
 const router = createRouter({
@@ -241,6 +242,23 @@ const router = createRouter({
     // },
   ],
   history: createWebHistory(),
+});
+
+// 全局路由守卫
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore();
+
+  // 检查访问的路由是否是 '/tool/generator'
+  if (to.path === '/tool/generator') {
+    if (userStore.userInfo.userId !== '001') {
+      // 用户不是管理员，重定向到错误页面
+      message.error('您没有权限访问此页面');
+      return next({path: '/error', query: {msg: '您没有权限访问此页面'}});
+    }
+  }
+
+  // 继续导航
+  next();
 });
 
 // router.beforeEach((to, from, next) => {

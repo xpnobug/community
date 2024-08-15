@@ -1,12 +1,13 @@
 /** 用户类型 */
 export interface UserInfo {
-  id: string
+  userId: string
   username: string
   nickname: string
   gender: 0 | 1 | 2
   email: string
   phone: string
   avatar: string
+  userCover: string
   pwdResetTime: string
   pwdExpired: boolean
   registrationDate: string

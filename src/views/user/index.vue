@@ -22,8 +22,8 @@ instance?.proxy?.$Bus.on("menuId", (param: any) => {
 
 <template>
   <div class="content-grid"
-       style="width: 100%;  transform: translate(261.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
-    <div class="">
+       style=" transform: translate(261.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
+    <div class="content-view">
       <div class="loading" style="display: none;">
         <div class="page-loader">
           <div class="page-loader-info"><p class="page-loader-info-text">加载中...</p></div>
@@ -88,10 +88,7 @@ instance?.proxy?.$Bus.on("menuId", (param: any) => {
     grid-template-columns: 0 92% 0 !important;
   }
 }
-.content-grid {
-  max-width: 1184px;
-  /*padding: 54px 0 32px;*/
-}
+
 
 .grid.grid-3-6-3 {
   grid-template-areas: 'sidebar1 content sidebar2';
