@@ -765,6 +765,7 @@ function joinRoom(data: { roomId: number }) {
 @media screen and (orientation: portrait) {
   .home-wrap .play-container .container {
     margin: 15px;
+    width: 400px;
     flex-direction: column;
     justify-content: space-around;
   }
