@@ -69,7 +69,7 @@
                                   <ul class="YxrMgA _25vNWQ _9Mb__A" role="list" id=":r4lg:" aria-labelledby=":r4lh:">
                                     <li class="k__oiw _9Mb__A" v-for="item in menuItems">
                                       <a @click="handleMenuItemClick(item)" href="#" class="_1QoxDw DNpAZA o4TrkA CA2Rbg fgQwew zQlusQ uRvRjQ oGPTlw YPTJew Qkd66A tYI0Vw vCeYsQ a_AtFA TZTGpw"
-                                         aria-label="品牌 - 高级版功能">
+                                         aria-label="高级版功能">
 																			<span class="JyB_vw" style="--8ZV4pQ: 8px; --5kmWhA: center;">
 																				<span class="yYw_FA Zxv8Qg">
 																					<div class="Da1_FQ">
@@ -88,7 +88,7 @@
 																									</p>
 																								</span>
 																							</span>
-																							<span class="r7sYbA">
+<!--																							<span class="r7sYbA">
 																								<span class="Mv7ZNQ">
 																									<span class="ND60fA GFDO_A ShdDsQ _31xSpA UQIxBA">
 																										<span class="vkK5cw UQIxBA">
@@ -103,11 +103,11 @@
 																										</span>
 																									</span>
 																								</span>
-																							</span>
+																							</span>-->
 																						</div>
 																					</div>
 																				</span>
-																				<span class="yYw_FA Zxv8Qg">
+<!--																				<span class="yYw_FA Zxv8Qg">
 																					<span aria-hidden="true" class="NA_Img dkWypw lmfTqA">
 																						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                                  fill="none">
@@ -115,12 +115,12 @@
 																							</path>
 																						</svg>
 																					</span>
-																				</span>
+																				</span>-->
 																			</span>
                                       </a>
                                     </li>
                                     <li class="k__oiw _9Mb__A">
-                                      <a href="/magic-home" class="_1QoxDw DNpAZA o4TrkA CA2Rbg fgQwew uRvRjQ oGPTlw YPTJew Qkd66A tYI0Vw vCeYsQ a_AtFA TZTGpw">
+                                      <a href="#" class="_1QoxDw DNpAZA o4TrkA CA2Rbg fgQwew uRvRjQ oGPTlw YPTJew Qkd66A tYI0Vw vCeYsQ a_AtFA TZTGpw">
 																		<span class="JyB_vw" style="--8ZV4pQ: 8px; --5kmWhA: center;">
 																			<span class="yYw_FA Zxv8Qg">
 																				<div class="Da1_FQ">

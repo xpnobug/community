@@ -4,7 +4,7 @@ import {useDefer} from "@/hooks/useDefer.js";
 import getMenuData from "@/router/menuUtil";
 import NavComponent from "@/components/navComponent/index.vue";
 import FooterView from "@/views/footer/FooterView.vue";
-import H5Index from "@/components/navComponent/h5Index.vue";
+import H5Index from "@/components/navComponent/NavMobileMenu.vue";
 import {isMobile} from "@/utils";
 const defer = useDefer();
 const menu = getMenuData();
