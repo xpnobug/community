@@ -67,7 +67,7 @@ export default defineConfig(({command,mode}) => {
       viteCompression({
         verbose: false, // 启用日志输出，可以设置为 false 关闭
         disable: false, // 是否禁用压缩，默认为 false，即启用压缩
-        deleteOriginFile: true, // 是否删除源文件，默认为 false，即不删除
+        deleteOriginFile: false, // 是否删除源文件，默认为 false，即不删除
         threshold: 5120, // 压缩前最小文件大小，单位为字节，小于该值的文件不会被压缩
         algorithm: 'gzip', // 压缩算法，这里使用 gzip
         ext: '.gz' // 压缩后的文件扩展名
