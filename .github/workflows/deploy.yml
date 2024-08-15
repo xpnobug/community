@@ -1,53 +1,64 @@
 name: main
 
-# 触发workflow的条件
+# 触发工作流的条件
 on:
   push:
-    branches: [master]  # 只有 master 分支发生 push 事件时才会触发 workflow
+    branches: [master]  # 只有 master 分支的 push 事件才会触发工作流
   pull_request:
-    branches: [master]  # 只有 master 分支的 pull request 事件才会触发 workflow
+    branches: [master]  # 只有 master 分支的 pull request 事件才会触发工作流
 
 jobs:
   build:
     runs-on: ubuntu-latest  # 运行环境为最新的 Ubuntu 虚拟机
     steps:
       # 1. 检出代码
-      - name: Checkout
+      - name: 检出代码
         uses: actions/checkout@v3
 
       # 2. 安装 Node.js
       - name: 安装 Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18.12  # 指定 Node.js 版本
-          cache: 'npm'  # 使用 npm 缓存
+          node-version: 18.12  # 设置 Node.js 版本
+          cache: 'npm'  # 启用 npm 缓存以加快安装速度
 
-      # 3. 安装 pnpm
+      # 3. 安装 pnpm 包管理工具
       - name: 安装 pnpm
         run: npm install -g pnpm  # 全局安装 pnpm
 
-      # 4. 安装项目依赖
+      # 4. 缓存 pnpm 存储和 node_modules 目录
+      - name: 缓存 pnpm 存储和 node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pnpm-store
+            node_modules  # 缓存 pnpm store 和 node_modules 目录以加速后续构建
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      # 5. 安装项目依赖
       - name: 安装依赖
-        run: pnpm i  # 使用 pnpm 安装依赖
+        run: pnpm i  # 使用 pnpm 安装项目所需的依赖
 
-      # 5. 构建项目
+      # 6. 打包项目
       - name: 打包项目
-        run: pnpm run build  # 执行构建命令
+        run: pnpm run build  # 执行构建命令，生成生产环境代码
 
-      # 6. 压缩构建后的文件
+      # 7. 压缩构建后的文件
       - name: 压缩构建文件
-        run: tar -czf dist.tar.gz ./dist  # 将 dist 目录压缩为 dist.tar.gz
+        run: tar -czf dist.tar.gz ./dist  # 将构建后的 dist 目录压缩为 dist.tar.gz 文件
 
-      # 7. 上传压缩文件到服务器
+      # 8. 上传压缩文件到服务器
       - name: 上传压缩文件
         run: |
           sshpass -p ${{ secrets.DEPLOY_PASSWORD }} scp -o StrictHostKeyChecking=no dist.tar.gz root@182.92.201.19:/www/wwwroot/community/
         env:
-          REMOTE_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}  # 从 secrets 中获取服务器密码
+          REMOTE_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}  # 从 secrets 中获取服务器的登录密码
 
-      # 8. 在服务器上解压文件并删除压缩包
+      # 9. 在服务器上解压文件并删除压缩包
       - name: 解压文件并清理
         run: |
           sshpass -p ${{ secrets.DEPLOY_PASSWORD }} ssh -o StrictHostKeyChecking=no root@182.92.201.19 "tar -xzf /www/wwwroot/community/dist.tar.gz -C /www/wwwroot/community/ && rm /www/wwwroot/community/dist.tar.gz"
         env:
-          REMOTE_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}  # 从 secrets 中获取服务器密码
+          REMOTE_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}  # 从 secrets 中获取服务器的登录密码
