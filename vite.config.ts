@@ -78,12 +78,6 @@ export default defineConfig(({command,mode}) => {
         // prodUrl: 'https://cdn.jsdelivr.net/npm/{name}@{version}/{path}',
         modules: [
           {
-            name: 'vue',
-            var: 'Vue',
-            path: `https://unpkg.com/vue@3.4.21/dist/vue.global.js`,
-          },
-
-          {
             name: 'element-plus',
             var: 'ElementPlus',
             path: 'https://unpkg.com/element-plus@2.7.1/dist/index.full.js',
