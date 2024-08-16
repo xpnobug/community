@@ -104,7 +104,7 @@ const storeSetup = () => {
     try {
       await logoutApi()
       await logoutCallBack()
-      localStorage.removeItem("billd_live___token");
+      localStorage.removeItem("live_token");
       return true
     } catch (error) {
       return false

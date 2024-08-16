@@ -68,7 +68,7 @@ const emits = defineEmits(['close']);
     box-sizing: border-box;
     padding: 20px;
     border-radius: 10px;
-    background-color: #fff;
+    background-color: var(--eGVbng);
     font-size: 14px;
     transform: translate(-50%, -50%);
     .title {
