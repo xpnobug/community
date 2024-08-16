@@ -115,6 +115,7 @@ const storeSetup = () => {
   const getInfo = async () => {
     const res = await getUserInfoApi()
     Object.assign(userInfo, res.data.data)
+    localStorage.setItem('userId', userInfo.userId === null ? 'null' :  userInfo.userId );
     // userInfo.avatar = getAvatar(res.data.avatar, res.data.gender)
     userInfo.avatar = res.data.data.avatar
     userInfo.userId = res.data.data.userId;

@@ -59,6 +59,7 @@ http.interceptors.response.use(
           localStorage.removeItem('userInfo');
           localStorage.removeItem('live_token');
           localStorage.setItem("userId", 'null');
+          localStorage.removeItem("user");
         } else if (response.data.code === 403) {
           message.error('没有权限');
         }

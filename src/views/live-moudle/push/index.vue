@@ -1,113 +1,115 @@
 <template>
-  <div class="push-wrap">
-    <div
-        ref="topRef"
-        class="left"
-    >
+  <div class="content-grid">
+    <div class="push-wrap">
       <div
-          ref="containerRef"
-          class="container"
-      >
-        <div
-            class="screenshot"
-            @click="handleScreenshot"
-        >
-          <n-popover
-              :flip="false"
-              placement="top"
-              trigger="hover"
-          >
-            <template #trigger>
-              <n-icon
-                  :color="THEME_COLOR"
-                  size="26"
-              >
-                <Camera></Camera>
-              </n-icon>
-            </template>
-            <div class="slider">截屏</div>
-          </n-popover>
-        </div>
-        <div
-            v-if="recording"
-            class="recording"
-        >
-          ● REC {{ recordVideoTime }}
-        </div>
-        <div
-            class="record-ico"
-            @click="handleRecordVideo"
-        >
-          <n-popover
-              :flip="false"
-              placement="top"
-              trigger="hover"
-          >
-            <template #trigger>
-              <n-icon
-                  :color="recording ? 'red' : THEME_COLOR"
-                  size="26"
-              >
-                <Videocam v-if="!recording"></Videocam>
-                <VideocamOffSharp v-else></VideocamOffSharp>
-              </n-icon>
-            </template>
-            <div class="slider">{{ !recording ? '开始录制' : '结束录制' }}</div>
-          </n-popover>
-        </div>
-        <canvas
-            id="pushCanvasRef"
-            ref="pushCanvasRef"
-        ></canvas>
-        <div
-            v-if="appStore.allTrack.filter((item) => !item.hidden).length <= 0"
-            class="add-wrap"
-        >
-          <n-space>
-            <n-button
-                v-for="(item, index) in allMediaTypeList"
-                :key="index"
-                class="item"
-                @click="handleStartMedia(item)"
-            >
-              {{ item.txt }}
-            </n-button>
-          </n-space>
-        </div>
-      </div>
+          ref="topRef"
+          class="left"
 
-      <div
-          ref="bottomRef"
-          class="room-control"
       >
-        <div class="info">
+        <div
+            ref="containerRef"
+            class="container"
+        >
           <div
-              :style="{ backgroundImage: `url(${userStore.userInfo?.avatar})` }"
-              class="avatar"
-          ></div>
-          <div class="detail">
-            <div class="top">
-              <div class="name">
-                <div class="ipt">
-                  <n-input-group>
-                    <n-input
-                        v-model:value="roomName"
-                        placeholder="输入房间名"
-                        size="small"
-                    />
-                    <n-button
-                        size="small"
-                        type="primary"
-                        @click="confirmRoomName"
-                    >
-                      确定
-                    </n-button>
-                  </n-input-group>
+              class="screenshot"
+              @click="handleScreenshot"
+          >
+            <n-popover
+                :flip="false"
+                placement="top"
+                trigger="hover"
+            >
+              <template #trigger>
+                <n-icon
+                    :color="THEME_COLOR"
+                    size="26"
+                >
+                  <Camera></Camera>
+                </n-icon>
+              </template>
+              <div class="slider">截屏</div>
+            </n-popover>
+          </div>
+          <div
+              v-if="recording"
+              class="recording"
+          >
+            ● REC {{ recordVideoTime }}
+          </div>
+          <div
+              class="record-ico"
+              @click="handleRecordVideo"
+          >
+            <n-popover
+                :flip="false"
+                placement="top"
+                trigger="hover"
+            >
+              <template #trigger>
+                <n-icon
+                    :color="recording ? 'red' : THEME_COLOR"
+                    size="26"
+                >
+                  <Videocam v-if="!recording"></Videocam>
+                  <VideocamOffSharp v-else></VideocamOffSharp>
+                </n-icon>
+              </template>
+              <div class="slider">{{ !recording ? '开始录制' : '结束录制' }}</div>
+            </n-popover>
+          </div>
+          <canvas
+              id="pushCanvasRef"
+              ref="pushCanvasRef"
+          ></canvas>
+          <div
+              v-if="appStore.allTrack.filter((item) => !item.hidden).length <= 0"
+              class="add-wrap"
+          >
+            <n-space>
+              <n-button
+                  v-for="(item, index) in allMediaTypeList"
+                  :key="index"
+                  class="item"
+                  @click="handleStartMedia(item)"
+              >
+                {{ item.txt }}
+              </n-button>
+            </n-space>
+          </div>
+        </div>
+
+        <div
+            ref="bottomRef"
+            class="room-control"
+        >
+          <div class="info">
+            <div
+                :style="{ backgroundImage: `url(${userStore.userInfo?.avatar})` }"
+                class="avatar"
+            ></div>
+            <div class="detail">
+              <div class="top">
+                <div class="name">
+                  <div class="ipt">
+                    <n-input-group>
+                      <n-input
+                          v-model:value="roomName"
+                          placeholder="输入房间名"
+                          size="small"
+                      />
+                      <n-button
+                          size="small"
+                          type="primary"
+                          @click="confirmRoomName"
+                      >
+                        确定
+                      </n-button>
+                    </n-input-group>
+                  </div>
+                  <div class="item">延迟：{{ rtcRtt || '-' }}</div>
+                  <div class="item">丢包：{{ rtcLoss || '-' }}</div>
                 </div>
-                <div class="item">延迟：{{ rtcRtt || '-' }}</div>
-                <div class="item">丢包：{{ rtcLoss || '-' }}</div>
-              </div>
-              <div class="other">
+                <div class="other">
                 <span
                     v-if="NODE_ENV === 'development'"
                     class="item"
@@ -118,19 +120,91 @@
                       liveRoomTypeEnumMap[appStore.liveRoomInfo?.type || '']
                     }}</span>
                 </span>
-                <span
-                    class="item share"
-                    @click="handleShare"
-                >
+                  <span
+                      class="item share"
+                      @click="handleShare"
+                  >
                   分享直播间
                 </span>
-                <span class="item">
+                  <span class="item">
                   正在观看：
                   {{ liveUserList.length }}
                 </span>
+                </div>
+              </div>
+              <div v-if="menuPmView" class="bottom">
+                <div class="rtc-config">
+                  <div class="item-list">
+                    <div class="item">
+                      <div class="txt">码率：</div>
+                      <div class="down small">
+                        <n-select
+                            v-model:value="currentMaxBitrate"
+                            :options="maxBitrate"
+                            size="small"
+                        />
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="txt">帧率：</div>
+                      <div class="down small">
+                        <n-select
+                            v-model:value="currentMaxFramerate"
+                            :options="maxFramerate"
+                            size="small"
+                        />
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="txt">分辨率：</div>
+                      <div class="down big">
+                        <n-select
+                            v-model:value="currentResolutionRatio"
+                            :options="resolutionRatio"
+                            size="small"
+                        />
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="txt">视频内容：</div>
+                      <div class="down small">
+                        <n-select
+                            v-model:value="currentVideoContentHint"
+                            :options="videoContentHint"
+                            size="small"
+                        />
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="txt">音频内容：</div>
+                      <div class="down big">
+                        <n-select
+                            v-model:value="currentAudioContentHint"
+                            :options="audioContentHint"
+                            size="small"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rtc-network"></div>
+                </div>
+                <n-button
+                    v-if="!roomLiving"
+                    type="primary"
+                    @click="handleStartLive"
+                >
+                  开始直播
+                </n-button>
+                <n-button
+                    v-else
+                    type="error"
+                    @click="handleEndLive"
+                >
+                  结束直播
+                </n-button>
               </div>
             </div>
-            <div v-if="menuPmView" class="bottom">
+            <div v-if="!menuPmView" class="bottom">
               <div class="rtc-config">
                 <div class="item-list">
                   <div class="item">
@@ -202,190 +276,118 @@
               </n-button>
             </div>
           </div>
-          <div v-if="!menuPmView" class="bottom">
-            <div class="rtc-config">
-              <div class="item-list">
-                <div class="item">
-                  <div class="txt">码率：</div>
-                  <div class="down small">
-                    <n-select
-                        v-model:value="currentMaxBitrate"
-                        :options="maxBitrate"
-                        size="small"
-                    />
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="txt">帧率：</div>
-                  <div class="down small">
-                    <n-select
-                        v-model:value="currentMaxFramerate"
-                        :options="maxFramerate"
-                        size="small"
-                    />
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="txt">分辨率：</div>
-                  <div class="down big">
-                    <n-select
-                        v-model:value="currentResolutionRatio"
-                        :options="resolutionRatio"
-                        size="small"
-                    />
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="txt">视频内容：</div>
-                  <div class="down small">
-                    <n-select
-                        v-model:value="currentVideoContentHint"
-                        :options="videoContentHint"
-                        size="small"
-                    />
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="txt">音频内容：</div>
-                  <div class="down big">
-                    <n-select
-                        v-model:value="currentAudioContentHint"
-                        :options="audioContentHint"
-                        size="small"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="rtc-network"></div>
-            </div>
-            <n-button
-                v-if="!roomLiving"
-                type="primary"
-                @click="handleStartLive"
-            >
-              开始直播
-            </n-button>
-            <n-button
-                v-else
-                type="error"
-                @click="handleEndLive"
-            >
-              结束直播
-            </n-button>
-          </div>
         </div>
       </div>
-    </div>
 
-    <div class="right">
-      <div class="resource-card">
-        <div class="title">素材列表</div>
-        <div class="list">
-          <div
-              v-for="(item, index) in appStore.allTrack.filter(
+      <div class="right">
+        <div class="resource-card">
+          <div class="title">素材列表</div>
+          <div class="list">
+            <div
+                v-for="(item, index) in appStore.allTrack.filter(
               (item) => !item.hidden
             )"
-              :key="index"
-              class="item"
-              @click="handleActiveObject(item)"
-          >
-            <div class="item-left">
-              <div
-                  class="control-item"
-                  @click="handleEye(item)"
-              >
-                <n-icon
-                    v-if="item.openEye && item.type !== MediaTypeEnum.microphone"
-                    size="16"
+                :key="index"
+                class="item"
+                @click="handleActiveObject(item)"
+            >
+              <div class="item-left">
+                <div
+                    class="control-item"
+                    @click="handleEye(item)"
                 >
-                  <EyeOutline></EyeOutline>
-                </n-icon>
-                <n-icon
-                    v-else
-                    size="16"
-                >
-                  <EyeOffOutline></EyeOffOutline>
-                </n-icon>
+                  <n-icon
+                      v-if="item.openEye && item.type !== MediaTypeEnum.microphone"
+                      size="16"
+                  >
+                    <EyeOutline></EyeOutline>
+                  </n-icon>
+                  <n-icon
+                      v-else
+                      size="16"
+                  >
+                    <EyeOffOutline></EyeOffOutline>
+                  </n-icon>
+                </div>
+                <div class="name">
+                  {{ NODE_ENV === 'development' ? item.id : '' }}({{
+                    mediaTypeEnumMap[item.type]
+                  }}){{ item.mediaName }}
+                </div>
               </div>
-              <div class="name">
-                {{ NODE_ENV === 'development' ? item.id : '' }}({{
-                  mediaTypeEnumMap[item.type]
-                }}){{ item.mediaName }}
-              </div>
-            </div>
 
-            <div class="control">
-              <div
-                  v-if="item.audio === 1"
-                  class="control-item"
-                  @click.stop="handleChangeMuted(item)"
-              >
-                <n-popover
-                    :flip="false"
-                    placement="top"
-                    trigger="hover"
+              <div class="control">
+                <div
+                    v-if="item.audio === 1"
+                    class="control-item"
+                    @click.stop="handleChangeMuted(item)"
                 >
-                  <template #trigger>
-                    <n-icon size="16">
-                      <VolumeMuteOutline v-if="item.muted"></VolumeMuteOutline>
-                      <VolumeHighOutline v-else></VolumeHighOutline>
-                    </n-icon>
-                  </template>
-                  <div class="slider">
-                    <n-slider
-                        :step="1"
-                        :value="item.volume"
-                        @update-value="(v) => handleChangeVolume(item, v)"
-                    />
-                  </div>
-                </n-popover>
-              </div>
-              <div
-                  class="control-item"
-                  @click="handleEdit(item)"
-              >
-                <n-icon size="16">
-                  <CreateOutline></CreateOutline>
-                </n-icon>
-              </div>
-              <div
-                  class="control-item"
-                  @click.stop="handleDel(item)"
-              >
-                <n-icon size="16">
-                  <Close></Close>
-                </n-icon>
+                  <n-popover
+                      :flip="false"
+                      placement="top"
+                      trigger="hover"
+                  >
+                    <template #trigger>
+                      <n-icon size="16">
+                        <VolumeMuteOutline v-if="item.muted"></VolumeMuteOutline>
+                        <VolumeHighOutline v-else></VolumeHighOutline>
+                      </n-icon>
+                    </template>
+                    <div class="slider">
+                      <n-slider
+                          :step="1"
+                          :value="item.volume"
+                          @update-value="(v) => handleChangeVolume(item, v)"
+                      />
+                    </div>
+                  </n-popover>
+                </div>
+                <div
+                    class="control-item"
+                    @click="handleEdit(item)"
+                >
+                  <n-icon size="16">
+                    <CreateOutline></CreateOutline>
+                  </n-icon>
+                </div>
+                <div
+                    class="control-item"
+                    @click.stop="handleDel(item)"
+                >
+                  <n-icon size="16">
+                    <Close></Close>
+                  </n-icon>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="bottom">
-          <n-button
-              size="small"
-              type="primary"
-              @click="showSelectMediaModalCpt = true"
-          >
-            添加素材
-          </n-button>
-        </div>
-      </div>
-      <div class="danmu-card">
-        <div class="title">弹幕互动</div>
-        <div class="list-wrap">
-          <div
-              ref="danmuListRef"
-              class="list"
-          >
-            <div
-                v-for="(item, index) in damuList"
-                :key="index"
-                class="item"
+          <div class="bottom">
+            <n-button
+                size="small"
+                type="primary"
+                @click="showSelectMediaModalCpt = true"
             >
-              <template v-if="item.msgType === DanmuMsgTypeEnum.danmu">
+              添加素材
+            </n-button>
+          </div>
+        </div>
+        <div class="danmu-card">
+          <div class="title">弹幕互动</div>
+          <div class="list-wrap">
+            <div
+                ref="danmuListRef"
+                class="list"
+            >
+              <div
+                  v-for="(item, index) in damuList"
+                  :key="index"
+                  class="item"
+              >
+                <template v-if="item.msgType === DanmuMsgTypeEnum.danmu">
                 <span class="time">
                   [{{ formatTimeHour(item.send_msg_time) }}]
                 </span>
-                <span class="name">
+                  <span class="name">
                   <span v-if="item.userInfo">
                     {{ item.userInfo.username }}[{{
                       item.userInfo.roles?.map((v) => v.role_name).join()
@@ -393,118 +395,120 @@
                   </span>
                   <span v-else>{{ item.socket_id }}[游客]</span>
                 </span>
-                <span>：</span>
-                <span
-                    v-if="item.msgIsFile === WsMessageMsgIsFileEnum.no"
-                    class="msg"
-                >
+                  <span>：</span>
+                  <span
+                      v-if="item.msgIsFile === WsMessageMsgIsFileEnum.no"
+                      class="msg"
+                  >
                   {{ item.msg }}
                 </span>
-                <div
-                    v-else
-                    class="msg img"
-                >
-                  <img
-                      :src="item.msg"
-                      alt=""
-                      @load="handleScrollTop"
-                  />
-                </div>
-              </template>
-              <template v-else-if="item.msgType === DanmuMsgTypeEnum.otherJoin">
-                <span class="name system">系统通知：</span>
-                <span class="msg">
+                  <div
+                      v-else
+                      class="msg img"
+                  >
+                    <img
+                        :src="item.msg"
+                        alt=""
+                        @load="handleScrollTop"
+                    />
+                  </div>
+                </template>
+                <template v-else-if="item.msgType === DanmuMsgTypeEnum.otherJoin">
+                  <span class="name system">系统通知：</span>
+                  <span class="msg">
                   <span>{{ item.userInfo?.username || item.socket_id }}</span>
                   <span>进入直播！</span>
                 </span>
-              </template>
-              <template
-                  v-else-if="item.msgType === DanmuMsgTypeEnum.userLeaved"
-              >
-                <span class="name system">系统通知：</span>
-                <span class="msg">
+                </template>
+                <template
+                    v-else-if="item.msgType === DanmuMsgTypeEnum.userLeaved"
+                >
+                  <span class="name system">系统通知：</span>
+                  <span class="msg">
                   <span>{{ item.userInfo?.username || item.socket_id }}</span>
                   <span>离开直播！</span>
                 </span>
-              </template>
-            </div>
-          </div>
-        </div>
-        <div
-            v-loading="msgLoading"
-            class="send-msg"
-        >
-          <div class="control">
-            <div
-                v-if="showEmoji"
-                class="emoji-list"
-            >
-              <div
-                  v-for="(item, index) in emojiArray"
-                  :key="index"
-                  class="item"
-                  @click="handlePushStr(item)"
-              >
-                {{ item }}
+                </template>
               </div>
             </div>
-            <div
-                class="ico face"
-                title="表情"
-                @click="showEmoji = !showEmoji"
-            ></div>
-            <div
-                class="ico img"
-                title="图片"
-                @click="mockClick"
-            >
-              <input
-                  ref="uploadRef"
-                  accept=".webp,.png,.jpg,.jpeg,.gif"
-                  class="input-upload"
-                  type="file"
-                  @change="uploadChange"
-              />
-            </div>
           </div>
-          <textarea
-              v-model="danmuStr"
-              class="ipt"
-              @keydown="keydownDanmu"
-          ></textarea>
           <div
-              class="btn"
-              @click="handleSendDanmu"
+              v-loading="msgLoading"
+              class="send-msg"
           >
-            发送
+            <div class="control">
+              <div
+                  v-if="showEmoji"
+                  class="emoji-list"
+              >
+                <div
+                    v-for="(item, index) in emojiArray"
+                    :key="index"
+                    class="item"
+                    @click="handlePushStr(item)"
+                >
+                  {{ item }}
+                </div>
+              </div>
+              <div
+                  class="ico face"
+                  title="表情"
+                  @click="showEmoji = !showEmoji"
+              ></div>
+              <div
+                  class="ico img"
+                  title="图片"
+                  @click="mockClick"
+              >
+                <input
+                    ref="uploadRef"
+                    accept=".webp,.png,.jpg,.jpeg,.gif"
+                    class="input-upload"
+                    type="file"
+                    @change="uploadChange"
+                />
+              </div>
+            </div>
+            <textarea
+                v-model="danmuStr"
+                class="ipt"
+                @keydown="keydownDanmu"
+            ></textarea>
+            <div
+                class="btn"
+                @click="handleSendDanmu"
+            >
+              发送
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div>
-    <SelectMediaModalCpt
-        v-if="showSelectMediaModalCpt"
-        :all-media-type-list="allMediaTypeList"
-        @close="showSelectMediaModalCpt = false"
-        @ok="handleShowMediaModalCpt"
-    ></SelectMediaModalCpt>
+    <div>
+      <SelectMediaModalCpt
+          v-if="showSelectMediaModalCpt"
+          :all-media-type-list="allMediaTypeList"
+          @close="showSelectMediaModalCpt = false"
+          @ok="handleShowMediaModalCpt"
+      ></SelectMediaModalCpt>
 
-    <MediaModalCpt
-        v-if="showMediaModalCpt"
-        :init-data="currentMediaData"
-        :is-edit="isEdit"
-        :media-type="currentMediaType"
-        @close="showMediaModalCpt = false"
-        @add-ok="addMediaOk"
-        @edit-ok="editMediaOk"
-    ></MediaModalCpt>
+      <MediaModalCpt
+          v-if="showMediaModalCpt"
+          :init-data="currentMediaData"
+          :is-edit="isEdit"
+          :media-type="currentMediaType"
+          @close="showMediaModalCpt = false"
+          @add-ok="addMediaOk"
+          @edit-ok="editMediaOk"
+      ></MediaModalCpt>
 
-    <OpenMicophoneTipCpt
-        v-if="showOpenMicophoneTipCpt"
-        @close="showOpenMicophoneTipCpt = false"
-    ></OpenMicophoneTipCpt>
+      <OpenMicophoneTipCpt
+          v-if="showOpenMicophoneTipCpt"
+          @close="showOpenMicophoneTipCpt = false"
+      ></OpenMicophoneTipCpt>
+    </div>
   </div>
+
 </template>
 
 <script lang="ts" setup>
@@ -2627,7 +2631,6 @@ function handleStartMedia(item: { type: MediaTypeEnum; txt: string }) {
     width: $w-960;
     height: 100%;
     border-radius: 6px;
-    background-color: white;
     color: #9499a0;
     vertical-align: top;
 
@@ -2890,7 +2893,7 @@ function handleStartMedia(item: { type: MediaTypeEnum; txt: string }) {
 
       .list {
         overflow: scroll;
-        height: 266px;
+        height: 130px;
 
         @extend %customScrollbar;
 
@@ -3036,6 +3039,12 @@ function handleStartMedia(item: { type: MediaTypeEnum; txt: string }) {
     }
   }
 }
+.push-wrap{
+  justify-content: center !important;
+}
+.push-wrap .left{
+  width: 900px !important;
+}
 
 // 屏幕宽度大于1500的时候
 @media screen and (min-width: $w-1500) {
@@ -3054,12 +3063,12 @@ function handleStartMedia(item: { type: MediaTypeEnum; txt: string }) {
 @media screen and (orientation: portrait) {
   .push-wrap{
     flex-direction: column;
-    align-items: center;
+    align-items: center !important;
     margin: 15px;
     width: auto;
   }
   .push-wrap .left{
-    width: 100%;
+    width: 100% !important;
     margin-bottom: 15px;
   }
   .push-wrap .left .room-control .info .avatar{

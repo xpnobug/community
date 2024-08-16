@@ -21,7 +21,7 @@
       <div class="right-btn">
         <!--        <el-button type="primary">搜索框</el-button>-->
         <SearchComponents/>
-        <el-button v-if="sfLogin === false" style="margin-right:10px;" type="primary" @click="login">登录</el-button>
+        <el-button v-if="!isLogin()" style="margin-right:10px;" type="primary" @click="login">登录</el-button>
         <div v-else style="display: flex; ">
           <a-popover v-if="!isMobile()"
               v-model:open="postpush"
@@ -45,7 +45,7 @@
               </a-avatar>
             </a-badge>
             <template #content>
-              <UserCaozuo :user="userInfo"/>
+              <UserCaozuo :user="userStore.userInfo"/>
             </template>
           </a-popover>
 
@@ -71,17 +71,17 @@
 <script lang="ts" setup>
 import {getCurrentInstance, onBeforeUnmount, onMounted, reactive, ref, watchEffect} from 'vue'
 import {useRouter} from "vue-router";
-import {isLogin} from "@/api/user";
 import UserCaozuo from "@/components/Setting/UserCaozuo.vue";
-import {useUserInfo} from "@/hooks/useCached";
 import EditArticle from "@/components/Setting/EditArticle.vue";
 import BgColorChange02 from "@/components/bgColor/BgColorChange02.vue";
 import SearchComponents from "@/components/search/searchComponents.vue";
 import MessageIndex from "@/views/message/messageIndex.vue";
-import {getToken} from "@/utils/auth";
+import {getToken,isLogin} from "@/utils/auth";
 import {getUnreadMessageCount} from "@/api";
 import {createFromIconfontCN} from "@ant-design/icons-vue";
 import {isMobile} from "@/utils";
+import {useUserStore} from "@/store";
+
 // SVG 图标
 const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/c/font_1898478_6kwgvtuqt0b.js',
@@ -110,16 +110,17 @@ const instance = getCurrentInstance()
 
 //获取token
 const sfLogin = ref(false);
-isLogin().then(async res => {
-  sfLogin.value = res.data.data;
-  const emit = async () => {
-    instance?.proxy?.$Bus.emit("isLogins", res.data.data)
-  }
-  await emit();
-});
+
+// isLogin().then(async res => {
+//   sfLogin.value = res.data.data;
+//   const emit = async () => {
+//     instance?.proxy?.$Bus.emit("isLogins", res.data.data)
+//   }
+//   await emit();
+// });
 
 //获取登录人信息
-const userInfo = useUserInfo();
+const userStore = useUserStore();
 
 
 //监听如果屏幕小于max-width: 768px，设置pmView

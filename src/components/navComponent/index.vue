@@ -32,10 +32,6 @@ instance?.proxy?.$Bus.on("userInfo", (param: any) => {
     console.error("用户信息获取失败")
   }
 })
-const isLogin = ref(false);
-instance?.proxy?.$Bus.on("isLogins", (param: any) => {
-  isLogin.value = param;
-})
 
 const djId = ref('0');
 const handleMenuItemClick = (item: any) => {

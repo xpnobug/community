@@ -55,12 +55,12 @@ const toUserInfo = (item: any) => {
              class="xm-header user-avatar user-short-description-avatar navigation-widget-close"
         >
           <div @click="toUserInfo(userInfo)" :style="djValueSet ? 'padding:13px':'padding:8px'" class="xm-avatar">
-            <!--                <img-->
-            <!--                    :src="userInfo.avatar" alt="头像"-->
-            <!--                    class=""-->
-            <!--                    style="border-radius: 50%;">-->
+                            <img
+                                :src="userInfo.avatar" alt="头像"
+                                class=""
+                                style="border-radius: 50%;width: 84px;">
             <!--              sm: 32, md: 40, lg: 64, xl: 80, xxl: 85-->
-            <a-avatar :size="djValueSet ? { lg: 85,xxl: 86 } : { lg: 40,xxl: 40 }" :src="userInfo.avatar"></a-avatar>
+<!--            <a-avatar :size="djValueSet ? { lg: 85,xxl: 86 } : { lg: 40,xxl: 40 }" :src="userInfo.avatar"></a-avatar>-->
           </div>
           <svg :style="djValueSet ? 'width:110px;height:110px;':'width:55px;height:55px;'"
                viewBox="0 0 100 100">

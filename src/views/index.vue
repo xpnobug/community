@@ -6,10 +6,12 @@ import NavComponent from "@/components/navComponent/index.vue";
 import FooterView from "@/views/footer/FooterView.vue";
 import H5Index from "@/components/navComponent/NavMobileMenu.vue";
 import {isMobile} from "@/utils";
+import {useUserStore} from "@/store";
 const defer = useDefer();
 const menu = getMenuData();
 console.log('menu', menu)
-
+const userStore = useUserStore();
+userStore.getInfo(); // 获取用户信息
 </script>
 
 <template>

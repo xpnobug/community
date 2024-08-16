@@ -1,7 +1,7 @@
 <template>
   <div class="shell" @mouseleave="leave" @mousemove="inmove">
     <div class="is-showCard">
-      <div v-if="isLogin !== false" :style="djValueSet === false ?'width: 300px':'padding-left: 10px;'"
+      <div v-if="isLogin()" :style="djValueSet === false ?'width: 300px':'padding-left: 10px;'"
            class="simplebar-content snipcss-WosQN">
         <figure v-show="djValueSet === false"
                 :style="{background: 'url('+userInfo.userCover+') center center / cover no-repeat rgb(255, 255, 255)'}"
@@ -90,7 +90,7 @@ import {getCurrentInstance, ref} from "vue";
 import {useRouter} from "vue-router";
 import {getStatisticsById} from "@/api/statistics";
 import {useDefer} from "@/hooks/useDefer.js";
-
+import {isLogin} from '@/utils/auth'
 import {menuItems} from "@/hooks/useMenu";
 //定义变量
 const menuPmView = ref();
@@ -123,10 +123,10 @@ instance?.proxy?.$Bus.on("userInfo", (param: any) => {
     console.error("用户信息获取失败")
   }
 })
-const isLogin = ref(false);
-instance?.proxy?.$Bus.on("isLogins", (param: any) => {
-  isLogin.value = param;
-})
+// const isLogin = ref(false);
+// instance?.proxy?.$Bus.on("isLogins", (param: any) => {
+//   isLogin.value = param;
+// })
 
 const djId = ref('0');
 const handleMenuItemClick = (item: any) => {
