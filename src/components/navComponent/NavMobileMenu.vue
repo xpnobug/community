@@ -74,7 +74,7 @@
 																				<span class="yYw_FA Zxv8Qg">
 																					<div class="Da1_FQ">
 																						<span aria-hidden="true" class="NA_Img dkWypw">
-                                               <i :class="item.icon"></i>
+                                                <IconFont class="icon svg" :style="{ fontSize: '20px' }" :type="item.icon"/>
 																						</span>
 																					</div>
 																				</span>
