@@ -133,12 +133,12 @@
 </template>
 
 <script setup lang="ts">
-import {useUserInfo} from "@/hooks/useCached";
 import {getCurrentInstance, reactive, ref} from "vue";
 import {message, UploadProps} from "ant-design-vue";
 import UserInfoUpload from "@/views/userSetting/compontents/UserInfoUpload.vue";
 import {updateUser} from "@/api/user";
-
+import {useUserStore} from "@/store";
+const userStore = useUserStore();
 interface FormState {
   username: string;
   email: string;
@@ -164,7 +164,7 @@ const tx = ref("tx");
 const cover = ref("cover");
 const avatar = ref();
 const userCover = ref();
-const userInfo = useUserInfo();
+const userInfo = userStore.userInfo();
 const handleUp = (value) => {
   avatar.value = value;
   formState.avatar = value;
