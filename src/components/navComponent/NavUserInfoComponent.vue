@@ -58,7 +58,7 @@ const toUserInfo = (item: any) => {
                             <img
                                 :src="userInfo.avatar" alt="头像"
                                 class=""
-                                style="border-radius: 50%;width: 84px;">
+                                style="border-radius: 50%;width: 84px; height: 84px;">
             <!--              sm: 32, md: 40, lg: 64, xl: 80, xxl: 85-->
 <!--            <a-avatar :size="djValueSet ? { lg: 85,xxl: 86 } : { lg: 40,xxl: 40 }" :src="userInfo.avatar"></a-avatar>-->
           </div>

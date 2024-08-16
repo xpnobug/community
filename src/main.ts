@@ -15,7 +15,7 @@ import '@/assets/pink/css/root.css';
 import '@/assets/pink/css/sticker.css';
 import '@/assets/pink/css/viewer.css';
 
-
+import IconFont from "@/components/icon/IconFont.vue";
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
@@ -96,4 +96,5 @@ app.use(ArcoVue, {
   // 用于改变使用组件时的前缀名称
   componentPrefix: 'arco'
 });
+app.component('IconFont', IconFont);
 app.mount('#app')

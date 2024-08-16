@@ -1,13 +1,16 @@
 <template>
   <div class="menu-main">
-    <div @click="updateMenuDJ">
-      <button class="_1QoxDw Qkd66A tYI0Vw o4TrkA cclg9A YPTJew lsXp_w cwOZMg zQlusQ uRvRjQ _3AH3gw _1QhF8A snipcss-rF2B7" type="button" aria-label="主菜单"><span class="TcNIhA"><span aria-hidden="true" class="NA_Img dkWypw"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor" fill-rule="evenodd" d="M5.75 5.25h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 0 1 0-1.5zm0 6h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 1 1 0-1.5zm0 6h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 1 1 0-1.5z"></path>
-            </svg></span></span></button>
-    </div>
+
     <div class="menu-list">
       <nav style="flex-grow: 1;">
         <ul class="menu-ul">
+          <li>
+            <div @click="updateMenuDJ">
+              <button class="_1QoxDw Qkd66A tYI0Vw o4TrkA cclg9A YPTJew lsXp_w cwOZMg zQlusQ uRvRjQ _3AH3gw _1QhF8A snipcss-rF2B7" type="button" aria-label="主菜单"><span class="TcNIhA"><span aria-hidden="true" class="NA_Img dkWypw"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" fill-rule="evenodd" d="M5.75 5.25h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 0 1 0-1.5zm0 6h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 1 1 0-1.5zm0 6h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 1 1 0-1.5z"></path>
+            </svg></span></span></button>
+            </div>
+          </li>
           <!--      logo-->
           <div class="logo" v-if="!isMobile()">
             <img src="/logo.svg" alt="">
@@ -17,7 +20,7 @@
         </ul>
       </nav>
     </div>
-    <div class="btn-list">
+    <div class="btn-list" style="padding: 0 30px;">
       <div class="right-btn">
         <!--        <el-button type="primary">搜索框</el-button>-->
         <SearchComponents/>
@@ -54,7 +57,7 @@
                      :getPopupContainer="(triggerNode) => triggerNode.parentNode" trigger="click">
             <a-badge :dot="show" style="margin-right:10px;">
               <a-avatar shape="square" size="large">
-                <icon-font class="icon svg" type="icon-xiaoxi"/>
+                <IconFont :style="{ fontSize: '16px' }"  type="icon-xiaoxi"/>
               </a-avatar>
             </a-badge>
             <template #content>
@@ -76,16 +79,14 @@ import EditArticle from "@/components/Setting/EditArticle.vue";
 import BgColorChange02 from "@/components/bgColor/BgColorChange02.vue";
 import SearchComponents from "@/components/search/searchComponents.vue";
 import MessageIndex from "@/views/message/messageIndex.vue";
+import IconFont from "@/components/icon/IconFont.vue";
 import {getToken,isLogin} from "@/utils/auth";
 import {getUnreadMessageCount} from "@/api";
-import {createFromIconfontCN} from "@ant-design/icons-vue";
 import {isMobile} from "@/utils";
 import {useUserStore} from "@/store";
 
 // SVG 图标
-const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_6kwgvtuqt0b.js',
-});
+import {menuItems} from "@/hooks/useMenu";
 const postpush = ref<boolean>(false);
 const message = ref<boolean>(false);
 const visible = ref<boolean>(false);
@@ -252,7 +253,7 @@ onMounted(() => {
   height: 54px;
   /*background-color: #337fff;*/
   background-color: var(--reaicc-nav-bg);
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   /*padding: 0 40px;*/
 }

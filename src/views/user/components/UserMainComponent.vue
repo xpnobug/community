@@ -3,14 +3,10 @@
 import {nextTick, onMounted, reactive, ref} from "vue";
 import {useRoute} from "vue-router";
 import {listByUserId} from "@/api/article.js";
-import {createFromIconfontCN} from "@ant-design/icons-vue";
 import PostInfoList from "@/components/PostInfoList.vue";
 
 //svg图标
-const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_6kwgvtuqt0b.js',
-});
-
+import IconFont from "@/components/icon/IconFont.vue";
 const tagList = ref([
   {id: "1", label: '推荐'},
   {id: "2", label: '圈子'},
@@ -158,7 +154,7 @@ const handleTag = (value: any) => {
   <div class="grid-column snipcss-iJ4SG">
     <div id="slider_home" class="home-slider" style="height:65px;">
       <div class="right" id="category-bar-next" style="" @click="scrollCategoryBarToRight()">
-        <icon-font class="icon svg" type="icon-xiayige"/>
+        <IconFont class="icon svg" type="icon-xiayige"/>
       </div>
       <div class="slider-list" id="catalog-list" style="transform:translateX(0px);">
         <div class="slider" style="min-width: 95px;" v-for="tag in tagList" :class="[{ 'active': tagId === tag.id}]"

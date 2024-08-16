@@ -3,7 +3,6 @@ import type {UnwrapRef} from 'vue';
 import {onBeforeUnmount, onMounted, reactive, ref, toRaw} from "vue";
 import {register} from "@/api/user";
 import {message} from "ant-design-vue";
-import {createFromIconfontCN} from "@ant-design/icons-vue";
 import {capImage, emailCode, smsCode} from "@/api/captcha";
 import Verify from "@/components/verifition/Verify.vue";
 import BgColorChange02 from "@/components/bgColor/BgColorChange02.vue";
@@ -11,12 +10,7 @@ import {useUserStore} from "@/store";
 import {useRoute, useRouter} from "vue-router";
 import {socialAuth} from "@/api";
 import SocialIndex from "@/views/login/social/socialIndex.vue";
-
-// SVG 图标
-const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_6kwgvtuqt0b.js',
-});
-
+import IconFont from "@/components/icon/IconFont.vue";
 // 表单状态接口
 interface FormState {
   username?: string;
@@ -363,15 +357,15 @@ const toHome = () => {
                     @finish="onSubmit">
                   <!--              <h2 class="title">登录</h2>-->
                   <div class="input-field">
-                    <icon-font class="icon svg" type="icon-yonghu"/>
+                    <IconFont class="icon svg" type="icon-yonghu"/>
                     <a-input v-model:value="formState.username" placeholder="用户名" type="text"></a-input>
                   </div>
                   <div class="input-field">
-                    <icon-font class="icon svg" type="icon-mima"/>
+                    <IconFont class="icon svg" type="icon-mima"/>
                     <a-input-password v-model:value="formState.password" placeholder="密码"></a-input-password>
                   </div>
                   <div class="input-field" style="display: flex;justify-content: space-evenly;align-items: center;">
-                    <icon-font class="icon svg" style=" margin: 20px;" type="icon-zhucedenglu-yanzhengma"/>
+                    <IconFont class="icon svg" style=" margin: 20px;" type="icon-zhucedenglu-yanzhengma"/>
                     <a-input v-model:value="formState.captcha" placeholder="验证码" type="text"></a-input>
                     <div class="captcha-container" @click="changeImg">
                       <img :src="captchaImgBase64" alt="验证码">
@@ -392,12 +386,12 @@ const toHome = () => {
                     @finish="onSubmitPhone">
                   <!--              <h2 class="title">登录</h2>-->
                   <div class="input-field">
-                    <icon-font class="icon svg" type="icon-yonghu"/>
+                    <IconFont class="icon svg" type="icon-yonghu"/>
                     <a-input v-model:value="phoneForm.phone" placeholder="请输入手机号" type="text"></a-input>
                   </div>
 
                   <div class="input-field" style="display: flex;justify-content: space-evenly;align-items: center;">
-                    <icon-font class="icon svg" style=" margin: 20px;" type="icon-zhucedenglu-yanzhengma"/>
+                    <IconFont class="icon svg" style=" margin: 20px;" type="icon-zhucedenglu-yanzhengma"/>
                     <a-input v-model:value="phoneForm.captcha" placeholder="验证码" type="text"></a-input>
                     <a-space direction="vertical">
                       <a-space>
@@ -418,12 +412,12 @@ const toHome = () => {
                     @finish="onSubmitEmail">
                   <!--              <h2 class="title">登录</h2>-->
                   <div class="input-field">
-                    <icon-font class="icon svg" type="icon-youxiang"/>
+                    <IconFont class="icon svg" type="icon-youxiang"/>
                     <a-input v-model:value="emailForm.email" placeholder="请输入邮箱" type="text"></a-input>
                   </div>
 
                   <div class="input-field" style="display: flex;justify-content: space-evenly;align-items: center;">
-                    <icon-font class="icon svg" style=" margin: 20px;" type="icon-zhucedenglu-yanzhengma"/>
+                    <IconFont class="icon svg" style=" margin: 20px;" type="icon-zhucedenglu-yanzhengma"/>
                     <a-input v-model:value="emailForm.captcha" placeholder="验证码" type="text"></a-input>
                     <a-space direction="vertical">
                       <a-space>
@@ -440,16 +434,16 @@ const toHome = () => {
             <p class="social-text" style="text-align: center">其他登录方式</p>
             <div class="social-media">
               <a id="sign-in-wx" class="social-icon" href="#" @click="thirdLogin('github')">
-                <icon-font class="icon svg" type="icon-github"/>
+                <IconFont class="icon svg" type="icon-github"/>
               </a>
               <a class="social-icon" href="#" @click="thirdLogin('gitee')">
-                <icon-font class="icon svg" type="icon-gitee"/>
+                <IconFont class="icon svg" type="icon-gitee"/>
               </a>
               <a class="social-icon" href="#" @click="thirdLogin('weixin')">
-                <icon-font class="icon svg" type="icon-a-weixin2"/>
+                <IconFont class="icon svg" type="icon-a-weixin2"/>
               </a>
               <a class="social-icon" href="#" @click="thirdLogin('qq')">
-                <icon-font class="icon svg" type="icon-a-QQ1"/>
+                <IconFont class="icon svg" type="icon-a-QQ1"/>
               </a>
             </div>
           </div>
@@ -461,15 +455,15 @@ const toHome = () => {
                 action="#" class="sign-up-form" @finish="upOnFinish">
               <h2 class="title">注册</h2>
               <div class="input-field">
-                <icon-font class="icon svg" type="icon-yonghu"/>
+                <IconFont class="icon svg" type="icon-yonghu"/>
                 <a-input v-model:value="formState.username" placeholder="用户名" type="text"></a-input>
               </div>
               <div class="input-field">
-                <icon-font class="icon svg" type="icon-youxiang"/>
+                <IconFont class="icon svg" type="icon-youxiang"/>
                 <a-input v-model:value="formState.email" placeholder="邮箱"></a-input>
               </div>
               <div class="input-field">
-                <icon-font class="icon svg" type="icon-mima"/>
+                <IconFont class="icon svg" type="icon-mima"/>
                 <a-input-password v-model:value="formState.password" placeholder="密码"></a-input-password>
               </div>
               <!--          <a-form-item :name="formName"></a-form-item>-->

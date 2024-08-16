@@ -20,11 +20,7 @@
 
 <script setup lang="ts">
 import {timeUtils} from "@/store/TimeUtil";
-import {createFromIconfontCN} from "@ant-design/icons-vue";
-// SVG 图标
-const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_6kwgvtuqt0b.js',
-});
+import IconFont from "@/components/icon/IconFont.vue";
 
 // 获取父组件传递的 props
 const props = defineProps<{  messageList }>();

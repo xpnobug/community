@@ -21,7 +21,7 @@ const articleId = route.query.articleId;
 
 const postInfo = ref([]);
 const store = inject('store');
-store.setLoading(true);
+// store.setLoading(true);
 selectOne(articleId).then(res => {
   postInfo.value = res.data.data
   console.log(postInfo.value)

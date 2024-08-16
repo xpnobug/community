@@ -5,6 +5,7 @@ import {getStatisticsById} from "@/api/statistics";
 import {useDefer} from "@/hooks/useDefer.js";
 import {menuItems} from "@/hooks/useMenu";
 import NavUserInfoComponent from "@/components/navComponent/NavUserInfoComponent.vue";
+import IconFont from "@/components/icon/IconFont.vue";
 //定义变量
 const menuPmView = ref();
 const djValueSet = ref(true);
@@ -110,7 +111,7 @@ const handleMenuItemClick = (item: any) => {
 																				<span class="yYw_FA Zxv8Qg">
 																					<div class="Da1_FQ">
 																						<span aria-hidden="true" class="NA_Img dkWypw">
-                                               <i :class="item.icon"></i>
+                                               <IconFont class="icon svg" :style="{ fontSize: '20px' }" :type="item.icon"/>
 																						</span>
 																					</div>
 																				</span>

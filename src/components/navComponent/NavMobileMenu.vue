@@ -307,6 +307,7 @@ import {useRouter} from "vue-router";
 import {useDefer} from "@/hooks/useDefer.js";
 const placement = ref<DrawerProps['placement']>('left');
 import {menuItems} from "@/hooks/useMenu";
+import IconFont from "@/components/icon/IconFont.vue";
 //定义变量
 
 const open = ref<boolean>(false);

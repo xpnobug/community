@@ -7,7 +7,7 @@
         <ZskComponent :posts="zskList" :loadings="loadings"/>
       </keep-alive>
       <ZtComponent :posts="ztList" :loadings="loadings"/>
-      <LiveComponent v-if="defer" :posts="liveList" :loadings="loadings"/>
+      <LiveComponent :posts="liveList" :loadings="loadings"/>
     </div>
   </div>
 </template>
@@ -45,7 +45,7 @@ const liveList = ref([]);
 const loadings = ref(false);
 
 const store = inject('store');
-store.setLoading(true);
+// store.setLoading(true);
 
 pageList().then((res) => {
   if (res.status === 200) {

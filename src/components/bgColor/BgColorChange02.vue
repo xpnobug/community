@@ -100,13 +100,13 @@ a {
   /*position: absolute;*/
   /*top: 20px;*/
   /*left: 36px;*/
-  /*background-color: var(--chat-background);*/
+  background-color: var(--chat-background);
   border: none;
   color: #ddd;
   outline: none;
   cursor: pointer;
   box-shadow: var(--navigation-box-shadow);
-  border-radius: 50%;
+  border-radius: 25%;
   display: flex;
   justify-content: center;
   align-items: center;

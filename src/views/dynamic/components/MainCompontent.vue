@@ -2,14 +2,12 @@
 
 import {nextTick, onMounted, reactive, ref,inject} from "vue";
 import {list} from "@/api/article";
-import {createFromIconfontCN} from "@ant-design/icons-vue";
+import IconFont from "@/components/icon/IconFont.vue";
 import PostInfoList from "@/components/PostInfoList.vue";
 import { useDefer } from "@/hooks/useDefer.js";
 const defer = useDefer();
 //svg图标
-const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_6kwgvtuqt0b.js',
-});
+
 
 const tagList = ref([
   {id: "1", label: '推荐'},
@@ -161,7 +159,7 @@ function scrollCategoryBarToRight() {
   <div class="grid-column"><!---->
     <div id="slider_home" class="home-slider" style="height:65px;">
       <div class="right" id="category-bar-next" style="" @click="scrollCategoryBarToRight()">
-        <icon-font class="icon svg" type="icon-xiayige"/>
+        <IconFont class="icon svg" type="icon-xiayige"/>
       </div>
       <div class="slider-list" id="catalog-list" style="transform:translateX(0px);">
         <div class="slider" style="min-width: 95px;" v-for="tag in tagList" :class="[{ 'active': tagId === tag.id}]"

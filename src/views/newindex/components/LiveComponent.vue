@@ -69,7 +69,7 @@ const toPostInfo = (item: any) => {
             <div class="">
               <div class="identification">新鲜事</div>
               <div class="content-list">
-                <a-empty v-if="rightPost.length === 0" :description="null" />
+                <a-empty v-show="rightPost.length === 0" :description="null" />
                 <ul v-if="props.loadings" >
                   <li v-for="(item,index) in rightPost" :key="item.articleId">
                     <div class="serial-no">{{ index+1 }}</div>
