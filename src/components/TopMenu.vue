@@ -326,7 +326,7 @@ input[type="text"], input[type="password"] {
   .menu-ul {
     display: flex;
     position: relative;
-    width: 0;
+    width: 20px;
     margin-right: 0;
     list-style: none;
   }
