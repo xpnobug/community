@@ -181,7 +181,7 @@ const timeFromNow = (data) => {
         </div>
       </div>
     </div>
-    <div class="widget-box" style="padding: 0px; display: none">
+    <div class="widget-box" style="padding: 0px;">
       <div data-v-2dfd8ab4="">
         <div class="adv ant-carousel">
           <div class="slick-slider slick-initialized">
@@ -192,7 +192,7 @@ const timeFromNow = (data) => {
                   <div>
                     <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
                       <div class="section-banner"
-                           style="background: url(https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/9b03fab0081d7609e444f8feae966182.png?imageMogr2/crop/568x568/gravity/center) center center / cover no-repeat; cursor: pointer; height: 284px;">
+                           style="background: url(https://alist.reaicc.com/nas/image/png/2024-08-20/1/68fc8735-18b0-48d6-8442-7ab8f38793db.png) center center / cover no-repeat; cursor: pointer; height: 284px;">
                         <p class="section-banner-title"></p>
                         <p class="section-banner-text"></p></div>
                     </div>

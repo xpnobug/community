@@ -227,15 +227,18 @@ onMounted(() => {
 
 <style scoped>
 .u-search{
-  width: 100%;
-  margin-right: 10px;
+  /*width: 100%;*/
+  margin-right: 30px;
+  border: 1px solid var(--3YOFOw);
+  border-radius: 10px;
 }
 ::v-deep(.u-search .search){
   background: none;
   border: none;
 }
 ::v-deep(.card-box){
-  margin-top: 10px;
+  margin-top: 14px;
+  border-radius: 5px;
   background-color: var(--reaicc-meta-theme-post-color);
 }
 
@@ -250,12 +253,12 @@ onMounted(() => {
 
 .menu-main {
   display: flex;
-  height: 54px;
+  height: 65px;
   /*background-color: #337fff;*/
   background-color: var(--reaicc-nav-bg);
   justify-content: space-between;
   align-items: center;
-  /*padding: 0 40px;*/
+  border-bottom: 1px solid var(--X3--Zg);
 }
 
 .menu-ul {
@@ -274,7 +277,7 @@ onMounted(() => {
 
 .menu-ul li a {
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   text-decoration: none;
 }
 
@@ -306,12 +309,17 @@ input[type="text"], input[type="password"] {
   padding: 0 18px;
   color: #fff;
 }
-
+::v-deep(.u-search .search input){
+  line-height: 30px !important;
+}
+::v-deep(.u-search label){
+  top: 2px;
+}
 ::-webkit-input-placeholder { /* WebKit browsers */
   color: #99b9ee;
 }
 .logo>img{
-  width: 100px;
+  width: 130px;
 }
 /*设置手机端样式*/
 @media screen and (orientation: portrait) {
@@ -329,6 +337,9 @@ input[type="text"], input[type="password"] {
     width: 20px;
     margin-right: 0;
     list-style: none;
+  }
+  .u-search{
+    width: 100%;
   }
 }
 

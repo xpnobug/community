@@ -181,7 +181,7 @@ onBeforeUnmount(() => {
           </div>
           <p class="user-status-title medium"><span class="bold"
                                                     style="cursor: pointer; color: rgb(251, 91, 90);">
-            {{ item.author }}
+            {{ item.nickName }}
           </span></p>
           <p class="user-status-text small">{{ timeFromNow(item.publishDate) }} <span> · 未知</span>
           </p>
@@ -225,8 +225,9 @@ onBeforeUnmount(() => {
       </div>
       <div class="widget-box-status-content">
         <div class="tag-list">
-          <div class="topic-forum-box"><a class="tag-item secondary"
-                                          style="margin-top: 16px;">产品共创</a></div>
+          <div class="topic-forum-box">
+            <a class="tag-item secondary" style="margin-top: 16px;">{{ item.name }}</a>
+          </div>
           <div class="to-detail" style="margin-top: 16px; flex-grow: 1; text-align: right;">
             <a @click="toPostInfo(item)"
                class="to-detail"

@@ -88,7 +88,7 @@ const tjBanKList = ref([
         </div>
       </div>
     </div> <!----> <!----> <!---->
-    <div class="widget-box" style="padding: 0px; display: none">
+    <div class="widget-box" style="padding: 0px;">
       <div data-v-2dfd8ab4="">
         <div class="adv ant-carousel">
           <div class="slick-slider slick-initialized">
@@ -99,7 +99,7 @@ const tjBanKList = ref([
                   <div>
                     <div tabindex="-1" class="" style="width: 100%;">
                       <div class="section-banner"
-                           style="background: url(https://alist.reaicc.com/nas/image/jpeg/2024-04/1/76df301b-d0ef-45b0-95fc-979f2d358782.jpg) center center / cover no-repeat; cursor: default; height: 284px;">
+                           style="background: url(https://alist.reaicc.com/nas/image/png/2024-08-20/1/86cc0f0c-ba39-4e51-b739-f661a40196ef.png) center center / cover no-repeat; cursor: default; height: 284px;">
                         <p class="section-banner-title"></p>
                         <p class="section-banner-text"></p></div>
                     </div>

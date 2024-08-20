@@ -41,7 +41,7 @@ selectOne(articleId).then(res => {
                                              href="/">社区</a></span><span
               class="ant-breadcrumb-separator">/</span></span><span class=""><span
               class="ant-breadcrumb-link"><a class="link"
-                                             href="/forum?id=7"> 运营干货 </a></span><span
+                                             href="/forum?id=7"> {{ postInfo.name }} </a></span><span
               class="ant-breadcrumb-separator">/</span></span><span class=""><span
               class="ant-breadcrumb-link">正文</span><span class="ant-breadcrumb-separator">/</span></span>
           </div>
@@ -192,7 +192,7 @@ selectOne(articleId).then(res => {
                   <span class="bold"
                         href="profile-timeline.html"
                         style="cursor: pointer; color: rgb(251, 91, 90);"> {{
-                      postInfo.author
+                      postInfo.nickName
                     }} </span>
                 </p>
                 <p class="user-status-text small">技术总监</p>
@@ -206,7 +206,7 @@ selectOne(articleId).then(res => {
               <MdPreview :codeFoldable="false" :editorId="id" :modelValue="postInfo.content"/>
               <Sudoku :imgList="postInfo.imgList"/>
             </div>
-            <div class="tag-list"><a class="tag-item secondary">运营干货</a></div>
+            <div class="tag-list"><a class="tag-item secondary">{{ postInfo.name }}</a></div>
           </div>
         </div>
         <div id="comment" style="transform: translateY(-80px);"></div>
@@ -346,6 +346,9 @@ a:active, a:hover {
 }
 
 ::v-deep(.md-editor-previewOnly .md-editor-preview) {
+  color: var(--reaicc-fontcolor);
+}
+::v-deep(.md-editor-preview h3){
   color: var(--reaicc-fontcolor);
 }
 

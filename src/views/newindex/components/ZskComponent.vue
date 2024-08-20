@@ -56,7 +56,7 @@ const toPostInfo = (item: any) => {
                                style="width: 100%; height: 100%; border-radius: 50%;">
                         </div>
                         <div class="release-time">
-                          <span>{{ info.author }}</span>&nbsp;
+                          <span>{{ info.nickName }}</span>&nbsp;
                           <span>{{ timeUtils.convertTime(info.publishDate, true) }} · 未知</span>
                         </div>
                       </div>
@@ -92,7 +92,7 @@ const toPostInfo = (item: any) => {
                                alt=""
                                style="width: 100%; height: 100%; border-radius: 50%;">
                         </div>
-                        <div class="author-name">{{ item.author }}</div>
+                        <div class="author-name">{{ item.nickName }}</div>
                       </div>
                       <div class="release-times">
                         {{ timeUtils.convertTime(item.publishDate) }}

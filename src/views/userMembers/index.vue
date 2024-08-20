@@ -29,7 +29,7 @@ const page = reactive<Page>({
 
 <template>
   <div class="content-grid">
-    <div class="content-view" style="margin: 10px; width: 1556px;">
+    <div class="content-view">
       <div class="section-banner"
            style="background: url(https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/aedadfd944b6b44687f68d45eca091af.png?imageMogr2/crop/2368x320/gravity/center) center center / cover no-repeat; cursor: default;">
         <p class="section-banner-title"></p>

@@ -1,30 +1,37 @@
 <template>
   <div class="content-grid">
-    <div class="home-slider">
-      <div class="section-header">
-        <div class="section-header-info">
-          <h2 class="section-title">官方版块</h2>
+    <div class="content-view">
+      <div class="home-slider">
+        <div class="section-header">
+          <div class="section-header-info">
+            <h2 class="section-title">官方版块</h2>
+          </div>
+          <a-space wrap>
+            <SaveChannelCompontents :get-offica-data="getOfficaData"/>
+          </a-space>
         </div>
-        <a-space wrap>
-          <SaveChannelCompontents :get-offica-data="getOfficaData"/>
-        </a-space>
-      </div>
-      <OfficalChannelIndex v-if="officalList.length > 0" :officalList="officalList"/>
-      <a-empty v-else/>
-      <div class="section-header">
-        <div class="section-header-info">
-          <h2 class="section-title">用户版块</h2>
+        <OfficalChannelIndex v-if="officalList.length > 0" :officalList="officalList"/>
+        <a-empty v-else/>
+        <a-pagination
+            @change="pageChange(page.currentPage)"
+            v-model:current="page.currentPage"
+            v-model:page-size="page.pageSize"
+            :total="page.count" show-less-items/>
+        <div class="section-header">
+          <div class="section-header-info">
+            <h2 class="section-title">用户版块</h2>
+          </div>
+          <a-space wrap>
+            <SaveUserChannel :getUserChannelData="getUserChannelData"/>
+          </a-space>
         </div>
-        <a-space wrap>
-          <SaveUserChannel :getUserChannelData="getUserChannelData"/>
-        </a-space>
+        <UserSearchComponent/>
+        <UserChannelsIndex
+            :getUserChannelData="getUserChannelData"
+            v-if="userChannelList.length > 0"
+            :userChannelList="userChannelList"/>
+        <a-empty v-else/>
       </div>
-      <UserSearchComponent/>
-      <UserChannelsIndex
-          :getUserChannelData="getUserChannelData"
-          v-if="userChannelList.length > 0"
-          :userChannelList="userChannelList"/>
-      <a-empty v-else/>
     </div>
   </div>
 </template>
@@ -35,17 +42,35 @@ import UserChannelsIndex from "@/views/channelbk/userChannel/userChannelsIndex.v
 import OfficalChannelIndex from "@/views/channelbk/officialChannel/officalChannelIndex.vue";
 import SaveChannelCompontents from "@/views/channelbk/functions/saveOffical.vue";
 import {channelList} from "@/api/channels";
-import page from "@/api/base";
-import {ref, onMounted} from "vue";
+import {Page} from "@/api/base";
+import {ref, onMounted, reactive} from "vue";
 import SaveUserChannel from "@/views/channelbk/functions/saveUserChannel.vue";
 
 // 获取官方版块数据
 const officalList = ref([]);
 const userChannelList = ref([]);
+
+const page = reactive<Page>({
+  pageSize: 3,
+  currentPage: 1,
+  count: 0,
+  maxPage: 10,
+  minPage: 1,
+  firstResult: 0,
+  recount: true
+});
 const getOfficaData = async () => {
   const {data} = await channelList(page, 1)
+  page.pageSize = data.pageSize;
+  page.currentPage = data.currentPage;
+  page.count = data.count;
   officalList.value = data.data;
 }
+const pageChange = (val) => {
+  page.currentPage = val;
+  getOfficaData()
+}
+
 const getUserChannelData = async () => {
   const {data} = await channelList(page, 2)
   userChannelList.value = data.data;
