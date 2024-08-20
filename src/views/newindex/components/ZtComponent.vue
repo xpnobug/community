@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import {watch, computed} from "vue";
+import {computed, watch} from "vue";
 import {useRouter} from "vue-router";
 
 //获取用户信息
-const props = defineProps(['posts', 'loadings'])
+const props = defineProps(['dict', 'posts', 'loadings'])
 const leftPost = computed(() => {
-  return props.posts.filter(item => item && item.publishPlatform === 'LT-REAI专题');
+  return props.posts.filter(item => item && item.type === 'home-ltzt');
 });
 const rightPost = computed(() => {
-  return props.posts.filter(item => item && item.publishPlatform === '功能前瞻');
+  return props.posts.filter(item => item && item.type === 'home-preview');
 });
 watch(() => props.loadings, (newValue, oldValue) => {
 }, {immediate: true, deep: true})
@@ -24,11 +24,11 @@ const toPostInfo = (item: any) => {
   <div><!----> <!---->
     <div class="box" style="margin-bottom: 16px;">
       <div class="public">
-        <div class="title">LT-REAI专题</div>
+        <div class="title">{{ dict["home-ltzt"] }}</div>
         <div class="contents contents-one">
           <div class="right-content" :style="{display: leftPost.length === 0 ? 'block' : ''}">
-            <a-empty v-if="leftPost.length === 0" :description="null" />
             <div class="subject-matter-text" v-if="props.loadings" v-for="item in leftPost.slice(0,1)"  >
+              <a-empty v-if="leftPost.length === 0" :description="null" />
               <a class="link"  @click="toPostInfo(item)" style="line-height: 20px;">
                 <div class="picture"><!---->
                   <img :src="item.coverImage"
@@ -65,9 +65,9 @@ const toPostInfo = (item: any) => {
 
           </div>
           <div class="left-content left-content-public">
-            <div class="identification">功能前瞻</div>
-            <a-empty v-if="rightPost.length === 0" :description="null" />
+            <div class="identification">{{ dict["home-preview"] }}</div>
             <div class="content-list" v-if="props.loadings">
+              <a-empty v-if="rightPost.length === 0" :description="null" />
               <ul>
                 <li v-for="(item,index) in rightPost.slice(0,10)" :key="index">
                   <div class="serial-no">{{ index+1 }}</div>
@@ -108,8 +108,6 @@ const toPostInfo = (item: any) => {
   display: flex;
   justify-content: space-between;
 }
-
-
 
 
 .box .public .contents-one .right-content .subject-matter-text {
@@ -252,6 +250,7 @@ a {
   font-weight: 600;
   color: var(--reaicc-fontcolor);
   margin-bottom: 14px;
+  width: 260px;
 }
 
 .box .public .contents .left-content-public .content-list {

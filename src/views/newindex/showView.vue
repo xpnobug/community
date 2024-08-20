@@ -4,10 +4,10 @@
     <div class="box-s">
       <PictureComponent :posts="banner"/>
       <keep-alive>
-        <ZskComponent :posts="zskList" :loadings="loadings"/>
+        <ZskComponent :dict="dictMapList" :loadings="loadings" :posts="zskList"/>
       </keep-alive>
-      <ZtComponent :posts="ztList" :loadings="loadings"/>
-      <LiveComponent :posts="liveList" :loadings="loadings"/>
+      <ZtComponent :dict="dictMapList" :loadings="loadings" :posts="ztList"/>
+      <LiveComponent :dict="dictMapList" :loadings="loadings" :posts="liveList"/>
     </div>
   </div>
 </template>
@@ -18,8 +18,11 @@ import ZskComponent from "./components/ZskComponent.vue";
 import ZtComponent from "@/views/newindex/components/ZtComponent.vue";
 import LiveComponent from "@/views/newindex/components/LiveComponent.vue";
 import {pageList} from "@/api/article";
-import { useDefer } from "@/hooks/useDefer.js";
+import {useDefer} from "@/hooks/useDefer.js";
+import {dictList} from "@/api/dict";
+
 const defer = useDefer();
+
 interface Page {
   pageSize: number;
   currentPage: number;
@@ -47,6 +50,14 @@ const loadings = ref(false);
 const store = inject('store');
 // store.setLoading(true);
 
+const dictMapList = ref([]);
+dictList('home').then((res) => {
+  if (res.status === 200) {
+    dictMapList.value = res.data.data;
+  }
+})
+
+
 pageList().then((res) => {
   if (res.status === 200) {
     loadings.value = true;
@@ -54,41 +65,26 @@ pageList().then((res) => {
 
   postList.value = res.data.data;
 
-  // 创建一个统一的结果列表
-  const categorizedArticles = {
-    zskList: [],
-    banner: [],
-    ztList: [],
-    liveList: []
+  // 创建一个字典映射，将 typeName 映射到相应的数组
+  const typeNameMap = {
+    'banner': banner.value,
+    'home-yyzsk': zskList.value,
+    'home-product': zskList.value,
+    'home-preview': ztList.value,
+    'home-ltzt': ztList.value,
+    'home-colorlife': liveList.value,
+    'home-news': liveList.value
   };
 
-  // 创建一个映射对象，将 typeName 映射到相应的列表
-  const typeNameToListMap: { [key: string]: string } = {
-    'home-yyzsk': 'zskList',
-    '产品共创': 'zskList',
-    'banner': 'banner',
-    'LT-REAI专题': 'ztList',
-    '功能前瞻': 'ztList',
-    '七彩生活': 'liveList',
-    '新鲜事': 'liveList'
-  };
-
-  // 处理每个 item，将 articleList 归类到统一结果列表中
+  // 遍历 postList，将 articleList 推入对应的数组中
   postList.value.forEach((item: any) => {
-    const listName = typeNameToListMap[item.typeName];
-    if (listName) {
-      categorizedArticles[listName].push(...item.articleList);
+    const targetArray = typeNameMap[item.typeName];
+    if (targetArray) {
+      targetArray.push(...item.articleList);
     }
   });
-
-  // 将结果列表中的数据赋值到相应的 ref 中
-  zskList.value = categorizedArticles.zskList;
-  banner.value = categorizedArticles.banner;
-  ztList.value = categorizedArticles.ztList;
-  liveList.value = categorizedArticles.liveList;
-
-  store.setLoading(false);
 });
+
 
 
 

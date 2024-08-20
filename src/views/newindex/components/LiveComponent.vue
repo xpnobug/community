@@ -2,12 +2,12 @@
 import {computed, watch} from 'vue'
 import {useRouter} from "vue-router";
 
-const props = defineProps(['posts','loadings'])
+const props = defineProps(['dict','posts','loadings'])
 const leftPost = computed(() => {
-  return props.posts.filter(item => item && item.publishPlatform === '七彩生活');
+  return props.posts.filter(item => item && item.type === 'home-colorlife');
 });
 const rightPost = computed(() => {
-  return props.posts.filter(item => item && item.publishPlatform === '新鲜事');
+  return props.posts.filter(item => item && item.type === 'home-news');
 });
 watch(()=>props.loadings,(newValue,oldValue)=>{
 },{immediate:true,deep:true})
@@ -21,12 +21,12 @@ const toPostInfo = (item: any) => {
   <div><!----> <!---->
     <div class="box" style="margin-bottom: 16px;"><!---->
       <div class="public">
-        <div class="title">七彩生活</div>
+        <div class="title">{{ dict["home-colorlife"] }}</div>
         <div class="contents contents-tow">
           <div class="right-content">
             <div class="subject-matter-text">
-              <a-empty v-if="leftPost.length === 0" :description="null" />
               <ul v-if="props.loadings" >
+                <a-empty v-if="leftPost.length === 0" :description="null" />
                 <li v-for="item in leftPost.slice(0,3)" :key="item.id">
                   <div class="picture"><!---->
                     <a class="" @click="toPostInfo(item)" style="width: 100%; height: 100%; display: block;"><img
@@ -67,10 +67,10 @@ const toPostInfo = (item: any) => {
           </div>
           <div class="left-content left-content-public">
             <div class="">
-              <div class="identification">新鲜事</div>
+              <div class="identification">{{ dict["home-news"] }}</div>
               <div class="content-list">
-                <a-empty v-show="rightPost.length === 0" :description="null" />
-                <ul v-if="props.loadings" >
+                <ul v-if="props.loadings">
+                  <a-empty v-if="rightPost.length === 0" :description="null" />
                   <li v-for="(item,index) in rightPost" :key="item.articleId">
                     <div class="serial-no">{{ index+1 }}</div>
                     <div class="serial-no-content"><a class="" @click="toPostInfo(item)">{{ item.content }}</a>
@@ -190,6 +190,7 @@ img {
 
 .box .public .contents-tow .right-content .content-list {
   flex-grow: 1;
+  width: 260px;
 }
 
 .box .public .contents-tow .right-content .content-list ul {
@@ -259,6 +260,7 @@ img {
   font-weight: 600;
   color: var(--reaicc-fontcolor);
   margin-bottom: 14px;
+  width: 260px;
 }
 
 .box .public .contents .left-content-public .content-list {

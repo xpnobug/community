@@ -7,16 +7,15 @@ import {timeUtils} from "@/store/TimeUtil";
 import {useDictionaryItem} from "@/api/dict";
 
 const defer = useDefer();
-const props = defineProps(['posts', 'loadings'])
+const props = defineProps(['dict','posts', 'loadings'])
+console.log(props.dict)
+
 const leftPost = computed(() => {
-  return props.posts.filter(item => item && item.publishPlatform === 'home-yyzsk');
+  return props.posts.filter(item => item && item.type === 'home-yyzsk');
 });
 const rightPost = computed(() => {
-  return props.posts.filter(item => item && item.publishPlatform === '产品共创');
+  return props.posts.filter(item => item && item.type === 'home-product');
 });
-
-const sjName = useDictionaryItem("home-yyzsk");
-const productName = useDictionaryItem("home-product");
 
 //监听loadings.value，修改loadings
 watch(() => props.loadings, (newValue, oldValue) => {
@@ -31,11 +30,11 @@ const toPostInfo = (item: any) => {
   <div><!----> <!---->
     <div class="box" style="margin-bottom: 16px;"><!----> <!---->
       <div class="public">
-        <div class="title">{{ sjName }}</div>
+        <div class="title">{{ dict["home-yyzsk"] }}</div>
         <div class="contents contents-three" >
           <div class="right-content">
-            <a-empty v-if="leftPost.length === 0" :description="null" />
             <div v-if="props.loadings">
+              <a-empty v-if="leftPost.length === 0" :description="null" />
               <div v-for="info in leftPost.slice(0, 5)" class="content-box">
                 <a class="links" @click="toPostInfo(info)">
                   <div class="pictures">
@@ -76,9 +75,9 @@ const toPostInfo = (item: any) => {
           </div>
           <div class="left-content recommended-list">
             <div class="">
-              <div class="recommended-title">{{ productName }}</div>
-              <a-empty v-if="rightPost.length === 0" :description="null" />
+              <div class="recommended-title">{{ dict["home-product"] }}</div>
               <ul v-if="loadings" class="recommended">
+                <a-empty v-if="rightPost.length === 0" :description="null" />
                 <li v-for="item in rightPost.slice(0, 6)"
                     :key="item.id"
                     class="recommended-li">
@@ -283,6 +282,7 @@ svg:not(:root) {
   font-size: 16px;
   font-weight: 600;
   color: var(--reaicc-fontcolor);
+  width: 260px;
 }
 
 dl, ol, ul {

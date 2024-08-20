@@ -1,6 +1,8 @@
 <script setup lang="ts">
-const props = defineProps(['posts'])
+import {computed} from "vue";
 import {useRouter} from "vue-router";
+
+const props = defineProps(['posts'])
 
 const router = useRouter();
 const toPostInfo = (item: any) => {
@@ -9,15 +11,15 @@ const toPostInfo = (item: any) => {
 </script>
 <template>
   <div class="box" style="margin-bottom: 17px;">
-    <div class="top" v-for="item in props.posts.slice(0,1)" :key="item.id">
-<!--      <a-skeleton-image active :shape="avatarShape" />-->
+    <div v-for="item in posts.slice(0,1)" :key="item.id" class="top">
+      <!--      <a-skeleton-image active :shape="avatarShape" />-->
       <div class="banner" @click="toPostInfo(item)"
            :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}">
         <div class="content">
           <span>{{ item.title }}</span>
         </div>
       </div>
-      <div class="identification"  v-for="item in props.posts.slice(1,2)" :key="item.id">
+      <div v-for="item in props.posts.slice(1,2)" :key="item.id" class="identification">
         <div class="bg-picture" @click="toPostInfo(item)"
              :style="{background: 'url('+item.coverImage+') center center / cover no-repeat rgb(255, 255, 255)'}">
 
