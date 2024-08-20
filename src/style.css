@@ -13,7 +13,6 @@
 
 body {
   font-family: Meslo LG;
-  height: 100%;
   font-size: var(--global-font-size);
   line-height: 1.15;
   background-color: var(--global-bg);

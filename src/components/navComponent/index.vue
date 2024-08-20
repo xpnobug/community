@@ -297,18 +297,12 @@ const handleMenuItemClick = (item: any) => {
   --safe-area-inset-left: env(safe-area-inset-left);
 }
 
-@supports (height:100dvh) {
-  .ra8xgQ {
-    min-height: 100dvh;
-  }
-}
 .ra8xgQ {
   color: var(--VNXpSw);
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   grid-template-rows: 0fr 0fr 1fr 0fr;
   margin: 0 auto;
-  min-height: 100vh;
 }
 
 ._sOBqQ {

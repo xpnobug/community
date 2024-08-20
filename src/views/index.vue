@@ -36,24 +36,19 @@ userStore.getInfo(); // 获取用户信息
 
 <style scoped>
 .yIDCqA {
-  height: 100%;
+  /*height: 100%;*/
   position: relative;
   width: 100%;
 }
 
-.ra8xgQ._1tk2_Q {
-  height: 100%;
-}
+/*.ra8xgQ._1tk2_Q {*/
+/*  height: 100%;*/
+/*}*/
 
 .ra8xgQ.ZbSf_A {
   transition: background-color .15s ease-in-out;
 }
 
-@supports (height:100dvh) {
-  .ra8xgQ {
-    min-height: 100dvh;
-  }
-}
 
 .ra8xgQ {
   color: var(--VNXpSw);
@@ -61,7 +56,7 @@ userStore.getInfo(); // 获取用户信息
   grid-template-columns: auto minmax(0, 1fr);
   grid-template-rows: 0fr 0fr 1fr 0fr;
   margin: 0 auto;
-  min-height: 100vh;
+  /*min-height: 100vh;*/
 }
 
 .dr1mMg .wGVWaQ {
