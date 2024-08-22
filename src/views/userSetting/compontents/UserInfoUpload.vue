@@ -3,9 +3,10 @@
   <a-upload id="avatar"
             v-model:file-list="fileList"
             :maxCount=1
-            action="/api/upload/uploadImg"
-            name="imgfile"
+            action="/api/common/file"
+            name="file"
             :before-upload="beforeUpload"
+            @preview="handlePreview"
             @change="uploadChange">
     <div v-if="fileList.length < 1">
       <div>Upload</div>
@@ -17,6 +18,27 @@ import {ref} from 'vue';
 import type {UploadProps} from 'ant-design-vue';
 import {message} from "ant-design-vue";
 const fileList = ref<UploadProps['fileList']>([]);
+const previewVisible = ref(false);
+const previewImage = ref('');
+const previewTitle = ref('');
+function getBase64(file: File) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    console.log(file)
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
+const handlePreview = async (file: UploadProps['fileList'][number]) => {
+  console.log(file)
+  if (!file.url && !file.preview) {
+    file.preview = (await getBase64(file.originFileObj)) as string;
+  }
+  previewImage.value = file.url || file.preview;
+  previewVisible.value = true;
+  previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf('/') + 1);
+};
 
 const props = defineProps({
   handleUp: {type: Function},
@@ -52,10 +74,10 @@ function uploadChange({file}: { event?: ProgressEvent }) {
   const res = (file as XMLHttpRequest).response
   if (res) {
     if (props.handleUp != undefined) {
-      props.handleUp(res.data.downloadUrl)
+      props.handleUp(res.url)
     }
     if (props.handleCover != undefined) {
-      props.handleCover(res.data.downloadUrl)
+      props.handleCover(res.url)
     }
     message.success("上传成功")
   }

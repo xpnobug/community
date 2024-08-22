@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import {channelList} from "@/api/recom";
 
 const tagList = ref([
   {id: "1", filter: '最新创建'},
@@ -11,40 +12,53 @@ const handleTag = (value:any) => {
   tagId.value = value.id
 }
 
-const tjBanKList = ref([
-  // {
-  //   id: "1",
-  //   avatar: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E9%9C%80%E6%B1%821600064352?imageMogr2/crop/160x160/gravity/center',
-  //   level: '9',
-  //   userName: '需求市场',
-  //   small: '3707',
-  //   tagId: '3'
-  // },
-  // {
-  //   id: "2",
-  //   avatar: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/bbb3fa3b5005b4f6cf3072e79dc12a7e.png?imageMogr2/crop/160x160/gravity/center',
-  //   level: '8',
-  //   userName: '产品共创',
-  //   small: '3707',
-  //   tagId: '3'
-  // },
-  // {
-  //   id: "3",
-  //   avatar: 'https://h5a.opensns.cn/public/uploads/attach/2019/08/06/5d497c3d4de72.jpg_160x160m1',
-  //   level: '7',
-  //   userName: '闲聊灌水',
-  //   small: '3707',
-  //   tagId: '1'
-  // },
-  // {
-  //   id: "4",
-  //   avatar: 'https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/5e058460bc75d1625714318?imageMogr2/crop/160x160/gravity/center',
-  //   level: '7',
-  //   userName: '干货',
-  //   small: '3707',
-  //   tagId: '2'
-  // },
-]);
+const tjBanKList = ref([]);
+channelList().then((res:any) => {
+  tjBanKList.value = res.data.data
+  console.log(tjBanKList.value)
+});
+const timeFromNow = (data) => {
+  // data 转换为时间戳
+  const date = new Date(data);
+  const currentDate = new Date();
+
+  // 确保data是一个有效的日期
+  if (isNaN(date.getTime()) || date > currentDate) {
+    return '无效的时间或未来的时间';
+  }
+
+  const difference = currentDate - date;
+
+  // 将毫秒数转换为天数
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  if (days >= 1) {
+    if (days === 1) {
+      return '昨天';
+    }
+    return `${days.toFixed(0)}天前`;
+  }
+
+  // 将剩余的毫秒数转换为小时
+  const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  if (hours > 0) {
+    return `${hours.toFixed(0)}小时前`;
+  }
+
+  // 将剩余的毫秒数转换为分钟
+  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+  if (minutes > 0) {
+    return `${minutes.toFixed(0)}分钟前`;
+  }
+
+  // 将剩余的毫秒数转换为秒，并设置一个阈值（例如10秒）来避免“刚刚”
+  const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+  if (seconds > 0) {
+    return `${seconds.toFixed(0)}秒前`;
+  }
+
+  // 如果时间差小于或等于阈值（例如10秒），则返回“刚刚”
+  return '刚刚';
+};
 </script>
 
 
@@ -58,23 +72,23 @@ const tjBanKList = ref([
              :class="[{ 'active': tagId === tag.id}]"
              @click="handleTag(tag)">{{ tag.filter }}</p>
         </div>
-        <div class="user-status-list">
+        <div class="user-status-list" v-for="channel in tjBanKList">
           <div class="user-status request-small"
-               v-for="item in tjBanKList"
-               v-show="tagId === item.tagId">
+               v-for="item in channel.channelList"
+               v-show="tagId === channel.type">
             <div class="xm-header user-avatar"
                  style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 8px; position: absolute; top: 0px; left: 0px;">
               <div class="xm-avatar" style="width: 44px; height: 44px; padding: 0px;"><img
-                  :src="item.avatar"
+                  :src="item.logo"
                   alt="头像" class="" style="border-radius: 8px;"></div>
             </div>
             <p class="user-status-title text-long-ellipsis">
-              <a href="#" class="bold">{{ item.nickName }}</a></p>
+              <a href="#" class="bold">{{ item.name }}</a></p>
             <p class="user-status-text small" v-if="tagId === '2'">
-              {{ item.small }} 成员
+              {{ item.followCount }} 成员
             </p>
             <p data-v-2f920749="" class="user-status-text small" v-else>
-              13小时前
+              {{ timeFromNow(item.createTime) }}
             </p>
             <div class="action-request-list">
               <div class="action-request accept">

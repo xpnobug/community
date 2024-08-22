@@ -12,3 +12,7 @@ interface Follow  {
 export function recommendList() {
     return axios.get(`${BASE_URL}/recommendList`);
 }
+
+export function channelList() {
+    return axios.get(`${BASE_URL}/showChannel`);
+}

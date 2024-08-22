@@ -2,15 +2,15 @@
   <div class="clearfix">
     <a-upload
         v-model:file-list="fileList"
-        action="/api/upload/uploadImg"
-        name="imgfile"
+        action="/api/common/file"
+        name="file"
         list-type="picture-card"
         @preview="handlePreview"
         @change="uploadChange"
         :headers="headers"
     >
       <div v-if="fileList.length < 9">
-<!--        <plus-outlined />-->
+        <plus-outlined />
         <div> + </div>
         <div> 上传图片 </div>
       </div>
@@ -22,6 +22,7 @@
 import { ref, inject, onMounted } from 'vue';
 import type { UploadProps } from 'ant-design-vue';
 import {message} from "ant-design-vue";
+import { PlusOutlined } from '@ant-design/icons-vue';
 function getBase64(file: File) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -54,6 +55,7 @@ const handleCancel = () => {
   previewTitle.value = '';
 };
 const handlePreview = async (file: UploadProps['fileList'][number]) => {
+  console.log(file)
   if (!file.url && !file.preview) {
     file.preview = (await getBase64(file.originFileObj)) as string;
   }
@@ -67,9 +69,9 @@ const list = ref<UploadProps['fileList']>([])
 function uploadChange({file}: { event?: ProgressEvent }) {
   const res = (file as XMLHttpRequest).response
   if (res){
-    list.value = [...list.value, res.data.downloadUrl]
+    list.value = [...list.value, res.url]
     if (props.handleClick != undefined) {
-      props.handleClick(res.data.downloadUrl)
+      props.handleClick(res.url)
     }
     if (props.imgLists != undefined) {
       props.imgLists(list.value)
