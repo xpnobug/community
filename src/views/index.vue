@@ -35,6 +35,11 @@ userStore.getInfo(); // 获取用户信息
 </template>
 
 <style scoped>
+@media screen and (orientation: portrait) {
+  .ra8xgQ {
+    min-height: 100vh;
+  }
+}
 .yIDCqA {
   /*height: 100%;*/
   position: relative;
