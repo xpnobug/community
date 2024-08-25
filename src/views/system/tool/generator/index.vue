@@ -1,45 +1,47 @@
 <template>
   <div class="content-grid"
        style="transform: translate(0px, 0px); transition: transform 0.4s ease-in-out 0s;">
-    <div class="box-s">
-      <div class="table-page">
-        <GiTable
-            row-key="tableName"
-            title="代码生成"
-            :data="dataList"
-            :columns="columns"
-            :loading="loading"
-            :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-            :pagination="pagination"
-            :disabled-tools="['size', 'setting']"
-            :disabled-column-keys="['tableName']"
-            @refresh="search"
-        >
-          <template #custom-left>
-            <arco-input v-model="queryForm.tableName" placeholder="请输入表名称" allow-clear
-                        @change="search">
-              <template #prefix>
-                <icon-search/>
-              </template>
-            </arco-input>
-            <arco-button @click="reset">重置</arco-button>
-          </template>
-          <template #action="{ record }">
-            <arco-space>
-              <arco-link @click="onConfig(record.tableName, record.comment)">配置</arco-link>
-              <arco-link
-                  :title="record.isConfiged ? '生成' : '请先进行生成配置'"
-                  :disabled="!record.isConfiged"
-                  @click="onPreview(record.tableName)"
-              >
-                生成
-              </arco-link>
-            </arco-space>
-          </template>
-        </GiTable>
+    <div class="content-view">
+      <div class="box-s">
+        <div class="table-page">
+          <GiTable
+              row-key="tableName"
+              title="代码生成"
+              :data="dataList"
+              :columns="columns"
+              :loading="loading"
+              :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+              :pagination="pagination"
+              :disabled-tools="['size', 'setting']"
+              :disabled-column-keys="['tableName']"
+              @refresh="search"
+          >
+            <template #custom-left>
+              <arco-input v-model="queryForm.tableName" placeholder="请输入表名称" allow-clear
+                          @change="search">
+                <template #prefix>
+                  <icon-search/>
+                </template>
+              </arco-input>
+              <arco-button @click="reset">重置</arco-button>
+            </template>
+            <template #action="{ record }">
+              <arco-space>
+                <arco-link @click="onConfig(record.tableName, record.comment)">配置</arco-link>
+                <arco-link
+                    :title="record.isConfiged ? '生成' : '请先进行生成配置'"
+                    :disabled="!record.isConfiged"
+                    @click="onPreview(record.tableName)"
+                >
+                  生成
+                </arco-link>
+              </arco-space>
+            </template>
+          </GiTable>
 
-        <GenConfigDrawer ref="GenConfigDrawerRef" @save-success="search"/>
-        <GenPreviewModal ref="GenPreviewModalRef" @generate="onGenerate"/>
+          <GenConfigDrawer ref="GenConfigDrawerRef" @save-success="search"/>
+          <GenPreviewModal ref="GenPreviewModalRef" @generate="onGenerate"/>
+        </div>
       </div>
     </div>
   </div>
@@ -51,10 +53,10 @@ import { h, reactive, ref} from 'vue'
 import GenConfigDrawer from './GenConfigDrawer.vue'
 import GenPreviewModal from './GenPreviewModal.vue'
 import {generate, listGenerator} from '@/api'
-import type {TableInstanceColumns} from '../compontents/GiTable/type'
+import type {TableInstanceColumns} from '../../compontents/GiTable/type'
 import {useTable} from '@/hooks'
 import {isMobile} from '@/utils'
-import GiTable from "@/views/tool/compontents/GiTable/index.vue";
+import GiTable from "@/views/system/compontents/GiTable/index.vue";
 
 defineOptions({name: 'Generator'})
 

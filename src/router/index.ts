@@ -10,7 +10,9 @@ import Friends from "@/views/userPyq/index.vue";
 import Chat from "@/views/newchat/demo1/index.vue";
 import Channels from "@/views/channelbk/index.vue";
 import Live from "@/views/live-moudle/pc/index.vue";
-import GeneralCode from "@/views/tool/generator/index.vue";
+import GeneralCode from "@/views/system/tool/generator/index.vue";
+import LogShow from "@/views/system/monitor/log/index.vue";
+import Storage from "@/views/system/storage/index.vue";
 import {useUserStore} from "@/store";
 import {message} from "ant-design-vue";
 
@@ -128,6 +130,16 @@ const defaultRoutes: RouteRecordRaw[] = [
         path: '/tool/generator',
         name: 'generator',
         component: GeneralCode,
+      },
+      {
+        path: '/monitor/log',
+        name: 'log',
+        component: LogShow,
+      },
+      {
+        path: '/system/storage',
+        name: 'storage',
+        component: Storage,
       },
 
       {

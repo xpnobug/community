@@ -23,18 +23,20 @@ export const menuItems = computed(() => {
     },
     {id: "5", label: '频道', url: '/channels', icon: 'icon-pindao', expanded: false},
     {id: "6", label: 'chat', url: '/chat', icon: 'icon-IMliaotian-duihua', expanded: false},
-    {id: "7", label: '直播', url: '/live', icon: 'icon-zhibo', expanded: false},
+    {id: "7", label: '直播', url: '/live', icon: 'icon-zhibo', expanded: false}
   ];
 
   // 只有管理员可以看到 general 菜单项
   if (isAdmin.value) {
     items.push({
-      id: "8",
-      label: 'general',
-      url: '/tool/generator',
-      icon: 'iconfont icon-liebiao',
-      expanded: false
-    });
+          id: "990",
+          label: 'general',
+          url: '/tool/generator',
+          icon: 'icon-zidongshengcheng',
+          expanded: false
+        }, {id: "991", label: 'log', url: '/monitor/log', icon: 'icon-rizhi', expanded: false},
+        {id: "992", label: '存储配置', url: '/system/storage', icon: 'icon-duixiangcunchu', expanded: false},
+    );
   }
 
   return items;

@@ -77,8 +77,8 @@ import {nextTick, ref, watch} from 'vue'
 import {Message, type TreeNodeData} from '@arco-design/web-vue'
 import {useClipboard} from '@vueuse/core'
 import {type GeneratePreviewResp, genPreview} from '@/api'
-import GiSvgIcon from "@/views/tool/compontents/GiSvgIcon/index.vue";
-import GiCodeView from "@/views/tool/compontents/GiCodeView/index.vue";
+import GiSvgIcon from "@/views/system/compontents/GiSvgIcon/index.vue";
+import GiCodeView from "@/views/system/compontents/GiCodeView/index.vue";
 
 // 生成
 const emit = defineEmits<{ (e: 'generate', tableNames: string[]): void }>()

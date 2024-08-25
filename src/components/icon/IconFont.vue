@@ -3,7 +3,7 @@
 import { createFromIconfontCN } from '@ant-design/icons-vue';
 
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_bz47p19iuh8.js', // 在 iconfont.cn 上生成
+  scriptUrl: '//at.alicdn.com/t/c/font_1898478_fkkfvj2wcmm.js', // 在 iconfont.cn 上生成
 });
 
 // Props 定义

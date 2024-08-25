@@ -1,11 +1,11 @@
 import type * as Tool from './type'
-import http, {requestNative} from "@/request/axios";
+import http, {requestNative,get} from "@/request/axios";
 
 const BASE_URL = '/generator'
 
 /** @desc 查询代码生成列表 */
 export function listGenerator(query: Tool.TablePageQuery) {
-  return http.get<PageRes<Tool.TableResp[]>>(`${BASE_URL}/table`, query)
+  return get<PageRes<Tool.TableResp[]>>(`${BASE_URL}/table`, query)
 }
 
 /** @desc 查询字段配置列表 */

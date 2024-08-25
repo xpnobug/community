@@ -1,5 +1,3 @@
-import {Page} from "@/api/base";
-
 /** 系统用户类型 */
 export interface UserResp {
   id: string
@@ -43,7 +41,7 @@ export interface UserQuery {
   sort: Array<string>
 }
 
-export interface UserPageQuery extends UserQuery, Page {
+export interface UserPageQuery extends UserQuery, PageQuery {
 }
 
 /** 系统角色类型 */
@@ -84,7 +82,7 @@ export interface RoleQuery {
   sort: Array<string>
 }
 
-export interface RolePageQuery extends RoleQuery, Page {
+export interface RolePageQuery extends RoleQuery, PageQuery {
 }
 
 /** 系统菜单类型 */
@@ -179,7 +177,7 @@ export interface DictItemQuery {
   dictId: string
 }
 
-export interface DictItemPageQuery extends DictItemQuery, Page {
+export interface DictItemPageQuery extends DictItemQuery, PageQuery {
 }
 
 /** 系统公告类型 */
@@ -203,7 +201,7 @@ export interface NoticeQuery {
   sort: Array<string>
 }
 
-export interface NoticePageQuery extends NoticeQuery, Page {
+export interface NoticePageQuery extends NoticeQuery, PageQuery {
 }
 
 /** 系统文件类型 */
@@ -239,12 +237,12 @@ export interface FileQuery {
   sort: Array<string>
 }
 
-export interface FilePageQuery extends FileQuery, Page {
+export interface FilePageQuery extends FileQuery, PageQuery {
 }
 
 /** 系统存储类型 */
 export type StorageResp = {
-  storageId: string
+  id: string
   name: string
   code: string
   type: number
@@ -269,7 +267,7 @@ export interface StorageQuery {
   sort: Array<string>
 }
 
-export interface StoragePageQuery extends StorageQuery, Page {
+export interface StoragePageQuery extends StorageQuery, PageQuery {
 }
 
 /** 系统参数类型 */
@@ -353,5 +351,5 @@ export interface MessageQuery {
   sort: Array<string>
 }
 
-export interface MessagePageQuery extends MessageQuery, Page {
+export interface MessagePageQuery extends MessageQuery, PageQuery {
 }

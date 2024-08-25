@@ -5,7 +5,7 @@ import type { Options as paginationOptions } from './usePagination'
 import { usePagination } from '@/hooks'
 
 interface Options<T> {
-  formatResult?: (data: T[]) => any
+  formatResult?: (data: T[]) => any; // 可选的函数类型
   onSuccess?: () => void
   immediate?: boolean
   rowKey?: keyof T
@@ -24,10 +24,10 @@ export function useTable<T>(api: Api<T>, options?: Options<T>) {
   async function getTableData() {
     try {
       loading.value = true
-      const res = await api({ page: pagination.current, size: pagination.pageSize })
-      const data = !Array.isArray(res.data.data) ? res.data.data.list : res.data.data
+      const res = await api({ currentPage: pagination.current, pageSize: pagination.pageSize })
+      const data = !Array.isArray(res.data) ? res.data.list : res.data
       tableData.value = formatResult ? formatResult(data) : data
-      const total = !Array.isArray(res.data.data) ? res.data.data.total : data.length
+      const total = !Array.isArray(res.data) ? res.data.total : res.count
       setTotal(total)
       onSuccess && onSuccess()
     } finally {
@@ -69,7 +69,7 @@ export function useTable<T>(api: Api<T>, options?: Options<T>) {
         if (res.success) {
           Message.success(options?.successTip || '删除成功')
           selectedKeys.value = []
-          getTableData()
+          await getTableData()
         }
         return res.success
       } catch (error) {

@@ -3,6 +3,8 @@ import axios from 'axios';
 import {message} from 'ant-design-vue';
 import {setToken} from "@/utils/localStorage/user";
 import {getToken} from '@/utils/auth'
+import qs from 'query-string'
+
 
 interface ICodeMessage {
   [propName: number]: string
@@ -114,8 +116,30 @@ const requestNative = <T = unknown>(config: AxiosRequestConfig): Promise<AxiosRe
     .catch((err: { msg: string }) => reject(err))
   })
 }
-
+const download = (url: string, params?: object, config?: AxiosRequestConfig): Promise<AxiosResponse> => {
+    return requestNative({
+        method: 'get',
+        url,
+        responseType: 'blob',
+        params,
+        paramsSerializer: (obj) => {
+            return qs.stringify(obj)
+        },
+        ...config
+    })
+}
+const get = <T = any>(url: string, params?: object, config?: AxiosRequestConfig): Promise<ApiRes<T>> => {
+    return request({
+        method: 'get',
+        url,
+        params,
+        paramsSerializer: (obj) => {
+            return qs.stringify(obj)
+        },
+        ...config
+    })
+}
 export default http;
-export { request, requestNative};
+export { request, requestNative, download, get };
 
 

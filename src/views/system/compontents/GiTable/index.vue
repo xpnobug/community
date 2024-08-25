@@ -92,7 +92,7 @@
 import { ref, computed, watch, useAttrs, useSlots } from 'vue'
 import type { DropdownInstance, TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { VueDraggable } from 'vue-draggable-plus'
-import IconTableSize from "@/views/tool/compontents/icons/IconTableSize.vue";
+import IconTableSize from "@/views/system/compontents/icons/IconTableSize.vue";
 
 defineOptions({ name: 'GiTable', inheritAttrs: false })
 const props = withDefaults(defineProps<Props>(), {

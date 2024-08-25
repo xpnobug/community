@@ -115,9 +115,9 @@ import { ref, watch } from 'vue'
 import { type FormInstance, Message } from '@arco-design/web-vue'
 import { useWindowSize } from '@vueuse/core'
 import { type FieldConfigResp, type GeneratorConfigResp, getGenConfig, listFieldConfig, saveGenConfig } from '@/api'
-import type { TableInstanceColumns } from '../compontents/GiTable/type'
+import type { TableInstanceColumns } from '../../compontents/GiTable/type'
 import { useForm } from '@/hooks'
-import GiTable from "@/views/tool/compontents/GiTable/index.vue";
+import GiTable from "@/views/system/compontents/GiTable/index.vue";
 // import { useDict } from '@/hooks/app'
 
 const emit = defineEmits<{
