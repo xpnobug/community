@@ -23,6 +23,10 @@ export function channelList(page: Page, isOfficial: number) {
     })
 }
 
+export function channelDetail(channelId: number) {
+    return axios.get(`${BASE_URL}/`+ channelId);
+}
+
 export function addChannel(channel: ChannelsResponse) {
     return axios.post(`${BASE_URL}/add`, channel);
 }

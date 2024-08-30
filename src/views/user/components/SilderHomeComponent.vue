@@ -98,7 +98,7 @@ const handleMenu = (value: any) => {
   flex-wrap: nowrap;
   width: 100%;
   border-radius: 12px;
-  background: var(--reaicc-meta-theme-post-color);
+  /*background: var(--reaicc-meta-theme-post-color);*/
   box-shadow: rgba(94, 92, 154, 0.06) 0px 0px 40px 0px;
   padding: 0px 40px;
   position: relative;

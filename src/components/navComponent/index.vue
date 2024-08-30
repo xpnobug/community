@@ -330,7 +330,7 @@ const handleMenuItemClick = (item: any) => {
 
 .TQmvYQ {
   position: sticky;
-  width: 260px;
+  width: 245px;
 }
 
 .KnHzhQ, .PDv0sA {

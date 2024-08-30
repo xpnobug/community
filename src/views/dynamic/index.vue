@@ -52,23 +52,6 @@ export default {
   transition: transform 0.4s ease-in-out 0s;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-gap: 16px;
-  -ms-flex-align: start;
-  align-items: start;
-}
-
-.grid.grid-3-6-3 {
-  grid-template-areas: 'sidebar1 content sidebar2';
-  grid-template-columns: 24.986486% 47.324324% 24.986486%;
-}
-
-.content-grid .grid {
-  margin-top: 32px;
-}
-
 .section-banner {
   min-height: 160px;
   padding: 52px 60px 0 200px;

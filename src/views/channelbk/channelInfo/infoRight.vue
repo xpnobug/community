@@ -1,0 +1,494 @@
+<script setup lang="ts">
+import {ref} from "vue";
+import {channelList} from "@/api/recom";
+const props = defineProps(['userList'])
+const tagList = ref([
+  {id: "1", filter: '最新创建'},
+  {id: "2", filter: '最受欢迎'},
+  {id: "3", filter: '最近活跃'},
+]);
+const tagId = ref("1");
+const handleTag = (value:any) => {
+  tagId.value = value.id
+}
+
+const tjBanKList = ref([]);
+channelList().then((res:any) => {
+  tjBanKList.value = res.data.data
+  console.log(tjBanKList.value)
+});
+const timeFromNow = (data) => {
+  // data 转换为时间戳
+  const date = new Date(data);
+  const currentDate = new Date();
+
+  // 确保data是一个有效的日期
+  if (isNaN(date.getTime()) || date > currentDate) {
+    return '无效的时间或未来的时间';
+  }
+
+  const difference = currentDate - date;
+
+  // 将毫秒数转换为天数
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  if (days >= 1) {
+    if (days === 1) {
+      return '昨天';
+    }
+    return `${days.toFixed(0)}天前`;
+  }
+
+  // 将剩余的毫秒数转换为小时
+  const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  if (hours > 0) {
+    return `${hours.toFixed(0)}小时前`;
+  }
+
+  // 将剩余的毫秒数转换为分钟
+  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+  if (minutes > 0) {
+    return `${minutes.toFixed(0)}分钟前`;
+  }
+
+  // 将剩余的毫秒数转换为秒，并设置一个阈值（例如10秒）来避免“刚刚”
+  const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+  if (seconds > 0) {
+    return `${seconds.toFixed(0)}秒前`;
+  }
+
+  // 如果时间差小于或等于阈值（例如10秒），则返回“刚刚”
+  return '刚刚';
+};
+</script>
+
+
+<template>
+  <div class="grid-column fixed" style="top: -142px;"><!---->
+    <div class="widget-box snipcss-OX2Tb">
+      <p class="widget-box-title">版主</p>
+      <div class="widget-box-content">
+        <div class="user-status-list">
+          <div class="user-status request-small" v-for="item in props.userList" :key="item.id">
+            <div class="xm-header user-avatar" style="width: 44px; height: 44px; border: none; cursor: pointer; border-radius: 50%; position: absolute; top: 0px; left: 0px;">
+              <div class="xm-avatar" style="width: 30px; height: 30px; padding: 6.4px;">
+                <img :src="item.avatar" alt="头像" class="" style="border-radius: 50%;"></div> <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
+              <defs>
+                <linearGradient id="svgb87b7e8b-4602-4ffc-8034-f6762613a12c" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%"></stop>
+                  <stop offset="100%"></stop>
+                </linearGradient>
+              </defs>
+              <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="#e9e9f0" stroke-width="8" fill-opacity="0"></path>
+              <path d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92" stroke="url(#svgb87b7e8b-4602-4ffc-8034-f6762613a12c)" stroke-width="8" fill-opacity="0" style="stroke-dasharray: 203.77, 287;"></path>
+            </svg>
+              <div class="xm-level" style="background: transparent;">
+                <img src="https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/%E7%BA%A2V1605690514?upload_type/Tencent_COS" style="width: 18px; height: 18px;"></div>
+            </div>
+            <p class="user-status-title text-long-ellipsis" style="color: rgb(251, 91, 90);">
+              <a class="bold" style="color: rgb(251, 91, 90);"> {{ item.username }} </a></p>
+            <p class="user-status-text small text-long-ellipsis">超级版主</p>
+          </div>
+
+          <p class="user-status-title" style="font-size: 0.875rem; text-align: center;"><a style="cursor: pointer;">查看全部</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+h1, h2, h3, h4, h5, h6, a, p {
+  color: var(--reaicc-fontcolor);
+  /*font-family: "Rajdhani", sans-serif;*/
+  line-height: 1em;
+}
+
+h1, h2, h3, h4, h5, h6, p, ol, ul, figure, .table, .form-row {
+  margin: 0;
+}
+
+.fixed {
+  position: sticky;
+  top: 54px;
+}
+
+.fixed {
+  position: sticky;
+  top: 54px;
+}
+
+.grid .grid-column {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-gap: 16px;
+  min-width: 0;
+}
+
+/*推荐用户*/
+.widget-box {
+  padding: 32px 28px;
+  border-radius: 12px;
+  background-color: var(--reaicc-meta-theme-post-color);
+  box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
+  position: relative;
+}
+
+.widget-box .widget-box-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+p {
+  margin-bottom: 0 !important;
+}
+
+.widget-box .widget-box-content {
+  margin-top: 36px;
+}
+
+.filters {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.filters .filter {
+  margin-right: 20px;
+  padding-bottom: 4px;
+  /*color: #adafca;*/
+  font-size: 0.875rem;
+  font-weight: 700;
+  opacity: .6;
+  cursor: pointer;
+  transition: color .2s ease-in-out, opacity .2s ease-in-out;
+}
+
+.filters .filter.active, input[type=password]:focus, input[type=text]:focus, select:focus, textarea:focus {
+  border-color: #337fff;
+}
+
+.filters .filter.active, input[type=password]:focus, input[type=text]:focus, select:focus, textarea:focus {
+  border-color: #337fff;
+}
+
+.filters .filter.active, input[type=password]:focus, input[type=text]:focus, select:focus, textarea:focus {
+  border-color: #337fff;
+}
+
+.filters .filter.active {
+  border-bottom: 2px solid #23d2e2;
+}
+
+.filters .filter.active, .filters .filter:hover {
+  color: var(--reaicc-fontcolor);
+  opacity: 1;
+}
+
+
+.filters .filter:last-child {
+  margin-right: 0;
+}
+
+
+.widget-box .widget-box-content .filters + .user-status-list, .widget-box .widget-box-content .filters + .post-preview-line-list {
+  margin-top: 24px;
+}
+
+.user-status.request-small {
+  padding-right: 48px;
+}
+
+.user-status-list .user-status {
+  margin-bottom: 22px;
+}
+
+.user-status {
+  min-height: 44px;
+  padding: 2px 0 0 52px;
+  position: relative;
+}
+
+.xm-header {
+  background: #fff;
+  border-radius: 50%;
+  box-sizing: content-box;
+}
+
+.user-avatar {
+  display: block;
+  width: 100px;
+  height: 110px;
+  position: relative;
+}
+
+.xm-avatar {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.xm-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+.xm-level {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #0051d4;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+img, svg {
+  vertical-align: middle;
+}
+
+.user-status.request .user-status-title, .user-status.request-small .user-status-title {
+  margin-top: 2px;
+  line-height: 1.1428571429em;
+}
+
+.user-status-title {
+  line-height: 20px !important;
+}
+
+.text-long-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.user-status-title {
+  line-height: 20px !important;
+}
+
+.text-long-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.user-status .user-status-title {
+  color: var(--reaicc-fontcolor);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4285714286em;
+}
+
+.text-long-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.user-status .user-status-title .bold {
+  color: var(--reaicc-fontcolor);
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+}
+
+p a {
+  color: #00c7d9;
+  font-weight: 600;
+}
+
+a {
+  color: #1890ff;
+  text-decoration: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  transition: color .3s;
+  -webkit-text-decoration-skip: objects;
+}
+
+.user-status .user-status-text.small {
+  font-size: 0.75rem;
+}
+
+.user-status.request .user-status-text, .user-status.request-small .user-status-text {
+  margin-top: 8px;
+}
+
+.user-status .user-status-text {
+  font-size: 12px;
+}
+
+
+.small, small {
+  font-size: 80%;
+  font-weight: 400;
+}
+
+.user-status .action-request-list {
+  position: absolute;
+  top: 2px;
+  right: 0;
+}
+
+.action-request-list {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.action-request-list .action-request:last-child {
+  margin-right: 0;
+}
+
+.action-request.accept {
+  background-color: #337fff;
+}
+
+.action-request-list .action-request {
+  margin-right: 12px;
+}
+
+.action-request {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #dedeea;
+  border-radius: 10px;
+  color: #adafca;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color .2s ease-in-out, background-color .2s ease-in-out, color .2s ease-in-out;
+}
+
+.action-request.accept .action-request-icon {
+  fill: #fff;
+  opacity: 1;
+}
+
+.action-request .action-request-icon {
+  fill: #adafca;
+  opacity: .6;
+  transition: fill .2s ease-in-out, opacity .2s ease-in-out;
+}
+
+/*stroke-dasharray: 183.68, 287; 设置弧度
+svg 设置颜色
+*/
+stop:first-child {
+  stop-color: rgba(51, 127, 255, 0);
+}
+
+stop:nth-child(2) {
+  stop-color: #ff3370;
+}
+
+/*左侧底部图片*/
+.adv[data-v-2dfd8ab4] {
+  height: 284px;
+}
+
+.adv[data-v-2dfd8ab4] {
+  height: 284px;
+}
+
+.ant-carousel {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, .65);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  list-style: none;
+  font-feature-settings: "tnum", "tnum";
+}
+
+.ant-carousel .slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  -webkit-touch-callout: none;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ant-carousel .slick-slider .slick-list, .ant-carousel .slick-slider .slick-track {
+  transform: translateZ(0);
+}
+
+.ant-carousel .slick-list {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.ant-carousel .slick-track {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+.ant-carousel .slick-list .slick-slide.slick-active {
+  pointer-events: auto;
+}
+
+.ant-carousel .slick-initialized .slick-slide {
+  display: block;
+}
+
+.ant-carousel .slick-list .slick-slide {
+  pointer-events: none;
+}
+
+.ant-carousel .slick-slide {
+  display: none;
+  float: left;
+  height: 100%;
+  min-height: 1px;
+}
+
+.section-banner {
+  min-height: 160px;
+  padding: 52px 60px 0 200px;
+  border-radius: 12px;
+  /* background: url(/img/banner/banner-bg.png) no-repeat center; */
+  position: relative;
+  cursor: pointer;
+}
+
+.section-banner .section-banner-title, .section-banner .section-banner-text {
+  color: #fff;
+}
+
+.section-banner .section-banner-text {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+
+</style>

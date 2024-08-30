@@ -203,7 +203,11 @@ const defaultRoutes: RouteRecordRaw[] = [
         path: '/push',
         component: () => import('@/views/live-moudle/push/index.vue'),
       },
-
+      {
+        path: '/infoChannel',
+        name: 'infoChannel',
+        component: () => import('@/views/channelbk/channelInfo/index.vue')
+      },
     ]
   },
   /*  {

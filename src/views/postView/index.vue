@@ -41,7 +41,7 @@ selectOne(articleId).then(res => {
                                              href="/">社区</a></span><span
               class="ant-breadcrumb-separator">/</span></span><span class=""><span
               class="ant-breadcrumb-link"><a class="link"
-                                             href="/forum?id=7"> {{ postInfo.name }} </a></span><span
+                                             href="#"> {{ postInfo.name }} </a></span><span
               class="ant-breadcrumb-separator">/</span></span><span class=""><span
               class="ant-breadcrumb-link">正文</span><span class="ant-breadcrumb-separator">/</span></span>
           </div>

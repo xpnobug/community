@@ -2,6 +2,7 @@
   <div class="content-grid">
     <div class="content-view">
       <div class="home-slider">
+        <UserSearchComponent/>
         <div class="section-header">
           <div class="section-header-info">
             <h2 class="section-title">官方版块</h2>
@@ -10,13 +11,20 @@
             <SaveChannelCompontents :get-offica-data="getOfficaData"/>
           </a-space>
         </div>
-        <OfficalChannelIndex v-if="officalList.length > 0" :officalList="officalList"/>
+        <UserChannelsIndex
+            :getUserChannelData="getUserChannelData"
+            v-if="officalList.length > 0"
+            :userChannelList="officalList"/>
+        <!--        <OfficalChannelIndex v-if="officalList.length > 0" :officalList="officalList"/>-->
         <a-empty v-else/>
-        <a-pagination
-            @change="pageChange(page.currentPage)"
-            v-model:current="page.currentPage"
-            v-model:page-size="page.pageSize"
-            :total="page.count" show-less-items/>
+        <div style="margin-top: 10px">
+          <a-pagination
+              @change="pageChange(page.currentPage)"
+              v-model:current="page.currentPage"
+              v-model:page-size="page.pageSize"
+              :total="page.count" show-less-items/>
+        </div>
+
         <div class="section-header">
           <div class="section-header-info">
             <h2 class="section-title">用户版块</h2>
@@ -25,7 +33,6 @@
             <SaveUserChannel :getUserChannelData="getUserChannelData"/>
           </a-space>
         </div>
-        <UserSearchComponent/>
         <UserChannelsIndex
             :getUserChannelData="getUserChannelData"
             v-if="userChannelList.length > 0"
@@ -51,7 +58,7 @@ const officalList = ref([]);
 const userChannelList = ref([]);
 
 const page = reactive<Page>({
-  pageSize: 3,
+  pageSize: 4,
   currentPage: 1,
   count: 0,
   maxPage: 10,
@@ -162,8 +169,8 @@ body {
   flex-direction: column;
   width: 100%;
   border-radius: 12px;
-  background: var(--reaicc-meta-theme-post-color);
-  box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);
+  /*background: var(--reaicc-meta-theme-post-color);*/
+  /*box-shadow: 0 0 40px 0 rgba(94, 92, 154, .06);*/
   padding: 0 40px;
   position: relative;
   overflow: hidden;
@@ -298,7 +305,7 @@ body {
 .user-preview {
   border-radius: 12px;
   background-color: var(--reaicc-meta-theme-post-color);
-  box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
+  box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.06);
   cursor: pointer;
 }
 

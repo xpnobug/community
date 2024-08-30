@@ -61,7 +61,7 @@ userStore.getInfo(); // 获取用户信息
   grid-template-columns: auto minmax(0, 1fr);
   grid-template-rows: 0fr 0fr 1fr 0fr;
   margin: 0 auto;
-  min-height: 100vh;
+  min-height: 95vh;
 }
 
 .dr1mMg .wGVWaQ {

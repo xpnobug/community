@@ -3,7 +3,9 @@
     <div class="grid centered"
          :class="[{'grid-4-4-4' : viewIdValueSet === '1' , 'grid-3-3-3-3': viewIdValueSet === '2'}]">
       <div class="user-preview" v-for="item in userChannelList" :class="[{'small' : viewIdValueSet === '2'}]">
-        <div class="user-preview" :class="[{'small' : viewIdValueSet === '2' , 'landscape': viewIdValueSet === '3'}]" >
+        <div class="user-preview"
+             @click="handleClick(item)"
+             :class="[{'small' : viewIdValueSet === '2' , 'landscape': viewIdValueSet === '3'}]" >
           <figure class="user-preview-cover"
                   :style="{background: 'url('+ item.background +') center center / cover no-repeat rgb(255, 255, 255)'}">
             <img :src="item.logo" alt="图片" style="display: none;"> </figure>
@@ -56,6 +58,7 @@ import {getCurrentInstance, ref, onBeforeMount} from "vue";
 import AvatarGroup from "@/views/channelbk/userChannel/avatarGroup.vue";
 import {joinChannel, quitChannel} from "@/api/channels";
 import {message} from "ant-design-vue";
+import {useRouter} from "vue-router";
 const props = defineProps(['userChannelList','getUserChannelData'])
 
 const viewIdValueSet = ref('1');
@@ -127,7 +130,11 @@ const handleJoin = async (item: any) => {
     })
   }
 }
-
+const router = useRouter();
+const handleClick = (item: any) => {
+  console.log(item)
+  router.push({path: '/infoChannel', query: {channelId: item.channelId}})
+}
 
 </script>
 
@@ -243,7 +250,7 @@ body {
 }
 
 .grid.grid-4-4-4 {
-  grid-template-columns: repeat(auto-fit, 350px);
+  grid-template-columns: repeat(auto-fit, 320px);
 }
 
 

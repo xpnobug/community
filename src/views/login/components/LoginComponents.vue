@@ -515,18 +515,37 @@ const toHome = () => {
   color: var(--reaicc-fontcolor);
 }
 
-.mode-switch {
-  /*z-index: 1;*/
-  /*position: absolute;*/
-  /*top: 20px;*/
-  /*left: 36px;*/
-  /*background-color: var(--chat-background);*/
+/*.mode-switch {
+  !*z-index: 1;*!
+  !*position: absolute;*!
+  !*top: 20px;*!
+  !*left: 36px;*!
+  !*background-color: var(--chat-background);*!
   border: none;
   color: #ddd;
   outline: none;
   cursor: pointer;
   box-shadow: var(--navigation-box-shadow);
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  transform-origin: center;
+}*/
+.mode-switch {
+  /*z-index: 1;*/
+  /*position: absolute;*/
+  /*top: 20px;*/
+  /*left: 36px;*/
+  background-color: var(--chat-background);
+  border: none;
+  color: #ddd;
+  outline: none;
+  cursor: pointer;
+  box-shadow: var(--navigation-box-shadow);
+  border-radius: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
