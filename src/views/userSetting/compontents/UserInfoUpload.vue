@@ -7,6 +7,7 @@
             name="file"
             :before-upload="beforeUpload"
             @preview="handlePreview"
+            :headers="headers"
             @change="uploadChange">
     <div v-if="fileList.length < 1">
       <div>Upload</div>
@@ -30,6 +31,8 @@ function getBase64(file: File) {
     reader.onerror = error => reject(error);
   });
 }
+const headers = {'Authorization': `Bearer ${localStorage.getItem('token')}`}
+
 const handlePreview = async (file: UploadProps['fileList'][number]) => {
   console.log(file)
   if (!file.url && !file.preview) {
@@ -74,12 +77,11 @@ function uploadChange({file}: { event?: ProgressEvent }) {
   const res = (file as XMLHttpRequest).response
   if (res) {
     if (props.handleUp != undefined) {
-      props.handleUp(res.url)
+      props.handleUp(res.thumbnail)
     }
     if (props.handleCover != undefined) {
       props.handleCover(res.url)
     }
-    message.success("上传成功")
   }
   return file
 }

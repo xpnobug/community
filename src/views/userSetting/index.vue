@@ -16,14 +16,13 @@ const handleMenu = (value: any) => {
 </script>
 
 <template>
-  <div class="content-grid snipcss0-1-1-433"
-       style="width: 100%; transform: translate(253.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
-    <div class="snipcss-134kU">
-      <div class="section-banner"
-           style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/708dc9521e44ae71738a97e18d4bdae8.png?imageMogr2/crop/2368x320/gravity/center&quot;) center center / cover no-repeat; cursor: default;">
-        <p class="section-banner-title"></p>
-        <p class="section-banner-text"></p>
-      </div>
+  <div class="content-grid">
+    <div class="content-view">
+<!--      <div class="section-banner"-->
+<!--           style="background: url(&quot;https://jxxt-1257689580.cos.ap-chengdu.myqcloud.com/708dc9521e44ae71738a97e18d4bdae8.png?imageMogr2/crop/2368x320/gravity/center&quot;) center center / cover no-repeat; cursor: default;">-->
+<!--        <p class="section-banner-title"></p>-->
+<!--        <p class="section-banner-text"></p>-->
+<!--      </div>-->
       <div class="grid grid-3-9 medium-space">
         <div>
           <div class="account-hub-sidebar">
@@ -152,7 +151,7 @@ const handleMenu = (value: any) => {
           </div>
         </div>
         <MyInfo />
-        <MyPushPost />
+        <!--        <MyPushPost />-->
       </div>
     </div>
   </div>
@@ -167,10 +166,6 @@ const handleMenu = (value: any) => {
   }
 }
 
-.content-grid {
-  max-width: 1184px;
-  /*padding: 54px 0 32px;*/
-}
 
 :before, :after {
   display: block;
@@ -220,7 +215,7 @@ const handleMenu = (value: any) => {
 
 .grid.grid-3-9 {
   grid-template-areas: 'sidebar content';
-  /*grid-template-columns: 23.9864864865% 74.6621621622%;*/
+  grid-template-columns: 23.9864864865% 74.6621621622%;
 }
 
 .grid.medium-space {

@@ -2,7 +2,7 @@
   <div class="tl-photos">
     <img
         v-for="item in props.imgList"
-        :src="item" :width="200"
+        :src="item.url" :width="200"
         @click="visible = true"
     />
   </div>
@@ -10,7 +10,7 @@
     <a-image-preview-group
         :preview="{ visible, onVisibleChange: vis => (visible = vis) }">
       <a-image
-          v-for="item in props.imgList" :src="item"
+          v-for="item in props.imgList" :src="item.url"
       />
     </a-image-preview-group>
   </div>

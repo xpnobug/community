@@ -32,7 +32,7 @@ selectOne(articleId).then(res => {
 
 
 <template>
-  <div class="content-grid" style="margin:15px; transition: transform 0.4s ease-in-out 0s;">
+  <div class="content-grid">
     <div class="post-content post-container">
       <div class="breadcrumb">
         <div class="breadcrumb-container">

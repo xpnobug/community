@@ -7,15 +7,17 @@
         list-type="picture-card"
         @preview="handlePreview"
         @change="uploadChange"
+        @remove="removeChange"
         :headers="headers"
     >
       <div v-if="fileList.length < 9">
         <plus-outlined />
-        <div> + </div>
         <div> 上传图片 </div>
       </div>
     </a-upload>
-
+    <a-modal :open="previewVisible" :title="previewTitle" :footer="null" @cancel="handleCancel">
+      <img alt="example" style="width: 100%" :src="previewImage" />
+    </a-modal>
   </div>
 </template>
 <script lang="ts" setup>
@@ -23,6 +25,7 @@ import { ref, inject, onMounted } from 'vue';
 import type { UploadProps } from 'ant-design-vue';
 import {message} from "ant-design-vue";
 import { PlusOutlined } from '@ant-design/icons-vue';
+import {useRoute} from "vue-router";
 function getBase64(file: File) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -44,11 +47,13 @@ const props = defineProps({
   },
   imgLists: {
     type: Function
+  },
+  removeImgList:{
+    type: Function
   }
 });
 // 初始化 fileList
 const fileList = ref<UploadProps['fileList']>([]);
-
 
 const handleCancel = () => {
   previewVisible.value = false;
@@ -64,30 +69,53 @@ const handlePreview = async (file: UploadProps['fileList'][number]) => {
   previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf('/') + 1);
 };
 
+function removeChange(file) {
+  props.removeImgList(file.url)
+}
 
 const list = ref<UploadProps['fileList']>([])
 function uploadChange({file}: { event?: ProgressEvent }) {
   const res = (file as XMLHttpRequest).response
   if (res){
-    list.value = [...list.value, res.url]
+    list.value = [...list.value, {url: res.url,fileId: res.fileId}]
     if (props.handleClick != undefined) {
-      props.handleClick(res.url)
+      props.handleClick(res.fileId)
     }
     if (props.imgLists != undefined) {
       props.imgLists(list.value)
     }
-    message.success("上传成功")
   }
   return file
 }
-const imgData = inject('imgFile');
-onMounted(() => {
-  if (imgData) {
-    fileList.value = [{ url: imgData }];
-  } else {
-    console.error("Injection 'imgFile' not found.");
-  }
-});
+
+const route = useRoute();
+const type = ref();
+type.value = route.query.type; // 获取路由参数
+
+if (type.value == 'dt') {
+  const imgListData = inject('imgFileList');
+// 监听 imgListData 的变化
+  watch(() => imgListData.value, // 监听 imgListData 的值
+      (newList) => {
+        if (Array.isArray(newList)) {
+          fileList.value = newList.map(img => ({
+            url: img
+          }));
+        }
+      },
+      { immediate: true }
+  );
+}else {
+  const imgData = inject('imgFile');
+  watch(() => imgData.value, // 监听 imgListData 的值
+      (newList) => {
+        fileList.value = [{url: newList}]
+      },
+      { immediate: true }
+  );
+}
+
+
 
 </script>
 <style scoped>

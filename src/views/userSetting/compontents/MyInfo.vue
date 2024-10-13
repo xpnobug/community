@@ -65,7 +65,7 @@
               <div class="form-item">
                 <div class="form-input with-button active small"><label for="groups-search">
                   <span>昵称</span></label>
-                  <input v-model="formState.username" maxlength="" name="username" placeholder="" type="text">
+                  <input v-model="formState.nickName" maxlength="" name="username" placeholder="" type="text">
                 </div>
               </div>
               <!--                    <div class="form-item">-->
@@ -140,7 +140,7 @@ import {updateUser} from "@/api/user";
 import {useUserStore} from "@/store";
 const userStore = useUserStore();
 interface FormState {
-  username: string;
+  nickName: string;
   email: string;
   phoneNumber: string;
   address: string;
@@ -150,7 +150,7 @@ interface FormState {
 }
 
 const formState = reactive<FormState>({
-  username: "",
+  nickName: "",
   email: "",
   phoneNumber: "",
   address: "",
@@ -164,7 +164,7 @@ const tx = ref("tx");
 const cover = ref("cover");
 const avatar = ref();
 const userCover = ref();
-const userInfo = userStore.userInfo();
+const userInfo = userStore.userInfo;
 const handleUp = (value) => {
   avatar.value = value;
   formState.avatar = value;

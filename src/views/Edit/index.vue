@@ -47,7 +47,11 @@ interface FormState {
   publishPlatform: string;
   userId: string;
   avatar: string;
-  imgList: string[];
+  channelId: string;
+  imgList: [{
+    fileId: string;
+    url: string;
+  }],
 }
 
 //时间
@@ -84,7 +88,11 @@ const formState = reactive<FormState>({
   publishPlatform: "",
   userId: "",
   avatar: "",
-  imgList: [],
+  channelId: "",
+  imgList: [{
+    fileId: "",
+    url: "",
+  }],
 });
 //获取地址栏中id
 const route = useRoute();
@@ -97,16 +105,28 @@ watch(() => route.query.type, (newVal, oldVal) => {
 
 //如果地址栏参数为articleId
 const imgs = ref('');
+const imgList = ref([]);
 const optionValue = ref('');
+const removeImg = ref();
 // 提前提供一个默认值
 provide('imgFile', imgs);
+provide('imgFileList', imgList);
 provide('optionForm', optionValue);
 const fetchData = async () => {
   try {
     if (route.query.articleId) {
       const res = await selectOne(route.query.articleId);
       const data = res.data.data;
-      imgs.value = data.coverImage;
+      formState.imgList = data.imgList;
+      if (type.value === "tz") {
+        imgs.value = data.coverImg.url;
+      }else {
+        // Array.isArray(data.imgList)：这个条件用于判断 data.imgList 是否为数组。只有当 data.imgList 是一个数组时，才会进行 map 操作。
+        // 三元运算符：如果 data.imgList 存在并且是数组，则执行 map 操作提取 url。如果 data.imgList 不存在或不是数组，则返回一个空数组 []，避免报错。
+        imgList.value = Array.isArray(data.imgList)
+            ? data.imgList.map((item: { url: any }) => item.url)
+            : [];
+      }
       optionValue.value = data.publishPlatform;
       Object.assign(formState, data);
     }
@@ -116,17 +136,36 @@ const fetchData = async () => {
 };
 fetchData();
 
-
-//接收子组件传递的数据
-const parentClick = (value) => {
-  formState.coverImage = value;
-}
+// 接收子组件传递的文件id列表
 const imgLists = (value) => {
-  formState.imgList = value;
-  console.log(value)
-}
+  // 如果文章数据中没有imgList属性，则初始化为空数组
+  if (!formState.imgList) {
+    formState.imgList = [];
+  }
+
+  // 遍历子组件传递的文件id列表，将每个文件id添加到imgList数组中
+  value.forEach((item) => {
+    console.log(item)
+    // 确保不会重复添加相同的文件
+    if (!formState.imgList.some(img => img.fileId === item.fileId)) {
+      formState.imgList.push(item); // 将每个文件id对象添加到imgList数组中
+    }
+  });
+  console.log(formState.imgList)
+};
+
+// 删除图片
+const removeImgList = (value) => {
+  console.log(value);
+  // 过滤掉与value相同的图片
+  formState.imgList = formState.imgList.filter((item) => item.url !== value);
+  console.log(formState.imgList);
+};
+
+
 const cascaderChange = (value) => {
   formState.publishPlatform = value;
+  formState.channelId = value;
 }
 
 //获取登录人信息
@@ -203,7 +242,7 @@ const onFinishFailed = (errorInfo: any) => {
                       <br/>
                       <br/>
                       <br/>
-                      <upload :imgLists="imgLists"/>
+                      <upload :imgLists="imgLists" :removeImgList="removeImgList"/>
                     </div>
 
                     <div class="set-up">
@@ -238,7 +277,7 @@ const onFinishFailed = (errorInfo: any) => {
                         <!--                        </div>-->
                         <!--                      </div>-->
                         <div>封面</div>
-                        <upload :handleClick="parentClick"/>
+                        <upload :imgLists="imgLists" :removeImgList="removeImgList"/>
                       </div>
                       <div class="more-set-box" style="padding-bottom: 0px;" v-if="type !== 'dt'">
                         <div class="more-item new-release">

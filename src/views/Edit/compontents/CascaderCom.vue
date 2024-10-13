@@ -1,62 +1,54 @@
 <template>
-  <a-cascader v-model:value="value" :change="handleChange(value)" :options="options" placeholder="请选择"/>
-</template>
+  <a-cascader
+      v-model:value="value"
+      @change="handleChange"
+      :options="options"
+      placeholder="请选择"
+  /></template>
 <script lang="ts" setup>
 import {ref, inject, watch} from 'vue';
 import type {CascaderProps} from 'ant-design-vue';
+import {channelList} from "@/api/channels";
+import {Page} from "@/api/base";
 
 const props = defineProps({
   handleClick: {
     type: Function
   }
 })
-const options: CascaderProps['options'] = [
+const page = reactive<Page>({
+  pageSize: 10,
+  currentPage: 1,
+  count: 0,
+  maxPage: 10,
+  minPage: 1,
+  firstResult: 0,
+  recount: true
+});
+
+// 确保 options 初始化时包含一个有 children 的对象
+const options = ref<CascaderProps['options']>([
   {
     value: '首页',
     label: '首页',
-    children: [
-      {
-        value: 'banner',
-        label: 'banner',
-      },
-      {
-        value: 'home-yyzsk',
-        label: '运营知识库',
-      }, {
-        value: '产品共创',
-        label: '产品共创',
-      }, {
-        value: 'LT-REAI专题',
-        label: 'LT-REAI专题',
-      }, {
-        value: '功能前瞻',
-        label: '功能前瞻',
-      }, {
-        value: '七彩生活',
-        label: '七彩生活',
-      }, {
-        value: '新鲜事',
-        label: '新鲜事',
-      },
-    ],
-  },
-  // {
-  //   value: 'jiangsu',
-  //   label: 'Jiangsu',
-  //   children: [
-  //     {
-  //       value: 'nanjing',
-  //       label: 'Nanjing',
-  //       children: [
-  //         {
-  //           value: 'zhonghuamen',
-  //           label: 'Zhong Hua Men',
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
-];
+    children: [],
+  }
+]);
+const getOfficaData = async () => {
+  const {data} = await channelList(page, 1)
+  page.pageSize = data.pageSize;
+  page.currentPage = data.currentPage;
+  page.count = data.count;
+  options.value[0].children = data.data.map((item: any) => ({
+    value: item.channelId,
+    label: item.name,
+  }));
+
+  // 触发响应式更新
+  options.value = [...options.value];
+}
+getOfficaData();
+
 const value = ref<string[]>([]);
 const handleChange = (value: string[]) => {
   props.handleClick(value[1])
