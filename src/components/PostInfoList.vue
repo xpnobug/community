@@ -5,6 +5,7 @@ import {isLogin} from '@/utils/auth'
 import {deleteById} from "@/api/article";
 import {message} from "ant-design-vue";
 import {useRouter} from "vue-router";
+import IconFont from "@/components/icon/IconFont.vue";
 
 const userId = localStorage.getItem('userId');
 
@@ -115,7 +116,7 @@ onBeforeUnmount(() => {
           <div :class="{ active: item.articleId === settingState}">
             <div class="post-settings widget-box-post-settings-dropdown-trigger"
                  @click="handleClick(item.articleId)">
-              。。。
+              <icon-font type="icon-shengchengdaima"/>
             </div>
           </div>
           <div

@@ -216,10 +216,6 @@ body {
   grid-template-columns: repeat(auto-fit, 384px);
 }
 
-.grid.centered {
-  justify-content: flex-start;
-}
-
 .section-pager-bar {
   width: 494px;
   height: 60px;
@@ -605,10 +601,6 @@ figure {
   background-color: #337fff;
 }
 
-.user-preview .user-preview-info {
-  padding: 0 28px 32px;
-  position: relative;
-}
 
 .page-link {
   position: relative;
@@ -1168,7 +1160,7 @@ figure > img {
 }
 
 .user-preview .user-preview-info .user-avatar-list + .user-preview-actions {
-  margin-top: 36px;
+  margin-top: 10px;
 }
 
 .icon-magnifying-glass {

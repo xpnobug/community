@@ -125,6 +125,7 @@ interface FormState {
   userId: string;
   avatar: string;
   imgList: string[];
+  channelId: string;
 }
 
 interface musicFormState {
@@ -182,6 +183,7 @@ const formState = reactive<FormState>({
   userId: "",
   avatar: "",
   imgList: [],
+  channelId: "friendCircle",
 });
 
 const imgLists = (value) => {

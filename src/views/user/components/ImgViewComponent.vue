@@ -174,10 +174,6 @@ section {
   grid-template-columns: repeat(auto-fit, 184px);
 }
 
-.grid.centered {
-  justify-content: flex-start;
-}
-
 .photo-preview {
   display: block;
   border-radius: 12px;

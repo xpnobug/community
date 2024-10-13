@@ -1,6 +1,6 @@
 <template>
   <main id="posts" class="posts" @click="postActionProcessing($event.target)">
-    <a-space v-if="userId != null" style="width: 100%; justify-content: center;" warp>
+    <a-space v-if="userId !== 'null'" style="width: 100%; justify-content: center;" warp>
       <a-button danger type="text" @click="fetchPosts('me')">我发布的</a-button>
       <a-button danger type="text" @click="fetchPosts('all')">所有All</a-button>
       <DiaLogComponents/>
@@ -13,7 +13,7 @@
     margin: 20px;"
             tip="加载中..."/>
     <article v-for="(item, index) in friendPostList" v-show="loading === false" :id="'post-' + index + '-mxLp'"
-             :data-author="item.author"
+             :data-author="item.nickName"
              :data-date="item.publishDate" :data-title="item.title" :data-url="item.url || 'undefined'"
              class="g-clear-both">
       <div class="post-avatar g-left">
@@ -22,14 +22,14 @@
       </div>
       <div class="post-main g-right">
         <header class="post-header g-clear-both">
-          <div class="post-title g-left g-txt-ellipsis g-user-select">{{ item.author }}</div>
+          <div class="post-title g-left g-txt-ellipsis g-user-select">{{ item.nickName }}</div>
         </header>
         <section class="post-content g-inline-justify g-user-select">
           <p>{{ item.content }}</p>
           <div
               :class="['post-content-gallery', item.imgList.length > 0 ? 'grid-' + Math.min(item.imgList.length, 3) : '']">
             <figure v-for="img in item.imgList" :key="img" class="gallery-thumbnail" style="--aspectratio: auto;">
-              <img :data-index="img" :src="img" alt="" class="thumbnail-image g-alias-imgblock" data-action="viewimage"
+              <img :data-index="img.url" :src="img.url" alt="" class="thumbnail-image g-alias-imgblock" data-action="viewimage"
                    draggable="true" loading="lazy">
             </figure>
           </div>
@@ -73,7 +73,7 @@
 
 <script lang="ts" setup>
 import {postActionProcessing} from "@/hooks/post.ts";
-import {friendCircleList} from "@/api/article";
+import {friendCircleList} from "@/api/friend-article";
 import { onMounted, provide, ref, watch} from "vue";
 import LikeComponents from "@/views/userPyq/component/likeComponents.vue";
 import {getLikesList} from "@/api/likes";
@@ -87,7 +87,6 @@ const friendPostList = ref([]); // 用于存储文章列表
 const userId = localStorage.getItem('userId'); // 从本地存储获取用户ID
 
 const currentFetchType = ref<'me' | 'all'>('me'); // 当前获取文章的类型
-
 
 // 获取点赞列表
 const likeList = ref([]); // 用于存储点赞列表
@@ -181,6 +180,7 @@ const fetchPosts = (type: 'me' | 'all') => {
   autoParam.value.index = 1;
   friendCircleList(page, fetchUserId).then(res => {
     friendPostList.value = res.data.data; // 更新文章列表
+    console.log(friendPostList.value);
     getCommentList();
     autoStatus('normal'); // 更新自动加载状态
     loading.value = false;

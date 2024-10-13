@@ -35,15 +35,6 @@ interface Article  {
     avatar: string;
 }
 
-export function friendCircleList(page: Page, id: string) {
-    return axios.get(`${BASE_URL}/friendCircleList`, {
-        params: {
-            userId: id,
-            pageSize: page.pageSize,
-            currentPage: page.currentPage,
-        }
-    });
-}
 
 export function list(page: Page) {
     return axios.get(`${BASE_URL}/list`, {

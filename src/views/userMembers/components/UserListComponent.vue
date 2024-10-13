@@ -4,6 +4,7 @@ import {useRouter} from "vue-router";
 import {addFollow, delFollow} from "@/api/follow";
 import {message} from "ant-design-vue";
 import {isLogin, pageList} from "@/api/user";
+import PageIndex from "@/components/page/PageIndex.vue";
 
 const viewIdValueSet = ref('1');
 const tagIdValueSet = ref('1');
@@ -134,7 +135,7 @@ const delFollows = (item: any) => {
 <template>
   <div :class="[{'grid-4-4-4' : viewIdValueSet === '1' , 'grid-3-3-3-3': viewIdValueSet === '2'}]"
        class="grid centered"
-       style="margin-top: 16px; justify-content: flex-start;">
+       style="margin-top: 16px;">
     <div v-for="item in userList"
          v-show="tagIdValueSet === '1'"
          :class="[{'small' : viewIdValueSet === '2'}]"
@@ -242,46 +243,51 @@ const delFollows = (item: any) => {
             </div>
           </div>
           <div class="user-preview-actions" style="height: 48px;">
-            <p v-show="viewIdValueSet !== '3' && item.isFollow !== true"
+            <p v-if="viewIdValueSet !== '3' && item.isFollow !== true"
                @click="addFollows(item)"
                class="button secondary">
               + 关注
             </p>
-            <p v-show="viewIdValueSet !== '3' && item.isFollow === true" class="button secondary">
+            <p v-if="viewIdValueSet !== '3' && item.isFollow === true" class="button secondary">
               已关注
             </p>
-            <p v-show="viewIdValueSet !== '3' && item.isFollow === true" class="button secondary"
+            <p v-if="viewIdValueSet !== '3' && item.isFollow === true" class="button secondary"
                @click="delFollows(item)">
               取消关注
             </p>
           </div>
 
           <div class="user-preview-actions">
-            <p v-show="viewIdValueSet === '3' && item.isFollow !== true" class="button accept"
+            <p v-if="viewIdValueSet === '3' && item.isFollow !== true" class="button accept"
                @click="addFollows(item)">+ 关注</p>
-            <p v-show="viewIdValueSet === '3' && item.isFollow === true" class="button secondary">
+            <p v-if="viewIdValueSet === '3' && item.isFollow === true" class="button secondary">
               已关注
             </p>
-            <p v-show="viewIdValueSet === '3' && item.isFollow === true" class="button secondary"
+            <p v-if="viewIdValueSet === '3' && item.isFollow === true" class="button secondary"
                @click="delFollows(item)">
               取消关注
             </p>
           </div>
         </div>
-      </div> <!----> <!----></div>
-
+      </div>
+    </div>
   </div>
-
+  <div style="height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;">
+    <PageIndex/>
+  </div>
 </template>
 
 
 <style scoped>
 .grid.grid-3-3-3-3 {
-  grid-template-columns: repeat(auto-fit, 279px);
+  grid-template-columns: repeat(auto-fit, 266px);
 }
 
 .grid.grid-4-4-4 {
-  grid-template-columns: repeat(auto-fit, 377px);
+  grid-template-columns: repeat(auto-fit, 337px);
 }
 
 .grid.centered {
@@ -435,7 +441,7 @@ img, svg {
 }
 
 .user-preview .user-preview-info {
-  padding: 0 28px 32px;
+  padding: 0 60px 0;
   position: relative;
 }
 

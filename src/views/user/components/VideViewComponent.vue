@@ -196,10 +196,6 @@ section {
   justify-content: center;
 }
 
-.grid.centered {
-  justify-content: flex-start;
-}
-
 .grid.grid-3-3-3-3 {
   grid-template-columns: repeat(auto-fit, 284px);
 }

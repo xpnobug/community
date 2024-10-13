@@ -104,10 +104,6 @@ html {
   justify-content: center;
 }
 
-.grid.centered {
-  justify-content: flex-start;
-}
-
 *,:before,:after {
   margin: 0;
   padding: 0;

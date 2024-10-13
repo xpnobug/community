@@ -23,7 +23,7 @@
               <p class="user-short-description-title text-long-ellipsis"><a>{{ item.title }}</a></p>
               <p class="user-short-description-text" style="text-transform: none;"><a>{{item.summary}}</a></p>
             </div>
-            <div class="user-stats" :class="{'small-user-stats': viewIdValueSet === '3'}" style="margin-top: 30px;">
+            <div class="user-stats" :class="{'small-user-stats': viewIdValueSet === '3'}" style="margin-top: 15px;">
               <div class="user-stat">
                 <p class="user-stat-title">{{ item.postCount }}</p>
                 <p class="user-stat-text">内容</p>
@@ -237,7 +237,8 @@ body {
   grid-template-columns: 100%;
   grid-gap: 16px;
   -ms-flex-align: start;
-  align-items: start;
+  align-items: center;
+  justify-content: center;
 }
 
 .grid  {
@@ -250,14 +251,8 @@ body {
 }
 
 .grid.grid-4-4-4 {
-  grid-template-columns: repeat(auto-fit, 320px);
+  grid-template-columns: repeat(auto-fit, 317px);
 }
-
-
-.grid.centered {
-  justify-content: flex-start;
-}
-
 
 .user-preview.landscape {
   display: -ms-flexbox;
@@ -1227,7 +1222,7 @@ figure > img  {
 }
 
 .user-preview .user-preview-info .user-avatar-list + .user-preview-actions  {
-  margin-top: 36px;
+  margin-top: 10px;
 }
 
 .icon-magnifying-glass {

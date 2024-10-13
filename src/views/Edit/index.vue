@@ -119,7 +119,7 @@ const fetchData = async () => {
       const data = res.data.data;
       formState.imgList = data.imgList;
       if (type.value === "tz") {
-        imgs.value = data.coverImg.url;
+        imgs.value = data.coverImage;
       }else {
         // Array.isArray(data.imgList)：这个条件用于判断 data.imgList 是否为数组。只有当 data.imgList 是一个数组时，才会进行 map 操作。
         // 三元运算符：如果 data.imgList 存在并且是数组，则执行 map 操作提取 url。如果 data.imgList 不存在或不是数组，则返回一个空数组 []，避免报错。

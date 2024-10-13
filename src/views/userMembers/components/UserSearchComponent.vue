@@ -511,7 +511,6 @@ img, svg {
   }
 
   .section-filters-bar {
-    height: 100%;
     flex-direction: column;
   }
 

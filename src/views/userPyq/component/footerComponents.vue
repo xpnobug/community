@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts" setup>
-import {friendCircleList} from "@/api/article.ts";
+import {friendCircleList} from "@/api/friend-article.ts";
 import {onMounted, ref} from "vue";
 
 
