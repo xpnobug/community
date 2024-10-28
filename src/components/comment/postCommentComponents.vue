@@ -20,8 +20,9 @@ import {addComment, commentList} from "@/api/comment";
 import {reactive, ref, watch} from "vue";
 import page from "@/api/base";
 import {message} from "ant-design-vue";
+import {useUserStore} from "@/store";
 
-
+const userStore = useUserStore();
 defineOptions({
   name: 'comment'
 })
@@ -42,6 +43,7 @@ const config = reactive<ConfigApi>({
 // 评论数据
 const pyqCommentList = ref([]); // 用于存储评论列表
 const getCommentList = () => {
+  console.log("======",userStore)
   commentList(page, props.articleId).then(res => {
     pyqCommentList.value = res.data.data; // 更新评论列表
   });
@@ -92,7 +94,7 @@ watch(
 // 评论数据
 // 获取当前登录用户ID
 const userId = localStorage.getItem('userId') ?? '';
-const userInfo = JSON.parse(localStorage.getItem('userInfo')) ?? '';
+const userInfo = userStore.$state.userInfo ?? '';
 setTimeout(() => {
   // 当前登录用户数据
   config.user = {
@@ -109,7 +111,7 @@ const submit = ({content, parentId, files, finish}: SubmitParamApi) => {
     id: null,
     articleId: props.articleId,
     parentId: parentId,
-    uid: config.user.id,
+    uid: config.user.userId,
     content: content,
     createTime: new Date().toISOString(),
     user: {

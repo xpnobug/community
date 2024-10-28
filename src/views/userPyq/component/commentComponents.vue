@@ -15,6 +15,7 @@ import { CommentApi, ConfigApi, isArray, isObject, SubmitParamApi, UToast } from
 import { dayjs } from '@/plugins/day';
 import { addComment } from "@/api/comment";
 import { message } from "ant-design-vue";
+import {useUserStore} from "@/store";
 
 // 定义组件名称
 defineOptions({
@@ -145,7 +146,8 @@ watch(
 
 // 获取当前登录用户ID
 const userId = localStorage.getItem('userId') ?? '';
-const userInfo =  JSON.parse(localStorage.getItem('userInfo')) ?? '';
+const userStore = useUserStore();
+const userInfo = userStore.$state.userInfo ?? '';
 setTimeout(() => {
   // 当前登录用户数据
   config.user = {
