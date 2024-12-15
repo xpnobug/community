@@ -186,7 +186,7 @@ html:lang(en) #posts {
 
 #posts>article>div.post-main>footer.post-footer {
     height: var(--post_line_height_secondary);
-    padding: 0 0 30px;
+    padding: 0 0 10px;
 }
 
 #posts>article>div.post-main>footer.post-footer>div.post-info {

@@ -1,20 +1,20 @@
 <template>
   <div id="container" class="g-width g-block-center g-clear-both">
     <header id="banner">
-      <div v-if="userInfo!=null" id="banner-background"
+      <div v-if="login" id="banner-background"
            :style="'--banner_background_image: url('+ userInfo.userCover +');--banner_background_image_position: 0;'"
            class="existbg"></div>
-      <div v-show="userInfo==null" id="banner-background" class="existbg"
-           style="--banner_background_image: url(https://alist.reaicc.com/nas/image/jpeg/2024-06/1/a59a777f-94a2-4542-a337-2054e927a4f9.jpg);--banner_background_image_position: 0;"></div>
+      <div v-else id="banner-background" class="existbg"
+           style="--banner_background_image: url(https://alist.reaicc.com/image/png/2024-12-15/675ea481480efafa1504a40a.png);--banner_background_image_position: 0;"></div>
       <div id="banner-info" class="g-clear-both">
         <div class="name g-left g-txt-ellipsis g-user-select zh">
           <strong data-link="/" @click.stop="targetSelf($event.target)">{{
-              userInfo !== null ? userInfo.username : '我是访客'
+              login ? userInfo.username : '我是访客'
             }}</strong>
         </div>
         <div class="avatar g-right">
           <img alt="alt" class="g-alias-imgblock" draggable="false" loading="lazy"
-               :src="userInfo != null ? userInfo.avatar : 'https://alist.reaicc.com/nas/image/png/2024-06/1/a99c9b34-65aa-47fc-a8f7-f51060213aa5.png'"/>
+               :src="login ? userInfo.avatar : 'https://alist.reaicc.com/image/png/2024-12-15/675ea470480efafa1504a409.png'"/>
         </div>
       </div>
       <div id="banner-subinfo" class="g-txt-ellipsis g-user-select">遇见即是上上签.</div>
@@ -36,15 +36,18 @@
 import {onMounted, ref} from "vue";
 import ViewsComponents from "@/views/userPyq/component/viewsComponents.vue";
 import AudioComponents from "@/views/userPyq/component/audioComponents.vue";
-import FooterComponents from "@/views/userPyq/component/footerComponents.vue";
 import PostsComponents from "@/views/userPyq/component/postsComponents.vue";
+import { useUserStore } from '@/store/modules/user'
+import { isLogin } from "@/utils/auth";
+const login = isLogin();
+const userStore = useUserStore()
 
 const externalFriendPostList = ref([])
 const receiveFromChild = (value) => {
   externalFriendPostList.value = value
 }
-const userInfo =  JSON.parse(localStorage.getItem('userInfo'));
-
+const userInfo =  userStore.userInfo;
+console.log('userInfo', userInfo)
 // 辅助函数来加载脚本并等待其加载完成
 async function loadScript(src) {
   return new Promise((resolve, reject) => {

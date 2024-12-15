@@ -1,6 +1,6 @@
 <template>
   <main id="posts" class="posts" @click="postActionProcessing($event.target)">
-    <a-space v-if="userId !== 'null'" style="width: 100%; justify-content: center;" warp>
+    <a-space v-if="login" style="width: 100%; justify-content: center;" warp>
       <a-button danger type="text" @click="fetchPosts('me')">我发布的</a-button>
       <a-button danger type="text" @click="fetchPosts('all')">所有All</a-button>
       <DiaLogComponents/>
@@ -81,7 +81,9 @@ import fetchIpAddress from "@/api/useIp";
 import page from "@/api/base";
 import DiaLogComponents from "@/views/userPyq/component/form/diaLogComponents.vue";
 import {commentList} from "@/api/comment";
+import { isLogin } from "@/utils/auth";
 
+const login = isLogin();
 // 定义文章列表和用户ID
 const friendPostList = ref([]); // 用于存储文章列表
 const userId = localStorage.getItem('userId'); // 从本地存储获取用户ID
