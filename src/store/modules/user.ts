@@ -13,7 +13,7 @@ import {
   phoneLogin as phoneLoginApi,
   socialLogin as socialLoginApi
 } from '@/api'
-import { clearToken, getToken, setToken } from '@/utils/auth'
+import {clearToken, getToken, isLogin, setToken} from '@/utils/auth'
 import {IUser} from "@/api/live/types/IUser";
 import {IAuth, IRole} from "@/api/live/interface";
 import cache from "@/utils/cache";
@@ -105,6 +105,7 @@ const storeSetup = () => {
       await logoutApi()
       await logoutCallBack()
       localStorage.removeItem("live_token");
+      localStorage.removeItem("user");
       return true
     } catch (error) {
       return false
@@ -126,6 +127,7 @@ const storeSetup = () => {
       permissions.value = res.data.permissions
     }
   }
+
 
   return {
     userId,
