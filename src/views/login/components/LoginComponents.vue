@@ -11,6 +11,8 @@ import {useRoute, useRouter} from "vue-router";
 import {socialAuth} from "@/api";
 import SocialIndex from "@/views/login/social/socialIndex.vue";
 import IconFont from "@/components/icon/IconFont.vue";
+import {encryptByRsa} from "@/utils/encrypt";
+
 // 表单状态接口
 interface FormState {
   username?: string;
@@ -233,7 +235,7 @@ const thirdLogin = async (source: string) => {
       // 构建登录数据
       const loginData = {
         username: formState.username, // 用户名
-        password: formState.password, // 密码
+        password: encryptByRsa(formState.password) || '',
         captcha: formState.captcha,   // 验证码
         uuid: formState.uuid          // UUID
       };

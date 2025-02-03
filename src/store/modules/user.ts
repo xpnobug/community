@@ -11,7 +11,7 @@ import {
   getUserInfo as getUserInfoApi,
   logout as logoutApi,
   phoneLogin as phoneLoginApi,
-  socialLogin as socialLoginApi
+  socialLogin as socialLoginApi, AuthTypeEnum
 } from '@/api'
 import {clearToken, getToken, isLogin, setToken} from '@/utils/auth'
 import {IUser} from "@/api/live/types/IUser";
@@ -64,28 +64,29 @@ const storeSetup = () => {
 
   // 登录
   const accountLogin = async (req: AccountLoginReq) => {
-    const res = await accountLoginApi(req)
+    const res = await accountLoginApi({ ...req, clientId: import.meta.env.VITE_CLIENT_ID, authType: AuthTypeEnum.ACCOUNT })
     setToken(res.data.data.token)
     token.value = res.data.data.token
   }
 
   // 邮箱登录
   const emailLogin = async (req: EmailLoginReq) => {
-    const res = await emailLoginApi(req)
+    const res = await emailLoginApi({ ...req, clientId: import.meta.env.VITE_CLIENT_ID, authType: AuthTypeEnum.EMAIL })
     setToken(res.data.data.token)
     token.value = res.data.data.token
   }
 
   // 手机号登录
   const phoneLogin = async (req: PhoneLoginReq) => {
-    const res = await phoneLoginApi(req)
+    const res = await phoneLoginApi({ ...req, clientId: import.meta.env.VITE_CLIENT_ID, authType: AuthTypeEnum.PHONE })
     setToken(res.data.data.token)
     token.value = res.data.data.token
   }
 
+
   // 三方账号登录
   const socialLogin = async (source: string, req: any) => {
-    const res = await socialLoginApi(source, req)
+    const res = await socialLoginApi({ ...req, source, clientId: import.meta.env.VITE_CLIENT_ID, authType: AuthTypeEnum.SOCIAL })
     setToken(res.data.data.token)
     token.value = res.data.data.token
   }
@@ -96,7 +97,7 @@ const storeSetup = () => {
     permissions.value = []
     pwdExpiredShow.value = true
     resetToken()
-    // resetRouter()
+    // resetRoutes()
   }
 
   // 退出登录
@@ -113,18 +114,30 @@ const storeSetup = () => {
   }
 
   // 获取用户信息
+  // const getInfo = async () => {
+  //   const res = await getUserInfoApi()
+  //   Object.assign(userInfo, res.data.data)
+  //   localStorage.setItem('userId', userInfo.userId === null ? 'null' :  userInfo.userId );
+  //   // userInfo.avatar = getAvatar(res.data.avatar, res.data.gender)
+  //   userInfo.avatar = res.data.data.avatar
+  //   userInfo.userId = res.data.data.userId;
+  //   userInfo.nickname = res.data.data.nickname;
+  //   userInfo.userCover = res.data.data.userCover;
+  //   if (res.data.roles && res.data.roles.length) {
+  //     roles.value = res.data.roles
+  //     permissions.value = res.data.permissions
+  //   }
+  // }
+
+  // 获取用户信息
   const getInfo = async () => {
     const res = await getUserInfoApi()
     Object.assign(userInfo, res.data.data)
     localStorage.setItem('userId', userInfo.userId === null ? 'null' :  userInfo.userId );
-    // userInfo.avatar = getAvatar(res.data.avatar, res.data.gender)
     userInfo.avatar = res.data.data.avatar
-    userInfo.userId = res.data.data.userId;
-    userInfo.nickname = res.data.data.nickname;
-    userInfo.userCover = res.data.data.userCover;
-    if (res.data.roles && res.data.roles.length) {
-      roles.value = res.data.roles
-      permissions.value = res.data.permissions
+    if (res.data.data.roles && res.data.data.roles.length) {
+      roles.value = res.data.data.roles
+      permissions.value = res.data.data.permissions
     }
   }
 
